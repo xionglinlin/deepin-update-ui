@@ -1,0 +1,20 @@
+Source: deepin-update-ui
+Section: devel
+Priority: optional
+Maintainer: Deepin Sysdev <sysdev@deepin.com>
+Build-Depends: debhelper (>= 8.0.0), pkg-config,
+ cmake,
+ qtbase5-dev,
+ libgsettings-qt-dev,
+ libdtkwidget-dev,
+ qttools5-dev-tools,
+ libdframeworkdbus-dev,
+ dde-control-center-dev
+Standards-Version: 3.9.4
+Homepage: http://www.deepin.org/
+
+Package: deepin-update-ui
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, ${dist:Depends}
+Description: The UI collection for updating functions, including control
+center update plugins, full screen update interfaces, rollback pages, etc.

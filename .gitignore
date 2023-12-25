@@ -1,0 +1,51 @@
+# Compiled Object files
+*.slo
+*.lo
+*.o
+*.obj
+
+# Compiled Dynamic libraries
+*.so
+*.dylib
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+
+# Executables
+*.exe
+*.out
+*.app
+Makefile
+Makefile.*
+*.Debug
+*.Release
+*.rc
+*.zip
+
+dde-shutdown/dde-shutdown
+debug
+release
+build*
+report/
+
+*.user*
+*.qm
+*.swp
+*.vscode
+*.vim
+build*/
+*.pro.user*
+*.DS_Store
+*.core
+*.autosave
+*.user*
+
+.transifexrc
+cmake-build-debug/
+lupdate.sh
+.idea/
+.cache/
+debian
+obj-*

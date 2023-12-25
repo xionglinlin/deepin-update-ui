@@ -1,0 +1,93 @@
+// SPDX-FileCopyrightText: 2019 - 2023 UnionTech Software Technology Co., Ltd.
+//
+// SPDX-License-Identifier: LGPL-3.0-or-later
+
+#ifndef CHECKUPGRADEWIDGET_H
+#define CHECKUPGRADEWIDGET_H
+
+#include "updatemodel.h"
+#include "blurtransparentbutton.h"
+
+#include <QObject>
+#include <QFrame>
+#include <QLabel>
+#include <QPointer>
+#include <QSpacerItem>
+
+#include <dpicturesequenceview.h>
+#include <DProgressBar>
+#include <DWaterProgress>
+
+#include <QVBoxLayout>
+#include <QHBoxLayout>
+#include <QPushButton>
+
+class CheckProgressWidget : public QWidget
+{
+    Q_OBJECT
+public:
+    explicit CheckProgressWidget(QWidget *parent = nullptr);
+
+public slots:
+    void setValue(double value);
+
+protected:
+    bool event(QEvent *e) override;
+
+private:
+    QLabel *m_logo;
+    QLabel *m_tip;
+    Dtk::Widget::DPictureSequenceView *m_waitingView;
+    Dtk::Widget::DProgressBar *m_progressBar;
+    Dtk::Widget::DWaterProgress *m_waterProgress;
+    QLabel *m_progressText;
+};
+
+class CheckResultWidget : public QWidget
+{
+    Q_OBJECT
+public:
+    explicit CheckResultWidget(QWidget *parent = nullptr);
+    void showResult(bool success);
+
+protected:
+    void keyPressEvent(QKeyEvent *event) override;
+
+private:
+    QString systemVersion();
+    void showSuccessFrame();
+    void showErrorFrame();
+    void createButtons(const QList<UpdateModel::UpdateAction> &actions);
+
+private:
+    QLabel *m_iconLabel;
+    QLabel *m_title;
+    QLabel *m_tips;
+    QSpacerItem *m_titleSpacer;
+    QVBoxLayout *m_mainLayout;
+    QTimer *m_countDownTimer;
+    int m_countDown;
+    QList<QPushButton *> m_actionButtons;
+    QSpacerItem *m_buttonSpacer;
+    QPointer<QPushButton> m_checkedButton;
+};
+
+class CheckSystemWidget : public QWidget
+{
+    Q_OBJECT
+public:
+    static CheckSystemWidget* instance();
+
+private:
+    CheckSystemWidget(QWidget *parent);
+    ~CheckSystemWidget();
+
+    void initUI();
+    void initConnections();
+
+private:
+    CheckProgressWidget *m_checkProgressWidget;
+    CheckResultWidget *m_checkResultWidget;
+};
+
+#endif
