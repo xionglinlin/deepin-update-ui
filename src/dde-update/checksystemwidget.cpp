@@ -8,6 +8,7 @@
 #include <DFontSizeManager>
 #include <DHiDPIHelper>
 #include <DPaletteHelper>
+#include <DGuiApplicationHelper>
 
 #include <QEvent>
 #include <QApplication>
@@ -59,6 +60,7 @@ CheckProgressWidget::CheckProgressWidget(QWidget *parent)
         m_progressBar->setAlignment(Qt::AlignRight);
         m_progressBar->setAccessibleName("ProgressBar");
         m_progressBar->setValue(1);
+        DPaletteHelper::instance()->setPalette(m_progressBar, DGuiApplicationHelper::instance()->standardPalette(DGuiApplicationHelper::DarkType));
 
         m_progressText = new QLabel(this);
         m_progressText->setText("1%");

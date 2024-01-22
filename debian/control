@@ -17,4 +17,4 @@ Package: deepin-update-ui
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}, ${dist:Depends}
 Description: The UI collection for updating functions, including control
-center update plugins, full screen update interfaces, rollback pages, etc.
+ center update plugins, full screen update interfaces, rollback pages, etc.

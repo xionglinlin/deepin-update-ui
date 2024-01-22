@@ -44,8 +44,5 @@ build*/
 
 .transifexrc
 cmake-build-debug/
-lupdate.sh
 .idea/
 .cache/
-debian
-obj-*
