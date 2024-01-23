@@ -64,5 +64,5 @@ target_link_libraries(${PROJECT_NAME} PRIVATE
     ${DdeControlCenter_LIBRARIES}
 )
 
-install(FILES "misc/org.deepin.dde.control-center.update.json" DESTINATION share/dsg/configs)
+install(FILES "misc/org.deepin.dde.control-center.update.json" DESTINATION share/dsg/configs/org.deepin.dde.control-center)
 install(TARGETS ${PROJECT_NAME} DESTINATION lib/dde-control-center/modules)
