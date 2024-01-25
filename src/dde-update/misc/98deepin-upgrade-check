@@ -1,0 +1,19 @@
+#!/bin/bash
+
+if [ "$XDG_SESSION_TYPE" = "x11" ]; then
+    if [ -f /tmp/deepin_update_option.json ]; then
+        display_daemon="/usr/lib/deepin-daemon/greeter-display-daemon"
+        if [ -x $display_daemon ]; then
+            $display_daemon 1>/tmp/greeter-display-daemon.log 2>&1 &
+        fi
+        xsettingsd_conf="/etc/lightdm/deepin/xsettingsd.conf"
+        if [ -e $xsettingsd_conf ]; then
+            xsettingsd -c $xsettingsd_conf &
+        fi
+        /usr/bin/dde-update
+    fi
+elif [ "$XDG_SESSION_TYPE" = "wayland" ]; then
+    if [ -f /tmp/deepin_update_option.json ]; then
+        /usr/bin/run-kwayland-check-wrapper.sh
+    fi
+fi
