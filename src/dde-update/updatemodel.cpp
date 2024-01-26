@@ -118,7 +118,7 @@ QString UpdateModel::updateActionText(UpdateAction action)
         {ContinueUpdating, tr("Proceed to Update")},
         {Reboot, tr("Reboot")},
         {ShutDown, tr("Shut Down")},
-        {EnterDesktop, tr("Enter desktop")},
+        {EnterDesktop, tr("Go to Desktop")},
     };
 
     return ActionsText.value(action);

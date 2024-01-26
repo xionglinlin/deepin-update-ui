@@ -2,7 +2,7 @@
 <!DOCTYPE TS>
 <TS version="2.1">
 <context>
-    <name>DCC_NAMESPACE::update::MirrorSourceItem</name>
+    <name>dccV20::update::MirrorSourceItem</name>
     <message>
         <location filename="../src/dcc-update-plugin/window/widgets/mirrorsourceitem.cpp" line="14"/>
         <source>Untested</source>
@@ -30,7 +30,7 @@
     </message>
 </context>
 <context>
-    <name>DCC_NAMESPACE::update::MirrorsWidget</name>
+    <name>dccV20::update::MirrorsWidget</name>
     <message>
         <location filename="../src/dcc-update-plugin/window/mirrorswidget.cpp" line="30"/>
         <location filename="../src/dcc-update-plugin/window/mirrorswidget.cpp" line="43"/>
@@ -54,7 +54,7 @@
     </message>
 </context>
 <context>
-    <name>DCC_NAMESPACE::update::UpdateCtrlWidget</name>
+    <name>dccV20::update::UpdateCtrlWidget</name>
     <message>
         <location filename="../src/dcc-update-plugin/window/updatectrlwidget.cpp" line="87"/>
         <source>Current Edition</source>
@@ -66,13 +66,13 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/updatectrlwidget.cpp" line="255"/>
+        <location filename="../src/dcc-update-plugin/window/updatectrlwidget.cpp" line="256"/>
         <source>Privacy Policy</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
-    <name>DCC_NAMESPACE::update::UpdateHistoryButton</name>
+    <name>dccV20::update::UpdateHistoryButton</name>
     <message>
         <location filename="../src/dcc-update-plugin/window/widgets/updatehistorybutton.cpp" line="33"/>
         <source>Update History</source>
@@ -80,7 +80,7 @@
     </message>
 </context>
 <context>
-    <name>DCC_NAMESPACE::update::UpdateModeSettingItem</name>
+    <name>dccV20::update::UpdateModeSettingItem</name>
     <message>
         <location filename="../src/dcc-update-plugin/window/widgets/updatemodesettingitem.cpp" line="29"/>
         <source>System Updates</source>
@@ -109,110 +109,110 @@
     </message>
 </context>
 <context>
-    <name>DCC_NAMESPACE::update::UpdateModule</name>
+    <name>dccV20::update::UpdateModule</name>
     <message>
         <location filename="../src/dcc-update-plugin/updatemodule.cpp" line="117"/>
         <source>Updates</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/updatemodule.cpp" line="241"/>
-        <location filename="../src/dcc-update-plugin/updatemodule.cpp" line="264"/>
-        <location filename="../src/dcc-update-plugin/updatemodule.cpp" line="283"/>
+        <location filename="../src/dcc-update-plugin/updatemodule.cpp" line="237"/>
+        <location filename="../src/dcc-update-plugin/updatemodule.cpp" line="260"/>
+        <location filename="../src/dcc-update-plugin/updatemodule.cpp" line="279"/>
         <source>Check for Updates</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/updatemodule.cpp" line="242"/>
-        <location filename="../src/dcc-update-plugin/updatemodule.cpp" line="265"/>
+        <location filename="../src/dcc-update-plugin/updatemodule.cpp" line="238"/>
+        <location filename="../src/dcc-update-plugin/updatemodule.cpp" line="261"/>
         <source>Update Settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/updatemodule.cpp" line="284"/>
+        <location filename="../src/dcc-update-plugin/updatemodule.cpp" line="280"/>
         <source>System Updates</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/updatemodule.cpp" line="285"/>
-        <location filename="../src/dcc-update-plugin/updatemodule.cpp" line="326"/>
-        <location filename="../src/dcc-update-plugin/updatemodule.cpp" line="344"/>
+        <location filename="../src/dcc-update-plugin/updatemodule.cpp" line="281"/>
+        <location filename="../src/dcc-update-plugin/updatemodule.cpp" line="322"/>
+        <location filename="../src/dcc-update-plugin/updatemodule.cpp" line="340"/>
         <source>Security Updates</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/updatemodule.cpp" line="286"/>
-        <location filename="../src/dcc-update-plugin/updatemodule.cpp" line="342"/>
+        <location filename="../src/dcc-update-plugin/updatemodule.cpp" line="282"/>
+        <location filename="../src/dcc-update-plugin/updatemodule.cpp" line="338"/>
         <source>Third-party Updates</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/updatemodule.cpp" line="288"/>
+        <location filename="../src/dcc-update-plugin/updatemodule.cpp" line="284"/>
         <source>Auto Download</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/updatemodule.cpp" line="289"/>
+        <location filename="../src/dcc-update-plugin/updatemodule.cpp" line="285"/>
         <source>Download when Inactive</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/updatemodule.cpp" line="290"/>
+        <location filename="../src/dcc-update-plugin/updatemodule.cpp" line="286"/>
         <source>Limit Speed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/updatemodule.cpp" line="291"/>
-        <location filename="../src/dcc-update-plugin/updatemodule.cpp" line="320"/>
+        <location filename="../src/dcc-update-plugin/updatemodule.cpp" line="287"/>
+        <location filename="../src/dcc-update-plugin/updatemodule.cpp" line="316"/>
         <source>Updates Notification</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/updatemodule.cpp" line="292"/>
-        <location filename="../src/dcc-update-plugin/updatemodule.cpp" line="322"/>
+        <location filename="../src/dcc-update-plugin/updatemodule.cpp" line="288"/>
+        <location filename="../src/dcc-update-plugin/updatemodule.cpp" line="318"/>
         <source>Clear Package Cache</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/updatemodule.cpp" line="293"/>
-        <location filename="../src/dcc-update-plugin/updatemodule.cpp" line="346"/>
+        <location filename="../src/dcc-update-plugin/updatemodule.cpp" line="289"/>
+        <location filename="../src/dcc-update-plugin/updatemodule.cpp" line="342"/>
         <source>Update History</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/updatemodule.cpp" line="294"/>
-        <location filename="../src/dcc-update-plugin/updatemodule.cpp" line="348"/>
+        <location filename="../src/dcc-update-plugin/updatemodule.cpp" line="290"/>
+        <location filename="../src/dcc-update-plugin/updatemodule.cpp" line="344"/>
         <source>Transferring Cache</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/updatemodule.cpp" line="301"/>
+        <location filename="../src/dcc-update-plugin/updatemodule.cpp" line="297"/>
         <source>Updates from Internal Testing Sources</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/updatemodule.cpp" line="316"/>
+        <location filename="../src/dcc-update-plugin/updatemodule.cpp" line="312"/>
         <source>Auto Check for Updates</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/updatemodule.cpp" line="318"/>
+        <location filename="../src/dcc-update-plugin/updatemodule.cpp" line="314"/>
         <source>Auto Download Updates</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/updatemodule.cpp" line="324"/>
+        <location filename="../src/dcc-update-plugin/updatemodule.cpp" line="320"/>
         <source>System</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/updatemodule.cpp" line="365"/>
+        <location filename="../src/dcc-update-plugin/updatemodule.cpp" line="361"/>
         <source>Check for updates, Update settings</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
-    <name>DCC_NAMESPACE::update::UpdateSettings</name>
+    <name>dccV20::update::UpdateSettings</name>
     <message>
         <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="70"/>
         <source>Switch it on to automatically download the updates in wireless or wired network</source>
@@ -373,7 +373,7 @@
     </message>
 </context>
 <context>
-    <name>DCC_NAMESPACE::update::UpdateStatusItem</name>
+    <name>dccV20::update::UpdateStatusItem</name>
     <message>
         <location filename="../src/dcc-update-plugin/window/widgets/updatestatusitem.cpp" line="144"/>
         <source>Your system is up to date</source>
@@ -395,23 +395,23 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/widgets/updatestatusitem.cpp" line="176"/>
+        <location filename="../src/dcc-update-plugin/window/widgets/updatestatusitem.cpp" line="177"/>
         <source>Last check: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/widgets/updatestatusitem.cpp" line="182"/>
+        <location filename="../src/dcc-update-plugin/window/widgets/updatestatusitem.cpp" line="184"/>
         <source>Check Again</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/widgets/updatestatusitem.cpp" line="184"/>
+        <location filename="../src/dcc-update-plugin/window/widgets/updatestatusitem.cpp" line="186"/>
         <source>Failed to check for updates</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
-    <name>DCC_NAMESPACE::update::UpdateWidget</name>
+    <name>dccV20::update::UpdateWidget</name>
     <message>
         <location filename="../src/dcc-update-plugin/window/updatewidget.cpp" line="46"/>
         <source>Check for Updates</source>
@@ -453,12 +453,12 @@
 <context>
     <name>UpgradeHistoryDialog</name>
     <message>
-        <location filename="../src/dcc-update-plugin/window/widgets/update-history/upgradehistorydialog.cpp" line="54"/>
+        <location filename="../src/dcc-update-plugin/window/widgets/update-history/upgradehistorydialog.cpp" line="55"/>
         <source>Update History</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/widgets/update-history/upgradehistorydialog.cpp" line="80"/>
+        <location filename="../src/dcc-update-plugin/window/widgets/update-history/upgradehistorydialog.cpp" line="81"/>
         <source>No update history</source>
         <translation type="unfinished"></translation>
     </message>
@@ -857,6 +857,11 @@
     <message>
         <location filename="../src/dcc-update-plugin/module/updatemodel.cpp" line="470"/>
         <source>Service connection is abnormal, please check the network and try again</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/dcc-update-plugin/module/updatemodel.cpp" line="471"/>
+        <source>The repository source configuration is not valid, please check and try again.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

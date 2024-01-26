@@ -27,7 +27,29 @@
         <file>themes/dark/icons/no-update-history.svg</file>
     </qresource>
     <qresource prefix="/">
-
+        <file>../../../translations/dcc-update-plugin.ts</file>
+        <file>../../../translations/dcc-update-plugin_bo.ts</file>
+        <file>../../../translations/dcc-update-plugin_az.ts</file>
+        <file>../../../translations/dcc-update-plugin_cs.ts</file>
+        <file>../../../translations/dcc-update-plugin_fi.ts</file>
+        <file>../../../translations/dcc-update-plugin_hu.ts</file>
+        <file>../../../translations/dcc-update-plugin_nl.ts</file>
+        <file>../../../translations/dcc-update-plugin_pt.ts</file>
+        <file>../../../translations/dcc-update-plugin_sq.ts</file>
+        <file>../../../translations/dcc-update-plugin_ug.ts</file>
+        <file>../../../translations/dcc-update-plugin_uk.ts</file>
+        <file>../../../translations/dcc-update-plugin_zh_CN.ts</file>
+        <file>../../../translations/dcc-update-plugin_zh_HK.ts</file>
+        <file>../../../translations/dcc-update-plugin_zh_TW.ts</file>
+        <file>../../../translations/dcc-update-plugin_de.ts</file>
+        <file>../../../translations/dcc-update-plugin_ca.ts</file>
+        <file>../../../translations/dcc-update-plugin_es.ts</file>
+        <file>../../../translations/dcc-update-plugin_hr.ts</file>
+        <file>../../../translations/dcc-update-plugin_it.ts</file>
+        <file>../../../translations/dcc-update-plugin_pl.ts</file>
+        <file>../../../translations/dcc-update-plugin_pt_BR.ts</file>
+        <file>../../../translations/dcc-update-plugin_ru.ts</file>
+        <file>../../../translations/dcc-update-plugin_en_US.ts</file>
     </qresource>
     <qresource prefix="/"/>
 </RCC>

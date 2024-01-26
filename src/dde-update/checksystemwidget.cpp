@@ -51,7 +51,7 @@ CheckProgressWidget::CheckProgressWidget(QWidget *parent)
         m_logo->setFixedSize(286, 57);
         m_logo->setPixmap(DHiDPIHelper::loadNxPixmap(":img/logo.svg"));
 
-        m_tip->setText(tr("Checking in progress, almost completed. Thank you for your patience"));
+        m_tip->setText(tr("The check is almost complete, thank you for your patience"));
 
         m_progressBar = new DProgressBar(this);
         m_progressBar->setFixedWidth(500);
@@ -203,7 +203,7 @@ void CheckResultWidget::showErrorFrame()
     m_titleSpacer->changeSize(0, 0);
     m_iconLabel->setPixmap(DHiDPIHelper::loadNxPixmap(":img/failed.svg"));
     const QList<UpdateModel::UpdateAction> actions = {{UpdateModel::Reboot, UpdateModel::EnterDesktop}};
-    m_title->setText(tr("There are some issues with the system."));
+    m_title->setText(tr("Checked for some errors"));
 
     createButtons(actions);
     if (!m_actionButtons.isEmpty())
