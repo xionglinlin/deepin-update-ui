@@ -45,6 +45,28 @@
             "description": "",
             "permissions": "readonly",
             "visibility": "private"
+        },
+        "updateHistoryEnabled": {
+            "value": "Enabled",
+            "serial": 0,
+            "flags": [],
+            "name": "Update history enabled",
+            "name[zh_CN]": "启用历史更新记录功能",
+            "description[zh_CN]": "控制中心-更新-更新设置-历史更新记录显示状态。如果值为Enabled，则正常显示\n 如果值为Disabled，按钮将置灰\n 如果值为Hidden，历史更新栏目将隐藏。\n 默认值为 Enabled",
+            "description": "",
+            "permissions": "readwrite",
+            "visibility": "private"
+        },
+        "p2pUpdateEnabled": {
+            "value": "Hidden",
+            "serial": 0,
+            "flags": ["global"],
+            "name": "P2P update enabled",
+            "name[zh_CN]": "是否显示p2p更新",
+            "description[zh_CN]": "控制中心-更新-更新设置页面是否显示缓存传递设置项。如果值为Enabled，则正常显示\n 如果值为Disabled，按钮将置灰\n 如果值为Hidden，缓存传递设置项将隐藏。\n 默认值为 Enabled",
+            "description": "",
+            "permissions": "readwrite",
+            "visibility": "private"
         }
     }
   }
