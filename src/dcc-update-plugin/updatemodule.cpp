@@ -24,7 +24,7 @@ using namespace dcc::update;
 using namespace DCC_NAMESPACE;
 using namespace DCC_NAMESPACE::update;
 
-Q_LOGGING_CATEGORY(dcc::update::DCC_UPDATE, "dcc.update")
+Q_LOGGING_CATEGORY(dcc::update::DCC_UPDATE, "org.deepin.dde.control-center.update")
 
 UpdateModule::UpdateModule(QObject *parent)
     : QObject(parent)
