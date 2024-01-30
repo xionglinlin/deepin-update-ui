@@ -71,6 +71,7 @@ CheckProgressWidget::CheckProgressWidget(QWidget *parent)
         m_waterProgress = new DWaterProgress(this);
         m_waterProgress->setFixedSize(98, 98);
         m_waterProgress->setValue(1);
+        m_waterProgress->start();
     }
 
     QHBoxLayout *pProgressLayout = new QHBoxLayout;
@@ -111,12 +112,13 @@ bool CheckProgressWidget::event(QEvent *e)
 
 void CheckProgressWidget::setValue(double value)
 {
-    int iProgress = static_cast<int>(value * 100);
+    // 使用round获取准确的整数，防止由于精度损失出现*9%的情况
+    int iProgress = static_cast<int>(std::round(value * 100));
     // 进度条不能大于100，不能小于0，不能回退
     if (iProgress > 100 || iProgress < 0 || iProgress <= (m_progressBar ? m_progressBar->value() : m_waterProgress->value()))
         return;
 
-    qInfo() << "Check system progress value: " << value;
+    qInfo() << "Check system progress value: " << iProgress;
     m_progressBar ?  m_progressBar->setValue(iProgress) : m_waterProgress->setValue(iProgress);
     if (m_progressText)
         m_progressText->setText(QString::number(iProgress) + "%");
