@@ -15,8 +15,12 @@ namespace update {
 
 inline static void removeItemAndNotDestruct(SettingsGroup *group,SettingsItem *item)
 {
+    if (!item || !group)
+        return;
+
     group->getLayout()->removeWidget(item);
     item->removeEventFilter(group);
+    item->setParent(nullptr);
 }
 
 MainControlPanel::MainControlPanel(UpdateModel* model, QWidget* parent)
