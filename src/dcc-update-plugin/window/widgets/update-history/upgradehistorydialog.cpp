@@ -98,7 +98,7 @@ void UpgradeHistoryDialog::initUI()
 
     auto historyWidget = new QWidget;
     m_contentLayout = new QVBoxLayout(historyWidget);
-    if (!QGuiApplication::platformName().startsWith("wayland", Qt::CaseInsensitive) && Dtk::Gui::DWindowManagerHelper::instance()->hasComposite()) {
+    if (!QGuiApplication::platformName().startsWith("wayland", Qt::CaseInsensitive) && Dtk::Gui::DWindowManagerHelper::instance()->hasBlurWindow()) {
         historyWidget->setAttribute(Qt::WA_TranslucentBackground);
     }
     m_contentLayout->setSpacing(10);
