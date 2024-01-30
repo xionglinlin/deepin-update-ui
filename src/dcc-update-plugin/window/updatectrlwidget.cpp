@@ -145,8 +145,8 @@ void UpdateCtrlWidget::setStatus(const UpdatesStatus& status)
 
     updateWidgetsVisible();
     if (tmpStats >= SystemIsNotActive) {
-        switch (tmpStats) {
         m_mainControlPanel->setVisible(false);
+        switch (tmpStats) {
         case UpdatesStatus::SystemIsNotActive:
             qCInfo(DCC_UPDATE) << "System is not active";
             m_versionTip->setVisible(false);
