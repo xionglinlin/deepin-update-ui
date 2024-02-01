@@ -304,7 +304,12 @@ void RecoveryWidget::initUI()
 
         // running, 代表在更新过程中被中断
         if (status == "running") {
-            reasonMsg = tr("Updates failed: it was interrupted.");
+            // 如果reason是needCheck，更新已经完成，等待重启检查，此时进入ab界面，可能是手动触发
+            if (reasonCode == "needCheck") {
+                reasonMsg.clear();
+            } else  {
+                reasonMsg = tr("Updates failed: it was interrupted.");
+            }
         } else if (status == "failed") {
             if (reasonCode == "dpkgError") {
                 reasonMsg = tr("Updates failed: DPKG error.");
