@@ -124,7 +124,49 @@ void CheckProgressWidget::setValue(double value)
         m_progressText->setText(QString::number(iProgress) + "%");
 }
 
-CheckResultWidget::CheckResultWidget(QWidget *parent)
+QString systemVersion()
+{
+    QSettings lsbSetting("/etc/os-version", QSettings::IniFormat);
+    lsbSetting.setIniCodec("utf-8");
+    lsbSetting.beginGroup("Version");
+    QLocale locale;
+
+    if (locale.language() == QLocale::Chinese)
+        return lsbSetting.value(QString("EditionName[%1]").arg(locale.name()), "").toString() +
+            lsbSetting.value("MinorVersion").toString();
+
+    return lsbSetting.value(QString("EditionName"), "").toString() +
+        lsbSetting.value("MinorVersion").toString();
+}
+
+SuccessFrame::SuccessFrame(QWidget *parent)
+    : QWidget(parent)
+    , m_enterBtn(new BlurTransparentButton(tr("Go to Desktop"), this))
+{
+    QLabel *successTip = new QLabel(tr("Welcome, system updated successfully"));
+    DFontSizeManager::instance()->bind(successTip, DFontSizeManager::T1, QFont::Normal);
+    QLabel *currentVersion = new QLabel(tr("Current Edition:") + " " + systemVersion());
+    DFontSizeManager::instance()->bind(currentVersion, DFontSizeManager::T3, QFont::Medium);
+
+    m_enterBtn->setFixedSize(240, 48);
+
+    QVBoxLayout *mainLayout = new QVBoxLayout(this);
+    mainLayout->setMargin(0);
+    mainLayout->setSpacing(0);
+    mainLayout->addStretch(4);
+    mainLayout->addWidget(successTip, 0, Qt::AlignHCenter);
+    mainLayout->addSpacing(25);
+    mainLayout->addWidget(currentVersion, 0, Qt::AlignHCenter);
+    mainLayout->addStretch(3);
+    mainLayout->addWidget(m_enterBtn, 0, Qt::AlignHCenter);
+    mainLayout->addStretch(2);
+
+    connect(m_enterBtn, &BlurTransparentButton::clicked, qApp, [] {
+        qApp->exit();
+    });
+}
+
+ErrorFrame::ErrorFrame(QWidget *parent)
     : QWidget(parent)
     , m_iconLabel(new QLabel(this))
     , m_title(new QLabel(this))
@@ -154,52 +196,6 @@ CheckResultWidget::CheckResultWidget(QWidget *parent)
     m_mainLayout->addWidget(m_title, 0, Qt::AlignCenter);
     m_mainLayout->addWidget(m_tips,0 , Qt::AlignCenter);
     m_mainLayout->addItem(m_buttonSpacer);
-}
-
-void CheckResultWidget::showResult(bool success)
-{
-    if (success) {
-        qInfo() << "Check system completed, result: " << success;
-        showSuccessFrame();
-    } else {
-        showErrorFrame();
-    }
-}
-
-QString CheckResultWidget::systemVersion()
-{
-    QSettings lsbSetting("/etc/os-version", QSettings::IniFormat);
-    lsbSetting.setIniCodec("utf-8");
-    lsbSetting.beginGroup("Version");
-    QLocale locale;
-
-    if (locale.language() == QLocale::Chinese)
-        return lsbSetting.value(QString("EditionName[%1]").arg(locale.name()), "").toString() +
-            lsbSetting.value("MinorVersion").toString();
-
-    return lsbSetting.value(QString("EditionName"), "").toString() +
-        lsbSetting.value("MinorVersion").toString();
-}
-
-void CheckResultWidget::showSuccessFrame()
-{
-    qDeleteAll(m_actionButtons);
-    m_actionButtons.clear();
-    m_buttonSpacer->changeSize(0, 0);
-    m_titleSpacer->changeSize(0, 30);
-    m_iconLabel->setFixedSize(286, 57);
-    m_iconLabel->setPixmap(DHiDPIHelper::loadNxPixmap(":img/logo.svg"));
-    m_title->setText(systemVersion());
-    createButtons({UpdateModel::EnterDesktop});
-    if (!m_actionButtons.isEmpty())
-        m_buttonSpacer->changeSize(0, 80);
-
-    m_mainLayout->invalidate();
-}
-
-void CheckResultWidget::showErrorFrame()
-{
-    qInfo() << "Check system failed, show error frame";
 
     m_buttonSpacer->changeSize(0, 0);
     m_titleSpacer->changeSize(0, 0);
@@ -214,7 +210,7 @@ void CheckResultWidget::showErrorFrame()
     m_mainLayout->invalidate();
 }
 
-void CheckResultWidget::createButtons(const QList<UpdateModel::UpdateAction> &actions)
+void ErrorFrame::createButtons(const QList<UpdateModel::UpdateAction> &actions)
 {
     qDeleteAll(m_actionButtons);
     m_actionButtons.clear();
@@ -246,7 +242,7 @@ void CheckResultWidget::createButtons(const QList<UpdateModel::UpdateAction> &ac
     }
 }
 
-void CheckResultWidget::keyPressEvent(QKeyEvent *event)
+void ErrorFrame::keyPressEvent(QKeyEvent *event)
 {
     switch (event->key()) {
     case Qt::Key_Up:
@@ -285,7 +281,6 @@ void CheckResultWidget::keyPressEvent(QKeyEvent *event)
 CheckSystemWidget::CheckSystemWidget(QWidget *parent)
     : QWidget(parent)
     , m_checkProgressWidget(new CheckProgressWidget(this))
-    , m_checkResultWidget(new CheckResultWidget(this))
 {
     initUI();
     initConnections();
@@ -308,20 +303,26 @@ CheckSystemWidget* CheckSystemWidget::instance()
 void CheckSystemWidget::initUI()
 {
     auto mainLayout = new  QVBoxLayout(this);
+    mainLayout->setSpacing(0);
     mainLayout->addWidget(m_checkProgressWidget);
-    mainLayout->addWidget(m_checkResultWidget);
-
     m_checkProgressWidget->setVisible(true);
-    m_checkResultWidget->setVisible(false);
 }
 
 void CheckSystemWidget::initConnections()
 {
     connect(UpdateModel::instance(), &UpdateModel::checkStatusChanged, this, [this](UpdateModel::CheckStatus status) {
-        if (UpdateModel::CheckSuccess == status || UpdateModel::CheckFailed == status) {
-            m_checkResultWidget->showResult(UpdateModel::CheckSuccess == status);
-            m_checkResultWidget->setVisible(true);
+        if (UpdateModel::CheckFailed == status) {
             m_checkProgressWidget->setVisible(false);
+            auto errorFrame = new ErrorFrame(this);
+            auto mainLayout = dynamic_cast<QVBoxLayout*>(layout());
+            if (mainLayout)
+                mainLayout->addWidget(errorFrame);
+        } else if (UpdateModel::CheckSuccess == status) {
+            m_checkProgressWidget->setVisible(false);
+            auto successFrame = new SuccessFrame(this);
+            auto mainLayout = dynamic_cast<QVBoxLayout*>(layout());
+            if (mainLayout)
+                mainLayout->addWidget(successFrame);
         }
     });
 

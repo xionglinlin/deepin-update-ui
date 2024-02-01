@@ -43,20 +43,27 @@ private:
     QLabel *m_progressText;
 };
 
-class CheckResultWidget : public QWidget
+
+class SuccessFrame : public QWidget
 {
     Q_OBJECT
 public:
-    explicit CheckResultWidget(QWidget *parent = nullptr);
-    void showResult(bool success);
+    explicit SuccessFrame(QWidget *parent = nullptr);
+
+private:
+    BlurTransparentButton *m_enterBtn;
+};
+
+class ErrorFrame : public QWidget
+{
+        Q_OBJECT
+public:
+    explicit ErrorFrame(QWidget *parent = nullptr);
 
 protected:
     void keyPressEvent(QKeyEvent *event) override;
 
 private:
-    QString systemVersion();
-    void showSuccessFrame();
-    void showErrorFrame();
     void createButtons(const QList<UpdateModel::UpdateAction> &actions);
 
 private:
@@ -87,7 +94,6 @@ private:
 
 private:
     CheckProgressWidget *m_checkProgressWidget;
-    CheckResultWidget *m_checkResultWidget;
 };
 
 #endif

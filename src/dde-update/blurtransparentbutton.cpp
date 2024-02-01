@@ -20,18 +20,22 @@ BlurTransparentButton::BlurTransparentButton(const QString &text, QWidget *paren
     , m_state(Leave)
     , m_iconLabel(new QLabel(this))
     , m_textLabel(new QLabel(this))
+    , m_radius(10)
 {
     m_iconLabel->setFixedSize(64, 64);
-    m_textLabel->setFixedHeight(64);
     m_textLabel->setText(text);
 
     m_iconLabel->setAlignment(Qt::AlignmentFlag::AlignRight | Qt::AlignmentFlag::AlignVCenter);
     m_textLabel->setAlignment(Qt::AlignmentFlag::AlignLeft | Qt::AlignmentFlag::AlignVCenter);
     QHBoxLayout *layout = new QHBoxLayout(this);
+    layout->addStretch();
     layout->setContentsMargins(0, 0, 0, 0);
     layout->addWidget(m_iconLabel);
     layout->setSpacing(20);
     layout->addWidget(m_textLabel);
+    layout->addStretch();
+
+    m_iconLabel->setVisible(false);
 
     QPalette palette = this->palette();
     palette.setColor(QPalette::WindowText, Qt::white);
@@ -58,11 +62,13 @@ QString BlurTransparentButton::text()
 void BlurTransparentButton::setNormalPixmap(const QPixmap &normalPixmap)
 {
     m_normalPixmap = normalPixmap;
+    m_iconLabel->setVisible(true);
 }
 
 void BlurTransparentButton::setHoverPixmap(const QPixmap &hoverPixmap)
 {
     m_hoverPixmap = hoverPixmap;
+    m_iconLabel->setVisible(true);
 }
 
 QPixmap BlurTransparentButton::hoverPixmap()
@@ -73,6 +79,11 @@ QPixmap BlurTransparentButton::hoverPixmap()
 QPixmap BlurTransparentButton::normalPixmap()
 {
     return m_normalPixmap;
+}
+
+void BlurTransparentButton::setRadius(int radius)
+{
+    m_radius = radius;
 }
 
 void BlurTransparentButton::enterEvent(QEvent *event)
@@ -111,7 +122,7 @@ void BlurTransparentButton::paintEvent(QPaintEvent *event)
     switch (m_state) {
     case Enter:
     case Release:
-        color.setAlphaF(0.3);
+        color.setAlphaF(0.4);
         break;
     case Leave:
     case Press:
@@ -133,7 +144,7 @@ void BlurTransparentButton::paintEvent(QPaintEvent *event)
     } else
         painter.setPen(Qt::NoPen);
 
-    painter.drawRoundedRect(rect().marginsRemoved(QMargins(penWidth, penWidth, penWidth, penWidth)), 18, 18);
+    painter.drawRoundedRect(rect().marginsRemoved(QMargins(penWidth, penWidth, penWidth, penWidth)), m_radius, m_radius);
 
     QWidget::paintEvent(event);
 }

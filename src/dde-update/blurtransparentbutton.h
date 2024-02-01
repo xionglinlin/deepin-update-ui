@@ -29,6 +29,7 @@ public:
     QPixmap normalPixmap();
     void setHoverPixmap(const QPixmap &hoverPixmap);
     QPixmap hoverPixmap();
+    void setRadius(int radius);
 
 
 Q_SIGNALS:
@@ -46,6 +47,7 @@ private:
     State m_state;
     QLabel *m_iconLabel;
     QLabel *m_textLabel;
+    int m_radius;
     QPixmap m_normalPixmap;
     QPixmap m_hoverPixmap;
 };
