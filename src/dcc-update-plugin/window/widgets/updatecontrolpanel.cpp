@@ -353,7 +353,7 @@ void UpdateControlPanel::setUpdateStatus(UpdatesStatus status)
         { UpgradeWaiting, tr("Preparing for updates…") },
         { UpgradeReady, tr("Preparing for updates…") },
         { BackingUp, tr("Backing up…") },
-        { BackupSuccess, tr("Backing up") },
+        { BackupSuccess, tr("Installing updates...") },
         { BackupFailed, tr("Backup failed") },
         { Upgrading, tr("Installing updates...") },
         { UpgradeFailed, tr("Updates failed") },
