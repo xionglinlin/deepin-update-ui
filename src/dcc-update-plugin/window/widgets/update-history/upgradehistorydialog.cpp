@@ -98,9 +98,9 @@ void UpgradeHistoryDialog::initUI()
 
     auto historyWidget = new QWidget;
     m_contentLayout = new QVBoxLayout(historyWidget);
-    if (!QGuiApplication::platformName().startsWith("wayland", Qt::CaseInsensitive) && Dtk::Gui::DWindowManagerHelper::instance()->hasBlurWindow()) {
-        historyWidget->setAttribute(Qt::WA_TranslucentBackground);
-    }
+    QPalette p = contentArea->palette();
+    p.setBrush(QPalette::Background, Qt::transparent);
+    contentArea->setPalette(p);
     m_contentLayout->setSpacing(10);
     m_contentLayout->setContentsMargins(70, 0, 70 ,0);
     contentArea->setWidget(historyWidget);
@@ -134,7 +134,11 @@ void UpgradeHistoryDialog::updateLayout(const QList<HistoryItemInfo>& items)
     m_normalHistoryWidget->setVisible(true);
     addContent(m_normalHistoryWidget);
     for (const auto &item : items) {
-        m_contentLayout->addWidget(new HistoryUpdateItem(item, this));
+        auto w = new HistoryUpdateItem(item, this);
+        QPalette p = w->palette();
+        p.setBrush(QPalette::Window, p.base());
+        w->setPalette(p);
+        m_contentLayout->addWidget(w);
     }
     m_contentLayout->addSpacing(20);
 }
