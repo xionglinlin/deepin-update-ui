@@ -9,6 +9,7 @@
 #include <QHBoxLayout>
 #include <QApplication>
 #include <QScrollArea>
+#include <QScrollBar>
 #include <QWindow>
 
 #include <DFontSizeManager>
@@ -56,6 +57,12 @@ UpdateLogWidget::UpdateLogWidget(QWidget *parent)
     QPalette pa = scrollArea->palette();
     pa.setColor(QPalette::Background, Qt::transparent);
     scrollArea->setPalette(pa);
+
+#ifdef QT_SCROLL_WHEEL_ANI
+    QScrollBar *bar = scrollArea->verticalScrollBar();
+    bar->setSingleStep(1);
+    scrollArea->setVerticalScrollBarPolicy(Qt::ScrollBarSlideAnimationOn);
+#endif
 
     auto logLayout = new QVBoxLayout(m_logWidget);
     logLayout->addWidget(scrollArea, 0, Qt::AlignCenter);

@@ -8,6 +8,7 @@
 
 #include <QScrollArea>
 #include <QScroller>
+#include <QScrollBar>
 #include <QFile>
 
 #include <DFontSizeManager>
@@ -89,6 +90,12 @@ void UpgradeHistoryDialog::initUI()
     contentArea->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
     contentArea->setSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::Expanding);
     contentArea->setContentsMargins(0, 0, 0, 0);
+
+#ifdef QT_SCROLL_WHEEL_ANI
+    QScrollBar *bar = contentArea->verticalScrollBar();
+    bar->setSingleStep(1);
+    contentArea->setVerticalScrollBarPolicy(Qt::ScrollBarSlideAnimationOn);
+#endif
 
     QScroller::grabGesture(contentArea->viewport(), QScroller::LeftMouseButtonGesture);
     QScroller *scroller = QScroller::scroller(contentArea);

@@ -11,6 +11,7 @@
 
 #include <QPushButton>
 #include <QVBoxLayout>
+#include <QScrollBar>
 
 using namespace dcc;
 using namespace dcc::update;
@@ -58,6 +59,12 @@ MirrorsWidget::MirrorsWidget(UpdateModel *model, QWidget *parent)
     m_view->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     m_view->setFrameShape(QFrame::NoFrame);
     m_view->setModel(m_model);
+
+#ifdef QT_SCROLL_WHEEL_ANI
+    QScrollBar *bar = m_view->verticalScrollBar();
+    bar->setSingleStep(1);
+    m_view->setVerticalScrollBarPolicy(Qt::ScrollBarSlideAnimationOn);
+#endif
 
     QVBoxLayout *listLayout= new QVBoxLayout;
     listLayout->addWidget(m_view);
