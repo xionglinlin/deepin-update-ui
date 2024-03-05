@@ -25,6 +25,7 @@
 #include <DSysInfo>
 #include <DTextEdit>
 #include <DTipLabel>
+#include <DDialog>
 
 namespace dcc {
 namespace update {
@@ -126,6 +127,7 @@ private:
     ControlPanelType m_controlPanelType;
     // 安装和备份共用一个进度条，如果没有备份的话从安装进度从0开始，备份了的话接着备份完成时的进度往后面走
     static int InstallProgressBeginValue;
+    QPointer<Dtk::Widget::DDialog> m_chooseInstallTypeDialog;
 };
 
 }

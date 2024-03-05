@@ -69,6 +69,7 @@ UpdateControlPanel::UpdateControlPanel(QWidget* parent)
     , m_buttonStatus(ButtonStatus::invalid)
     , m_updateStatus(Default)
     , m_model(nullptr)
+    , m_chooseInstallTypeDialog(nullptr)
 {
     initUi();
     initConnect();
@@ -602,49 +603,52 @@ int UpdateControlPanel::updateTypes() const
 
 void UpdateControlPanel::onUpdateButtonClicked()
 {
-    DDialog* chooseInstallTypeDialog = new DDialog(this);
-    chooseInstallTypeDialog->setAttribute(Qt::WA_DeleteOnClose, true);
-    connect(m_model, &UpdateModel::checkUpdateModeChanged, chooseInstallTypeDialog, [chooseInstallTypeDialog] {
-        chooseInstallTypeDialog->close();
-    });
-    connect(m_model, &UpdateModel::updateStatusChanged, chooseInstallTypeDialog, [chooseInstallTypeDialog] {
-        chooseInstallTypeDialog->close();
-    });
-    chooseInstallTypeDialog->setMinimumSize(422, 188);
-    const auto iconSize = QSize(32 * qApp->devicePixelRatio(), 32 * qApp->devicePixelRatio());
-    const auto iconPath = ":/update/themes/common/icons/dcc_update.svg";
-    chooseInstallTypeDialog->setIcon(QIcon(DHiDPIHelper::loadNxPixmap(iconPath).scaled(iconSize, Qt::KeepAspectRatioByExpanding, Qt::SmoothTransformation)));
-    chooseInstallTypeDialog->setAttribute(Qt::WA_DeleteOnClose);
+    if (!m_chooseInstallTypeDialog) {
+        m_chooseInstallTypeDialog = new DDialog(this);
+        m_chooseInstallTypeDialog->setAttribute(Qt::WA_DeleteOnClose, true);
+        connect(m_model, &UpdateModel::checkUpdateModeChanged, m_chooseInstallTypeDialog, [this] {
+            m_chooseInstallTypeDialog->close();
+        });
+        connect(m_model, &UpdateModel::updateStatusChanged, m_chooseInstallTypeDialog, [this] {
+            m_chooseInstallTypeDialog->close();
+        });
+        m_chooseInstallTypeDialog->setMinimumSize(422, 188);
+        const auto iconSize = QSize(32 * qApp->devicePixelRatio(), 32 * qApp->devicePixelRatio());
+        const auto iconPath = ":/update/themes/common/icons/dcc_update.svg";
+        m_chooseInstallTypeDialog->setIcon(QIcon(DHiDPIHelper::loadNxPixmap(iconPath).scaled(iconSize, Qt::KeepAspectRatioByExpanding, Qt::SmoothTransformation)));
+        m_chooseInstallTypeDialog->setAttribute(Qt::WA_DeleteOnClose);
 
-    int backgroundInstall = chooseInstallTypeDialog->addButton(tr("Silent Installation"));
-    int installAndReboot = chooseInstallTypeDialog->addButton(tr("Update and Reboot"));
-    int installAndShutdown = chooseInstallTypeDialog->addButton(tr("Update and Shut Down"), true, DDialog::ButtonRecommend);
-    for (auto button : chooseInstallTypeDialog->getButtons()) {
-        const QString& originText = button->text();
-        const QString& text = getElidedText(button, button->text(), Qt::ElideRight, FullUpdateBtnWidth - 10, 0, __LINE__);
-        button->setText(text);
-        button->setToolTip(originText);
-    }
-    chooseInstallTypeDialog->setMessage(tr("The updates have been already downloaded. What do you want to do?"));
-    chooseInstallTypeDialog->setFixedWidth(422);
-    connect(chooseInstallTypeDialog, &DDialog::buttonClicked, this, [this, backgroundInstall, installAndReboot, installAndShutdown] (int index, const QString &text) {
-        // ret: 0: 后台安装，1：安装并重启，2：安装并关机
-        if (index == backgroundInstall) {
-            Q_EMIT SignalBridge::ref().requestBackgroundInstall(updateTypes() & m_model->checkUpdateMode(), true);
-        } else if (index == installAndReboot || index == installAndShutdown) {
-            QString method = index == installAndReboot ? "UpdateAndReboot" : "UpdateAndShutdown";
-            DDBusSender()
-                .service("com.deepin.dde.lockFront")
-                .interface("com.deepin.dde.shutdownFront")
-                .path("/com/deepin/dde/shutdownFront")
-                .method(method)
-                .call();
-        } else {
-            // User clicked `Close` button, do nothing
+        int backgroundInstall = m_chooseInstallTypeDialog->addButton(tr("Silent Installation"));
+        int installAndReboot = m_chooseInstallTypeDialog->addButton(tr("Update and Reboot"));
+        int installAndShutdown = m_chooseInstallTypeDialog->addButton(tr("Update and Shut Down"), true, DDialog::ButtonRecommend);
+        for (auto button : m_chooseInstallTypeDialog->getButtons()) {
+            const QString& originText = button->text();
+            const QString& text = getElidedText(button, button->text(), Qt::ElideRight, FullUpdateBtnWidth - 10, 0, __LINE__);
+            button->setText(text);
+            button->setToolTip(originText);
         }
-    });
+        m_chooseInstallTypeDialog->setMessage(tr("The updates have been already downloaded. What do you want to do?"));
+        m_chooseInstallTypeDialog->setFixedWidth(422);
+        connect(m_chooseInstallTypeDialog, &DDialog::buttonClicked, this, [this, backgroundInstall, installAndReboot, installAndShutdown] (int index, const QString &text) {
+            // ret: 0: 后台安装，1：安装并重启，2：安装并关机
+            if (index == backgroundInstall) {
+                Q_EMIT SignalBridge::ref().requestBackgroundInstall(updateTypes() & m_model->checkUpdateMode(), true);
+            } else if (index == installAndReboot || index == installAndShutdown) {
+                QString method = index == installAndReboot ? "UpdateAndReboot" : "UpdateAndShutdown";
+                DDBusSender()
+                    .service("com.deepin.dde.lockFront")
+                    .interface("com.deepin.dde.shutdownFront")
+                    .path("/com/deepin/dde/shutdownFront")
+                    .method(method)
+                    .call();
+            } else {
+                // User clicked `Close` button, do nothing
+            }
+        });
+    }
 
-    chooseInstallTypeDialog->show();
+    m_chooseInstallTypeDialog->show();
+    m_chooseInstallTypeDialog->activateWindow();
 }
 
 void UpdateControlPanel::onBatteryStatusChanged(bool isOK)
