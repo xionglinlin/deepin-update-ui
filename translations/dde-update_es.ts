@@ -4,7 +4,7 @@
     <message>
         <location filename="../src/dde-update/checksystemwidget.cpp" line="54"/>
         <source>The check is almost complete, thank you for your patience</source>
-        <translation type="unfinished"/>
+        <translation>La verificación está casi completa, gracias por su paciencia.</translation>
     </message>
     <message>
         <location filename="../src/dde-update/checksystemwidget.cpp" line="69"/>
@@ -13,11 +13,29 @@
     </message>
 </context>
 <context>
-    <name>CheckResultWidget</name>
+    <name>ErrorFrame</name>
     <message>
-        <location filename="../src/dde-update/checksystemwidget.cpp" line="206"/>
+        <location filename="../src/dde-update/checksystemwidget.cpp" line="204"/>
         <source>Checked for some errors</source>
-        <translation type="unfinished"/>
+        <translation>Comprobado por algunos errores.</translation>
+    </message>
+</context>
+<context>
+    <name>SuccessFrame</name>
+    <message>
+        <location filename="../src/dde-update/checksystemwidget.cpp" line="144"/>
+        <source>Go to Desktop</source>
+        <translation>Ir al escritorio</translation>
+    </message>
+    <message>
+        <location filename="../src/dde-update/checksystemwidget.cpp" line="146"/>
+        <source>Welcome, system updated successfully</source>
+        <translation>Bienvenido, el sistema se actualizó con éxito</translation>
+    </message>
+    <message>
+        <location filename="../src/dde-update/checksystemwidget.cpp" line="148"/>
+        <source>Current Edition:</source>
+        <translation>Edición actual:</translation>
     </message>
 </context>
 <context>
@@ -135,7 +153,7 @@
     <message>
         <location filename="../src/dde-update/updatemodel.cpp" line="121"/>
         <source>Go to Desktop</source>
-        <translation type="unfinished"/>
+        <translation>Ir al escritorio</translation>
     </message>
 </context>
 <context>

@@ -103,7 +103,7 @@
     <message>
         <location filename="../src/dcc-update-plugin/window/widgets/updatemodesettingitem.cpp" line="54"/>
         <source>Update content</source>
-        <translation type="unfinished"/>
+        <translation>Dopuni sadržaj</translation>
     </message>
 </context>
 <context>
@@ -191,7 +191,7 @@
     <message>
         <location filename="../src/dcc-update-plugin/updatemodule.cpp" line="312"/>
         <source>Auto Check for Updates</source>
-        <translation type="unfinished"/>
+        <translation>Samoprovjera za dopune</translation>
     </message>
     <message>
         <location filename="../src/dcc-update-plugin/updatemodule.cpp" line="314"/>
@@ -214,7 +214,7 @@
     <message>
         <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="70"/>
         <source>Switch it on to automatically download the updates in wireless or wired network</source>
-        <translation type="unfinished"/>
+        <translation>Prebaci na automatsko preuzimanje dopuna u bežičnoj i žičnoj mreži.</translation>
     </message>
     <message>
         <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="71"/>
@@ -466,32 +466,32 @@
     <message>
         <location filename="../src/dcc-update-plugin/window/widgets/update-history/historyupdateitem.cpp" line="99"/>
         <source>Installation date: </source>
-        <translation type="unfinished"/>
+        <translation>datum instalacije:</translation>
     </message>
     <message>
         <location filename="../src/dcc-update-plugin/window/widgets/update-history/historyupdateitem.cpp" line="106"/>
         <source>Security Updates</source>
-        <translation type="unfinished"/>
+        <translation>Suigurnosne dopune</translation>
     </message>
     <message>
         <location filename="../src/dcc-update-plugin/window/widgets/update-history/historyupdateitem.cpp" line="140"/>
         <source>System Updates</source>
-        <translation type="unfinished"/>
+        <translation>Dopune sustava</translation>
     </message>
     <message>
         <location filename="../src/dcc-update-plugin/window/widgets/update-history/historyupdateitem.cpp" line="150"/>
         <source>Version: </source>
-        <translation type="unfinished"/>
+        <translation>Inačica:</translation>
     </message>
     <message>
         <location filename="../src/dcc-update-plugin/window/widgets/update-history/historyupdateitem.cpp" line="150"/>
         <source>Server</source>
-        <translation type="unfinished"/>
+        <translation>Poslužitelj</translation>
     </message>
     <message>
         <location filename="../src/dcc-update-plugin/window/widgets/update-history/historyupdateitem.cpp" line="150"/>
         <source>Desktop</source>
-        <translation type="unfinished"/>
+        <translation>Radna površina</translation>
     </message>
 </context>
 <context>
@@ -666,7 +666,7 @@
     <message>
         <location filename="../src/dcc-update-plugin/window/widgets/updatecontrolpanel.cpp" line="619"/>
         <source>Silent Installation</source>
-        <translation type="unfinished"/>
+        <translation>Tiha instalacija</translation>
     </message>
     <message>
         <location filename="../src/dcc-update-plugin/window/widgets/updatecontrolpanel.cpp" line="620"/>
@@ -676,7 +676,7 @@
     <message>
         <location filename="../src/dcc-update-plugin/window/widgets/updatecontrolpanel.cpp" line="621"/>
         <source>Update and Shut Down</source>
-        <translation type="unfinished"/>
+        <translation>Dopuni i iskljući</translation>
     </message>
     <message>
         <location filename="../src/dcc-update-plugin/window/widgets/updatecontrolpanel.cpp" line="628"/>
@@ -741,47 +741,47 @@
     <message>
         <location filename="../src/dcc-update-plugin/module/updateloghelper.cpp" line="27"/>
         <source>LOW</source>
-        <translation type="unfinished"/>
+        <translation>NISKO</translation>
     </message>
     <message>
         <location filename="../src/dcc-update-plugin/module/updateloghelper.cpp" line="28"/>
         <source>MEDIUM</source>
-        <translation type="unfinished"/>
+        <translation>SREDNJE</translation>
     </message>
     <message>
         <location filename="../src/dcc-update-plugin/module/updateloghelper.cpp" line="29"/>
         <source>HIGH</source>
-        <translation type="unfinished"/>
+        <translation>VISOKO</translation>
     </message>
     <message>
         <location filename="../src/dcc-update-plugin/module/updateloghelper.cpp" line="30"/>
         <source>CRITICAL</source>
-        <translation type="unfinished"/>
+        <translation>KRITIČNO</translation>
     </message>
     <message>
         <location filename="../src/dcc-update-plugin/module/updateloghelper.cpp" line="41"/>
         <source>critical-risk</source>
-        <translation type="unfinished"/>
+        <translation>kritični rizik</translation>
     </message>
     <message>
         <location filename="../src/dcc-update-plugin/module/updateloghelper.cpp" line="42"/>
         <source>high-risk</source>
-        <translation type="unfinished"/>
+        <translation>visoki rizik</translation>
     </message>
     <message>
         <location filename="../src/dcc-update-plugin/module/updateloghelper.cpp" line="43"/>
         <source>medium-risk</source>
-        <translation type="unfinished"/>
+        <translation>srednji rizik</translation>
     </message>
     <message>
         <location filename="../src/dcc-update-plugin/module/updateloghelper.cpp" line="44"/>
         <source>low-risk</source>
-        <translation type="unfinished"/>
+        <translation>niski rizik</translation>
     </message>
     <message>
         <location filename="../src/dcc-update-plugin/module/updateloghelper.cpp" line="45"/>
         <source>unknown</source>
-        <translation type="unfinished"/>
+        <translation>nepoznato</translation>
     </message>
     <message>
         <location filename="../src/dcc-update-plugin/module/updateloghelper.cpp" line="47"/>
@@ -791,12 +791,12 @@
     <message>
         <location filename="../src/dcc-update-plugin/module/updateloghelper.cpp" line="50"/>
         <source>vulnerabilities</source>
-        <translation type="unfinished"/>
+        <translation>ranjivosti</translation>
     </message>
     <message>
         <location filename="../src/dcc-update-plugin/module/updateloghelper.cpp" line="50"/>
         <source>vulnerability</source>
-        <translation type="unfinished"/>
+        <translation>ranjivost</translation>
     </message>
 </context>
 <context>
@@ -819,7 +819,7 @@
     <message>
         <location filename="../src/dcc-update-plugin/module/updatemodel.cpp" line="462"/>
         <source>Please check your network and try again.</source>
-        <translation type="unfinished"/>
+        <translation>Molim provjerite svoju mrežu i probajte ponovno.</translation>
     </message>
     <message>
         <location filename="../src/dcc-update-plugin/module/updatemodel.cpp" line="463"/>
@@ -845,7 +845,7 @@
         <location filename="../src/dcc-update-plugin/module/updatemodel.cpp" line="467"/>
         <location filename="../src/dcc-update-plugin/module/updatemodel.cpp" line="468"/>
         <source>DPKG error</source>
-        <translation type="unfinished"/>
+        <translation>DPKG greška</translation>
     </message>
     <message>
         <location filename="../src/dcc-update-plugin/module/updatemodel.cpp" line="469"/>

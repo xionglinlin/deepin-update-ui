@@ -300,7 +300,7 @@
     <message>
         <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="196"/>
         <source>Enable this option to transfer updates to computers that are locally connected to the network to speed up the download of updates to other computers.</source>
-        <translation>Habilite esta opción para transferir actualizaciones a computadoras que están conectadas localmente a la red para acelerar la descarga de actualizaciones a otras computadoras.</translation>
+        <translation>Habilite esta opción para transferir actualizaciones a computadoras que están conectadas localmente a la red y acelerar la descarga de actualizaciones a otras computadoras.</translation>
     </message>
     <message>
         <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="211"/>
@@ -357,7 +357,7 @@
     <message>
         <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="592"/>
         <source>If you leave the internal testing channel now, you may not be able to get the latest bug fixes and updates. Please leave after the official version is released to keep your system stable!</source>
-        <translation>Si abandona el canal de prueba interno ahora, es posible que no pueda obtener las últimas correcciones de errores y actualizaciones. ¡Váyase después de que se publique la versión oficial para mantener su sistema estable!</translation>
+        <translation>Si abandona el canal de pruebas internas ahora, es posible que no pueda obtener las últimas correcciones de errores y actualizaciones. ¡Para mantener su sistema estable salga después de que se publique la versión oficial!</translation>
     </message>
     <message>
         <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="594"/>

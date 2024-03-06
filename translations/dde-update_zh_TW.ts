@@ -13,11 +13,29 @@
     </message>
 </context>
 <context>
-    <name>CheckResultWidget</name>
+    <name>ErrorFrame</name>
     <message>
-        <location filename="../src/dde-update/checksystemwidget.cpp" line="206"/>
+        <location filename="../src/dde-update/checksystemwidget.cpp" line="204"/>
         <source>Checked for some errors</source>
         <translation>檢查到一些錯誤</translation>
+    </message>
+</context>
+<context>
+    <name>SuccessFrame</name>
+    <message>
+        <location filename="../src/dde-update/checksystemwidget.cpp" line="144"/>
+        <source>Go to Desktop</source>
+        <translation>進入桌面</translation>
+    </message>
+    <message>
+        <location filename="../src/dde-update/checksystemwidget.cpp" line="146"/>
+        <source>Welcome, system updated successfully</source>
+        <translation>歡迎您，系統已成功升級</translation>
+    </message>
+    <message>
+        <location filename="../src/dde-update/checksystemwidget.cpp" line="148"/>
+        <source>Current Edition:</source>
+        <translation>目前版本：</translation>
     </message>
 </context>
 <context>

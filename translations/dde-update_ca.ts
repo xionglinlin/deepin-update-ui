@@ -13,11 +13,29 @@
     </message>
 </context>
 <context>
-    <name>CheckResultWidget</name>
+    <name>ErrorFrame</name>
     <message>
-        <location filename="../src/dde-update/checksystemwidget.cpp" line="206"/>
+        <location filename="../src/dde-update/checksystemwidget.cpp" line="204"/>
         <source>Checked for some errors</source>
         <translation>S&apos;ha comprovat si hi ha errors.</translation>
+    </message>
+</context>
+<context>
+    <name>SuccessFrame</name>
+    <message>
+        <location filename="../src/dde-update/checksystemwidget.cpp" line="144"/>
+        <source>Go to Desktop</source>
+        <translation>Ves a l&apos;escriptori</translation>
+    </message>
+    <message>
+        <location filename="../src/dde-update/checksystemwidget.cpp" line="146"/>
+        <source>Welcome, system updated successfully</source>
+        <translation>Us donem la benvinguda. El sistema s&apos;ha actualitzat correctament.</translation>
+    </message>
+    <message>
+        <location filename="../src/dde-update/checksystemwidget.cpp" line="148"/>
+        <source>Current Edition:</source>
+        <translation>Edició actual:</translation>
     </message>
 </context>
 <context>

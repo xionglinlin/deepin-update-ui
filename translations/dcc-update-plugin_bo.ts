@@ -175,7 +175,7 @@
         <location filename="../src/dcc-update-plugin/updatemodule.cpp" line="289"/>
         <location filename="../src/dcc-update-plugin/updatemodule.cpp" line="342"/>
         <source>Update History</source>
-        <translation>ལོ་རྒྱུས་གསར་སྒྱུར།</translation>
+        <translation>ལོ་རྒྱུས་གསར་སྒྱུར་ལ་ལྟ་བ།</translation>
     </message>
     <message>
         <location filename="../src/dcc-update-plugin/updatemodule.cpp" line="290"/>
@@ -330,7 +330,7 @@
     <message>
         <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="270"/>
         <source>Update History</source>
-        <translation>ལོ་རྒྱུས་གསར་སྒྱུར།</translation>
+        <translation>ལོ་རྒྱུས་གསར་སྒྱུར་ལ་ལྟ་བ།</translation>
         <extra-child_page>Update Settings</extra-child_page>
         <extra-contents_path>/update/Update Settings</extra-contents_path>
     </message>
@@ -453,12 +453,12 @@
     <message>
         <location filename="../src/dcc-update-plugin/window/widgets/update-history/upgradehistorydialog.cpp" line="55"/>
         <source>Update History</source>
-        <translation>གསར་སྒྱུར་ལོ་རྒྱུས།</translation>
+        <translation>གསར་སྒྱུར་ལོ་རྒྱུས་ཟིན་ཐོ།</translation>
     </message>
     <message>
         <location filename="../src/dcc-update-plugin/window/widgets/update-history/upgradehistorydialog.cpp" line="81"/>
         <source>No update history</source>
-        <translation>གསར་སྒྱུར་ལོ་རྒྱུས་མེད་པ།</translation>
+        <translation>གསར་སྒྱུར་ལོ་རྒྱུས་ཟིན་ཐོ་མེད་པ།</translation>
     </message>
 </context>
 <context>
@@ -709,12 +709,12 @@
     <message>
         <location filename="../src/dcc-update-plugin/window/widgets/detailinfoitem.cpp" line="56"/>
         <source>For more details, visit:</source>
-        <translation type="unfinished"/>
+        <translation>ཐེངས་འདིའི་གསར་སྒྱུར་དང་འབྲེལ་བའི་ཞིབ་ཕྲའི་ནང་དོན་དག་་་་་་་་་་ནས་ལྟ་ཆོག</translation>
     </message>
     <message>
         <location filename="../src/dcc-update-plugin/window/widgets/detailinfoitem.cpp" line="126"/>
         <source>Collapse</source>
-        <translation type="unfinished"/>
+        <translation>བསྡུ་བ།</translation>
     </message>
 </context>
 <context>

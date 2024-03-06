@@ -13,11 +13,29 @@
     </message>
 </context>
 <context>
-    <name>CheckResultWidget</name>
+    <name>ErrorFrame</name>
     <message>
-        <location filename="../src/dde-update/checksystemwidget.cpp" line="206"/>
+        <location filename="../src/dde-update/checksystemwidget.cpp" line="204"/>
         <source>Checked for some errors</source>
         <translation>De foutencontrole is voltooid</translation>
+    </message>
+</context>
+<context>
+    <name>SuccessFrame</name>
+    <message>
+        <location filename="../src/dde-update/checksystemwidget.cpp" line="144"/>
+        <source>Go to Desktop</source>
+        <translation>Ga naar bureaublad</translation>
+    </message>
+    <message>
+        <location filename="../src/dde-update/checksystemwidget.cpp" line="146"/>
+        <source>Welcome, system updated successfully</source>
+        <translation>Welkom! Het systeem is bijgewerkt.</translation>
+    </message>
+    <message>
+        <location filename="../src/dde-update/checksystemwidget.cpp" line="148"/>
+        <source>Current Edition:</source>
+        <translation>Huidige editie:</translation>
     </message>
 </context>
 <context>
