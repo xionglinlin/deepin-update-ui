@@ -10,7 +10,6 @@
 #include "widgets/translucentframe.h"
 #include "window/gsettingwatcher.h"
 #include "window/utils.h"
-#include "update-history/upgradehistorydialog.h"
 
 #include <DDialog>
 #include <DFontSizeManager>
@@ -79,6 +78,7 @@ UpdateSettings::UpdateSettings(UpdateModel* model, QWidget* parent)
     , m_autoCleanCache(new SwitchWidget(this))
     , m_p2pUpdateSwitch(nullptr)
     , m_p2pUpdateWidget(nullptr)
+    , m_upgradeHistoryDialog(nullptr)
 {
     //~ contents_path /update/Update Settings
     //~ child_page Update Settings
@@ -271,9 +271,12 @@ void UpdateSettings::initUi()
     auto showHistoryButton = new DIconButton(QStyle::SP_ArrowRight, this);
     showHistoryButton->setFlat(true);
     connect(showHistoryButton, &QPushButton::clicked, this, [this] {
-        auto dialog = new UpgradeHistoryDialog(this);
-        dialog->setAttribute(Qt::WA_DeleteOnClose);
-        dialog->show();
+        if (!m_upgradeHistoryDialog) {
+            m_upgradeHistoryDialog = new UpgradeHistoryDialog(this);
+            m_upgradeHistoryDialog->setAttribute(Qt::WA_DeleteOnClose);
+        }
+        m_upgradeHistoryDialog->show();
+        m_upgradeHistoryDialog->activateWindow();
     });
 
     auto showHistoryWidget = new SettingsItem(this);

@@ -9,6 +9,7 @@
 #include "window/dconfigwatcher.h"
 #include "updatemodel.h"
 #include "updatemodesettingitem.h"
+#include "update-history/upgradehistorydialog.h"
 
 #include <QCheckBox>
 
@@ -105,6 +106,7 @@ private:
     dcc::update::NextPage *m_updateMirrors; // 设置镜像源
     dcc::widgets::SwitchWidget *m_p2pUpdateSwitch;  // p2p更新
     QWidget *m_p2pUpdateWidget;
+    QPointer<UpgradeHistoryDialog> m_upgradeHistoryDialog;
 };
 
 }// namespace datetime
