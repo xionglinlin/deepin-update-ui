@@ -104,7 +104,7 @@ void HistoryUpdateItem::addSecurityItem(const HistoryItemInfo &info)
 {
     m_icon->setPixmap(DHiDPIHelper::loadNxPixmap(":/update/updatev20/dcc_safe_update.svg"));
     m_titleLabel->setText(tr("Security Updates"));
-    m_summaryLabel->setText(info.summary);
+    m_summaryLabel->setText(info.summary.isEmpty() ? tr("Fixed some known bugs and security vulnerabilities") : info.summary);
 
     for (const auto &item : info.details) {
         auto w = new QWidget(this);
@@ -138,7 +138,11 @@ void HistoryUpdateItem::addSystemItem(const HistoryItemInfo &info)
 {
     m_icon->setPixmap(DHiDPIHelper::loadNxPixmap(":/update/updatev20/dcc_system_update.svg"));
     m_titleLabel->setText(tr("System Updates"));
-    m_summaryLabel->setVisible(false);
+    const bool existDetails = !info.details.isEmpty();
+    m_summaryLabel->setVisible(!existDetails);
+    if (!existDetails) {
+        m_summaryLabel->setText(tr("Fixed some known bugs and security vulnerabilities"));
+    }
 
     for (const auto &item : info.details) {
         auto w = new QWidget(this);
@@ -147,7 +151,11 @@ void HistoryUpdateItem::addSystemItem(const HistoryItemInfo &info)
         itemLayout->setSpacing(2);
 
         auto nameLabel = createNameLabel();
-        nameLabel->setText(tr("Version: ") + (DCC_NAMESPACE::IsServerSystem ? tr("Server") : tr("Desktop")) + item.name);
+        // 根据需求，将最后一个字符替换为0（原因是不想用户看到版本频繁的更新）
+        QString name = item.name;
+        if (dccV20::IsProfessionalSystem)
+            name.replace(item.name.length() - 1, 1, '0');
+        nameLabel->setText(tr("Version: ") + (DCC_NAMESPACE::IsServerSystem ? tr("Server") : tr("Desktop")) + name);
 
         auto detailLabel = createDetailLabel();
         detailLabel->setText(item.description);
