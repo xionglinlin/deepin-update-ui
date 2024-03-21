@@ -164,6 +164,9 @@ SuccessFrame::SuccessFrame(QWidget *parent)
     connect(m_enterBtn, &BlurTransparentButton::clicked, qApp, [] {
         qApp->exit();
     });
+
+    setFocusProxy(m_enterBtn);
+    setFocus();
 }
 
 ErrorFrame::ErrorFrame(QWidget *parent)
