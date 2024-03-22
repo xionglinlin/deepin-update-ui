@@ -627,7 +627,7 @@ void UpdateControlPanel::onUpdateButtonClicked()
             button->setText(text);
             button->setToolTip(originText);
         }
-        m_chooseInstallTypeDialog->setMessage(tr("The updates have been already downloaded. What do you want to do?"));
+        m_chooseInstallTypeDialog->setMessage(tr("The update package has been downloaded. Please select the operation you wish to perform."));
         m_chooseInstallTypeDialog->setFixedWidth(422);
         connect(m_chooseInstallTypeDialog, &DDialog::buttonClicked, this, [this, backgroundInstall, installAndReboot, installAndShutdown] (int index, const QString &text) {
             // ret: 0: 后台安装，1：安装并重启，2：安装并关机
