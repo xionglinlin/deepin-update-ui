@@ -119,6 +119,7 @@ void CheckProgressWidget::setValue(double value)
         return;
 
     qInfo() << "Check system progress value: " << iProgress;
+    iProgress = qMin(iProgress, 99); // 进度条最大值设置为 99，避免进度条卡在 100，体验不好。而且 waterProgress 在 100 的时候不显示 “%”
     m_progressBar ?  m_progressBar->setValue(iProgress) : m_waterProgress->setValue(iProgress);
     if (m_progressText)
         m_progressText->setText(QString::number(iProgress) + "%");
