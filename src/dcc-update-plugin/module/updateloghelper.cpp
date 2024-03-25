@@ -48,9 +48,16 @@ QString UpdateLogHelper::sumCveLevelUp(const QMap<VulLevel, int>& vulCount)
     for (auto it = --vulCount.cend() ; it != --vulCount.begin(); it--) {
         const int count = it.value();
         QString vulnerability = count > 1 ? tr("vulnerabilities") : tr("vulnerability");
-        explain.append(QString(" %1 of %2 %3%4").arg(QString::number(count)).arg(textMap.value(it.key())).arg(vulnerability).arg(it == vulCount.begin() ? "." : ","));
+        //~ content_explain `数字+%`会在代码中替换为字符串，例如：3 of high-risk vulnerabilities；各语言需要根据实际情况增加空格(例如：中文没有空格，英文有空格)
+        const QString &content = tr("%1 of %2 %3").arg(QString::number(count)).arg(textMap.value(it.key())).arg(vulnerability);
+        //~ content_explain 中文逗号不需要空格，英文逗号需要空格For more details, please visit
+        explain.append(content + tr(", "));
     }
 
+    //~ content_explain 这句话后面会带上一个超链接，各语言自行决定末尾需不需要加空格
+    explain.append(tr("for more details, please visit "));
+    const auto link = "https://src.uniontech.com";
+    explain.append(QString("<a href=\"%1\">%2").arg(link).arg(link));
     return explain;
 }
 
