@@ -30,23 +30,23 @@
 <context>
     <name>dccV20::update::MirrorsWidget</name>
     <message>
-        <location filename="../src/dcc-update-plugin/window/mirrorswidget.cpp" line="30"/>
-        <location filename="../src/dcc-update-plugin/window/mirrorswidget.cpp" line="43"/>
+        <location filename="../src/dcc-update-plugin/window/mirrorswidget.cpp" line="31"/>
+        <location filename="../src/dcc-update-plugin/window/mirrorswidget.cpp" line="44"/>
         <source>Mirror List</source>
         <translation>Llista de rèpliques</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/mirrorswidget.cpp" line="32"/>
+        <location filename="../src/dcc-update-plugin/window/mirrorswidget.cpp" line="33"/>
         <source>Test Speed</source>
         <translation>Velocitat de la prova</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/mirrorswidget.cpp" line="121"/>
+        <location filename="../src/dcc-update-plugin/window/mirrorswidget.cpp" line="128"/>
         <source>Untested</source>
         <translation>Sense provar</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/mirrorswidget.cpp" line="150"/>
+        <location filename="../src/dcc-update-plugin/window/mirrorswidget.cpp" line="157"/>
         <source>Retest</source>
         <translation>Torna-ho a provar.</translation>
     </message>
@@ -212,22 +212,22 @@
 <context>
     <name>dccV20::update::UpdateSettings</name>
     <message>
-        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="70"/>
+        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="69"/>
         <source>Switch it on to automatically download the updates in wireless or wired network</source>
         <translation>Activeu-ho per baixar automàticament les actualitzacions amb una xarxa amb fil o sense.</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="71"/>
+        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="70"/>
         <source>Join the internal testing channel to get deepin latest updates</source>
         <translation>Uniu-vos al canal de proves internes per rebre les darreres actualitzacions del Deepin.</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="74"/>
+        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="73"/>
         <source>Start at</source>
         <translation>Comença a</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="75"/>
+        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="74"/>
         <source>End at</source>
         <translation>Acaba a</translation>
     </message>
@@ -335,37 +335,37 @@
         <extra-contents_path>/update/Update Settings</extra-contents_path>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="398"/>
+        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="401"/>
         <source>Only numbers between 1-99999 are allowed</source>
         <translation>Només es permeten números entre 1 i 99999.</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="523"/>
+        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="526"/>
         <source>here</source>
         <translation>aquí</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="524"/>
+        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="527"/>
         <source>Click %1 to complete the application</source>
         <translation>Cliqueu a %1 per completar la sol·licitud.</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="565"/>
+        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="568"/>
         <source>Checking system versions, please wait...</source>
         <translation>Es comproven les versions del sistema. Espereu, si us plau...</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="592"/>
+        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="595"/>
         <source>If you leave the internal testing channel now, you may not be able to get the latest bug fixes and updates. Please leave after the official version is released to keep your system stable!</source>
         <translation>Si deixeu ara el canal de proves intern, és possible que no pugueu obtenir les darreres correccions d&apos;errors i actualitzacions. Si us plau, abandoneu-lo després que es publiqui la versió oficial per poder mantenir el sistema estable!</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="594"/>
+        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="597"/>
         <source>Leave</source>
         <translation>Surt</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="595"/>
+        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="598"/>
         <source>Cancel</source>
         <translation>Cancel·la</translation>
     </message>
@@ -451,12 +451,12 @@
 <context>
     <name>UpgradeHistoryDialog</name>
     <message>
-        <location filename="../src/dcc-update-plugin/window/widgets/update-history/upgradehistorydialog.cpp" line="55"/>
+        <location filename="../src/dcc-update-plugin/window/widgets/update-history/upgradehistorydialog.cpp" line="56"/>
         <source>Update History</source>
         <translation>Historial d&apos;actualitzacions</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/widgets/update-history/upgradehistorydialog.cpp" line="81"/>
+        <location filename="../src/dcc-update-plugin/window/widgets/update-history/upgradehistorydialog.cpp" line="82"/>
         <source>No update history</source>
         <translation>No hi ha historial d&apos;actualitzacions.</translation>
     </message>
@@ -474,22 +474,28 @@
         <translation>Actualitzacions de seguretat</translation>
     </message>
     <message>
+        <location filename="../src/dcc-update-plugin/window/widgets/update-history/historyupdateitem.cpp" line="107"/>
+        <location filename="../src/dcc-update-plugin/window/widgets/update-history/historyupdateitem.cpp" line="144"/>
+        <source>Fixed some known bugs and security vulnerabilities</source>
+        <translation>S&apos;han corregit alguns errors coneguts i vulnerabilitats de seguretat.</translation>
+    </message>
+    <message>
         <location filename="../src/dcc-update-plugin/window/widgets/update-history/historyupdateitem.cpp" line="140"/>
         <source>System Updates</source>
         <translation>Actualitzacions del sistema</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/widgets/update-history/historyupdateitem.cpp" line="150"/>
+        <location filename="../src/dcc-update-plugin/window/widgets/update-history/historyupdateitem.cpp" line="158"/>
         <source>Version: </source>
         <translation>Versió:</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/widgets/update-history/historyupdateitem.cpp" line="150"/>
+        <location filename="../src/dcc-update-plugin/window/widgets/update-history/historyupdateitem.cpp" line="158"/>
         <source>Server</source>
         <translation>Servidor</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/widgets/update-history/historyupdateitem.cpp" line="150"/>
+        <location filename="../src/dcc-update-plugin/window/widgets/update-history/historyupdateitem.cpp" line="158"/>
         <source>Desktop</source>
         <translation>Escriptori</translation>
     </message>
@@ -561,145 +567,141 @@
         <translation>Mostra els registres</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/widgets/updatecontrolpanel.cpp" line="89"/>
+        <location filename="../src/dcc-update-plugin/window/widgets/updatecontrolpanel.cpp" line="90"/>
         <source>Updates Available</source>
         <translation>Actualitzacions disponibles</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/widgets/updatecontrolpanel.cpp" line="193"/>
-        <location filename="../src/dcc-update-plugin/window/widgets/updatecontrolpanel.cpp" line="198"/>
+        <location filename="../src/dcc-update-plugin/window/widgets/updatecontrolpanel.cpp" line="194"/>
+        <location filename="../src/dcc-update-plugin/window/widgets/updatecontrolpanel.cpp" line="199"/>
         <source>Download All</source>
         <translation>Baixa-ho tot</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/widgets/updatecontrolpanel.cpp" line="194"/>
-        <location filename="../src/dcc-update-plugin/window/widgets/updatecontrolpanel.cpp" line="199"/>
+        <location filename="../src/dcc-update-plugin/window/widgets/updatecontrolpanel.cpp" line="195"/>
+        <location filename="../src/dcc-update-plugin/window/widgets/updatecontrolpanel.cpp" line="200"/>
         <source>Try Again</source>
         <translation> Torneu-ho a provar</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/widgets/updatecontrolpanel.cpp" line="195"/>
+        <location filename="../src/dcc-update-plugin/window/widgets/updatecontrolpanel.cpp" line="196"/>
         <source>Install Now</source>
         <translation>Instal·la-les ara</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/widgets/updatecontrolpanel.cpp" line="196"/>
+        <location filename="../src/dcc-update-plugin/window/widgets/updatecontrolpanel.cpp" line="197"/>
         <source>Proceed to Update</source>
         <translation>Procedeix a l&apos;actualització</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/widgets/updatecontrolpanel.cpp" line="197"/>
+        <location filename="../src/dcc-update-plugin/window/widgets/updatecontrolpanel.cpp" line="198"/>
         <source>Reboot now</source>
         <translation>Reinicia ara</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/widgets/updatecontrolpanel.cpp" line="347"/>
+        <location filename="../src/dcc-update-plugin/window/widgets/updatecontrolpanel.cpp" line="348"/>
         <source>Updates available</source>
         <translation>Actualitzacions disponibles</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/widgets/updatecontrolpanel.cpp" line="348"/>
+        <location filename="../src/dcc-update-plugin/window/widgets/updatecontrolpanel.cpp" line="349"/>
         <source>Preparing for downloading...</source>
         <translation>Es prepara la baixada...</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/widgets/updatecontrolpanel.cpp" line="349"/>
+        <location filename="../src/dcc-update-plugin/window/widgets/updatecontrolpanel.cpp" line="350"/>
         <source>Downloading updates...</source>
         <translation>Es baixen les actualitzacions...</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/widgets/updatecontrolpanel.cpp" line="350"/>
+        <location filename="../src/dcc-update-plugin/window/widgets/updatecontrolpanel.cpp" line="351"/>
         <source>Downloading paused</source>
         <translation>Baixada interrompuda</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/widgets/updatecontrolpanel.cpp" line="351"/>
+        <location filename="../src/dcc-update-plugin/window/widgets/updatecontrolpanel.cpp" line="352"/>
         <source>Downloading completed</source>
         <translation>Baixada completa</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/widgets/updatecontrolpanel.cpp" line="352"/>
+        <location filename="../src/dcc-update-plugin/window/widgets/updatecontrolpanel.cpp" line="353"/>
         <source>Downloading updates failed</source>
         <translation>Ha fallat baixar les actualitzacions.</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/widgets/updatecontrolpanel.cpp" line="353"/>
         <location filename="../src/dcc-update-plugin/window/widgets/updatecontrolpanel.cpp" line="354"/>
+        <location filename="../src/dcc-update-plugin/window/widgets/updatecontrolpanel.cpp" line="355"/>
         <source>Preparing for updates…</source>
         <translation>Es preparen les actualitzacions...</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/widgets/updatecontrolpanel.cpp" line="355"/>
+        <location filename="../src/dcc-update-plugin/window/widgets/updatecontrolpanel.cpp" line="356"/>
         <source>Backing up…</source>
         <translation>Es fa una còpia de seguretat...</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/widgets/updatecontrolpanel.cpp" line="356"/>
-        <source>Backing up</source>
-        <translation>Còpia de seguetat</translation>
+        <location filename="../src/dcc-update-plugin/window/widgets/updatecontrolpanel.cpp" line="630"/>
+        <source>The update package has been downloaded. Please select the operation you wish to perform.</source>
+        <translation>S&apos;ha baixat el paquet d&apos;actualització. Seleccioneu l&apos;operació que vulgueu fer.</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/widgets/updatecontrolpanel.cpp" line="357"/>
+        <location filename="../src/dcc-update-plugin/window/widgets/updatecontrolpanel.cpp" line="358"/>
         <source>Backup failed</source>
         <translation>Ha fallat la còpia de seguretat.</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/widgets/updatecontrolpanel.cpp" line="358"/>
+        <location filename="../src/dcc-update-plugin/window/widgets/updatecontrolpanel.cpp" line="357"/>
+        <location filename="../src/dcc-update-plugin/window/widgets/updatecontrolpanel.cpp" line="359"/>
         <source>Installing updates...</source>
         <translation>S&apos;instal·len actualitzacions...</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/widgets/updatecontrolpanel.cpp" line="359"/>
+        <location filename="../src/dcc-update-plugin/window/widgets/updatecontrolpanel.cpp" line="360"/>
         <source>Updates failed</source>
         <translation>Ha fallat l&apos;actualització.</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/widgets/updatecontrolpanel.cpp" line="360"/>
+        <location filename="../src/dcc-update-plugin/window/widgets/updatecontrolpanel.cpp" line="361"/>
         <source>Updates successful</source>
         <translation>Actualitzacions correctes</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/widgets/updatecontrolpanel.cpp" line="436"/>
+        <location filename="../src/dcc-update-plugin/window/widgets/updatecontrolpanel.cpp" line="437"/>
         <source>Size</source>
         <translation>Mida</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/widgets/updatecontrolpanel.cpp" line="619"/>
+        <location filename="../src/dcc-update-plugin/window/widgets/updatecontrolpanel.cpp" line="621"/>
         <source>Silent Installation</source>
         <translation>Instal·lació silenciosa</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/widgets/updatecontrolpanel.cpp" line="620"/>
+        <location filename="../src/dcc-update-plugin/window/widgets/updatecontrolpanel.cpp" line="622"/>
         <source>Update and Reboot</source>
         <translation>Actualitza i reinicia</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/widgets/updatecontrolpanel.cpp" line="621"/>
+        <location filename="../src/dcc-update-plugin/window/widgets/updatecontrolpanel.cpp" line="623"/>
         <source>Update and Shut Down</source>
         <translation>Actualitza i atura</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/widgets/updatecontrolpanel.cpp" line="628"/>
-        <source>The updates have been already downloaded. What do you want to do?</source>
-        <translation>Les actualitzacions ja s&apos;han baixat. Què voleu fer?</translation>
-    </message>
-    <message>
-        <location filename="../src/dcc-update-plugin/window/widgets/updatecontrolpanel.cpp" line="692"/>
+        <location filename="../src/dcc-update-plugin/window/widgets/updatecontrolpanel.cpp" line="696"/>
         <source>You can install updates when shut down or reboot</source>
         <translation>Podeu instal·lar actualitzacions quan tanqueu o reinicieu.</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/widgets/updatecontrolpanel.cpp" line="693"/>
+        <location filename="../src/dcc-update-plugin/window/widgets/updatecontrolpanel.cpp" line="697"/>
         <source>Do not force a shutdown or power off when installing updates. Otherwise, your system may be damaged.</source>
         <translation>No forceu l&apos;aturada quan instal·leu actualitzacions. El sistema es podria danyar.</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/widgets/updatecontrolpanel.cpp" line="694"/>
+        <location filename="../src/dcc-update-plugin/window/widgets/updatecontrolpanel.cpp" line="698"/>
         <source>Reboot to use the system and the applications properly</source>
         <translation>Reinicieu per usar el sistema i les aplicacions correctament.</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/widgets/updatecontrolpanel.cpp" line="695"/>
+        <location filename="../src/dcc-update-plugin/window/widgets/updatecontrolpanel.cpp" line="699"/>
         <source>The battery capacity is lower than 60%. To get successful updates, please plug in.</source>
         <translation>La capacitat de la bateria és inferior al 60%. Per obtenir actualitzacions correctes, endolleu el dispositiu.</translation>
     </message>
@@ -797,6 +799,24 @@
         <location filename="../src/dcc-update-plugin/module/updateloghelper.cpp" line="50"/>
         <source>vulnerability</source>
         <translation>una vulnerabilitat</translation>
+    </message>
+    <message>
+        <location filename="../src/dcc-update-plugin/module/updateloghelper.cpp" line="52"/>
+        <source>%1 of %2 %3</source>
+        <translation type="unfinished"/>
+        <extra-content_explain>`数字+%`会在代码中替换为字符串，例如：3 of high-risk vulnerabilities；各语言需要根据实际情况增加空格(例如：中文没有空格，英文有空格)</extra-content_explain>
+    </message>
+    <message>
+        <location filename="../src/dcc-update-plugin/module/updateloghelper.cpp" line="54"/>
+        <source>, </source>
+        <translation type="unfinished"/>
+        <extra-content_explain>中文逗号不需要空格，英文逗号需要空格For more details, please visit</extra-content_explain>
+    </message>
+    <message>
+        <location filename="../src/dcc-update-plugin/module/updateloghelper.cpp" line="58"/>
+        <source>for more details, please visit </source>
+        <translation type="unfinished"/>
+        <extra-content_explain>这句话后面会带上一个超链接，各语言自行决定末尾需不需要加空格</extra-content_explain>
     </message>
 </context>
 <context>

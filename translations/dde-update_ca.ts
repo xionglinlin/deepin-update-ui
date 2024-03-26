@@ -15,7 +15,7 @@
 <context>
     <name>ErrorFrame</name>
     <message>
-        <location filename="../src/dde-update/checksystemwidget.cpp" line="204"/>
+        <location filename="../src/dde-update/checksystemwidget.cpp" line="208"/>
         <source>Checked for some errors</source>
         <translation>S&apos;ha comprovat si hi ha errors.</translation>
     </message>
@@ -23,17 +23,17 @@
 <context>
     <name>SuccessFrame</name>
     <message>
-        <location filename="../src/dde-update/checksystemwidget.cpp" line="144"/>
+        <location filename="../src/dde-update/checksystemwidget.cpp" line="145"/>
         <source>Go to Desktop</source>
         <translation>Ves a l&apos;escriptori</translation>
     </message>
     <message>
-        <location filename="../src/dde-update/checksystemwidget.cpp" line="146"/>
+        <location filename="../src/dde-update/checksystemwidget.cpp" line="147"/>
         <source>Welcome, system updated successfully</source>
         <translation>Us donem la benvinguda. El sistema s&apos;ha actualitzat correctament.</translation>
     </message>
     <message>
-        <location filename="../src/dde-update/checksystemwidget.cpp" line="148"/>
+        <location filename="../src/dde-update/checksystemwidget.cpp" line="149"/>
         <source>Current Edition:</source>
         <translation>Edició actual:</translation>
     </message>
@@ -41,22 +41,22 @@
 <context>
     <name>UpdateCompleteWidget</name>
     <message>
-        <location filename="../src/dde-update/updatewidget.cpp" line="209"/>
+        <location filename="../src/dde-update/updatewidget.cpp" line="216"/>
         <source>View Logs</source>
         <translation>Mostra els registres</translation>
     </message>
     <message>
-        <location filename="../src/dde-update/updatewidget.cpp" line="257"/>
+        <location filename="../src/dde-update/updatewidget.cpp" line="264"/>
         <source>Updates successful</source>
         <translation>Actualitzacions correctes</translation>
     </message>
     <message>
-        <location filename="../src/dde-update/updatewidget.cpp" line="262"/>
+        <location filename="../src/dde-update/updatewidget.cpp" line="269"/>
         <source>Your computer will reboot soon %1</source>
         <translation>L&apos;ordinador es reiniciarà aviat: %1</translation>
     </message>
     <message>
-        <location filename="../src/dde-update/updatewidget.cpp" line="262"/>
+        <location filename="../src/dde-update/updatewidget.cpp" line="269"/>
         <source>Your computer will be turned off soon %1</source>
         <translation>L&apos;ordinador s&apos;aturarà aviat: %1</translation>
     </message>
@@ -64,7 +64,7 @@
 <context>
     <name>UpdateLogWidget</name>
     <message>
-        <location filename="../src/dde-update/updatewidget.cpp" line="28"/>
+        <location filename="../src/dde-update/updatewidget.cpp" line="29"/>
         <source>Hide Logs</source>
         <translation>Amaga els registres</translation>
     </message>
@@ -159,7 +159,7 @@
 <context>
     <name>UpdatePrepareWidget</name>
     <message>
-        <location filename="../src/dde-update/updatewidget.cpp" line="81"/>
+        <location filename="../src/dde-update/updatewidget.cpp" line="88"/>
         <source>Preparing for updates…</source>
         <translation>Es preparen les actualitzacions...</translation>
     </message>
@@ -167,7 +167,7 @@
 <context>
     <name>UpdateProgressWidget</name>
     <message>
-        <location filename="../src/dde-update/updatewidget.cpp" line="118"/>
+        <location filename="../src/dde-update/updatewidget.cpp" line="125"/>
         <source>Do not force a shutdown or power off when installing updates. Otherwise, your system may be damaged.</source>
         <translation>No forceu l&apos;aturada quan s&apos;instal·len actualitzacions. El sistema es podria danyar.</translation>
     </message>

@@ -30,23 +30,23 @@
 <context>
     <name>dccV20::update::MirrorsWidget</name>
     <message>
-        <location filename="../src/dcc-update-plugin/window/mirrorswidget.cpp" line="30"/>
-        <location filename="../src/dcc-update-plugin/window/mirrorswidget.cpp" line="43"/>
+        <location filename="../src/dcc-update-plugin/window/mirrorswidget.cpp" line="31"/>
+        <location filename="../src/dcc-update-plugin/window/mirrorswidget.cpp" line="44"/>
         <source>Mirror List</source>
         <translation>鏡像源列表</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/mirrorswidget.cpp" line="32"/>
+        <location filename="../src/dcc-update-plugin/window/mirrorswidget.cpp" line="33"/>
         <source>Test Speed</source>
         <translation>測速</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/mirrorswidget.cpp" line="121"/>
+        <location filename="../src/dcc-update-plugin/window/mirrorswidget.cpp" line="128"/>
         <source>Untested</source>
         <translation>未檢測</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/mirrorswidget.cpp" line="150"/>
+        <location filename="../src/dcc-update-plugin/window/mirrorswidget.cpp" line="157"/>
         <source>Retest</source>
         <translation>重新測速</translation>
     </message>
@@ -212,22 +212,22 @@
 <context>
     <name>dccV20::update::UpdateSettings</name>
     <message>
-        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="70"/>
+        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="69"/>
         <source>Switch it on to automatically download the updates in wireless or wired network</source>
         <translation>開啟“自動下載”，會在有無線網絡和有線網絡的情況下自動下載</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="71"/>
+        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="70"/>
         <source>Join the internal testing channel to get deepin latest updates</source>
         <translation>加入deepin內測通道，以獲取deepin最新更新內容</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="74"/>
+        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="73"/>
         <source>Start at</source>
         <translation>開始時間</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="75"/>
+        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="74"/>
         <source>End at</source>
         <translation>結束時間</translation>
     </message>
@@ -335,37 +335,37 @@
         <extra-contents_path>/update/Update Settings</extra-contents_path>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="398"/>
+        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="401"/>
         <source>Only numbers between 1-99999 are allowed</source>
         <translation>只允許輸入1-99999</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="523"/>
+        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="526"/>
         <source>here</source>
         <translation>此處</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="524"/>
+        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="527"/>
         <source>Click %1 to complete the application</source>
         <translation>點擊%1完成內測申請</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="565"/>
+        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="568"/>
         <source>Checking system versions, please wait...</source>
         <translation>正在對系統版本進行ั驗證，請耐心等待...</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="592"/>
+        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="595"/>
         <source>If you leave the internal testing channel now, you may not be able to get the latest bug fixes and updates. Please leave after the official version is released to keep your system stable!</source>
         <translation>現在退出可能會導致你無法獲取到最新的內測修復和更新內容，為保持系統穩定請等待deepin正式版本發佈後退出內測！</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="594"/>
+        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="597"/>
         <source>Leave</source>
         <translation>退 出</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="595"/>
+        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="598"/>
         <source>Cancel</source>
         <translation>取 消</translation>
     </message>
@@ -451,12 +451,12 @@
 <context>
     <name>UpgradeHistoryDialog</name>
     <message>
-        <location filename="../src/dcc-update-plugin/window/widgets/update-history/upgradehistorydialog.cpp" line="55"/>
+        <location filename="../src/dcc-update-plugin/window/widgets/update-history/upgradehistorydialog.cpp" line="56"/>
         <source>Update History</source>
         <translation>更新历史记录</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/widgets/update-history/upgradehistorydialog.cpp" line="81"/>
+        <location filename="../src/dcc-update-plugin/window/widgets/update-history/upgradehistorydialog.cpp" line="82"/>
         <source>No update history</source>
         <translation>无更新历史记录</translation>
     </message>
@@ -474,22 +474,28 @@
         <translation>安全更新</translation>
     </message>
     <message>
+        <location filename="../src/dcc-update-plugin/window/widgets/update-history/historyupdateitem.cpp" line="107"/>
+        <location filename="../src/dcc-update-plugin/window/widgets/update-history/historyupdateitem.cpp" line="144"/>
+        <source>Fixed some known bugs and security vulnerabilities</source>
+        <translation>修復部分已知缺陷和安全漏洞</translation>
+    </message>
+    <message>
         <location filename="../src/dcc-update-plugin/window/widgets/update-history/historyupdateitem.cpp" line="140"/>
         <source>System Updates</source>
         <translation>系統更新</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/widgets/update-history/historyupdateitem.cpp" line="150"/>
+        <location filename="../src/dcc-update-plugin/window/widgets/update-history/historyupdateitem.cpp" line="158"/>
         <source>Version: </source>
         <translation>版本：</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/widgets/update-history/historyupdateitem.cpp" line="150"/>
+        <location filename="../src/dcc-update-plugin/window/widgets/update-history/historyupdateitem.cpp" line="158"/>
         <source>Server</source>
         <translation>伺服器版</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/widgets/update-history/historyupdateitem.cpp" line="150"/>
+        <location filename="../src/dcc-update-plugin/window/widgets/update-history/historyupdateitem.cpp" line="158"/>
         <source>Desktop</source>
         <translation>桌面版</translation>
     </message>
@@ -561,145 +567,141 @@
         <translation>查看日誌</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/widgets/updatecontrolpanel.cpp" line="89"/>
+        <location filename="../src/dcc-update-plugin/window/widgets/updatecontrolpanel.cpp" line="90"/>
         <source>Updates Available</source>
         <translation>檢測到有可用的更新</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/widgets/updatecontrolpanel.cpp" line="193"/>
-        <location filename="../src/dcc-update-plugin/window/widgets/updatecontrolpanel.cpp" line="198"/>
+        <location filename="../src/dcc-update-plugin/window/widgets/updatecontrolpanel.cpp" line="194"/>
+        <location filename="../src/dcc-update-plugin/window/widgets/updatecontrolpanel.cpp" line="199"/>
         <source>Download All</source>
         <translation>全部下載</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/widgets/updatecontrolpanel.cpp" line="194"/>
-        <location filename="../src/dcc-update-plugin/window/widgets/updatecontrolpanel.cpp" line="199"/>
+        <location filename="../src/dcc-update-plugin/window/widgets/updatecontrolpanel.cpp" line="195"/>
+        <location filename="../src/dcc-update-plugin/window/widgets/updatecontrolpanel.cpp" line="200"/>
         <source>Try Again</source>
         <translation>重試</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/widgets/updatecontrolpanel.cpp" line="195"/>
+        <location filename="../src/dcc-update-plugin/window/widgets/updatecontrolpanel.cpp" line="196"/>
         <source>Install Now</source>
         <translation>立即安裝</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/widgets/updatecontrolpanel.cpp" line="196"/>
+        <location filename="../src/dcc-update-plugin/window/widgets/updatecontrolpanel.cpp" line="197"/>
         <source>Proceed to Update</source>
         <translation>繼續更新</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/widgets/updatecontrolpanel.cpp" line="197"/>
+        <location filename="../src/dcc-update-plugin/window/widgets/updatecontrolpanel.cpp" line="198"/>
         <source>Reboot now</source>
         <translation>立即重啟</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/widgets/updatecontrolpanel.cpp" line="347"/>
+        <location filename="../src/dcc-update-plugin/window/widgets/updatecontrolpanel.cpp" line="348"/>
         <source>Updates available</source>
         <translation>檢查到有新版本可用</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/widgets/updatecontrolpanel.cpp" line="348"/>
+        <location filename="../src/dcc-update-plugin/window/widgets/updatecontrolpanel.cpp" line="349"/>
         <source>Preparing for downloading...</source>
         <translation>下載準備中...</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/widgets/updatecontrolpanel.cpp" line="349"/>
+        <location filename="../src/dcc-update-plugin/window/widgets/updatecontrolpanel.cpp" line="350"/>
         <source>Downloading updates...</source>
         <translation>下載更新中...</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/widgets/updatecontrolpanel.cpp" line="350"/>
+        <location filename="../src/dcc-update-plugin/window/widgets/updatecontrolpanel.cpp" line="351"/>
         <source>Downloading paused</source>
         <translation>下載已暫停...</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/widgets/updatecontrolpanel.cpp" line="351"/>
+        <location filename="../src/dcc-update-plugin/window/widgets/updatecontrolpanel.cpp" line="352"/>
         <source>Downloading completed</source>
         <translation>更新包已下載完成</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/widgets/updatecontrolpanel.cpp" line="352"/>
+        <location filename="../src/dcc-update-plugin/window/widgets/updatecontrolpanel.cpp" line="353"/>
         <source>Downloading updates failed</source>
         <translation>下載失敗</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/widgets/updatecontrolpanel.cpp" line="353"/>
         <location filename="../src/dcc-update-plugin/window/widgets/updatecontrolpanel.cpp" line="354"/>
+        <location filename="../src/dcc-update-plugin/window/widgets/updatecontrolpanel.cpp" line="355"/>
         <source>Preparing for updates…</source>
         <translation>正在準備更新...</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/widgets/updatecontrolpanel.cpp" line="355"/>
+        <location filename="../src/dcc-update-plugin/window/widgets/updatecontrolpanel.cpp" line="356"/>
         <source>Backing up…</source>
         <translation>備份中...</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/widgets/updatecontrolpanel.cpp" line="356"/>
-        <source>Backing up</source>
-        <translation>備份中</translation>
+        <location filename="../src/dcc-update-plugin/window/widgets/updatecontrolpanel.cpp" line="630"/>
+        <source>The update package has been downloaded. Please select the operation you wish to perform.</source>
+        <translation>更新包已下載完畢，請選擇您要執行的操作</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/widgets/updatecontrolpanel.cpp" line="357"/>
+        <location filename="../src/dcc-update-plugin/window/widgets/updatecontrolpanel.cpp" line="358"/>
         <source>Backup failed</source>
         <translation>備份失敗</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/widgets/updatecontrolpanel.cpp" line="358"/>
+        <location filename="../src/dcc-update-plugin/window/widgets/updatecontrolpanel.cpp" line="357"/>
+        <location filename="../src/dcc-update-plugin/window/widgets/updatecontrolpanel.cpp" line="359"/>
         <source>Installing updates...</source>
         <translation>安裝更新中...</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/widgets/updatecontrolpanel.cpp" line="359"/>
+        <location filename="../src/dcc-update-plugin/window/widgets/updatecontrolpanel.cpp" line="360"/>
         <source>Updates failed</source>
         <translation>更新失敗</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/widgets/updatecontrolpanel.cpp" line="360"/>
+        <location filename="../src/dcc-update-plugin/window/widgets/updatecontrolpanel.cpp" line="361"/>
         <source>Updates successful</source>
         <translation>更新成功</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/widgets/updatecontrolpanel.cpp" line="436"/>
+        <location filename="../src/dcc-update-plugin/window/widgets/updatecontrolpanel.cpp" line="437"/>
         <source>Size</source>
         <translation>大小</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/widgets/updatecontrolpanel.cpp" line="619"/>
+        <location filename="../src/dcc-update-plugin/window/widgets/updatecontrolpanel.cpp" line="621"/>
         <source>Silent Installation</source>
         <translation>後台靜默安裝</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/widgets/updatecontrolpanel.cpp" line="620"/>
+        <location filename="../src/dcc-update-plugin/window/widgets/updatecontrolpanel.cpp" line="622"/>
         <source>Update and Reboot</source>
         <translation>更新並重啟</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/widgets/updatecontrolpanel.cpp" line="621"/>
+        <location filename="../src/dcc-update-plugin/window/widgets/updatecontrolpanel.cpp" line="623"/>
         <source>Update and Shut Down</source>
         <translation>更新並關機</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/widgets/updatecontrolpanel.cpp" line="628"/>
-        <source>The updates have been already downloaded. What do you want to do?</source>
-        <translation>更新包已下載完畢，請選擇您要執行的操作</translation>
-    </message>
-    <message>
-        <location filename="../src/dcc-update-plugin/window/widgets/updatecontrolpanel.cpp" line="692"/>
+        <location filename="../src/dcc-update-plugin/window/widgets/updatecontrolpanel.cpp" line="696"/>
         <source>You can install updates when shut down or reboot</source>
         <translation>您可以在關機或重啟時安裝更新</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/widgets/updatecontrolpanel.cpp" line="693"/>
+        <location filename="../src/dcc-update-plugin/window/widgets/updatecontrolpanel.cpp" line="697"/>
         <source>Do not force a shutdown or power off when installing updates. Otherwise, your system may be damaged.</source>
         <translation>更新時請勿強制關機或斷電，否則會導致系統損壞</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/widgets/updatecontrolpanel.cpp" line="694"/>
+        <location filename="../src/dcc-update-plugin/window/widgets/updatecontrolpanel.cpp" line="698"/>
         <source>Reboot to use the system and the applications properly</source>
         <translation>為了您能夠正常地使用系統和應用，請重新啟動系統</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/widgets/updatecontrolpanel.cpp" line="695"/>
+        <location filename="../src/dcc-update-plugin/window/widgets/updatecontrolpanel.cpp" line="699"/>
         <source>The battery capacity is lower than 60%. To get successful updates, please plug in.</source>
         <translation>電池電量低於60%，為保障更新成功，請及時接入電源</translation>
     </message>
@@ -797,6 +799,24 @@
         <location filename="../src/dcc-update-plugin/module/updateloghelper.cpp" line="50"/>
         <source>vulnerability</source>
         <translation>漏洞</translation>
+    </message>
+    <message>
+        <location filename="../src/dcc-update-plugin/module/updateloghelper.cpp" line="52"/>
+        <source>%1 of %2 %3</source>
+        <translation>%1個%2%3</translation>
+        <extra-content_explain>`数字+%`会在代码中替换为字符串，例如：3 of high-risk vulnerabilities；各语言需要根据实际情况增加空格(例如：中文没有空格，英文有空格)</extra-content_explain>
+    </message>
+    <message>
+        <location filename="../src/dcc-update-plugin/module/updateloghelper.cpp" line="54"/>
+        <source>, </source>
+        <translation>，</translation>
+        <extra-content_explain>中文逗号不需要空格，英文逗号需要空格For more details, please visit</extra-content_explain>
+    </message>
+    <message>
+        <location filename="../src/dcc-update-plugin/module/updateloghelper.cpp" line="58"/>
+        <source>for more details, please visit </source>
+        <translation>更多詳情請訪問</translation>
+        <extra-content_explain>这句话后面会带上一个超链接，各语言自行决定末尾需不需要加空格</extra-content_explain>
     </message>
 </context>
 <context>

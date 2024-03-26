@@ -15,48 +15,48 @@
 <context>
     <name>ErrorFrame</name>
     <message>
-        <location filename="../src/dde-update/checksystemwidget.cpp" line="204"/>
+        <location filename="../src/dde-update/checksystemwidget.cpp" line="208"/>
         <source>Checked for some errors</source>
-        <translation type="unfinished"/>
+        <translation>بەزى خاتالىقلار بايقالدى</translation>
     </message>
 </context>
 <context>
     <name>SuccessFrame</name>
     <message>
-        <location filename="../src/dde-update/checksystemwidget.cpp" line="144"/>
+        <location filename="../src/dde-update/checksystemwidget.cpp" line="145"/>
         <source>Go to Desktop</source>
-        <translation type="unfinished"/>
+        <translation>ئۈستەليۈزىگە كىرىش</translation>
     </message>
     <message>
-        <location filename="../src/dde-update/checksystemwidget.cpp" line="146"/>
+        <location filename="../src/dde-update/checksystemwidget.cpp" line="147"/>
         <source>Welcome, system updated successfully</source>
-        <translation type="unfinished"/>
+        <translation>خۇش كەپسىز، سىستېما يېڭىلاندى</translation>
     </message>
     <message>
-        <location filename="../src/dde-update/checksystemwidget.cpp" line="148"/>
+        <location filename="../src/dde-update/checksystemwidget.cpp" line="149"/>
         <source>Current Edition:</source>
-        <translation type="unfinished"/>
+        <translation>نۆۋەتتىكى نەشرى:</translation>
     </message>
 </context>
 <context>
     <name>UpdateCompleteWidget</name>
     <message>
-        <location filename="../src/dde-update/updatewidget.cpp" line="209"/>
+        <location filename="../src/dde-update/updatewidget.cpp" line="216"/>
         <source>View Logs</source>
         <translation>كۈندىلىك خاتىرىنى كۆرۈش</translation>
     </message>
     <message>
-        <location filename="../src/dde-update/updatewidget.cpp" line="257"/>
+        <location filename="../src/dde-update/updatewidget.cpp" line="264"/>
         <source>Updates successful</source>
         <translation>يېڭىلاندى</translation>
     </message>
     <message>
-        <location filename="../src/dde-update/updatewidget.cpp" line="262"/>
+        <location filename="../src/dde-update/updatewidget.cpp" line="269"/>
         <source>Your computer will reboot soon %1</source>
         <translation>كومپيۇتېرىڭىز قايتا قوزغىلىدۇ %1</translation>
     </message>
     <message>
-        <location filename="../src/dde-update/updatewidget.cpp" line="262"/>
+        <location filename="../src/dde-update/updatewidget.cpp" line="269"/>
         <source>Your computer will be turned off soon %1</source>
         <translation>كومپيۇتېرىڭىز تاقىلىدۇ %1</translation>
     </message>
@@ -64,7 +64,7 @@
 <context>
     <name>UpdateLogWidget</name>
     <message>
-        <location filename="../src/dde-update/updatewidget.cpp" line="28"/>
+        <location filename="../src/dde-update/updatewidget.cpp" line="29"/>
         <source>Hide Logs</source>
         <translation>كۈندىلىك خاتىرىنى يىغىش</translation>
     </message>
@@ -159,7 +159,7 @@
 <context>
     <name>UpdatePrepareWidget</name>
     <message>
-        <location filename="../src/dde-update/updatewidget.cpp" line="81"/>
+        <location filename="../src/dde-update/updatewidget.cpp" line="88"/>
         <source>Preparing for updates…</source>
         <translation>يېڭىلاشقا تەييارلىنىۋاتىدۇ...</translation>
     </message>
@@ -167,7 +167,7 @@
 <context>
     <name>UpdateProgressWidget</name>
     <message>
-        <location filename="../src/dde-update/updatewidget.cpp" line="118"/>
+        <location filename="../src/dde-update/updatewidget.cpp" line="125"/>
         <source>Do not force a shutdown or power off when installing updates. Otherwise, your system may be damaged.</source>
         <translation>يېڭىلىغاندا كومپيۇتېرنى مەجبۇرىي تاقىۋەتمەڭ ياكى توكتىن ئۈزۈۋەتمەڭ، بولمىسا سىستېما بۇزۇلۇپ كېتىدۇ</translation>
     </message>

@@ -15,32 +15,50 @@
     </message>
 </context>
 <context>
-    <name>CheckResultWidget</name>
+    <name>ErrorFrame</name>
     <message>
-        <location filename="../src/dde-update/checksystemwidget.cpp" line="206"/>
+        <location filename="../src/dde-update/checksystemwidget.cpp" line="208"/>
         <source>Checked for some errors</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>SuccessFrame</name>
+    <message>
+        <location filename="../src/dde-update/checksystemwidget.cpp" line="145"/>
+        <source>Go to Desktop</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/dde-update/checksystemwidget.cpp" line="147"/>
+        <source>Welcome, system updated successfully</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/dde-update/checksystemwidget.cpp" line="149"/>
+        <source>Current Edition:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>UpdateCompleteWidget</name>
     <message>
-        <location filename="../src/dde-update/updatewidget.cpp" line="209"/>
+        <location filename="../src/dde-update/updatewidget.cpp" line="216"/>
         <source>View Logs</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dde-update/updatewidget.cpp" line="257"/>
+        <location filename="../src/dde-update/updatewidget.cpp" line="264"/>
         <source>Updates successful</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dde-update/updatewidget.cpp" line="262"/>
+        <location filename="../src/dde-update/updatewidget.cpp" line="269"/>
         <source>Your computer will reboot soon %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dde-update/updatewidget.cpp" line="262"/>
+        <location filename="../src/dde-update/updatewidget.cpp" line="269"/>
         <source>Your computer will be turned off soon %1</source>
         <translation type="unfinished"></translation>
     </message>
@@ -48,7 +66,7 @@
 <context>
     <name>UpdateLogWidget</name>
     <message>
-        <location filename="../src/dde-update/updatewidget.cpp" line="28"/>
+        <location filename="../src/dde-update/updatewidget.cpp" line="29"/>
         <source>Hide Logs</source>
         <translation type="unfinished"></translation>
     </message>
@@ -143,7 +161,7 @@
 <context>
     <name>UpdatePrepareWidget</name>
     <message>
-        <location filename="../src/dde-update/updatewidget.cpp" line="81"/>
+        <location filename="../src/dde-update/updatewidget.cpp" line="88"/>
         <source>Preparing for updates…</source>
         <translation type="unfinished"></translation>
     </message>
@@ -151,7 +169,7 @@
 <context>
     <name>UpdateProgressWidget</name>
     <message>
-        <location filename="../src/dde-update/updatewidget.cpp" line="118"/>
+        <location filename="../src/dde-update/updatewidget.cpp" line="125"/>
         <source>Do not force a shutdown or power off when installing updates. Otherwise, your system may be damaged.</source>
         <translation type="unfinished"></translation>
     </message>

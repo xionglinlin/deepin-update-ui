@@ -22,37 +22,37 @@
     </message>
     <message>
         <location filename="../src/dde-abrecovery/recoverydialog.cpp" line="297"/>
-        <location filename="../src/dde-abrecovery/recoverydialog.cpp" line="314"/>
+        <location filename="../src/dde-abrecovery/recoverydialog.cpp" line="319"/>
         <source>Updates failed.</source>
         <translation>Ha fallat l&apos;actualització.</translation>
     </message>
     <message>
-        <location filename="../src/dde-abrecovery/recoverydialog.cpp" line="307"/>
+        <location filename="../src/dde-abrecovery/recoverydialog.cpp" line="311"/>
         <source>Updates failed: it was interrupted.</source>
         <translation>L&apos;actualització ha fallat: s&apos;ha interromput.</translation>
     </message>
     <message>
-        <location filename="../src/dde-abrecovery/recoverydialog.cpp" line="310"/>
+        <location filename="../src/dde-abrecovery/recoverydialog.cpp" line="315"/>
         <source>Updates failed: DPKG error.</source>
         <translation>Les actualitzacions han fallat: error de DPKG.</translation>
     </message>
     <message>
-        <location filename="../src/dde-abrecovery/recoverydialog.cpp" line="312"/>
+        <location filename="../src/dde-abrecovery/recoverydialog.cpp" line="317"/>
         <source>Updates failed: insufficient disk space.</source>
         <translation>Les actualitzacions han fallat: espai al disc insuficient.</translation>
     </message>
     <message>
-        <location filename="../src/dde-abrecovery/recoverydialog.cpp" line="325"/>
+        <location filename="../src/dde-abrecovery/recoverydialog.cpp" line="330"/>
         <source>Are you sure you want to roll back to %1 backed up on %2?</source>
         <translation>Segur que voleu tornar a %1 de la còpia de seguretat de %2?</translation>
     </message>
     <message>
-        <location filename="../src/dde-abrecovery/recoverydialog.cpp" line="335"/>
+        <location filename="../src/dde-abrecovery/recoverydialog.cpp" line="340"/>
         <source>Cancel and Reboot</source>
         <translation>Cancel·la-ho i reinicia&apos;t</translation>
     </message>
     <message>
-        <location filename="../src/dde-abrecovery/recoverydialog.cpp" line="351"/>
+        <location filename="../src/dde-abrecovery/recoverydialog.cpp" line="356"/>
         <source>Confirm</source>
         <translation>Confirmeu-ho</translation>
     </message>

@@ -22,37 +22,37 @@
     </message>
     <message>
         <location filename="../src/dde-abrecovery/recoverydialog.cpp" line="297"/>
-        <location filename="../src/dde-abrecovery/recoverydialog.cpp" line="314"/>
+        <location filename="../src/dde-abrecovery/recoverydialog.cpp" line="319"/>
         <source>Updates failed.</source>
         <translation>རྒྱུད་ཁོངས་གསར་སྒྱུར་བྱེད་མ་ཐུབ།</translation>
     </message>
     <message>
-        <location filename="../src/dde-abrecovery/recoverydialog.cpp" line="307"/>
+        <location filename="../src/dde-abrecovery/recoverydialog.cpp" line="311"/>
         <source>Updates failed: it was interrupted.</source>
         <translation>གསར་སྒྱུར་བྱེད་མཚམས་ཆད་པས། ཐེངས་འདིའི་རྒྱུད་ཁོངས་གསར་སྒྱུར་བྱེད་མ་ཐུབ།</translation>
     </message>
     <message>
-        <location filename="../src/dde-abrecovery/recoverydialog.cpp" line="310"/>
+        <location filename="../src/dde-abrecovery/recoverydialog.cpp" line="315"/>
         <source>Updates failed: DPKG error.</source>
         <translation>dpkgནོར་འཁྲུལ་བྱུང་སྟབས། ཐེངས་འདིའི་རྒྱུད་ཁོངས་གསར་སྒྱུར་བྱེད་མ་ཐུབ།</translation>
     </message>
     <message>
-        <location filename="../src/dde-abrecovery/recoverydialog.cpp" line="312"/>
+        <location filename="../src/dde-abrecovery/recoverydialog.cpp" line="317"/>
         <source>Updates failed: insufficient disk space.</source>
         <translation>སྡུད་སྡེར་གྱི་བར་སྟོང་མི་འདང་བས། ཐེངས་འདིའི་རྒྱུད་ཁོངས་གསར་སྒྱུར་བྱེད་མ་ཐུབ།</translation>
     </message>
     <message>
-        <location filename="../src/dde-abrecovery/recoverydialog.cpp" line="325"/>
+        <location filename="../src/dde-abrecovery/recoverydialog.cpp" line="330"/>
         <source>Are you sure you want to roll back to %1 backed up on %2?</source>
         <translation>རྒྱུད་ཁོངས་%2སྔོན་གྱི་%1ལ་འགྱུར་རྒྱུར་ཁྱོད་ཀྱིས་གཏན་ཁེལ་ལམ།</translation>
     </message>
     <message>
-        <location filename="../src/dde-abrecovery/recoverydialog.cpp" line="335"/>
+        <location filename="../src/dde-abrecovery/recoverydialog.cpp" line="340"/>
         <source>Cancel and Reboot</source>
         <translation>འདོར་བ་མ་ཟད་བསྐྱར་སློང་བྱེད།</translation>
     </message>
     <message>
-        <location filename="../src/dde-abrecovery/recoverydialog.cpp" line="351"/>
+        <location filename="../src/dde-abrecovery/recoverydialog.cpp" line="356"/>
         <source>Confirm</source>
         <translation>གཏན་ཁེལ། </translation>
     </message>
