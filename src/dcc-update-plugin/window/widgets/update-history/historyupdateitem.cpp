@@ -150,18 +150,22 @@ void HistoryUpdateItem::addSystemItem(const HistoryItemInfo &info)
         itemLayout->setMargin(0);
         itemLayout->setSpacing(2);
 
-        auto nameLabel = createNameLabel();
-        // 根据需求，将最后一个字符替换为0（原因是不想用户看到版本频繁的更新）
-        QString name = item.name;
-        if (dccV20::IsProfessionalSystem)
-            name.replace(item.name.length() - 1, 1, '0');
-        nameLabel->setText(tr("Version: ") + (DCC_NAMESPACE::IsServerSystem ? tr("Server") : tr("Desktop")) + name);
+        DLabel* nameLabel = nullptr;
+        if (!item.name.isEmpty()) {
+            nameLabel = createNameLabel();
+            // 根据需求，将最后一个字符替换为0（原因是不想用户看到版本频繁的更新）
+            QString name = item.name;
+            if (dccV20::IsProfessionalSystem)
+                name.replace(item.name.length() - 1, 1, '0');
+            nameLabel->setText(tr("Version: ") + (DCC_NAMESPACE::IsServerSystem ? tr("Server") : tr("Desktop")) + name);
+        }
 
         auto detailLabel = createDetailLabel();
         detailLabel->setText(item.description);
 
-        itemLayout->addWidget(nameLabel, 0, Qt::AlignLeft);
-        itemLayout->addWidget(detailLabel, 0, Qt::AlignLeft);
+        if (nameLabel)
+            itemLayout->addWidget(nameLabel);
+        itemLayout->addWidget(detailLabel);
 
         m_contentLayout->addWidget(w);
     }
