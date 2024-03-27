@@ -30,6 +30,7 @@ public:
     void setHoverPixmap(const QPixmap &hoverPixmap);
     QPixmap hoverPixmap();
     void setRadius(int radius);
+    void enableHighLightFocus(bool enable) { m_enableHighLightFocus = enable; }
 
 
 Q_SIGNALS:
@@ -50,6 +51,7 @@ private:
     int m_radius;
     QPixmap m_normalPixmap;
     QPixmap m_hoverPixmap;
+    bool m_enableHighLightFocus;
 };
 
 #endif // INHIBITBUTTON_H

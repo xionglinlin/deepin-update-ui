@@ -150,6 +150,7 @@ SuccessFrame::SuccessFrame(QWidget *parent)
     DFontSizeManager::instance()->bind(currentVersion, DFontSizeManager::T3, QFont::Medium);
 
     m_enterBtn->setFixedSize(240, 48);
+    m_enterBtn->enableHighLightFocus(false);
 
     QVBoxLayout *mainLayout = new QVBoxLayout(this);
     mainLayout->setMargin(0);

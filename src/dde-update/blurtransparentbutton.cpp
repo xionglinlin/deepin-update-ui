@@ -21,6 +21,7 @@ BlurTransparentButton::BlurTransparentButton(const QString &text, QWidget *paren
     , m_iconLabel(new QLabel(this))
     , m_textLabel(new QLabel(this))
     , m_radius(10)
+    , m_enableHighLightFocus(true)
 {
     m_iconLabel->setFixedSize(64, 64);
     m_textLabel->setText(text);
@@ -135,7 +136,7 @@ void BlurTransparentButton::paintEvent(QPaintEvent *event)
 
     QStyleOption opt;
     opt.initFrom(this);
-    if (opt.state & QStyle::State_HasFocus) {
+    if (opt.state & QStyle::State_HasFocus && m_enableHighLightFocus) {
         QPen pen;
         pen.setWidth(penWidth);
         color.setAlphaF(0.5);
