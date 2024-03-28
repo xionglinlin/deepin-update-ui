@@ -803,7 +803,7 @@
     <message>
         <location filename="../src/dcc-update-plugin/module/updateloghelper.cpp" line="52"/>
         <source>%1 of %2 %3</source>
-        <translation type="unfinished"/>
+        <translation>%1%2%3</translation>
         <extra-content_explain>`数字+%`会在代码中替换为字符串，例如：3 of high-risk vulnerabilities；各语言需要根据实际情况增加空格(例如：中文没有空格，英文有空格)</extra-content_explain>
     </message>
     <message>
@@ -815,7 +815,7 @@
     <message>
         <location filename="../src/dcc-update-plugin/module/updateloghelper.cpp" line="58"/>
         <source>for more details, please visit </source>
-        <translation type="unfinished"/>
+        <translation>ཞིབ་ཕྲའི་ནང་དོན་དག་་་་་་་་་་ནས་ལྟ་ཆོག</translation>
         <extra-content_explain>这句话后面会带上一个超链接，各语言自行决定末尾需不需要加空格</extra-content_explain>
     </message>
 </context>

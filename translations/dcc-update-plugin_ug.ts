@@ -477,7 +477,7 @@
         <location filename="../src/dcc-update-plugin/window/widgets/update-history/historyupdateitem.cpp" line="107"/>
         <location filename="../src/dcc-update-plugin/window/widgets/update-history/historyupdateitem.cpp" line="144"/>
         <source>Fixed some known bugs and security vulnerabilities</source>
-        <translation type="unfinished"/>
+        <translation>بايقالغان بەزى نۇقسان ۋە بىخەتەرلىك يوچۇقلىرى تۈزىتىلدى</translation>
     </message>
     <message>
         <location filename="../src/dcc-update-plugin/window/widgets/update-history/historyupdateitem.cpp" line="140"/>
@@ -642,7 +642,7 @@
     <message>
         <location filename="../src/dcc-update-plugin/window/widgets/updatecontrolpanel.cpp" line="630"/>
         <source>The update package has been downloaded. Please select the operation you wish to perform.</source>
-        <translation type="unfinished"/>
+        <translation>يېڭىلاش بولىقى چۈشۈپ بولدى، ئىجرا قىلماقچى بولغان مەشغۇلاتنى تاللاڭ</translation>
     </message>
     <message>
         <location filename="../src/dcc-update-plugin/window/widgets/updatecontrolpanel.cpp" line="358"/>
@@ -803,19 +803,19 @@
     <message>
         <location filename="../src/dcc-update-plugin/module/updateloghelper.cpp" line="52"/>
         <source>%1 of %2 %3</source>
-        <translation type="unfinished"/>
+        <translation>%1 دانە %2%3</translation>
         <extra-content_explain>`数字+%`会在代码中替换为字符串，例如：3 of high-risk vulnerabilities；各语言需要根据实际情况增加空格(例如：中文没有空格，英文有空格)</extra-content_explain>
     </message>
     <message>
         <location filename="../src/dcc-update-plugin/module/updateloghelper.cpp" line="54"/>
         <source>, </source>
-        <translation type="unfinished"/>
+        <translation>، </translation>
         <extra-content_explain>中文逗号不需要空格，英文逗号需要空格For more details, please visit</extra-content_explain>
     </message>
     <message>
         <location filename="../src/dcc-update-plugin/module/updateloghelper.cpp" line="58"/>
         <source>for more details, please visit </source>
-        <translation type="unfinished"/>
+        <translation>تەپسىلاتىنى كۆرۈش</translation>
         <extra-content_explain>这句话后面会带上一个超链接，各语言自行决定末尾需不需要加空格</extra-content_explain>
     </message>
 </context>

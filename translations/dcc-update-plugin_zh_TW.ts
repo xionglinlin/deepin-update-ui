@@ -466,7 +466,7 @@
     <message>
         <location filename="../src/dcc-update-plugin/window/widgets/update-history/historyupdateitem.cpp" line="99"/>
         <source>Installation date: </source>
-        <translation>安裝時間</translation>
+        <translation>安裝時間：</translation>
     </message>
     <message>
         <location filename="../src/dcc-update-plugin/window/widgets/update-history/historyupdateitem.cpp" line="106"/>
