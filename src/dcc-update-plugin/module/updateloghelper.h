@@ -150,6 +150,7 @@ struct HistoryItemDetail
     QString description;
     QString name;
     QString vulLevel;
+    QString displayVulLevel;
 
     static HistoryItemDetail fromCveJsonObj(const QJsonObject &obj)
     {

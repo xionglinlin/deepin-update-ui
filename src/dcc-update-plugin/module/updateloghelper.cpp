@@ -202,8 +202,16 @@ QList<HistoryItemInfo> UpdateLogHelper::handleHistoryUpdateLog(const QString &lo
                 auto count = vulCount.value(pair.first, 0);
                 vulCount[pair.first] = ++count;
                 item.summary = sumCveLevelUp(vulCount);
-                detail.vulLevel = pair.second;
+                detail.displayVulLevel = pair.second;
             }
+            qSort(item.details.begin(), item.details.end(), [](const HistoryItemDetail& v1, const HistoryItemDetail& v2) -> bool {
+                auto v1Level = vulLevelMap().value(v1.vulLevel).first;
+                auto v2Level = vulLevelMap().value(v2.vulLevel).first;
+                if (v1Level == v2Level) {
+                    return v1.name.compare(v2.name) >= 0;
+                }
+                return v1Level > v2Level;
+            });
         }
         infos.append(std::move(item));
 

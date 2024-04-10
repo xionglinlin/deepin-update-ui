@@ -119,7 +119,7 @@ void HistoryUpdateItem::addSecurityItem(const HistoryItemInfo &info)
         auto vulLevelLabel = new DLabel(this);
         DFontSizeManager::instance()->bind(vulLevelLabel, DFontSizeManager::T8);
         vulLevelLabel->setForegroundRole(DPalette::TextTitle);
-        vulLevelLabel->setText(item.vulLevel);
+        vulLevelLabel->setText(item.displayVulLevel);
         vulLevelLabel->setAlignment(Qt::AlignJustify | Qt::AlignLeft);
 
         itemLayout->addWidget(nameLabel, 0, Qt::AlignLeft);
