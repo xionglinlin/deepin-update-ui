@@ -117,12 +117,6 @@ void UpdateStatusItem::paintEvent(QPaintEvent *event)
 {
     Q_UNUSED(event)
 
-    const DPalette &dp = DPaletteHelper::instance()->palette(this);
-    QPainter p(this);
-    p.setPen(Qt::NoPen);
-    p.setBrush(dp.brush(DPalette::ItemBackground));
-    p.drawRoundedRect(rect(), 8, 8);
-
     return QFrame::paintEvent(event);
 }
 
