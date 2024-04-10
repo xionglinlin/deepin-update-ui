@@ -207,10 +207,5 @@ QList<HistoryItemInfo> UpdateLogHelper::handleHistoryUpdateLog(const QString &lo
         infos.append(std::move(item));
 
     }
-
-    qSort(infos.begin(), infos.end(), [](const HistoryItemInfo& v1, const HistoryItemInfo& v2) -> bool {
-        return v1.upgradeTime < v2.upgradeTime;
-    });
-
     return infos;
 }

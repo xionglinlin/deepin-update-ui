@@ -145,7 +145,7 @@ void UpgradeHistoryDialog::updateLayout(const QList<HistoryItemInfo>& items)
         QPalette p = w->palette();
         p.setBrush(QPalette::Window, p.base());
         w->setPalette(p);
-        m_contentLayout->insertWidget(0, w);
+        m_contentLayout->addWidget(w);
     }
     m_contentLayout->addSpacing(20);
 }
