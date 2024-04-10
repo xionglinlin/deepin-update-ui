@@ -105,6 +105,7 @@ void HistoryUpdateItem::addSecurityItem(const HistoryItemInfo &info)
     m_icon->setPixmap(DHiDPIHelper::loadNxPixmap(":/update/updatev20/dcc_safe_update.svg"));
     m_titleLabel->setText(tr("Security Updates"));
     m_summaryLabel->setText(info.summary.isEmpty() ? tr("Fixed some known bugs and security vulnerabilities") : info.summary);
+    m_summaryLabel->setOpenExternalLinks(true);
 
     for (const auto &item : info.details) {
         auto w = new QWidget(this);
@@ -127,10 +128,10 @@ void HistoryUpdateItem::addSecurityItem(const HistoryItemInfo &info)
         if (!item.description.isEmpty()) {
             auto detailLabel = createDetailLabel();
             detailLabel->setText(item.description);
-            itemLayout->addWidget(detailLabel, 0, Qt::AlignLeft);
+            itemLayout->addWidget(detailLabel);
         }
 
-        m_contentLayout->addWidget(w, 0, Qt::AlignLeft);
+        m_contentLayout->addWidget(w);
     }
 }
 

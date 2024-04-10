@@ -197,11 +197,12 @@ QList<HistoryItemInfo> UpdateLogHelper::handleHistoryUpdateLog(const QString &lo
         auto item = HistoryItemInfo::fromJsonObj(obj.toObject());
         if (item.type == UpdateType::SecurityUpdate) {
             QMap<VulLevel, int> vulCount;
-            for (const auto &detail : item.details) {
+            for (auto &detail : item.details) {
                 const auto &pair = vulLevelMap().value(detail.vulLevel);
                 auto count = vulCount.value(pair.first, 0);
                 vulCount[pair.first] = ++count;
                 item.summary = sumCveLevelUp(vulCount);
+                detail.vulLevel = pair.second;
             }
         }
         infos.append(std::move(item));
