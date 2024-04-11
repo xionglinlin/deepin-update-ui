@@ -40,18 +40,30 @@ UpdateStatusItem::UpdateStatusItem(UpdateModel *model, QFrame *parent)
     m_progress->setAccessibleName("LoadingItem_progress");
     m_progress->setRange(0, 100);
     m_progress->setFixedWidth(160);
-    m_progress->setFixedHeight(12);
+    m_progress->setFixedHeight(10);
     m_progress->setTextVisible(false);
 
-    QVBoxLayout *imgLayout = new QVBoxLayout;
-    imgLayout->setAlignment(Qt::AlignCenter);
     m_labelImage = new QLabel;
-    m_labelImage->setMinimumSize(128, 128);
-    imgLayout->addWidget(m_labelImage, 0, Qt::AlignTop);
-    imgLayout->addSpacing(10);
+    m_labelImage->setFixedSize(246, 142);
 
     m_titleLabel = new QLabel;
     DFontSizeManager::instance()->bind(m_titleLabel, DFontSizeManager::T6, QFont::DemiBold);
+
+    QVBoxLayout *textLayout = new QVBoxLayout;
+    textLayout->setAlignment(Qt::AlignCenter);
+    textLayout->setSpacing(5);
+    textLayout->setMargin(0);
+    textLayout->addWidget(m_progress, 0, Qt::AlignHCenter);
+    textLayout->addWidget(m_titleLabel, 0, Qt::AlignHCenter);
+    textLayout->addWidget(m_messageLabel, 0, Qt::AlignHCenter);
+
+    // 图标和文本、进度条之间没有间隔
+    QVBoxLayout *topContent = new QVBoxLayout;
+    topContent->setAlignment(Qt::AlignCenter);
+    topContent->setSpacing(0);
+    topContent->setMargin(0);
+    topContent->addWidget(m_labelImage, 0, Qt::AlignTop | Qt::AlignHCenter);
+    topContent->addLayout(textLayout);
 
     m_checkUpdateBtn->setFixedSize(QSize(200, 36));
     QVBoxLayout *checkUpdateButtonLayout = new QVBoxLayout;
@@ -65,16 +77,13 @@ UpdateStatusItem::UpdateStatusItem(UpdateModel *model, QFrame *parent)
     m_lastCheckTimeTip->setVisible(false);
     DFontSizeManager::instance()->bind(m_lastCheckTimeTip, DFontSizeManager::T8);
 
-    layout->addStretch();
+    layout->addStretch(2);
     layout->setSpacing(5);
     layout->setAlignment(Qt::AlignHCenter);
-    layout->addLayout(imgLayout);
-    layout->addWidget(m_progress, 0, Qt::AlignHCenter);
-    layout->addWidget(m_titleLabel, 0, Qt::AlignHCenter);
-    layout->addWidget(m_messageLabel, 0, Qt::AlignHCenter);
+    layout->addLayout(topContent);
     layout->addWidget(m_checkUpdateButtonWidget, 0, Qt::AlignHCenter);
     layout->addWidget(m_lastCheckTimeTip, 0, Qt::AlignHCenter);
-    layout->addStretch();
+    layout->addStretch(4);
 
     setLayout(layout);
 
@@ -131,7 +140,6 @@ void UpdateStatusItem::setStatus(UpdatesStatus status)
     m_titleLabel->setVisible(false);
 
     const QString &themeName = DCC_NAMESPACE::getThemeName();
-
     switch (status) {
         case Default:
         case Updated:
