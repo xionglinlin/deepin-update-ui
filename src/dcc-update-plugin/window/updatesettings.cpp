@@ -10,6 +10,7 @@
 #include "widgets/translucentframe.h"
 #include "window/gsettingwatcher.h"
 #include "window/utils.h"
+#include "linebutton.h"
 
 #include <DDialog>
 #include <DFontSizeManager>
@@ -267,10 +268,9 @@ void UpdateSettings::initUi()
     //~ contents_path /update/Update Settings
     //~ child_page Update Settings
     // 历史更新记录
-    auto historyLabel = new DLabel(tr("Update History"), this);
-    auto showHistoryButton = new DIconButton(QStyle::SP_ArrowRight, this);
-    showHistoryButton->setFlat(true);
-    connect(showHistoryButton, &QPushButton::clicked, this, [this] {
+    QStyleOption opt;
+    auto historyButton = new LineButton(tr("Update History"), DStyleHelper(this->style()).standardIcon(DStyle::SP_ArrowEnter, &opt, nullptr).pixmap(12, 12), this);
+    connect(historyButton, &LineButton::clicked, this, [this] {
         if (!m_upgradeHistoryDialog) {
             m_upgradeHistoryDialog = new UpgradeHistoryDialog(this);
             m_upgradeHistoryDialog->setAttribute(Qt::WA_DeleteOnClose);
@@ -279,15 +279,8 @@ void UpdateSettings::initUi()
         m_upgradeHistoryDialog->activateWindow();
     });
 
-    auto showHistoryWidget = new SettingsItem(this);
-    showHistoryWidget->addBackground();
-    auto historyLayout = new QHBoxLayout(showHistoryWidget);
-    historyLayout->addWidget(historyLabel);
-    historyLayout->addStretch();
-    historyLayout->addWidget(showHistoryButton);
-    historyLayout->addSpacing(10);
-    DConfigWatcher::instance()->bind(DConfigWatcher::update,"updateHistoryEnabled", showHistoryWidget);
-    contentLayout->addWidget(showHistoryWidget);
+    DConfigWatcher::instance()->bind(DConfigWatcher::update,"updateHistoryEnabled", historyButton);
+    contentLayout->addWidget(historyButton);
 
     contentLayout->setAlignment(Qt::AlignTop);
     contentLayout->setContentsMargins(46, 10, 46, 5);
