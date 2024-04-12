@@ -25,7 +25,7 @@ TipsItem::TipsItem(QFrame *parent)
       m_pix(""),
       m_status(UpdatesStatus::Default)
 {
-    m_icon->setFixedSize(128, 128);
+    m_icon->setFixedSize(246, 142);
 
     m_message->setWordWrap(true);
     m_message->setAlignment(Qt::AlignCenter);
