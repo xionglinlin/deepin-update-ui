@@ -26,7 +26,7 @@ LineButton::LineButton(const QString &leftText, const QPixmap &rightPixmap, QWid
     hlayout->setContentsMargins(10, 0, 10, 0);
     m_leftLabel->setText(leftText);
     hlayout->addWidget(m_leftLabel);
-    hlayout->addSpacerItem(new QSpacerItem(0, 0, QSizePolicy::Expanding, QSizePolicy::Expanding));
+    hlayout->addStretch();
     m_rightLabel->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
     m_rightLabel->setPixmap(rightPixmap);
     DFontSizeManager::instance()->bind(m_rightLabel, DFontSizeManager::T8);
@@ -34,7 +34,6 @@ LineButton::LineButton(const QString &leftText, const QPixmap &rightPixmap, QWid
     setLayout(hlayout);
     setFixedHeight(36);
 }
-
 
 void LineButton::setLeftLabelText(const QString &text)
 {
