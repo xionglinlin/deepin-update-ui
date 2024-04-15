@@ -949,6 +949,7 @@ void UpdateWorker::onCheckUpdateStatusChanged(const QString& value)
             setUpdateInfo();
         });
     } else if (value == "end") {
+        Q_EMIT m_model->updateCheckUpdateTime();
         deleteJob(m_checkUpdateJob);
     }
 }
