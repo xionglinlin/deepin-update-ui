@@ -64,7 +64,7 @@ void UpdateSettingItem::initUi()
     m_versionLabel->setForegroundRole(DPalette::TextTitle);
     m_versionLabel->setObjectName("versionLabel");
 
-    m_checkBox->setFixedSize(16, 16);
+    m_checkBox->setFixedSize(18, 18);
 
     titleLay->addWidget(m_versionLabel);
     titleLay->addStretch();

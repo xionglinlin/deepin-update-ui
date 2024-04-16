@@ -71,12 +71,10 @@ void drawIndicatorChecked(QPainter *pa, const QRectF &rect)
 
 void drawIndicatorUnchecked(QPainter *pa, const QRectF &rect)
 {
-    QRectF mark(0, 0, rect.width() - 1, rect.height() - 1);
-    mark.moveCenter(rect.center());
     QStyleOption opt;
     QPen pen(opt.palette.color(DPalette::Window));
     pen.setWidthF(1);
-    pa->drawEllipse(mark);
+    pa->drawEllipse(rect);
 }
 
 void IndicatorCheckBox::paintEvent(QPaintEvent *e)
@@ -90,8 +88,8 @@ void IndicatorCheckBox::paintEvent(QPaintEvent *e)
     }
 
     if (m_isChecked) {
-        drawIndicatorChecked(&painter, rect());
+        drawIndicatorChecked(&painter, rect().adjusted(1, 1, -1, -1));
     } else {
-        drawIndicatorUnchecked(&painter, rect());
+        drawIndicatorUnchecked(&painter, rect().adjusted(1, 1, -1, -1));
     }
 }
