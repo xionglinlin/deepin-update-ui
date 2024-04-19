@@ -827,12 +827,16 @@ void UpdateWorker::setDownloadJob(const QString& jobPath)
 {
     qCInfo(DCC_UPDATE) << "Set download job: " << jobPath;
     QMutexLocker locker(&m_downloadMutex);
+    if (m_downloadJob) {
+        qCInfo(DCC_UPDATE) << "Download job existed, do not create again";
+        return;
+    }
 
     m_downloadJob = new JobInter("com.deepin.lastore", jobPath, QDBusConnection::systemBus(), this);
     connect(m_downloadJob, &__Job::ProgressChanged, m_model, &UpdateModel::setDownloadProgress);
     connect(m_downloadJob, &__Job::StatusChanged, this, &UpdateWorker::onDownloadStatusChanged);
     connect(m_downloadJob, &__Job::DescriptionChanged, this, [this](const QString &description) {
-        if (m_downloadJob->status() == "failed") {
+        if (m_downloadJob && m_downloadJob->status() == "failed") {
             m_model->setLastErrorLog(DownloadFailed, description);
         }
     });
