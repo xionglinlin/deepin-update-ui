@@ -51,6 +51,7 @@ public:
     explicit SuccessFrame(QWidget *parent = nullptr);
 
 private:
+    bool eventFilter(QObject *o, QEvent *e) override;
     BlurTransparentButton *m_enterBtn;
 };
 

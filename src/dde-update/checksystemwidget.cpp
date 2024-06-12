@@ -167,8 +167,21 @@ SuccessFrame::SuccessFrame(QWidget *parent)
         qApp->exit();
     });
 
-    setFocusProxy(m_enterBtn);
-    setFocus();
+    qApp->installEventFilter(this);
+}
+
+bool SuccessFrame::eventFilter(QObject *o, QEvent *e)
+{
+    Q_UNUSED(o)
+    if (e->type() != QEvent::KeyPress)
+        return false;
+
+    if (auto keyEvent = dynamic_cast<QKeyEvent *>(e)) {
+        if (keyEvent->key() == Qt::Key_Return || keyEvent->key() == Qt::Key_Enter) {
+            Q_EMIT m_enterBtn->clicked();
+        }
+    }
+    return false;
 }
 
 ErrorFrame::ErrorFrame(QWidget *parent)
