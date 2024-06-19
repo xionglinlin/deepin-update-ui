@@ -67,6 +67,17 @@
             "description": "",
             "permissions": "readwrite",
             "visibility": "private"
+        },
+        "showVersion": {
+            "value": "version",
+            "serial": 0,
+            "flags": ["global"],
+            "name": "show version",
+            "name[zh_CN]": "显示的版本",
+            "description[zh_CN]": "显示的版本",
+            "description": "",
+            "permissions": "readwrite",
+            "visibility": "private"
         }
     }
   }

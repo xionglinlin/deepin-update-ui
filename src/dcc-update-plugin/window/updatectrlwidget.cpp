@@ -83,8 +83,7 @@ void UpdateCtrlWidget::initUI()
     DFontSizeManager::instance()->bind(m_versionTip, DFontSizeManager::T8);
     m_versionTip->setForegroundRole(DPalette::BrightText);
     m_versionTip->setEnabled(false);
-    QString sVersion = QString("%1 %2").arg(Dtk::Core::DSysInfo::uosProductTypeName()).arg(Dtk::Core::DSysInfo::minorVersion());
-    m_versionTip->setText(tr("Current Edition") + ": " + sVersion);
+    updateVersion();
 
     QHBoxLayout* resultItemLayout = new QHBoxLayout(m_checkUpdateWidget);
     resultItemLayout->setContentsMargins(QMargins(15, 0, 15, 0));
@@ -214,6 +213,8 @@ void UpdateCtrlWidget::setModel(UpdateModel* model)
     } else {
         setStatus(m_model->lastStatus());
     }
+    connect(m_model, &UpdateModel::systemVersionChanged, this, &UpdateCtrlWidget::updateVersion);
+    connect(m_model, &UpdateModel::baselineChanged, this, &UpdateCtrlWidget::updateVersion);
 }
 
 void UpdateCtrlWidget::onUpdateModeChanged(quint64 mode)
@@ -224,6 +225,18 @@ void UpdateCtrlWidget::onUpdateModeChanged(quint64 mode)
     } else {
         setStatus(m_model->lastStatus());
     }
+}
+
+void UpdateCtrlWidget::updateVersion()
+{
+    QString minorVersion;
+    if (m_model->showVersion() == "baseline" && !m_model->baseline().isEmpty()) {
+        minorVersion = m_model->baseline();
+    } else {
+        minorVersion = Dtk::Core::DSysInfo::minorVersion();
+    }
+    QString sVersion = QString("%1 %2").arg(Dtk::Core::DSysInfo::uosProductTypeName()).arg(minorVersion);
+    m_versionTip->setText(tr("Current Edition") + ": " + sVersion);
 }
 
 void UpdateCtrlWidget::updateWidgetsVisible()

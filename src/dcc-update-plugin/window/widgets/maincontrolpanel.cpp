@@ -3,6 +3,7 @@
 // SPDX-License-Identifier: LGPL-3.0-or-later
 
 #include "maincontrolpanel.h"
+#include "window/utils.h"
 
 #include <QVBoxLayout>
 
@@ -120,6 +121,13 @@ void MainControlPanel::onUpdateInfoChanged(UpdateType type)
     }
 
     updateItem->setIconVisible(true);
+    bool showBaseline = m_model->showVersion() == "baseline" && !updateInfo->baseline().isEmpty();
+    if (showBaseline) {
+        updateInfo->setAvailableVersion(updateInfo->baseline());
+    } else if (!updateItemInfo->availableVersion().isEmpty() && dccV20::IsProfessionalSystem) {
+        QString avaVersion = updateItemInfo->availableVersion();
+        updateInfo->setAvailableVersion(avaVersion.replace(avaVersion.length() - 1, 1, '0')); // 替换版本号的最后一位为‘0‘
+    }
     updateItem->setData(updateInfo);
     updateItem->setChecked(m_model->checkUpdateMode() & updateItem->updateType());
     updateContent(type, m_model->updateStatus(type));

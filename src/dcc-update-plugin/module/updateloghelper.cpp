@@ -136,6 +136,7 @@ void UpdateLogHelper::handleSystemItemInfo(UpdateItemInfo *itemInfo) const
 
     for (const auto &log : m_systemLog) {
         const QString& explain = getLanguageType() == "CN" ? log.cnLog : log.enLog;
+        itemInfo->setBaseline(log.baseline);
         // 写入最近的更新
         if (itemInfo->currentVersion().isEmpty()) {
             itemInfo->setCurrentVersion(log.showVersion);

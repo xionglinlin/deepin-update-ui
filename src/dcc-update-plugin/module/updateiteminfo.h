@@ -70,6 +70,9 @@ public:
     void setTypeString(const QString& type) { m_typeString = type; }
     QString typeString() const { return m_typeString; }
 
+    inline void setBaseline(const QString& baseline) { m_baseline = baseline; }
+    inline QString baseline() const { return m_baseline; }
+
 Q_SIGNALS:
     void downloadSizeChanged(const qlonglong size);
     void checkStateChanged(bool);
@@ -82,6 +85,7 @@ private:
     QString m_name;
     QString m_currentVersion;
     QString m_availableVersion;
+    QString m_baseline;
     QString m_explain;
     QString m_updateTime;
     QStringList m_packages;

@@ -173,10 +173,7 @@ void UpdateWorker::init()
     connect(m_powerInter, &PowerInter::BatteryPercentageChanged, this, &UpdateWorker::checkPower);
     connect(m_powerInter, &PowerInter::OnBatteryChanged, this, &UpdateWorker::checkPower);
 
-    QString sVersion = QString("%1 %2").arg(DSysInfo::uosProductTypeName()).arg(DSysInfo::majorVersion());
-    if (!IsServerSystem)
-        sVersion.append(" " + DSysInfo::uosEditionName());
-    m_model->setSystemVersionInfo(sVersion);
+    updateSystemVersion();
 
     const auto server = valueByQSettings<QString>(DCC_CONFIG_FILES, "Testing", "Server", "");
     if (!server.isEmpty()) {
@@ -894,6 +891,23 @@ void UpdateWorker::setDistUpgradeJob(const QString& jobPath)
     onDistUpgradeStatusChanged(m_distUpgradeJob->status());
 }
 
+void UpdateWorker::updateSystemVersion()
+{
+    const DConfig* dconfig = DConfigWatcher::instance()->getModulesConfig(DConfigWatcher::update);
+    if (dconfig && dconfig->isValid()) {
+        m_model->setShowVersion(dconfig->value("showVersion").toString());
+    }
+
+    QString sVersion = QString("%1 %2").arg(DSysInfo::uosProductTypeName()).arg(DSysInfo::majorVersion());
+    if (!IsServerSystem)
+        sVersion.append(" " + DSysInfo::uosEditionName());
+    m_model->setSystemVersionInfo(sVersion);
+
+    QSettings settings("/etc/os-baseline", QSettings::IniFormat);
+    m_model->setBaseline(settings.value("Baseline").toString());
+}
+
+
 void UpdateWorker::onDistUpgradeStatusChanged(const QString& status)
 {
     // 无需处理ready状态
@@ -909,6 +923,7 @@ void UpdateWorker::onDistUpgradeStatusChanged(const QString& status)
         const auto updateStatus = DIST_UPGRADE_STATUS_MAP.value(status);
         if (updateStatus == UpgradeComplete) {
             cleanLaStoreJob(m_distUpgradeJob);
+            updateSystemVersion();
         } else {
             if (updateStatus == UpgradeFailed && m_distUpgradeJob) {
                 const QString& description = m_distUpgradeJob->description();

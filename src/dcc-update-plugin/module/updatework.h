@@ -118,6 +118,7 @@ private:
     int isUnstableResource() const;
     void onRequestCheckUpdateModeChanged(int type, bool isChecked);
     void setDistUpgradeJob(const QString& jobPath);
+    void updateSystemVersion();
 
 private:
     UpdateModel* m_model;

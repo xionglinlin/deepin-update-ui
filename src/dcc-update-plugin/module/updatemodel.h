@@ -157,6 +157,12 @@ public:
     void setBatterIsOK(bool ok);
     bool batterIsOK() const { return m_batterIsOK; }
 
+    void setShowVersion(const QString &showVersion);
+    QString showVersion() const { return m_showVersion; }
+
+    void setBaseline(const QString &baseline);
+    inline QString baseline() const { return m_baseline; }
+
     LastoreDaemonUpdateStatus getLastoreDaemonStatus() { return LastoreDaemonUpdateStatus::fromJson(m_updateStatus); };
 
     void setLastErrorLog(UpdatesStatus status, const QString& description) { m_descriptionMap.insert(status, description); }
@@ -212,6 +218,7 @@ Q_SIGNALS:
     void batterStatusChanged(bool isOK);
     void notifyBackupSuccess();
     void p2pUpdateEnableStateChanged(bool enabled);
+    void baselineChanged(const QString &baseline);
 
 private:
     void setUpdateItemEnabled();
@@ -258,6 +265,8 @@ private:
     int m_checkUpdateMode;
     bool m_batterIsOK;
     bool m_p2pUpdateEnabled;
+    QString m_showVersion;
+    QString m_baseline;
 };
 
 }

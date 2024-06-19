@@ -60,6 +60,7 @@ Q_SIGNALS:
 
 private Q_SLOTS:
     void onUpdateModeChanged(quint64 mode);
+    void updateVersion();
 
 private:
     void initUI();

@@ -804,6 +804,21 @@ void UpdateModel::setBatterIsOK(bool ok)
     Q_EMIT batterStatusChanged(ok);
 }
 
+void UpdateModel::setShowVersion(const QString &showVersion)
+{
+    m_showVersion = showVersion;
+}
+
+void UpdateModel::setBaseline(const QString &baseline)
+{
+    if (m_baseline == baseline)
+        return;
+
+    m_baseline = baseline;
+
+    Q_EMIT baselineChanged(m_baseline);
+}
+
 void UpdateModel::updateAvailableState()
 {
     auto it = m_controlStatusMap.begin();

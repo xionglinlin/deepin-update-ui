@@ -165,11 +165,7 @@ void UpdateSettingItem::setData(UpdateItemInfo* updateItemInfo)
     const QString& systemVersionType = DCC_NAMESPACE::IsServerSystem ? tr("Server") : tr("Desktop");
     QString version;
     if (!updateItemInfo->availableVersion().isEmpty()) {
-        QString avaVersion = updateItemInfo->availableVersion();
-        QString tmpVersion = avaVersion;
-        if (dccV20::IsProfessionalSystem)
-            tmpVersion = avaVersion.replace(avaVersion.length() - 1, 1, '0'); // 替换版本号的最后一位为‘0‘
-        version = tr("Version") + ": " + systemVersionType + tmpVersion;
+        version = tr("Version") + ": " + systemVersionType + updateItemInfo->availableVersion();
     }
     setVersion(version);
     m_titleLabel->setText(updateItemInfo->name());
