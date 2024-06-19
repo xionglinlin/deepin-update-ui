@@ -193,6 +193,7 @@ void UpdateWorker::init()
     connect(&SignalBridge::ref(), &SignalBridge::requestRetry, this, &UpdateWorker::onRequestRetry);
     connect(&SignalBridge::ref(), &SignalBridge::requestBackgroundInstall, this, &UpdateWorker::doUpgrade);
     connect(&SignalBridge::ref(), &SignalBridge::requestStopDownload, this, &UpdateWorker::stopDownload);
+    connect(this, &UpdateWorker::systemActivationChanged, m_model, &UpdateModel::setSystemActivation, Qt::QueuedConnection); // systemActivationChanged是在线程中发出
 }
 
 void UpdateWorker::licenseStateChangeSlot()
@@ -206,7 +207,7 @@ void UpdateWorker::licenseStateChangeSlot()
 void UpdateWorker::getLicenseState()
 {
     if (DSysInfo::DeepinDesktop == DSysInfo::deepinType()) {
-        m_model->setSystemActivation(UiActiveState::Authorized);
+        emit systemActivationChanged(UiActiveState::Authorized);
         return;
     }
     QDBusInterface licenseInfo("com.deepin.license",
@@ -218,7 +219,7 @@ void UpdateWorker::getLicenseState()
         return;
     }
     UiActiveState reply = static_cast<UiActiveState>(licenseInfo.property("AuthorizationState").toInt());
-    m_model->setSystemActivation(reply);
+    emit systemActivationChanged(reply);
 }
 
 void UpdateWorker::activate()
