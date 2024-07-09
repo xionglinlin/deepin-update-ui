@@ -52,6 +52,9 @@ public:
 
 private:
     bool eventFilter(QObject *o, QEvent *e) override;
+    QString getSystemVersionAndEdition();
+
+private:
     BlurTransparentButton *m_enterBtn;
 };
 

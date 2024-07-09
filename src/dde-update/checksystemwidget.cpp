@@ -9,12 +9,14 @@
 #include <DHiDPIHelper>
 #include <DPaletteHelper>
 #include <DGuiApplicationHelper>
+#include <DSysInfo>
 
 #include <QEvent>
 #include <QApplication>
 #include <QKeyEvent>
 
 DWIDGET_USE_NAMESPACE
+DCORE_USE_NAMESPACE
 
 CheckProgressWidget::CheckProgressWidget(QWidget *parent)
     : QWidget(parent)
@@ -125,28 +127,13 @@ void CheckProgressWidget::setValue(double value)
         m_progressText->setText(QString::number(iProgress) + "%");
 }
 
-QString systemVersion()
-{
-    QSettings lsbSetting("/etc/os-version", QSettings::IniFormat);
-    lsbSetting.setIniCodec("utf-8");
-    lsbSetting.beginGroup("Version");
-    QLocale locale;
-
-    if (locale.language() == QLocale::Chinese)
-        return lsbSetting.value(QString("EditionName[%1]").arg(locale.name()), "").toString() +
-            lsbSetting.value("MinorVersion").toString();
-
-    return lsbSetting.value(QString("EditionName"), "").toString() +
-        lsbSetting.value("MinorVersion").toString();
-}
-
 SuccessFrame::SuccessFrame(QWidget *parent)
     : QWidget(parent)
     , m_enterBtn(new BlurTransparentButton(tr("Go to Desktop"), this))
 {
     QLabel *successTip = new QLabel(tr("Welcome, system updated successfully"));
     DFontSizeManager::instance()->bind(successTip, DFontSizeManager::T1, QFont::Normal);
-    QLabel *currentVersion = new QLabel(tr("Current Edition:") + " " + systemVersion());
+    QLabel *currentVersion = new QLabel(tr("Current Edition:") + " " + getSystemVersionAndEdition());
     DFontSizeManager::instance()->bind(currentVersion, DFontSizeManager::T3, QFont::Medium);
 
     m_enterBtn->setFixedSize(240, 48);
@@ -182,6 +169,19 @@ bool SuccessFrame::eventFilter(QObject *o, QEvent *e)
         }
     }
     return false;
+}
+
+QString SuccessFrame::getSystemVersionAndEdition()
+{
+    QString minorVersion, editionName;
+    if (DSysInfo::uosType() == DSysInfo::UosServer || DSysInfo::uosEditionType() == DSysInfo::UosEuler || DSysInfo::isDeepin()) {
+        minorVersion = DSysInfo::minorVersion();
+        editionName = DSysInfo::uosEditionName();
+    } else {
+        minorVersion = DSysInfo::productVersion();
+        editionName = DSysInfo::productTypeString();
+    }
+    return QString(editionName + " " + minorVersion);
 }
 
 ErrorFrame::ErrorFrame(QWidget *parent)
