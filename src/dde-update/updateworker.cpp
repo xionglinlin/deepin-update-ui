@@ -598,3 +598,16 @@ void UpdateWorker::getUpdateOption()
         qWarning() << "Open " << UPDATE_OPTION_FILE << " failed, use default power action:" << defaultPowerAction;
     }
 }
+
+void UpdateWorker::forceReboot(bool reboot)
+{
+    qInfo() << "Force reboot:" << reboot;
+    QDBusPendingReply<void> reply = m_managerInter->asyncCall("PowerOff", reboot);
+    QDBusPendingCallWatcher *watcher = new QDBusPendingCallWatcher(reply, this);
+    connect(watcher, &QDBusPendingCallWatcher::finished, this, [reply, watcher] {
+        watcher->deleteLater();
+        if (reply.isError()) {
+            qWarning() << "Power off failed:" << reply.error().message();
+        }
+    });
+}

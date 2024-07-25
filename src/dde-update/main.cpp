@@ -49,6 +49,7 @@ int main(int argc, char *argv[])
 
     DLogManager::setLogFormat("%{time}{yyyy-MM-dd, HH:mm:ss.zzz} [%{type:-7}] [ %{function:-35} %{line}] %{message}\n");
     DLogManager::registerConsoleAppender();
+    DLogManager::registerJournalAppender();
 
     QCommandLineOption doUpgrade(QStringList() << "u" << "do-upgrade", "Do upgrade, backup system and install packages.");
     QCommandLineOption checkSystem(QStringList() << "c" << "check-upgrade", "Check if the update was successful.");

@@ -56,6 +56,7 @@ public:
     bool checkPower();
     void enableShortcuts(bool enable);
     void doPowerAction(bool reboot);
+    void forceReboot(bool reboot);
 
 Q_SIGNALS:
     void requestExitUpdating();

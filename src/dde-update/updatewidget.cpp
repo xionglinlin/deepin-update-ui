@@ -288,6 +288,28 @@ void UpdateCompleteWidget::showSuccessFrame()
 
     setTipsText();
     m_countDownTimer->start();
+
+    // 没有成功重启/关机的时候（小概率事件）显示强制重启/关机按钮
+    QTimer::singleShot((m_countDown + 2) * 1000, this, [this] {
+        m_tips->setText(UpdateModel::instance()->isReboot() ?
+            tr("The automatic reboot process has failed. Please try to manually reboot your device.") :
+            tr("The automatic shutdown process has failed. Please try to manually shut down your device."));
+        auto button = new QPushButton(UpdateModel::instance()->isReboot() ?
+            UpdateModel::instance()->updateActionText(UpdateModel::Reboot) :
+            UpdateModel::instance()->updateActionText(UpdateModel::ShutDown), this);
+        button->setFixedSize(240, 48);
+        m_mainLayout->addWidget(button, 0, Qt::AlignHCenter);
+        m_actionButtons.append(button);
+        button->setFocusPolicy(Qt::NoFocus);
+        button->setCheckable(true);
+        m_buttonSpacer->changeSize(0, 80);
+        m_mainLayout->invalidate();
+        QApplication::setOverrideCursor(Qt::ArrowCursor);
+
+        connect(button, &QPushButton::clicked, this, [] {
+            UpdateWorker::instance()->forceReboot(UpdateModel::instance()->isReboot());
+        });
+    });
 }
 
 void UpdateCompleteWidget::showErrorFrame(UpdateModel::UpdateError error)
