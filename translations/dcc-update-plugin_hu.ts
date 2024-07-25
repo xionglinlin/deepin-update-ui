@@ -54,17 +54,17 @@
 <context>
     <name>dccV20::update::UpdateCtrlWidget</name>
     <message>
-        <location filename="../src/dcc-update-plugin/window/updatectrlwidget.cpp" line="87"/>
-        <source>Current Edition</source>
-        <translation>Jelenlegi verzió</translation>
-    </message>
-    <message>
-        <location filename="../src/dcc-update-plugin/window/updatectrlwidget.cpp" line="98"/>
+        <location filename="../src/dcc-update-plugin/window/updatectrlwidget.cpp" line="97"/>
         <source>To use this software, you must accept the %1 that accompanies software updates.</source>
         <translation>A szoftver használatához el kell fogadnia a szoftverfrissítéseket kísérő %1-et.</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/updatectrlwidget.cpp" line="256"/>
+        <location filename="../src/dcc-update-plugin/window/updatectrlwidget.cpp" line="239"/>
+        <source>Current Edition</source>
+        <translation>Jelenlegi verzió</translation>
+    </message>
+    <message>
+        <location filename="../src/dcc-update-plugin/window/updatectrlwidget.cpp" line="269"/>
         <source>Privacy Policy</source>
         <translation>Adatvédelmi irányelvek</translation>
     </message>
@@ -212,160 +212,158 @@
 <context>
     <name>dccV20::update::UpdateSettings</name>
     <message>
-        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="69"/>
+        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="70"/>
         <source>Switch it on to automatically download the updates in wireless or wired network</source>
         <translation>Kapcsolja be a frissítések automatikus letöltéséhez vezeték nélküli vagy vezetékes hálózatban</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="70"/>
+        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="71"/>
         <source>Join the internal testing channel to get deepin latest updates</source>
         <translation>Csatlakozzon a belső tesztelési csatornához, hogy megkapja a Deepin® legújabb frissítéseit</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="73"/>
+        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="74"/>
         <source>Start at</source>
         <translation>Kezdés ekkor</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="74"/>
+        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="75"/>
         <source>End at</source>
         <translation>Befejezés ekkor</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="85"/>
+        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="86"/>
         <source>Limit Speed</source>
         <translation>Sebesség korlátozása</translation>
         <extra-child_page>Update Settings</extra-child_page>
         <extra-contents_path>/update/Update Settings</extra-contents_path>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="88"/>
+        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="89"/>
         <source>Updates Notification</source>
         <translation>Frissítési értesítés</translation>
         <extra-child_page>Update Settings</extra-child_page>
         <extra-contents_path>/update/Update Settings</extra-contents_path>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="91"/>
+        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="92"/>
         <source>Auto Download Updates</source>
         <translation>Frissítések automatikus letöltése</translation>
         <extra-child_page>Update Settings</extra-child_page>
         <extra-contents_path>/update/Update Settings</extra-contents_path>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="94"/>
+        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="95"/>
         <source>Join Internal Testing Channel</source>
         <translation>Csatlakozzon a belső tesztelési csatornához</translation>
         <extra-child_page>Update Settings</extra-child_page>
         <extra-contents_path>/update/Update Settings</extra-contents_path>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="97"/>
+        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="98"/>
         <source>Updates from Internal Testing Sources</source>
         <translation>Belső tesztelési forrásokból származó frissítések</translation>
         <extra-child_page>Update Settings</extra-child_page>
         <extra-contents_path>/update/Update Settings</extra-contents_path>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="100"/>
+        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="101"/>
         <source>Download when Inactive</source>
         <translation>Letöltés inaktív állapotban</translation>
         <extra-child_page>Update Settings</extra-child_page>
         <extra-contents_path>/update/Update Settings</extra-contents_path>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="115"/>
+        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="116"/>
         <source>Update Settings</source>
         <translation>Frissítési beállítások</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="125"/>
+        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="126"/>
         <source>Other settings</source>
         <translation>Egyéb beállítások</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="185"/>
+        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="186"/>
         <source>Clear Package Cache</source>
         <translation>Csomaggyorsítótár törlése</translation>
         <extra-child_page>Update Settings</extra-child_page>
         <extra-contents_path>/update/Update Settings</extra-contents_path>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="194"/>
+        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="195"/>
         <source>Transferring Cache</source>
         <translation>Gyorsítótár átvitele</translation>
         <extra-child_page>Update Settings</extra-child_page>
         <extra-contents_path>/update/Update Settings</extra-contents_path>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="196"/>
+        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="197"/>
         <source>Enable this option to transfer updates to computers that are locally connected to the network to speed up the download of updates to other computers.</source>
         <translation>Engedélyezze ezt a beállítást a frissítések átviteléhez a hálózathoz helyileg csatlakoztatott számítógépekre, hogy felgyorsítsa a frissítések letöltését más számítógépekre.</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="211"/>
+        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="212"/>
         <source>System Repository Detection</source>
         <translation>Tükörszerver érzékelés</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="214"/>
+        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="215"/>
         <source>Show a notification if system update repository has been modified</source>
         <translation>Értesítés megjelenítése, ha a rendszerfrissítés tükörszervere módosult</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="223"/>
+        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="224"/>
         <source>Smart Mirror Switch</source>
         <translation>Intelligens tükörszerver választó</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="227"/>
+        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="228"/>
         <source>Switch it on to connect to the quickest mirror site automatically</source>
         <translation>Kapcsolja be, hogy automatikusan csatlakozzon a leggyorsabb tükörszerverhez</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="234"/>
+        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="235"/>
         <source>Mirror List</source>
         <translation>Tükrök listája</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="270"/>
+        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="272"/>
         <source>Update History</source>
         <translation>Frissítési előzmények</translation>
-        <extra-child_page>Update Settings</extra-child_page>
-        <extra-contents_path>/update/Update Settings</extra-contents_path>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="401"/>
+        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="394"/>
         <source>Only numbers between 1-99999 are allowed</source>
         <translation>Csak az 1 - 99999 közötti számok megengedettek</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="526"/>
+        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="519"/>
         <source>here</source>
         <translation>Itt</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="527"/>
+        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="520"/>
         <source>Click %1 to complete the application</source>
         <translation>Kattintson a %1 gombra az alkalmazás befejezéséhez</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="568"/>
+        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="561"/>
         <source>Checking system versions, please wait...</source>
         <translation>Rendszer verzió ellenőrzése, kérjük várjon...</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="595"/>
+        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="588"/>
         <source>If you leave the internal testing channel now, you may not be able to get the latest bug fixes and updates. Please leave after the official version is released to keep your system stable!</source>
         <translation>Ha most kilép a tesztelési csoportból, előfordulhat, hogy nem fogja tudni elérni a legújabb hibajavításokat és frissítéseket. Kérjük, a hivatalos verzió megjelenése után hagyja el, hogy rendszere stabil maradjon!</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="597"/>
+        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="590"/>
         <source>Leave</source>
         <translation>Elhagyás</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="598"/>
+        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="591"/>
         <source>Cancel</source>
         <translation>Mégsem</translation>
     </message>
@@ -373,37 +371,37 @@
 <context>
     <name>dccV20::update::UpdateStatusItem</name>
     <message>
-        <location filename="../src/dcc-update-plugin/window/widgets/updatestatusitem.cpp" line="144"/>
+        <location filename="../src/dcc-update-plugin/window/widgets/updatestatusitem.cpp" line="146"/>
         <source>Your system is up to date</source>
         <translation>A rendszere frissítésre került</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/widgets/updatestatusitem.cpp" line="147"/>
+        <location filename="../src/dcc-update-plugin/window/widgets/updatestatusitem.cpp" line="149"/>
         <source>Check for Updates</source>
         <translation>Frissítések keresése</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/widgets/updatestatusitem.cpp" line="155"/>
+        <location filename="../src/dcc-update-plugin/window/widgets/updatestatusitem.cpp" line="157"/>
         <source>Checking for updates, please wait...</source>
         <translation>Frissítések keresése, kérjük várjon...</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/widgets/updatestatusitem.cpp" line="164"/>
+        <location filename="../src/dcc-update-plugin/window/widgets/updatestatusitem.cpp" line="166"/>
         <source>Turn on the switches under Update Content to get better experiences</source>
         <translation>A jobb élmény érdekében kapcsolja be a kapcsolókat a Tartalom frissítése alatt</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/widgets/updatestatusitem.cpp" line="177"/>
+        <location filename="../src/dcc-update-plugin/window/widgets/updatestatusitem.cpp" line="179"/>
         <source>Last check: </source>
         <translation>Utolsó ellenőrzés ideje:</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/widgets/updatestatusitem.cpp" line="184"/>
+        <location filename="../src/dcc-update-plugin/window/widgets/updatestatusitem.cpp" line="186"/>
         <source>Check Again</source>
         <translation>Újra ellenőrzés</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/widgets/updatestatusitem.cpp" line="186"/>
+        <location filename="../src/dcc-update-plugin/window/widgets/updatestatusitem.cpp" line="188"/>
         <source>Failed to check for updates</source>
         <translation>A frissítések ellenőrzése sikertelen</translation>
     </message>
@@ -475,27 +473,27 @@
     </message>
     <message>
         <location filename="../src/dcc-update-plugin/window/widgets/update-history/historyupdateitem.cpp" line="107"/>
-        <location filename="../src/dcc-update-plugin/window/widgets/update-history/historyupdateitem.cpp" line="144"/>
+        <location filename="../src/dcc-update-plugin/window/widgets/update-history/historyupdateitem.cpp" line="145"/>
         <source>Fixed some known bugs and security vulnerabilities</source>
         <translation>Kijavítottunk néhány ismert hibát és biztonsági rést </translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/widgets/update-history/historyupdateitem.cpp" line="140"/>
+        <location filename="../src/dcc-update-plugin/window/widgets/update-history/historyupdateitem.cpp" line="141"/>
         <source>System Updates</source>
         <translation>Rendszer frissítések</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/widgets/update-history/historyupdateitem.cpp" line="158"/>
+        <location filename="../src/dcc-update-plugin/window/widgets/update-history/historyupdateitem.cpp" line="161"/>
         <source>Version: </source>
         <translation>Verzió:</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/widgets/update-history/historyupdateitem.cpp" line="158"/>
+        <location filename="../src/dcc-update-plugin/window/widgets/update-history/historyupdateitem.cpp" line="161"/>
         <source>Server</source>
         <translation>Szerver</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/widgets/update-history/historyupdateitem.cpp" line="158"/>
+        <location filename="../src/dcc-update-plugin/window/widgets/update-history/historyupdateitem.cpp" line="161"/>
         <source>Desktop</source>
         <translation>Asztal</translation>
     </message>
@@ -906,7 +904,7 @@
         <translation>Asztal</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/widgets/updatesettingitem.cpp" line="172"/>
+        <location filename="../src/dcc-update-plugin/window/widgets/updatesettingitem.cpp" line="168"/>
         <source>Version</source>
         <translation>Verzió</translation>
     </message>
@@ -914,23 +912,23 @@
 <context>
     <name>dcc::update::UpdateWorker</name>
     <message>
-        <location filename="../src/dcc-update-plugin/module/updatework.cpp" line="405"/>
+        <location filename="../src/dcc-update-plugin/module/updatework.cpp" line="403"/>
         <source>System Updates</source>
         <translation>Rendszer frissítések</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/module/updatework.cpp" line="406"/>
-        <location filename="../src/dcc-update-plugin/module/updatework.cpp" line="415"/>
+        <location filename="../src/dcc-update-plugin/module/updatework.cpp" line="404"/>
+        <location filename="../src/dcc-update-plugin/module/updatework.cpp" line="413"/>
         <source>Fixed some known bugs and security vulnerabilities</source>
         <translation>Kijavítottunk néhány ismert hibát és biztonsági rést </translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/module/updatework.cpp" line="414"/>
+        <location filename="../src/dcc-update-plugin/module/updatework.cpp" line="412"/>
         <source>Security Updates</source>
         <translation>Biztonsági frissítések</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/module/updatework.cpp" line="423"/>
+        <location filename="../src/dcc-update-plugin/module/updatework.cpp" line="421"/>
         <source>Third-party Repositories</source>
         <translation>Harmadik féltől származó adattárak</translation>
     </message>

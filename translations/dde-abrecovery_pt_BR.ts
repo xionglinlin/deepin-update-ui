@@ -13,7 +13,7 @@
     <message>
         <location filename="../src/dde-abrecovery/recoverydialog.cpp" line="254"/>
         <source>Rollback failed.</source>
-        <translation type="unfinished"/>
+        <translation>A reversão falhou.</translation>
     </message>
     <message>
         <location filename="../src/dde-abrecovery/recoverydialog.cpp" line="262"/>
@@ -24,32 +24,32 @@
         <location filename="../src/dde-abrecovery/recoverydialog.cpp" line="297"/>
         <location filename="../src/dde-abrecovery/recoverydialog.cpp" line="319"/>
         <source>Updates failed.</source>
-        <translation type="unfinished"/>
+        <translation>As atualizações falharam.</translation>
     </message>
     <message>
         <location filename="../src/dde-abrecovery/recoverydialog.cpp" line="311"/>
         <source>Updates failed: it was interrupted.</source>
-        <translation type="unfinished"/>
+        <translation>As atualizações falharam: foram interrompidas.</translation>
     </message>
     <message>
         <location filename="../src/dde-abrecovery/recoverydialog.cpp" line="315"/>
         <source>Updates failed: DPKG error.</source>
-        <translation type="unfinished"/>
+        <translation>As atualizações falharam: erro do DPKG.</translation>
     </message>
     <message>
         <location filename="../src/dde-abrecovery/recoverydialog.cpp" line="317"/>
         <source>Updates failed: insufficient disk space.</source>
-        <translation type="unfinished"/>
+        <translation>As atualizações falharam: espaço insuficiente em disco.</translation>
     </message>
     <message>
         <location filename="../src/dde-abrecovery/recoverydialog.cpp" line="330"/>
         <source>Are you sure you want to roll back to %1 backed up on %2?</source>
-        <translation type="unfinished"/>
+        <translation>Reverter para %1 com backup em %2?</translation>
     </message>
     <message>
         <location filename="../src/dde-abrecovery/recoverydialog.cpp" line="340"/>
         <source>Cancel and Reboot</source>
-        <translation>Cancelar e Reiniciar</translation>
+        <translation>Cancelar e reiniciar</translation>
     </message>
     <message>
         <location filename="../src/dde-abrecovery/recoverydialog.cpp" line="356"/>

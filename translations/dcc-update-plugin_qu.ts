@@ -1,4 +1,4 @@
-<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="lv">
+<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="qu">
 <context>
     <name>dccV20::update::MirrorSourceItem</name>
     <message>
@@ -111,7 +111,7 @@
     <message>
         <location filename="../src/dcc-update-plugin/updatemodule.cpp" line="117"/>
         <source>Updates</source>
-        <translation>Atjauninājumi</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/dcc-update-plugin/updatemodule.cpp" line="237"/>
@@ -365,7 +365,7 @@
     <message>
         <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="591"/>
         <source>Cancel</source>
-        <translation>Atcelt</translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -594,7 +594,7 @@
     <message>
         <location filename="../src/dcc-update-plugin/window/widgets/updatecontrolpanel.cpp" line="198"/>
         <source>Reboot now</source>
-        <translation>Restartēt tagad</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/dcc-update-plugin/window/widgets/updatecontrolpanel.cpp" line="348"/>
@@ -832,7 +832,7 @@
     <message>
         <location filename="../src/dcc-update-plugin/module/updatemodel.cpp" line="461"/>
         <source>Dependency error, failed to detect the updates</source>
-        <translation>Saistīto pakotņu kļūda, neizdevās noteikt atjauninājumus</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/dcc-update-plugin/module/updatemodel.cpp" line="462"/>

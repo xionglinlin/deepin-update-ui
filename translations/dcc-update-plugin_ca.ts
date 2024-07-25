@@ -54,17 +54,17 @@
 <context>
     <name>dccV20::update::UpdateCtrlWidget</name>
     <message>
-        <location filename="../src/dcc-update-plugin/window/updatectrlwidget.cpp" line="87"/>
-        <source>Current Edition</source>
-        <translation>Edició actual</translation>
-    </message>
-    <message>
-        <location filename="../src/dcc-update-plugin/window/updatectrlwidget.cpp" line="98"/>
+        <location filename="../src/dcc-update-plugin/window/updatectrlwidget.cpp" line="97"/>
         <source>To use this software, you must accept the %1 that accompanies software updates.</source>
         <translation>Per usar aquest programari, heu d&apos;acceptar la %1 que acompanya les actualitzacions de programari.</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/updatectrlwidget.cpp" line="256"/>
+        <location filename="../src/dcc-update-plugin/window/updatectrlwidget.cpp" line="239"/>
+        <source>Current Edition</source>
+        <translation>Edició actual</translation>
+    </message>
+    <message>
+        <location filename="../src/dcc-update-plugin/window/updatectrlwidget.cpp" line="269"/>
         <source>Privacy Policy</source>
         <translation>Política de privadesa</translation>
     </message>
@@ -212,160 +212,158 @@
 <context>
     <name>dccV20::update::UpdateSettings</name>
     <message>
-        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="69"/>
+        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="70"/>
         <source>Switch it on to automatically download the updates in wireless or wired network</source>
         <translation>Activeu-ho per baixar automàticament les actualitzacions amb una xarxa amb fil o sense.</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="70"/>
+        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="71"/>
         <source>Join the internal testing channel to get deepin latest updates</source>
         <translation>Uniu-vos al canal de proves internes per rebre les darreres actualitzacions del Deepin.</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="73"/>
+        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="74"/>
         <source>Start at</source>
         <translation>Comença a</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="74"/>
+        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="75"/>
         <source>End at</source>
         <translation>Acaba a</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="85"/>
+        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="86"/>
         <source>Limit Speed</source>
         <translation>Límit de velocitat</translation>
         <extra-child_page>Update Settings</extra-child_page>
         <extra-contents_path>/update/Update Settings</extra-contents_path>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="88"/>
+        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="89"/>
         <source>Updates Notification</source>
         <translation>Notificació d&apos;actualitzacions</translation>
         <extra-child_page>Update Settings</extra-child_page>
         <extra-contents_path>/update/Update Settings</extra-contents_path>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="91"/>
+        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="92"/>
         <source>Auto Download Updates</source>
         <translation>Baixa automàticament les actualitzacions</translation>
         <extra-child_page>Update Settings</extra-child_page>
         <extra-contents_path>/update/Update Settings</extra-contents_path>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="94"/>
+        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="95"/>
         <source>Join Internal Testing Channel</source>
         <translation>Uniu-vos al canal de proves internes</translation>
         <extra-child_page>Update Settings</extra-child_page>
         <extra-contents_path>/update/Update Settings</extra-contents_path>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="97"/>
+        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="98"/>
         <source>Updates from Internal Testing Sources</source>
         <translation>Actualitzacions de fonts de proves internes</translation>
         <extra-child_page>Update Settings</extra-child_page>
         <extra-contents_path>/update/Update Settings</extra-contents_path>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="100"/>
+        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="101"/>
         <source>Download when Inactive</source>
         <translation>Baixa-les quan estigui inactiu</translation>
         <extra-child_page>Update Settings</extra-child_page>
         <extra-contents_path>/update/Update Settings</extra-contents_path>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="115"/>
+        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="116"/>
         <source>Update Settings</source>
         <translation>Configuració de l&apos;actualització</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="125"/>
+        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="126"/>
         <source>Other settings</source>
         <translation>Altres configuracions</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="185"/>
+        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="186"/>
         <source>Clear Package Cache</source>
         <translation>Neteja la cau de paquets</translation>
         <extra-child_page>Update Settings</extra-child_page>
         <extra-contents_path>/update/Update Settings</extra-contents_path>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="194"/>
+        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="195"/>
         <source>Transferring Cache</source>
         <translation>Transferència de memòria cau</translation>
         <extra-child_page>Update Settings</extra-child_page>
         <extra-contents_path>/update/Update Settings</extra-contents_path>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="196"/>
+        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="197"/>
         <source>Enable this option to transfer updates to computers that are locally connected to the network to speed up the download of updates to other computers.</source>
         <translation>Activeu aquesta opció per transferir actualitzacions a ordinadors connectats localment a la xarxa per accelerar la descàrrega d&apos;actualitzacions a altres ordinadors.</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="211"/>
+        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="212"/>
         <source>System Repository Detection</source>
         <translation>Detecció de repositoris del sistema</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="214"/>
+        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="215"/>
         <source>Show a notification if system update repository has been modified</source>
         <translation>Mostra una notificació si s&apos;ha modificat el repositori d&apos;actualització del sistema.</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="223"/>
+        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="224"/>
         <source>Smart Mirror Switch</source>
         <translation>Canvi de rèplica intel·ligent</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="227"/>
+        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="228"/>
         <source>Switch it on to connect to the quickest mirror site automatically</source>
         <translation>Activeu-ho per connectar amb la rèplica del lloc més ràpida automàticament.</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="234"/>
+        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="235"/>
         <source>Mirror List</source>
         <translation>Llista de rèpliques</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="270"/>
+        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="272"/>
         <source>Update History</source>
         <translation>Historial d&apos;actualitzacions</translation>
-        <extra-child_page>Update Settings</extra-child_page>
-        <extra-contents_path>/update/Update Settings</extra-contents_path>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="401"/>
+        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="394"/>
         <source>Only numbers between 1-99999 are allowed</source>
         <translation>Només es permeten números entre 1 i 99999.</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="526"/>
+        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="519"/>
         <source>here</source>
         <translation>aquí</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="527"/>
+        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="520"/>
         <source>Click %1 to complete the application</source>
         <translation>Cliqueu a %1 per completar la sol·licitud.</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="568"/>
+        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="561"/>
         <source>Checking system versions, please wait...</source>
         <translation>Es comproven les versions del sistema. Espereu, si us plau...</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="595"/>
+        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="588"/>
         <source>If you leave the internal testing channel now, you may not be able to get the latest bug fixes and updates. Please leave after the official version is released to keep your system stable!</source>
         <translation>Si deixeu ara el canal de proves intern, és possible que no pugueu obtenir les darreres correccions d&apos;errors i actualitzacions. Si us plau, abandoneu-lo després que es publiqui la versió oficial per poder mantenir el sistema estable!</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="597"/>
+        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="590"/>
         <source>Leave</source>
         <translation>Surt</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="598"/>
+        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="591"/>
         <source>Cancel</source>
         <translation>Cancel·la</translation>
     </message>
@@ -373,37 +371,37 @@
 <context>
     <name>dccV20::update::UpdateStatusItem</name>
     <message>
-        <location filename="../src/dcc-update-plugin/window/widgets/updatestatusitem.cpp" line="144"/>
+        <location filename="../src/dcc-update-plugin/window/widgets/updatestatusitem.cpp" line="146"/>
         <source>Your system is up to date</source>
         <translation>El sistema està actualitzat.</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/widgets/updatestatusitem.cpp" line="147"/>
+        <location filename="../src/dcc-update-plugin/window/widgets/updatestatusitem.cpp" line="149"/>
         <source>Check for Updates</source>
         <translation>Comprova si hi ha actualitzacions</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/widgets/updatestatusitem.cpp" line="155"/>
+        <location filename="../src/dcc-update-plugin/window/widgets/updatestatusitem.cpp" line="157"/>
         <source>Checking for updates, please wait...</source>
         <translation>Es comprova si hi ha actualitzacions. Espereu, si us plau..</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/widgets/updatestatusitem.cpp" line="164"/>
+        <location filename="../src/dcc-update-plugin/window/widgets/updatestatusitem.cpp" line="166"/>
         <source>Turn on the switches under Update Content to get better experiences</source>
         <translation>Activeu els interruptors a Actualitza el contingut per obtenir-ne millor experiència.</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/widgets/updatestatusitem.cpp" line="177"/>
+        <location filename="../src/dcc-update-plugin/window/widgets/updatestatusitem.cpp" line="179"/>
         <source>Last check: </source>
         <translation>Darrera comprovació: </translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/widgets/updatestatusitem.cpp" line="184"/>
+        <location filename="../src/dcc-update-plugin/window/widgets/updatestatusitem.cpp" line="186"/>
         <source>Check Again</source>
         <translation>Torna-ho a comprovar</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/widgets/updatestatusitem.cpp" line="186"/>
+        <location filename="../src/dcc-update-plugin/window/widgets/updatestatusitem.cpp" line="188"/>
         <source>Failed to check for updates</source>
         <translation>Ha fallat comprovar si hi ha actualitzacions.</translation>
     </message>
@@ -475,27 +473,27 @@
     </message>
     <message>
         <location filename="../src/dcc-update-plugin/window/widgets/update-history/historyupdateitem.cpp" line="107"/>
-        <location filename="../src/dcc-update-plugin/window/widgets/update-history/historyupdateitem.cpp" line="144"/>
+        <location filename="../src/dcc-update-plugin/window/widgets/update-history/historyupdateitem.cpp" line="145"/>
         <source>Fixed some known bugs and security vulnerabilities</source>
         <translation>S&apos;han corregit alguns errors coneguts i vulnerabilitats de seguretat.</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/widgets/update-history/historyupdateitem.cpp" line="140"/>
+        <location filename="../src/dcc-update-plugin/window/widgets/update-history/historyupdateitem.cpp" line="141"/>
         <source>System Updates</source>
         <translation>Actualitzacions del sistema</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/widgets/update-history/historyupdateitem.cpp" line="158"/>
+        <location filename="../src/dcc-update-plugin/window/widgets/update-history/historyupdateitem.cpp" line="161"/>
         <source>Version: </source>
         <translation>Versió:</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/widgets/update-history/historyupdateitem.cpp" line="158"/>
+        <location filename="../src/dcc-update-plugin/window/widgets/update-history/historyupdateitem.cpp" line="161"/>
         <source>Server</source>
         <translation>Servidor</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/widgets/update-history/historyupdateitem.cpp" line="158"/>
+        <location filename="../src/dcc-update-plugin/window/widgets/update-history/historyupdateitem.cpp" line="161"/>
         <source>Desktop</source>
         <translation>Escriptori</translation>
     </message>
@@ -803,19 +801,19 @@
     <message>
         <location filename="../src/dcc-update-plugin/module/updateloghelper.cpp" line="52"/>
         <source>%1 of %2 %3</source>
-        <translation type="unfinished"/>
+        <translation>%1 de %2 %3</translation>
         <extra-content_explain>`数字+%`会在代码中替换为字符串，例如：3 of high-risk vulnerabilities；各语言需要根据实际情况增加空格(例如：中文没有空格，英文有空格)</extra-content_explain>
     </message>
     <message>
         <location filename="../src/dcc-update-plugin/module/updateloghelper.cpp" line="54"/>
         <source>, </source>
-        <translation type="unfinished"/>
+        <translation>, </translation>
         <extra-content_explain>中文逗号不需要空格，英文逗号需要空格For more details, please visit</extra-content_explain>
     </message>
     <message>
         <location filename="../src/dcc-update-plugin/module/updateloghelper.cpp" line="58"/>
         <source>for more details, please visit </source>
-        <translation type="unfinished"/>
+        <translation>per a més detalls, consulteu</translation>
         <extra-content_explain>这句话后面会带上一个超链接，各语言自行决定末尾需不需要加空格</extra-content_explain>
     </message>
 </context>
@@ -906,7 +904,7 @@
         <translation>Escriptori</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/widgets/updatesettingitem.cpp" line="172"/>
+        <location filename="../src/dcc-update-plugin/window/widgets/updatesettingitem.cpp" line="168"/>
         <source>Version</source>
         <translation>Versió</translation>
     </message>
@@ -914,23 +912,23 @@
 <context>
     <name>dcc::update::UpdateWorker</name>
     <message>
-        <location filename="../src/dcc-update-plugin/module/updatework.cpp" line="405"/>
+        <location filename="../src/dcc-update-plugin/module/updatework.cpp" line="403"/>
         <source>System Updates</source>
         <translation>Actualitzacions del sistema</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/module/updatework.cpp" line="406"/>
-        <location filename="../src/dcc-update-plugin/module/updatework.cpp" line="415"/>
+        <location filename="../src/dcc-update-plugin/module/updatework.cpp" line="404"/>
+        <location filename="../src/dcc-update-plugin/module/updatework.cpp" line="413"/>
         <source>Fixed some known bugs and security vulnerabilities</source>
         <translation>S&apos;han corregit alguns errors coneguts i vulnerabilitats de seguretat.</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/module/updatework.cpp" line="414"/>
+        <location filename="../src/dcc-update-plugin/module/updatework.cpp" line="412"/>
         <source>Security Updates</source>
         <translation>Actualitzacions de seguretat</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/module/updatework.cpp" line="423"/>
+        <location filename="../src/dcc-update-plugin/module/updatework.cpp" line="421"/>
         <source>Third-party Repositories</source>
         <translation>Repositoris de tercers</translation>
     </message>

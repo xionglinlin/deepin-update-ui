@@ -2,40 +2,40 @@
 <context>
     <name>CheckProgressWidget</name>
     <message>
-        <location filename="../src/dde-update/checksystemwidget.cpp" line="54"/>
+        <location filename="../src/dde-update/checksystemwidget.cpp" line="56"/>
         <source>The check is almost complete, thank you for your patience</source>
-        <translation type="unfinished"/>
+        <translation>Provjera je gotovo završena, hvala vam na strpljenju</translation>
     </message>
     <message>
-        <location filename="../src/dde-update/checksystemwidget.cpp" line="69"/>
+        <location filename="../src/dde-update/checksystemwidget.cpp" line="71"/>
         <source>Preparing</source>
-        <translation type="unfinished"/>
+        <translation>Pripremanje</translation>
     </message>
 </context>
 <context>
     <name>ErrorFrame</name>
     <message>
-        <location filename="../src/dde-update/checksystemwidget.cpp" line="208"/>
+        <location filename="../src/dde-update/checksystemwidget.cpp" line="222"/>
         <source>Checked for some errors</source>
-        <translation type="unfinished"/>
+        <translation>Provjereno za neke greške</translation>
     </message>
 </context>
 <context>
     <name>SuccessFrame</name>
     <message>
-        <location filename="../src/dde-update/checksystemwidget.cpp" line="145"/>
+        <location filename="../src/dde-update/checksystemwidget.cpp" line="132"/>
         <source>Go to Desktop</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../src/dde-update/checksystemwidget.cpp" line="147"/>
+        <location filename="../src/dde-update/checksystemwidget.cpp" line="134"/>
         <source>Welcome, system updated successfully</source>
-        <translation type="unfinished"/>
+        <translation>Dobrodošli, sustav je uspješno ažuriran</translation>
     </message>
     <message>
-        <location filename="../src/dde-update/checksystemwidget.cpp" line="149"/>
+        <location filename="../src/dde-update/checksystemwidget.cpp" line="136"/>
         <source>Current Edition:</source>
-        <translation type="unfinished"/>
+        <translation>Trenutno izdanje:</translation>
     </message>
 </context>
 <context>
@@ -48,7 +48,7 @@
     <message>
         <location filename="../src/dde-update/updatewidget.cpp" line="264"/>
         <source>Updates successful</source>
-        <translation type="unfinished"/>
+        <translation>Uspješno ažurirano</translation>
     </message>
     <message>
         <location filename="../src/dde-update/updatewidget.cpp" line="269"/>
@@ -58,6 +58,16 @@
     <message>
         <location filename="../src/dde-update/updatewidget.cpp" line="269"/>
         <source>Your computer will be turned off soon %1</source>
+        <translation>Vaše će se računalo isključiti uskoro %1</translation>
+    </message>
+    <message>
+        <location filename="../src/dde-update/updatewidget.cpp" line="295"/>
+        <source>The automatic reboot process has failed. Please try to manually reboot your device.</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/dde-update/updatewidget.cpp" line="296"/>
+        <source>The automatic shutdown process has failed. Please try to manually shut down your device.</source>
         <translation type="unfinished"/>
     </message>
 </context>
@@ -78,13 +88,13 @@
         <location filename="../src/dde-update/updatemodel.cpp" line="91"/>
         <location filename="../src/dde-update/updatemodel.cpp" line="92"/>
         <source>Update failed</source>
-        <translation type="unfinished"/>
+        <translation>Neuspjelo ažuriranje</translation>
     </message>
     <message>
         <location filename="../src/dde-update/updatemodel.cpp" line="84"/>
         <location filename="../src/dde-update/updatemodel.cpp" line="88"/>
         <source>Unknown error</source>
-        <translation type="unfinished"/>
+        <translation>Nepoznata greška</translation>
     </message>
     <message>
         <location filename="../src/dde-update/updatemodel.cpp" line="85"/>
@@ -103,7 +113,7 @@
         <location filename="../src/dde-update/updatemodel.cpp" line="86"/>
         <location filename="../src/dde-update/updatemodel.cpp" line="90"/>
         <source>Insufficient disk space. Please clean up your disk and try again.</source>
-        <translation type="unfinished"/>
+        <translation>Nedovoljno prostora na disku. Molim očistite disk i pokušajte ponovno.</translation>
     </message>
     <message>
         <location filename="../src/dde-update/updatemodel.cpp" line="87"/>
@@ -123,7 +133,7 @@
     <message>
         <location filename="../src/dde-update/updatemodel.cpp" line="92"/>
         <source>DPKG error</source>
-        <translation type="unfinished"/>
+        <translation>DPKG greška</translation>
     </message>
     <message>
         <location filename="../src/dde-update/updatemodel.cpp" line="116"/>
@@ -133,7 +143,7 @@
     <message>
         <location filename="../src/dde-update/updatemodel.cpp" line="117"/>
         <source>Abort</source>
-        <translation type="unfinished"/>
+        <translation>Odustani</translation>
     </message>
     <message>
         <location filename="../src/dde-update/updatemodel.cpp" line="118"/>
@@ -143,12 +153,12 @@
     <message>
         <location filename="../src/dde-update/updatemodel.cpp" line="119"/>
         <source>Reboot</source>
-        <translation type="unfinished"/>
+        <translation>Ponovno podigni sustav</translation>
     </message>
     <message>
         <location filename="../src/dde-update/updatemodel.cpp" line="120"/>
         <source>Shut Down</source>
-        <translation type="unfinished"/>
+        <translation>Isključi</translation>
     </message>
     <message>
         <location filename="../src/dde-update/updatemodel.cpp" line="121"/>
@@ -161,7 +171,7 @@
     <message>
         <location filename="../src/dde-update/updatewidget.cpp" line="88"/>
         <source>Preparing for updates…</source>
-        <translation type="unfinished"/>
+        <translation>Priprema za dopune...</translation>
     </message>
 </context>
 <context>

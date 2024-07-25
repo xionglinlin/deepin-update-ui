@@ -54,17 +54,17 @@
 <context>
     <name>dccV20::update::UpdateCtrlWidget</name>
     <message>
-        <location filename="../src/dcc-update-plugin/window/updatectrlwidget.cpp" line="87"/>
-        <source>Current Edition</source>
-        <translation>Huidige versie</translation>
-    </message>
-    <message>
-        <location filename="../src/dcc-update-plugin/window/updatectrlwidget.cpp" line="98"/>
+        <location filename="../src/dcc-update-plugin/window/updatectrlwidget.cpp" line="97"/>
         <source>To use this software, you must accept the %1 that accompanies software updates.</source>
         <translation>Om deze software te kunnen gebruiken, dien je akkoord te gaan met het %1 omtrent software-updates.</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/updatectrlwidget.cpp" line="256"/>
+        <location filename="../src/dcc-update-plugin/window/updatectrlwidget.cpp" line="239"/>
+        <source>Current Edition</source>
+        <translation>Huidige versie</translation>
+    </message>
+    <message>
+        <location filename="../src/dcc-update-plugin/window/updatectrlwidget.cpp" line="269"/>
         <source>Privacy Policy</source>
         <translation>Privacybeleid</translation>
     </message>
@@ -212,160 +212,158 @@
 <context>
     <name>dccV20::update::UpdateSettings</name>
     <message>
-        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="69"/>
+        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="70"/>
         <source>Switch it on to automatically download the updates in wireless or wired network</source>
         <translation>Schakel in om automatisch updates te downloaden via bekabelde of draadloze verbindingen</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="70"/>
+        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="71"/>
         <source>Join the internal testing channel to get deepin latest updates</source>
         <translation>Schakel het interne testkanaal in om de nieuwste Deepin-updates te ontvangen</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="73"/>
+        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="74"/>
         <source>Start at</source>
         <translation>Beginnen bij</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="74"/>
+        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="75"/>
         <source>End at</source>
         <translation>Eindigen bij</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="85"/>
+        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="86"/>
         <source>Limit Speed</source>
         <translation>Snelheid beperken</translation>
         <extra-child_page>Update Settings</extra-child_page>
         <extra-contents_path>/update/Update Settings</extra-contents_path>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="88"/>
+        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="89"/>
         <source>Updates Notification</source>
         <translation>Updatemeldingen tonen</translation>
         <extra-child_page>Update Settings</extra-child_page>
         <extra-contents_path>/update/Update Settings</extra-contents_path>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="91"/>
+        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="92"/>
         <source>Auto Download Updates</source>
         <translation>Updates automatisch downloaden</translation>
         <extra-child_page>Update Settings</extra-child_page>
         <extra-contents_path>/update/Update Settings</extra-contents_path>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="94"/>
+        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="95"/>
         <source>Join Internal Testing Channel</source>
         <translation>Intern testkanaal inschakelen</translation>
         <extra-child_page>Update Settings</extra-child_page>
         <extra-contents_path>/update/Update Settings</extra-contents_path>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="97"/>
+        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="98"/>
         <source>Updates from Internal Testing Sources</source>
         <translation>Updates uit interne testbronnen</translation>
         <extra-child_page>Update Settings</extra-child_page>
         <extra-contents_path>/update/Update Settings</extra-contents_path>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="100"/>
+        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="101"/>
         <source>Download when Inactive</source>
         <translation>Downloaden bij inactiviteit</translation>
         <extra-child_page>Update Settings</extra-child_page>
         <extra-contents_path>/update/Update Settings</extra-contents_path>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="115"/>
+        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="116"/>
         <source>Update Settings</source>
         <translation>Update-instellingen</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="125"/>
+        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="126"/>
         <source>Other settings</source>
         <translation>Overige instellingen</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="185"/>
+        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="186"/>
         <source>Clear Package Cache</source>
         <translation>Pakketcache legen</translation>
         <extra-child_page>Update Settings</extra-child_page>
         <extra-contents_path>/update/Update Settings</extra-contents_path>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="194"/>
+        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="195"/>
         <source>Transferring Cache</source>
         <translation>Bezig met overdracht van cache…</translation>
         <extra-child_page>Update Settings</extra-child_page>
         <extra-contents_path>/update/Update Settings</extra-contents_path>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="196"/>
+        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="197"/>
         <source>Enable this option to transfer updates to computers that are locally connected to the network to speed up the download of updates to other computers.</source>
         <translation>Schakel in om updates over het lokale netwerk te verspreiden. Hierdoor wordt het aantal updates op andere computers verlaagd.</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="211"/>
+        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="212"/>
         <source>System Repository Detection</source>
         <translation>Systeempakketbrondetectie</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="214"/>
+        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="215"/>
         <source>Show a notification if system update repository has been modified</source>
         <translation>Melding tonen als een systeempakketbron is aangepast</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="223"/>
+        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="224"/>
         <source>Smart Mirror Switch</source>
         <translation>Slimme spiegelserverschakelaar</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="227"/>
+        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="228"/>
         <source>Switch it on to connect to the quickest mirror site automatically</source>
         <translation>Schakel in om automatisch de snelste spiegelserver te gebruiken</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="234"/>
+        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="235"/>
         <source>Mirror List</source>
         <translation>Spiegelserverlijst</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="270"/>
+        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="272"/>
         <source>Update History</source>
         <translation>Updategeschiedenis</translation>
-        <extra-child_page>Update Settings</extra-child_page>
-        <extra-contents_path>/update/Update Settings</extra-contents_path>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="401"/>
+        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="394"/>
         <source>Only numbers between 1-99999 are allowed</source>
         <translation>Alleen getallen tussen de 1 en 99999 zijn toegestaan</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="526"/>
+        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="519"/>
         <source>here</source>
         <translation>hier</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="527"/>
+        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="520"/>
         <source>Click %1 to complete the application</source>
         <translation>Klik op %1 om te voltooien</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="568"/>
+        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="561"/>
         <source>Checking system versions, please wait...</source>
         <translation>Bezig met controleren van systeemversies…</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="595"/>
+        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="588"/>
         <source>If you leave the internal testing channel now, you may not be able to get the latest bug fixes and updates. Please leave after the official version is released to keep your system stable!</source>
         <translation>Als je het interne testkanaal uitschakelt, dan ontvang je mogelijk niet de nieuwste foutoplossings- en andere updates. Schakel het kanaal wél uit na de uitgave van de officiële versie om je systeem stabiel te laten draaien!</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="597"/>
+        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="590"/>
         <source>Leave</source>
         <translation>Uitschakelen</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="598"/>
+        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="591"/>
         <source>Cancel</source>
         <translation>Annuleren</translation>
     </message>
@@ -373,37 +371,37 @@
 <context>
     <name>dccV20::update::UpdateStatusItem</name>
     <message>
-        <location filename="../src/dcc-update-plugin/window/widgets/updatestatusitem.cpp" line="144"/>
+        <location filename="../src/dcc-update-plugin/window/widgets/updatestatusitem.cpp" line="146"/>
         <source>Your system is up to date</source>
         <translation>Je beschikt over de nieuwste versies</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/widgets/updatestatusitem.cpp" line="147"/>
+        <location filename="../src/dcc-update-plugin/window/widgets/updatestatusitem.cpp" line="149"/>
         <source>Check for Updates</source>
         <translation>Controleren op updates</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/widgets/updatestatusitem.cpp" line="155"/>
+        <location filename="../src/dcc-update-plugin/window/widgets/updatestatusitem.cpp" line="157"/>
         <source>Checking for updates, please wait...</source>
         <translation>Bezig met controleren op updates…</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/widgets/updatestatusitem.cpp" line="164"/>
+        <location filename="../src/dcc-update-plugin/window/widgets/updatestatusitem.cpp" line="166"/>
         <source>Turn on the switches under Update Content to get better experiences</source>
         <translation>Schakel de opties onder ‘Update-inhoud’ in om de gebruikservaring te verbeteren</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/widgets/updatestatusitem.cpp" line="177"/>
+        <location filename="../src/dcc-update-plugin/window/widgets/updatestatusitem.cpp" line="179"/>
         <source>Last check: </source>
         <translation>Recentste controle:</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/widgets/updatestatusitem.cpp" line="184"/>
+        <location filename="../src/dcc-update-plugin/window/widgets/updatestatusitem.cpp" line="186"/>
         <source>Check Again</source>
         <translation>Opnieuw controleren</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/widgets/updatestatusitem.cpp" line="186"/>
+        <location filename="../src/dcc-update-plugin/window/widgets/updatestatusitem.cpp" line="188"/>
         <source>Failed to check for updates</source>
         <translation>De controle is mislukt</translation>
     </message>
@@ -475,27 +473,27 @@
     </message>
     <message>
         <location filename="../src/dcc-update-plugin/window/widgets/update-history/historyupdateitem.cpp" line="107"/>
-        <location filename="../src/dcc-update-plugin/window/widgets/update-history/historyupdateitem.cpp" line="144"/>
+        <location filename="../src/dcc-update-plugin/window/widgets/update-history/historyupdateitem.cpp" line="145"/>
         <source>Fixed some known bugs and security vulnerabilities</source>
         <translation>Opgelost: enkele gemelde bugs en beveiligingsproblemen</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/widgets/update-history/historyupdateitem.cpp" line="140"/>
+        <location filename="../src/dcc-update-plugin/window/widgets/update-history/historyupdateitem.cpp" line="141"/>
         <source>System Updates</source>
         <translation>Systeemupdates</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/widgets/update-history/historyupdateitem.cpp" line="158"/>
+        <location filename="../src/dcc-update-plugin/window/widgets/update-history/historyupdateitem.cpp" line="161"/>
         <source>Version: </source>
         <translation>Versie:</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/widgets/update-history/historyupdateitem.cpp" line="158"/>
+        <location filename="../src/dcc-update-plugin/window/widgets/update-history/historyupdateitem.cpp" line="161"/>
         <source>Server</source>
         <translation>Server</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/widgets/update-history/historyupdateitem.cpp" line="158"/>
+        <location filename="../src/dcc-update-plugin/window/widgets/update-history/historyupdateitem.cpp" line="161"/>
         <source>Desktop</source>
         <translation>Computer</translation>
     </message>
@@ -875,7 +873,7 @@
     <message>
         <location filename="../src/dcc-update-plugin/module/updatemodel.cpp" line="470"/>
         <source>Service connection is abnormal, please check the network and try again</source>
-        <translation>Er is een probleem met verbinding. Controleer het netwerk en probeer het opnieuw.</translation>
+        <translation>Er is een probleem met de verbinding. Controleer het netwerk en probeer het opnieuw.</translation>
     </message>
     <message>
         <location filename="../src/dcc-update-plugin/module/updatemodel.cpp" line="471"/>
@@ -906,7 +904,7 @@
         <translation>Computer</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/widgets/updatesettingitem.cpp" line="172"/>
+        <location filename="../src/dcc-update-plugin/window/widgets/updatesettingitem.cpp" line="168"/>
         <source>Version</source>
         <translation>Versie</translation>
     </message>
@@ -914,23 +912,23 @@
 <context>
     <name>dcc::update::UpdateWorker</name>
     <message>
-        <location filename="../src/dcc-update-plugin/module/updatework.cpp" line="405"/>
+        <location filename="../src/dcc-update-plugin/module/updatework.cpp" line="403"/>
         <source>System Updates</source>
         <translation>Systeemupdates</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/module/updatework.cpp" line="406"/>
-        <location filename="../src/dcc-update-plugin/module/updatework.cpp" line="415"/>
+        <location filename="../src/dcc-update-plugin/module/updatework.cpp" line="404"/>
+        <location filename="../src/dcc-update-plugin/module/updatework.cpp" line="413"/>
         <source>Fixed some known bugs and security vulnerabilities</source>
         <translation>Er zijn enkele gemelde bugs en beveiligingsproblemen opgelost</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/module/updatework.cpp" line="414"/>
+        <location filename="../src/dcc-update-plugin/module/updatework.cpp" line="412"/>
         <source>Security Updates</source>
         <translation>Beveiligingsupdates</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/module/updatework.cpp" line="423"/>
+        <location filename="../src/dcc-update-plugin/module/updatework.cpp" line="421"/>
         <source>Third-party Repositories</source>
         <translation>Externe pakketbronnen</translation>
     </message>

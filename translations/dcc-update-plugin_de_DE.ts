@@ -9,7 +9,7 @@
     <message>
         <location filename="../src/dcc-update-plugin/window/widgets/mirrorsourceitem.cpp" line="84"/>
         <source>Timeout</source>
-        <translation type="unfinished"/>
+        <translation>Zeitüberschreitung</translation>
     </message>
     <message>
         <location filename="../src/dcc-update-plugin/window/widgets/mirrorsourceitem.cpp" line="86"/>
@@ -54,17 +54,17 @@
 <context>
     <name>dccV20::update::UpdateCtrlWidget</name>
     <message>
-        <location filename="../src/dcc-update-plugin/window/updatectrlwidget.cpp" line="87"/>
-        <source>Current Edition</source>
-        <translation>Aktuelle Edition</translation>
-    </message>
-    <message>
-        <location filename="../src/dcc-update-plugin/window/updatectrlwidget.cpp" line="98"/>
+        <location filename="../src/dcc-update-plugin/window/updatectrlwidget.cpp" line="97"/>
         <source>To use this software, you must accept the %1 that accompanies software updates.</source>
         <translation>Um diese Softwäre verwenden zu können, müssen Sie %1 akzeptieren, die dem Update beiliegt</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/updatectrlwidget.cpp" line="256"/>
+        <location filename="../src/dcc-update-plugin/window/updatectrlwidget.cpp" line="239"/>
+        <source>Current Edition</source>
+        <translation>Aktuelle Edition</translation>
+    </message>
+    <message>
+        <location filename="../src/dcc-update-plugin/window/updatectrlwidget.cpp" line="269"/>
         <source>Privacy Policy</source>
         <translation>Datenschutzerklärung</translation>
     </message>
@@ -175,13 +175,13 @@
         <location filename="../src/dcc-update-plugin/updatemodule.cpp" line="289"/>
         <location filename="../src/dcc-update-plugin/updatemodule.cpp" line="342"/>
         <source>Update History</source>
-        <translation type="unfinished"/>
+        <translation>Aktualisierungs-Chronik</translation>
     </message>
     <message>
         <location filename="../src/dcc-update-plugin/updatemodule.cpp" line="290"/>
         <location filename="../src/dcc-update-plugin/updatemodule.cpp" line="344"/>
         <source>Transferring Cache</source>
-        <translation type="unfinished"/>
+        <translation>Übertragungszwischenspeicher</translation>
     </message>
     <message>
         <location filename="../src/dcc-update-plugin/updatemodule.cpp" line="297"/>
@@ -206,166 +206,164 @@
     <message>
         <location filename="../src/dcc-update-plugin/updatemodule.cpp" line="361"/>
         <source>Check for updates, Update settings</source>
-        <translation type="unfinished"/>
+        <translation>Auf Aktualisierungen prüfen, Einstellungen aktualisieren</translation>
     </message>
 </context>
 <context>
     <name>dccV20::update::UpdateSettings</name>
     <message>
-        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="69"/>
+        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="70"/>
         <source>Switch it on to automatically download the updates in wireless or wired network</source>
         <translation>Anschalten um die Updates automatisch in WLAN- oder LAN-Umgebungen herunterzuladen.</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="70"/>
+        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="71"/>
         <source>Join the internal testing channel to get deepin latest updates</source>
         <translation>Dem Intern-Test-Kanal beitreten um Deepin-latest-Updates zu erhalten</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="73"/>
+        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="74"/>
         <source>Start at</source>
         <translation>Beginn um</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="74"/>
+        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="75"/>
         <source>End at</source>
         <translation>Ende um</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="85"/>
+        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="86"/>
         <source>Limit Speed</source>
         <translation>Geschwindigkeitsbegrenzung</translation>
         <extra-child_page>Update Settings</extra-child_page>
         <extra-contents_path>/update/Update Settings</extra-contents_path>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="88"/>
+        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="89"/>
         <source>Updates Notification</source>
         <translation>Updates-Benachrichtigung</translation>
         <extra-child_page>Update Settings</extra-child_page>
         <extra-contents_path>/update/Update Settings</extra-contents_path>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="91"/>
+        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="92"/>
         <source>Auto Download Updates</source>
         <translation>Automatik-Download-Updates</translation>
         <extra-child_page>Update Settings</extra-child_page>
         <extra-contents_path>/update/Update Settings</extra-contents_path>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="94"/>
+        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="95"/>
         <source>Join Internal Testing Channel</source>
         <translation>Trete dem Intern-Test-Kanal bei</translation>
         <extra-child_page>Update Settings</extra-child_page>
         <extra-contents_path>/update/Update Settings</extra-contents_path>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="97"/>
+        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="98"/>
         <source>Updates from Internal Testing Sources</source>
         <translation>Updates von Intern-Test-Quellen</translation>
         <extra-child_page>Update Settings</extra-child_page>
         <extra-contents_path>/update/Update Settings</extra-contents_path>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="100"/>
+        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="101"/>
         <source>Download when Inactive</source>
         <translation>Herunterladen, wenn inaktiv</translation>
         <extra-child_page>Update Settings</extra-child_page>
         <extra-contents_path>/update/Update Settings</extra-contents_path>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="115"/>
+        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="116"/>
         <source>Update Settings</source>
         <translation>Update-Einstellungen</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="125"/>
+        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="126"/>
         <source>Other settings</source>
         <translation>Weitere Einstellungen</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="185"/>
+        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="186"/>
         <source>Clear Package Cache</source>
         <translation>Paket-Cache-Speicher leeren</translation>
         <extra-child_page>Update Settings</extra-child_page>
         <extra-contents_path>/update/Update Settings</extra-contents_path>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="194"/>
+        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="195"/>
         <source>Transferring Cache</source>
-        <translation type="unfinished"/>
+        <translation>Übertragungszwischenspeicher</translation>
         <extra-child_page>Update Settings</extra-child_page>
         <extra-contents_path>/update/Update Settings</extra-contents_path>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="196"/>
+        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="197"/>
         <source>Enable this option to transfer updates to computers that are locally connected to the network to speed up the download of updates to other computers.</source>
-        <translation type="unfinished"/>
+        <translation>Diese Option anklicken, um Aktualisierungen auf Computer zu übertragen, die lokal im Netzwerk eingebunden sind, um die Aktualisierungen auf diesen zu beschleunigen.</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="211"/>
+        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="212"/>
         <source>System Repository Detection</source>
         <translation>Systemrepositorium-Erkennung</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="214"/>
+        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="215"/>
         <source>Show a notification if system update repository has been modified</source>
         <translation>Benachrichtigen, wenn das System-Update-Repositorium geändert wurde</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="223"/>
+        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="224"/>
         <source>Smart Mirror Switch</source>
         <translation>Smartes Wechseln des Spiegelservers</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="227"/>
+        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="228"/>
         <source>Switch it on to connect to the quickest mirror site automatically</source>
         <translation>Anschalten um automatisch zum schnellsten Spiegelserver zu wechseln</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="234"/>
+        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="235"/>
         <source>Mirror List</source>
         <translation>Spiegelserver-Liste</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="270"/>
+        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="272"/>
         <source>Update History</source>
-        <translation type="unfinished"/>
-        <extra-child_page>Update Settings</extra-child_page>
-        <extra-contents_path>/update/Update Settings</extra-contents_path>
+        <translation>Aktualisierungs-Chronik</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="401"/>
+        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="394"/>
         <source>Only numbers between 1-99999 are allowed</source>
         <translation>Nur Zahlen zwischen 1-99999sind erlaubt</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="526"/>
+        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="519"/>
         <source>here</source>
         <translation>hier</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="527"/>
+        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="520"/>
         <source>Click %1 to complete the application</source>
         <translation>Klicken Sie %1 um die Einstellungen abzuschließen</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="568"/>
+        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="561"/>
         <source>Checking system versions, please wait...</source>
         <translation>Systemversion wird gecheckt, einen Moment bitte…</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="595"/>
+        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="588"/>
         <source>If you leave the internal testing channel now, you may not be able to get the latest bug fixes and updates. Please leave after the official version is released to keep your system stable!</source>
         <translation>Wenn Sie den Intern-Test-Kanal jetzt verlassen, bekommen Sie keine neuesten Fehlerbehebungen und Updates mehr. Bitte warten Sie damit, bis die offizielle Version erschienen ist um ihr System stabil zu halten!</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="597"/>
+        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="590"/>
         <source>Leave</source>
         <translation>Verlassen</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="598"/>
+        <location filename="../src/dcc-update-plugin/window/updatesettings.cpp" line="591"/>
         <source>Cancel</source>
         <translation>Abbrechen</translation>
     </message>
@@ -373,39 +371,39 @@
 <context>
     <name>dccV20::update::UpdateStatusItem</name>
     <message>
-        <location filename="../src/dcc-update-plugin/window/widgets/updatestatusitem.cpp" line="144"/>
+        <location filename="../src/dcc-update-plugin/window/widgets/updatestatusitem.cpp" line="146"/>
         <source>Your system is up to date</source>
         <translation>Ihr System ist auf dem neuesten Stand</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/widgets/updatestatusitem.cpp" line="147"/>
+        <location filename="../src/dcc-update-plugin/window/widgets/updatestatusitem.cpp" line="149"/>
         <source>Check for Updates</source>
         <translation>Auf Updates prüfen</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/widgets/updatestatusitem.cpp" line="155"/>
+        <location filename="../src/dcc-update-plugin/window/widgets/updatestatusitem.cpp" line="157"/>
         <source>Checking for updates, please wait...</source>
         <translation>Letzte Überprüfung</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/widgets/updatestatusitem.cpp" line="164"/>
+        <location filename="../src/dcc-update-plugin/window/widgets/updatestatusitem.cpp" line="166"/>
         <source>Turn on the switches under Update Content to get better experiences</source>
         <translation>Für eine Verbesserung setzen Sie die Häkchen unter Update-Inhalt </translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/widgets/updatestatusitem.cpp" line="177"/>
+        <location filename="../src/dcc-update-plugin/window/widgets/updatestatusitem.cpp" line="179"/>
         <source>Last check: </source>
         <translation>Letzte Prüfung:</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/widgets/updatestatusitem.cpp" line="184"/>
+        <location filename="../src/dcc-update-plugin/window/widgets/updatestatusitem.cpp" line="186"/>
         <source>Check Again</source>
         <translation>Nochmals prüfen</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/widgets/updatestatusitem.cpp" line="186"/>
+        <location filename="../src/dcc-update-plugin/window/widgets/updatestatusitem.cpp" line="188"/>
         <source>Failed to check for updates</source>
-        <translation type="unfinished"/>
+        <translation>Überprüfung auf Updates schlug fehl</translation>
     </message>
 </context>
 <context>
@@ -413,31 +411,31 @@
     <message>
         <location filename="../src/dcc-update-plugin/window/updatewidget.cpp" line="46"/>
         <source>Check for Updates</source>
-        <translation type="unfinished"/>
+        <translation>Auf Updates prüfen</translation>
         <extra-child_page>Check for Updates</extra-child_page>
         <extra-contents_path>/update/Check for Updates</extra-contents_path>
     </message>
     <message>
         <location filename="../src/dcc-update-plugin/window/updatewidget.cpp" line="51"/>
         <source>Update Settings</source>
-        <translation type="unfinished"/>
+        <translation>Update-Einstellungen</translation>
         <extra-child_page>Update Settings</extra-child_page>
         <extra-contents_path>/update/Update Settings</extra-contents_path>
     </message>
     <message>
         <location filename="../src/dcc-update-plugin/window/updatewidget.cpp" line="63"/>
         <source>Last Update</source>
-        <translation type="unfinished"/>
+        <translation>Letztes Update</translation>
     </message>
     <message>
         <location filename="../src/dcc-update-plugin/window/updatewidget.cpp" line="126"/>
         <source>Return</source>
-        <translation type="unfinished"/>
+        <translation>Zurück</translation>
     </message>
     <message>
         <location filename="../src/dcc-update-plugin/window/updatewidget.cpp" line="183"/>
         <source>Update History</source>
-        <translation type="unfinished"/>
+        <translation>Chronik erneuern</translation>
     </message>
 </context>
 <context>
@@ -445,7 +443,7 @@
     <message>
         <location filename="../src/dcc-update-plugin/window/widgets/updatelogdialog.cpp" line="28"/>
         <source>Logs</source>
-        <translation type="unfinished"/>
+        <translation>Logs</translation>
     </message>
 </context>
 <context>
@@ -453,12 +451,12 @@
     <message>
         <location filename="../src/dcc-update-plugin/window/widgets/update-history/upgradehistorydialog.cpp" line="56"/>
         <source>Update History</source>
-        <translation type="unfinished"/>
+        <translation>Aktualisierungs-Chronik</translation>
     </message>
     <message>
         <location filename="../src/dcc-update-plugin/window/widgets/update-history/upgradehistorydialog.cpp" line="82"/>
         <source>No update history</source>
-        <translation type="unfinished"/>
+        <translation>Keine Aktualisierungs-Chronik</translation>
     </message>
 </context>
 <context>
@@ -466,38 +464,38 @@
     <message>
         <location filename="../src/dcc-update-plugin/window/widgets/update-history/historyupdateitem.cpp" line="99"/>
         <source>Installation date: </source>
-        <translation type="unfinished"/>
+        <translation>Installationsdatum:</translation>
     </message>
     <message>
         <location filename="../src/dcc-update-plugin/window/widgets/update-history/historyupdateitem.cpp" line="106"/>
         <source>Security Updates</source>
-        <translation type="unfinished"/>
+        <translation>Sicherheits-Aktualisierungen</translation>
     </message>
     <message>
         <location filename="../src/dcc-update-plugin/window/widgets/update-history/historyupdateitem.cpp" line="107"/>
-        <location filename="../src/dcc-update-plugin/window/widgets/update-history/historyupdateitem.cpp" line="144"/>
+        <location filename="../src/dcc-update-plugin/window/widgets/update-history/historyupdateitem.cpp" line="145"/>
         <source>Fixed some known bugs and security vulnerabilities</source>
-        <translation type="unfinished"/>
+        <translation>Einige Fehler und Sicherheitsrisiken beseitigt</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/widgets/update-history/historyupdateitem.cpp" line="140"/>
+        <location filename="../src/dcc-update-plugin/window/widgets/update-history/historyupdateitem.cpp" line="141"/>
         <source>System Updates</source>
-        <translation type="unfinished"/>
+        <translation>System-Aktualisierungen</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/widgets/update-history/historyupdateitem.cpp" line="158"/>
+        <location filename="../src/dcc-update-plugin/window/widgets/update-history/historyupdateitem.cpp" line="161"/>
         <source>Version: </source>
-        <translation type="unfinished"/>
+        <translation>Version:</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/widgets/update-history/historyupdateitem.cpp" line="158"/>
+        <location filename="../src/dcc-update-plugin/window/widgets/update-history/historyupdateitem.cpp" line="161"/>
         <source>Server</source>
-        <translation type="unfinished"/>
+        <translation>Server</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/widgets/update-history/historyupdateitem.cpp" line="158"/>
+        <location filename="../src/dcc-update-plugin/window/widgets/update-history/historyupdateitem.cpp" line="161"/>
         <source>Desktop</source>
-        <translation type="unfinished"/>
+        <translation>Schreibtisch</translation>
     </message>
 </context>
 <context>
@@ -506,31 +504,31 @@
         <location filename="../src/dcc-update-plugin/window/widgets/mirroritem.cpp" line="24"/>
         <location filename="../src/dcc-update-plugin/window/widgets/mirroritem.cpp" line="108"/>
         <source>Untested</source>
-        <translation type="unfinished"/>
+        <translation>Ungetestet</translation>
     </message>
     <message>
         <location filename="../src/dcc-update-plugin/window/widgets/mirroritem.cpp" line="70"/>
         <location filename="../src/dcc-update-plugin/window/widgets/mirroritem.cpp" line="104"/>
         <source>Timeout</source>
-        <translation type="unfinished"/>
+        <translation>Zeitüberschreitung</translation>
     </message>
     <message>
         <location filename="../src/dcc-update-plugin/window/widgets/mirroritem.cpp" line="72"/>
         <location filename="../src/dcc-update-plugin/window/widgets/mirroritem.cpp" line="105"/>
         <source>Slow</source>
-        <translation type="unfinished"/>
+        <translation>Langsam</translation>
     </message>
     <message>
         <location filename="../src/dcc-update-plugin/window/widgets/mirroritem.cpp" line="74"/>
         <location filename="../src/dcc-update-plugin/window/widgets/mirroritem.cpp" line="106"/>
         <source>Medium</source>
-        <translation type="unfinished"/>
+        <translation>Mittel</translation>
     </message>
     <message>
         <location filename="../src/dcc-update-plugin/window/widgets/mirroritem.cpp" line="76"/>
         <location filename="../src/dcc-update-plugin/window/widgets/mirroritem.cpp" line="107"/>
         <source>Fast</source>
-        <translation type="unfinished"/>
+        <translation>Schnell</translation>
     </message>
 </context>
 <context>
@@ -538,12 +536,12 @@
     <message>
         <location filename="../src/dcc-update-plugin/window/widgets/systemupdateitem.cpp" line="111"/>
         <source>Server</source>
-        <translation type="unfinished"/>
+        <translation>Server</translation>
     </message>
     <message>
         <location filename="../src/dcc-update-plugin/window/widgets/systemupdateitem.cpp" line="111"/>
         <source>Desktop</source>
-        <translation type="unfinished"/>
+        <translation>Schreibtisch</translation>
     </message>
 </context>
 <context>
@@ -551,12 +549,12 @@
     <message>
         <location filename="../src/dcc-update-plugin/window/widgets/tipsitem.cpp" line="59"/>
         <source>Your system is not activated, and it failed to connect to update services.</source>
-        <translation type="unfinished"/>
+        <translation>Ihr System ist nicht aktiviert, und es konnte nicht mit einem Update-Server verbunden werden.</translation>
     </message>
     <message>
         <location filename="../src/dcc-update-plugin/window/widgets/tipsitem.cpp" line="64"/>
         <source>The system updates are disabled. Please contact your administrator for help.</source>
-        <translation type="unfinished"/>
+        <translation>Die System-Updates sind ausgeschalten. Bitte kontaktieren Sie Ihren Administrator.</translation>
     </message>
 </context>
 <context>
@@ -564,146 +562,146 @@
     <message>
         <location filename="../src/dcc-update-plugin/window/widgets/updatecontrolpanel.cpp" line="51"/>
         <source>View logs</source>
-        <translation type="unfinished"/>
+        <translation>Logs ansehen</translation>
     </message>
     <message>
         <location filename="../src/dcc-update-plugin/window/widgets/updatecontrolpanel.cpp" line="90"/>
         <source>Updates Available</source>
-        <translation type="unfinished"/>
+        <translation>Updates vorhanden</translation>
     </message>
     <message>
         <location filename="../src/dcc-update-plugin/window/widgets/updatecontrolpanel.cpp" line="194"/>
         <location filename="../src/dcc-update-plugin/window/widgets/updatecontrolpanel.cpp" line="199"/>
         <source>Download All</source>
-        <translation type="unfinished"/>
+        <translation>Alle herunterladen</translation>
     </message>
     <message>
         <location filename="../src/dcc-update-plugin/window/widgets/updatecontrolpanel.cpp" line="195"/>
         <location filename="../src/dcc-update-plugin/window/widgets/updatecontrolpanel.cpp" line="200"/>
         <source>Try Again</source>
-        <translation type="unfinished"/>
+        <translation>Erneut versuchen</translation>
     </message>
     <message>
         <location filename="../src/dcc-update-plugin/window/widgets/updatecontrolpanel.cpp" line="196"/>
         <source>Install Now</source>
-        <translation type="unfinished"/>
+        <translation>Jetzt installieren</translation>
     </message>
     <message>
         <location filename="../src/dcc-update-plugin/window/widgets/updatecontrolpanel.cpp" line="197"/>
         <source>Proceed to Update</source>
-        <translation type="unfinished"/>
+        <translation>Mit Update fortfahren</translation>
     </message>
     <message>
         <location filename="../src/dcc-update-plugin/window/widgets/updatecontrolpanel.cpp" line="198"/>
         <source>Reboot now</source>
-        <translation type="unfinished"/>
+        <translation>Jetzt neustarten</translation>
     </message>
     <message>
         <location filename="../src/dcc-update-plugin/window/widgets/updatecontrolpanel.cpp" line="348"/>
         <source>Updates available</source>
-        <translation type="unfinished"/>
+        <translation>Updates vorhanden</translation>
     </message>
     <message>
         <location filename="../src/dcc-update-plugin/window/widgets/updatecontrolpanel.cpp" line="349"/>
         <source>Preparing for downloading...</source>
-        <translation type="unfinished"/>
+        <translation>Downloaden wird vorbereitet…</translation>
     </message>
     <message>
         <location filename="../src/dcc-update-plugin/window/widgets/updatecontrolpanel.cpp" line="350"/>
         <source>Downloading updates...</source>
-        <translation type="unfinished"/>
+        <translation>Updates werden heruntergeladen…</translation>
     </message>
     <message>
         <location filename="../src/dcc-update-plugin/window/widgets/updatecontrolpanel.cpp" line="351"/>
         <source>Downloading paused</source>
-        <translation type="unfinished"/>
+        <translation>Download angehalten</translation>
     </message>
     <message>
         <location filename="../src/dcc-update-plugin/window/widgets/updatecontrolpanel.cpp" line="352"/>
         <source>Downloading completed</source>
-        <translation type="unfinished"/>
+        <translation>Download abgeschlossen</translation>
     </message>
     <message>
         <location filename="../src/dcc-update-plugin/window/widgets/updatecontrolpanel.cpp" line="353"/>
         <source>Downloading updates failed</source>
-        <translation type="unfinished"/>
+        <translation>Download der Updates fehlgeschlagen</translation>
     </message>
     <message>
         <location filename="../src/dcc-update-plugin/window/widgets/updatecontrolpanel.cpp" line="354"/>
         <location filename="../src/dcc-update-plugin/window/widgets/updatecontrolpanel.cpp" line="355"/>
         <source>Preparing for updates…</source>
-        <translation type="unfinished"/>
+        <translation>Updates werden vorbereitet…</translation>
     </message>
     <message>
         <location filename="../src/dcc-update-plugin/window/widgets/updatecontrolpanel.cpp" line="356"/>
         <source>Backing up…</source>
-        <translation type="unfinished"/>
+        <translation>Backup wird erstellt…</translation>
     </message>
     <message>
         <location filename="../src/dcc-update-plugin/window/widgets/updatecontrolpanel.cpp" line="630"/>
         <source>The update package has been downloaded. Please select the operation you wish to perform.</source>
-        <translation type="unfinished"/>
+        <translation>Das Aktualisierungen-Paket wurde heruntergeladen. Bitte wählen Sie aus, was sie tun möchten.</translation>
     </message>
     <message>
         <location filename="../src/dcc-update-plugin/window/widgets/updatecontrolpanel.cpp" line="358"/>
         <source>Backup failed</source>
-        <translation type="unfinished"/>
+        <translation>BackUp fehlgeschlagen</translation>
     </message>
     <message>
         <location filename="../src/dcc-update-plugin/window/widgets/updatecontrolpanel.cpp" line="357"/>
         <location filename="../src/dcc-update-plugin/window/widgets/updatecontrolpanel.cpp" line="359"/>
         <source>Installing updates...</source>
-        <translation type="unfinished"/>
+        <translation>Aktualisierungen werden installiert</translation>
     </message>
     <message>
         <location filename="../src/dcc-update-plugin/window/widgets/updatecontrolpanel.cpp" line="360"/>
         <source>Updates failed</source>
-        <translation type="unfinished"/>
+        <translation>Aktualisieren fehlgeschlagen</translation>
     </message>
     <message>
         <location filename="../src/dcc-update-plugin/window/widgets/updatecontrolpanel.cpp" line="361"/>
         <source>Updates successful</source>
-        <translation type="unfinished"/>
+        <translation>Aktualisierungen erfolgt</translation>
     </message>
     <message>
         <location filename="../src/dcc-update-plugin/window/widgets/updatecontrolpanel.cpp" line="437"/>
         <source>Size</source>
-        <translation type="unfinished"/>
+        <translation>Größe</translation>
     </message>
     <message>
         <location filename="../src/dcc-update-plugin/window/widgets/updatecontrolpanel.cpp" line="621"/>
         <source>Silent Installation</source>
-        <translation type="unfinished"/>
+        <translation>Installation im Hintergrund</translation>
     </message>
     <message>
         <location filename="../src/dcc-update-plugin/window/widgets/updatecontrolpanel.cpp" line="622"/>
         <source>Update and Reboot</source>
-        <translation type="unfinished"/>
+        <translation>Aktualisieren und neustarten</translation>
     </message>
     <message>
         <location filename="../src/dcc-update-plugin/window/widgets/updatecontrolpanel.cpp" line="623"/>
         <source>Update and Shut Down</source>
-        <translation type="unfinished"/>
+        <translation>Aktualisieren und herunterfahren</translation>
     </message>
     <message>
         <location filename="../src/dcc-update-plugin/window/widgets/updatecontrolpanel.cpp" line="696"/>
         <source>You can install updates when shut down or reboot</source>
-        <translation type="unfinished"/>
+        <translation>Sie können die Aktualisierungen vornehmen beim Herunterfahren oder Neustarten</translation>
     </message>
     <message>
         <location filename="../src/dcc-update-plugin/window/widgets/updatecontrolpanel.cpp" line="697"/>
         <source>Do not force a shutdown or power off when installing updates. Otherwise, your system may be damaged.</source>
-        <translation type="unfinished"/>
+        <translation>Während der Installation der Aktualisierungen nicht Herunterfahren oder Ausschalten erzwingen. Anderenfalls kann ihr System Schaden nehmen.</translation>
     </message>
     <message>
         <location filename="../src/dcc-update-plugin/window/widgets/updatecontrolpanel.cpp" line="698"/>
         <source>Reboot to use the system and the applications properly</source>
-        <translation type="unfinished"/>
+        <translation>Neustarten, um das System und die Programme sauber einzurichten</translation>
     </message>
     <message>
         <location filename="../src/dcc-update-plugin/window/widgets/updatecontrolpanel.cpp" line="699"/>
         <source>The battery capacity is lower than 60%. To get successful updates, please plug in.</source>
-        <translation type="unfinished"/>
+        <translation>Die Akkukapazität liegt unter 60%. Um erfolgreich zu aktualisieren, verbinden Sie bitte ihr Gerät mit dem Stromnetz.</translation>
     </message>
 </context>
 <context>
@@ -711,12 +709,12 @@
     <message>
         <location filename="../src/dcc-update-plugin/window/widgets/detailinfoitem.cpp" line="56"/>
         <source>For more details, visit:</source>
-        <translation type="unfinished"/>
+        <translation>Für weitere Einzelheiten besuchen Sie:</translation>
     </message>
     <message>
         <location filename="../src/dcc-update-plugin/window/widgets/detailinfoitem.cpp" line="126"/>
         <source>Collapse</source>
-        <translation type="unfinished"/>
+        <translation>Einfahren</translation>
     </message>
 </context>
 <context>
@@ -725,12 +723,12 @@
         <location filename="../src/dcc-update-plugin/window/widgets/updateitem.cpp" line="64"/>
         <location filename="../src/dcc-update-plugin/window/widgets/updateitem.cpp" line="100"/>
         <source>Details</source>
-        <translation type="unfinished"/>
+        <translation>Einzelheiten</translation>
     </message>
     <message>
         <location filename="../src/dcc-update-plugin/window/widgets/updateitem.cpp" line="100"/>
         <source>Collapse</source>
-        <translation type="unfinished"/>
+        <translation>Einfahren</translation>
     </message>
 </context>
 <context>
@@ -738,84 +736,84 @@
     <message>
         <location filename="../src/dcc-update-plugin/module/updateloghelper.cpp" line="26"/>
         <source>NONE</source>
-        <translation type="unfinished"/>
+        <translation>NICHTS</translation>
     </message>
     <message>
         <location filename="../src/dcc-update-plugin/module/updateloghelper.cpp" line="27"/>
         <source>LOW</source>
-        <translation type="unfinished"/>
+        <translation>GERING</translation>
     </message>
     <message>
         <location filename="../src/dcc-update-plugin/module/updateloghelper.cpp" line="28"/>
         <source>MEDIUM</source>
-        <translation type="unfinished"/>
+        <translation>MITTEL</translation>
     </message>
     <message>
         <location filename="../src/dcc-update-plugin/module/updateloghelper.cpp" line="29"/>
         <source>HIGH</source>
-        <translation type="unfinished"/>
+        <translation>HOCH</translation>
     </message>
     <message>
         <location filename="../src/dcc-update-plugin/module/updateloghelper.cpp" line="30"/>
         <source>CRITICAL</source>
-        <translation type="unfinished"/>
+        <translation>KRITISCH</translation>
     </message>
     <message>
         <location filename="../src/dcc-update-plugin/module/updateloghelper.cpp" line="41"/>
         <source>critical-risk</source>
-        <translation type="unfinished"/>
+        <translation>kritisch-riskant</translation>
     </message>
     <message>
         <location filename="../src/dcc-update-plugin/module/updateloghelper.cpp" line="42"/>
         <source>high-risk</source>
-        <translation type="unfinished"/>
+        <translation>hoch-kritisch</translation>
     </message>
     <message>
         <location filename="../src/dcc-update-plugin/module/updateloghelper.cpp" line="43"/>
         <source>medium-risk</source>
-        <translation type="unfinished"/>
+        <translation>mittel-kritisch</translation>
     </message>
     <message>
         <location filename="../src/dcc-update-plugin/module/updateloghelper.cpp" line="44"/>
         <source>low-risk</source>
-        <translation type="unfinished"/>
+        <translation>gering-kritisch</translation>
     </message>
     <message>
         <location filename="../src/dcc-update-plugin/module/updateloghelper.cpp" line="45"/>
         <source>unknown</source>
-        <translation type="unfinished"/>
+        <translation>unbekannt</translation>
     </message>
     <message>
         <location filename="../src/dcc-update-plugin/module/updateloghelper.cpp" line="47"/>
         <source>This update fixes</source>
-        <translation type="unfinished"/>
+        <translation>Diese Aktualisierung behebt</translation>
     </message>
     <message>
         <location filename="../src/dcc-update-plugin/module/updateloghelper.cpp" line="50"/>
         <source>vulnerabilities</source>
-        <translation type="unfinished"/>
+        <translation>Sicherheitsrisiken</translation>
     </message>
     <message>
         <location filename="../src/dcc-update-plugin/module/updateloghelper.cpp" line="50"/>
         <source>vulnerability</source>
-        <translation type="unfinished"/>
+        <translation>Sicherheitsrisiko</translation>
     </message>
     <message>
         <location filename="../src/dcc-update-plugin/module/updateloghelper.cpp" line="52"/>
         <source>%1 of %2 %3</source>
-        <translation type="unfinished"/>
+        <translation>%1 von %2 %3</translation>
         <extra-content_explain>`数字+%`会在代码中替换为字符串，例如：3 of high-risk vulnerabilities；各语言需要根据实际情况增加空格(例如：中文没有空格，英文有空格)</extra-content_explain>
     </message>
     <message>
         <location filename="../src/dcc-update-plugin/module/updateloghelper.cpp" line="54"/>
         <source>, </source>
-        <translation type="unfinished"/>
+        <translation>, </translation>
         <extra-content_explain>中文逗号不需要空格，英文逗号需要空格For more details, please visit</extra-content_explain>
     </message>
     <message>
         <location filename="../src/dcc-update-plugin/module/updateloghelper.cpp" line="58"/>
         <source>for more details, please visit </source>
-        <translation type="unfinished"/>
+        <translation>für weitere Einzelheiten besuchen Sie bitte</translation>
         <extra-content_explain>这句话后面会带上一个超链接，各语言自行决定末尾需不需要加空格</extra-content_explain>
     </message>
 </context>
@@ -824,63 +822,63 @@
     <message>
         <location filename="../src/dcc-update-plugin/module/updatemodel.cpp" line="459"/>
         <source>Unknown error</source>
-        <translation type="unfinished"/>
+        <translation>Unbekannter Fehler</translation>
     </message>
     <message>
         <location filename="../src/dcc-update-plugin/module/updatemodel.cpp" line="460"/>
         <source>Downloading updates failed. Please free up %1 disk space first.</source>
-        <translation type="unfinished"/>
+        <translation>Aktualisierungen konnten nicht heruntergeladen werden. Bitte machen Sie zuerst %1 Speicherplatz frei.</translation>
     </message>
     <message>
         <location filename="../src/dcc-update-plugin/module/updatemodel.cpp" line="461"/>
         <source>Dependency error, failed to detect the updates</source>
-        <translation type="unfinished"/>
+        <translation>Abhängigkeiten-Fehler, Aktualisierungen konnten nicht erkannt werden.</translation>
     </message>
     <message>
         <location filename="../src/dcc-update-plugin/module/updatemodel.cpp" line="462"/>
         <source>Please check your network and try again.</source>
-        <translation type="unfinished"/>
+        <translation>Bitte prüfen Sie Ihr Netzwerk und versuchen es erneut.</translation>
     </message>
     <message>
         <location filename="../src/dcc-update-plugin/module/updatemodel.cpp" line="463"/>
         <source>Downloading updates failed. Please check your network and try again.</source>
-        <translation type="unfinished"/>
+        <translation>Aktualisierungen konnten nicht heruntergeladen werden. Bitte machen überprüfen Sie Ihr Netzwerk und versuchen es erneut.</translation>
     </message>
     <message>
         <location filename="../src/dcc-update-plugin/module/updatemodel.cpp" line="464"/>
         <source>Unable to perform system backup. If you continue the updates, you cannot roll back to the old system later.</source>
-        <translation type="unfinished"/>
+        <translation>Sytem-Backup konnte nicht durchgeführt werden. Falls Sie mit den Aktualisierungen fortfahren, können Sie nicht wieder zurück zum alten System.</translation>
     </message>
     <message>
         <location filename="../src/dcc-update-plugin/module/updatemodel.cpp" line="465"/>
         <source>If you continue the updates, you cannot roll back to the old system later.</source>
-        <translation type="unfinished"/>
+        <translation>Falls Sie mit den Aktualisierungen fortfahren, können Sie nicht wieder zurück zum alten System.</translation>
     </message>
     <message>
         <location filename="../src/dcc-update-plugin/module/updatemodel.cpp" line="466"/>
         <source>Insufficient disk space</source>
-        <translation type="unfinished"/>
+        <translation>Zu wenig Speicherplatz</translation>
     </message>
     <message>
         <location filename="../src/dcc-update-plugin/module/updatemodel.cpp" line="467"/>
         <location filename="../src/dcc-update-plugin/module/updatemodel.cpp" line="468"/>
         <source>DPKG error</source>
-        <translation type="unfinished"/>
+        <translation>DPKG-Fehler</translation>
     </message>
     <message>
         <location filename="../src/dcc-update-plugin/module/updatemodel.cpp" line="469"/>
         <source>File missing</source>
-        <translation type="unfinished"/>
+        <translation>Datei fehlt</translation>
     </message>
     <message>
         <location filename="../src/dcc-update-plugin/module/updatemodel.cpp" line="470"/>
         <source>Service connection is abnormal, please check the network and try again</source>
-        <translation type="unfinished"/>
+        <translation>Service-Verbindung ist unnormal, bitte prüfen Sie das Netzwerk und versuchen es erneut</translation>
     </message>
     <message>
         <location filename="../src/dcc-update-plugin/module/updatemodel.cpp" line="471"/>
         <source>The repository source configuration is not valid, please check and try again.</source>
-        <translation type="unfinished"/>
+        <translation>Diese Repositorien-Quellen-Konfiguration ist ungültig, bitte überprüfen Sie dies und versuchen es erneut.</translation>
     </message>
 </context>
 <context>
@@ -888,51 +886,51 @@
     <message>
         <location filename="../src/dcc-update-plugin/window/widgets/updatesettingitem.cpp" line="96"/>
         <source>View More</source>
-        <translation type="unfinished"/>
+        <translation>Mehr ansehen</translation>
     </message>
     <message>
         <location filename="../src/dcc-update-plugin/window/widgets/updatesettingitem.cpp" line="162"/>
         <source>Release date: </source>
-        <translation type="unfinished"/>
+        <translation>Veröffentlichungsdatum:</translation>
     </message>
     <message>
         <location filename="../src/dcc-update-plugin/window/widgets/updatesettingitem.cpp" line="165"/>
         <source>Server</source>
-        <translation type="unfinished"/>
+        <translation>Server</translation>
     </message>
     <message>
         <location filename="../src/dcc-update-plugin/window/widgets/updatesettingitem.cpp" line="165"/>
         <source>Desktop</source>
-        <translation type="unfinished"/>
+        <translation>Schreibtisch</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/window/widgets/updatesettingitem.cpp" line="172"/>
+        <location filename="../src/dcc-update-plugin/window/widgets/updatesettingitem.cpp" line="168"/>
         <source>Version</source>
-        <translation type="unfinished"/>
+        <translation>Version</translation>
     </message>
 </context>
 <context>
     <name>dcc::update::UpdateWorker</name>
     <message>
-        <location filename="../src/dcc-update-plugin/module/updatework.cpp" line="405"/>
+        <location filename="../src/dcc-update-plugin/module/updatework.cpp" line="403"/>
         <source>System Updates</source>
-        <translation type="unfinished"/>
+        <translation>System-Aktualisierungen</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/module/updatework.cpp" line="406"/>
-        <location filename="../src/dcc-update-plugin/module/updatework.cpp" line="415"/>
+        <location filename="../src/dcc-update-plugin/module/updatework.cpp" line="404"/>
+        <location filename="../src/dcc-update-plugin/module/updatework.cpp" line="413"/>
         <source>Fixed some known bugs and security vulnerabilities</source>
-        <translation type="unfinished"/>
+        <translation>Einige Fehler und Sicherheitsrisiken beseitigt</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/module/updatework.cpp" line="414"/>
+        <location filename="../src/dcc-update-plugin/module/updatework.cpp" line="412"/>
         <source>Security Updates</source>
-        <translation type="unfinished"/>
+        <translation>Sicherheits-Aktualisierungen</translation>
     </message>
     <message>
-        <location filename="../src/dcc-update-plugin/module/updatework.cpp" line="423"/>
+        <location filename="../src/dcc-update-plugin/module/updatework.cpp" line="421"/>
         <source>Third-party Repositories</source>
-        <translation type="unfinished"/>
+        <translation>Drittparteien-Repositorien</translation>
     </message>
 </context>
 </TS>

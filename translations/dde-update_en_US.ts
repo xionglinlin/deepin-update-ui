@@ -2,12 +2,12 @@
 <context>
     <name>CheckProgressWidget</name>
     <message>
-        <location filename="../src/dde-update/checksystemwidget.cpp" line="54"/>
+        <location filename="../src/dde-update/checksystemwidget.cpp" line="56"/>
         <source>The check is almost complete, thank you for your patience</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../src/dde-update/checksystemwidget.cpp" line="69"/>
+        <location filename="../src/dde-update/checksystemwidget.cpp" line="71"/>
         <source>Preparing</source>
         <translation type="unfinished"/>
     </message>
@@ -15,7 +15,7 @@
 <context>
     <name>ErrorFrame</name>
     <message>
-        <location filename="../src/dde-update/checksystemwidget.cpp" line="208"/>
+        <location filename="../src/dde-update/checksystemwidget.cpp" line="222"/>
         <source>Checked for some errors</source>
         <translation type="unfinished"/>
     </message>
@@ -23,17 +23,17 @@
 <context>
     <name>SuccessFrame</name>
     <message>
-        <location filename="../src/dde-update/checksystemwidget.cpp" line="145"/>
+        <location filename="../src/dde-update/checksystemwidget.cpp" line="132"/>
         <source>Go to Desktop</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../src/dde-update/checksystemwidget.cpp" line="147"/>
+        <location filename="../src/dde-update/checksystemwidget.cpp" line="134"/>
         <source>Welcome, system updated successfully</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../src/dde-update/checksystemwidget.cpp" line="149"/>
+        <location filename="../src/dde-update/checksystemwidget.cpp" line="136"/>
         <source>Current Edition:</source>
         <translation type="unfinished"/>
     </message>
@@ -59,6 +59,16 @@
         <location filename="../src/dde-update/updatewidget.cpp" line="269"/>
         <source>Your computer will be turned off soon %1</source>
         <translation>Your computer will be turned off soon %1</translation>
+    </message>
+    <message>
+        <location filename="../src/dde-update/updatewidget.cpp" line="295"/>
+        <source>The automatic reboot process has failed. Please try to manually reboot your device.</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/dde-update/updatewidget.cpp" line="296"/>
+        <source>The automatic shutdown process has failed. Please try to manually shut down your device.</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
