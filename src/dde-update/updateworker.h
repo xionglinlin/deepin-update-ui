@@ -85,6 +85,7 @@ private:
     QPointer<JobInter> m_distUpgradeJob; // 更新job
     QPointer<JobInter> m_fixErrorJob; // 修复错误job
     QPointer<JobInter> m_checkSystemJob; // 修复错误job
+    bool m_waitingToCheckSystem;
 };
 
 #endif // UPDATECTRL_H

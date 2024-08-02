@@ -32,6 +32,7 @@ UpdateWorker::UpdateWorker(QObject *parent)
     , m_distUpgradeJob(nullptr)
     , m_fixErrorJob(nullptr)
     , m_checkSystemJob(nullptr)
+    , m_waitingToCheckSystem(false)
 {
 }
 
@@ -55,6 +56,11 @@ void UpdateWorker::init()
             UpdateModel::instance()->setLastErrorLog("com.deepin.lastore.Manager interface is invalid.");
             UpdateModel::instance()->setUpdateError(UpdateModel::UpdateError::UpdateInterfaceError);
             UpdateModel::instance()->setUpdateStatus(UpdateModel::UpdateStatus::InstallFailed);
+        } else {
+            if (m_waitingToCheckSystem) {
+                m_waitingToCheckSystem = false;
+                doCheckSystem(UpdateModel::instance()->updateMode(), UpdateModel::instance()->checkSystemStage());
+            }
         }
     });
     connect(m_abRecoveryInter, &RecoveryInter::JobEnd, this, [](const QString &kind, bool success, const QString &errMsg) {
@@ -339,8 +345,15 @@ void UpdateWorker::doDistUpgradeIfCanBackup()
 
 void UpdateWorker::doCheckSystem(int updateMode, UpdateModel::CheckSystemStage stage)
 {
-    qInfo() << "Update mode:" << updateMode << ", chech system stage:" << stage;
-    QDBusPendingReply<QDBusObjectPath> reply = m_managerInter->asyncCall("CheckUpgrade", updateMode, static_cast<int>(stage));
+    qInfo() << "Update mode:" << updateMode << ", check system stage:" << stage;
+    ManagerInter manager("com.deepin.lastore", "/com/deepin/lastore", QDBusConnection::systemBus(), this);
+    if (!manager.isValid()) {
+        qWarning() << "Update mode is invalid, last error:" << manager.lastError().message();
+        m_waitingToCheckSystem = true;
+        return;
+    }
+
+    QDBusPendingReply<QDBusObjectPath> reply = manager.asyncCall("CheckUpgrade", updateMode, static_cast<int>(stage));
     QDBusPendingCallWatcher *watcher = new QDBusPendingCallWatcher(reply, this);
     connect(watcher, &QDBusPendingCallWatcher::finished, this, [this, reply, watcher] {
         watcher->deleteLater();
