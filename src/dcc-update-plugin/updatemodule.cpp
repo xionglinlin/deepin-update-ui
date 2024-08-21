@@ -92,6 +92,10 @@ void UpdateModule::preInitialize(bool sync, FrameProxyInterface::PushType pushty
         if (systemActivation == UiActiveState::Authorized || systemActivation == UiActiveState::TrialAuthorized || systemActivation == UiActiveState::AuthorizedLapse) {
             if (m_updateWidget)
                 m_updateWidget->setSystemVersion(m_model->systemVersionInfo());
+
+            // 授权发生变化时触发检查更新
+            if (m_model->isActivationValid())
+                Q_EMIT m_model->beginCheckUpdate();
         }
     });
 #endif
