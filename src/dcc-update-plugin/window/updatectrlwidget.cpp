@@ -89,8 +89,9 @@ void UpdateCtrlWidget::initUI()
     resultItemLayout->setContentsMargins(QMargins(15, 0, 15, 0));
     resultItemLayout->addWidget(m_checkUpdateItem, 1);
 
-    DFontSizeManager::instance()->bind(m_privacyPolicyLabel, DFontSizeManager::T6);
+    DFontSizeManager::instance()->bind(m_privacyPolicyLabel, DFontSizeManager::T8);
     m_privacyPolicyLabel->setAlignment(Qt::AlignHCenter);
+    m_privacyPolicyLabel->setForegroundRole(DPalette::TextTips);
     m_privacyPolicyLabel->setTextFormat(Qt::RichText);
     m_privacyPolicyLabel->setWordWrap(true);
     m_privacyPolicyLabel->setOpenExternalLinks(true);
