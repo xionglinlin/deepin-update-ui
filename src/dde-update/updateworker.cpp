@@ -208,6 +208,11 @@ void UpdateWorker::createCheckSystemJob(const QString& jobPath)
     }
 
     m_checkSystemJob = new JobInter("com.deepin.lastore", jobPath, QDBusConnection::systemBus(), this);
+    // 低概率出现创建 job 时，系统检查已经完成的情况，此时直接退出进程即可。
+    if (m_checkSystemJob->id().isEmpty()) {
+        qWarning() << "Check system job id is empty, exit application now";
+        qApp->exit();
+    }
     connect(m_checkSystemJob, &__Job::ProgressChanged, UpdateModel::instance(), &UpdateModel::setJobProgress);
     connect(m_checkSystemJob, &__Job::StatusChanged, this, &UpdateWorker::onCheckSystemStatusChanged);
     UpdateModel::instance()->setJobProgress(m_checkSystemJob->progress());
