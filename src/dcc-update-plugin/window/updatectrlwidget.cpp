@@ -116,6 +116,10 @@ void UpdateCtrlWidget::initUI()
 void UpdateCtrlWidget::initConnect()
 {
     connect(m_checkUpdateItem, &UpdateStatusItem::requestCheckUpdate, m_model, &UpdateModel::beginCheckUpdate);
+    connect(m_model, &UpdateModel::systemActivationChanged, this, [this] (UiActiveState state) {
+        if (!m_model->isActivationValid())
+            setStatus(Default);
+    });
 }
 
 UpdateCtrlWidget::~UpdateCtrlWidget()
