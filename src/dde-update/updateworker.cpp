@@ -266,17 +266,25 @@ void UpdateWorker::onCheckSystemStatusChanged(const QString &status)
     qInfo() << "Check system status changed " << status;
     if (CHECK_UPGRADE_STATUS_MAP.contains(status)) {
         const auto updateStatus = CHECK_UPGRADE_STATUS_MAP.value(status);
-        if (updateStatus == UpdateModel::CheckEnd) {
+        const auto stage = UpdateModel::instance()->checkSystemStage();
+        qInfo() << "Check system stage:" << stage << ", update status:" << updateStatus;
+        if (UpdateModel::CSS_AfterLogin == stage && updateStatus == UpdateModel::CheckEnd) {
             cleanLaStoreJob(m_checkSystemJob);
         } else {
             if (updateStatus == UpdateModel::CheckFailed && m_checkSystemJob) {
                 UpdateModel::instance()->setLastErrorLog(m_checkSystemJob->description());
             }
-            if (UpdateModel::CSS_BeforeLogin == UpdateModel::instance()->checkSystemStage()) {
+            if (UpdateModel::CSS_BeforeLogin == stage) {
                 if (updateStatus == UpdateModel::CheckFailed) {
                     doAction(UpdateModel::Reboot);
                 } else if (updateStatus == UpdateModel::CheckSuccess || updateStatus == UpdateModel::CheckEnd) {
+                    cleanLaStoreJob(m_checkSystemJob);
+                    qInfo() << "Exit application";
                     qApp->exit();
+                    QTimer::singleShot(5000, qApp, [] {
+                        qWarning() << "Something abnormal, I'm still here";
+                        qApp->quit();
+                    });
                 }
             } else {
                 UpdateModel::instance()->setCheckStatus(updateStatus);
