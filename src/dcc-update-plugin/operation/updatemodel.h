@@ -39,6 +39,7 @@ class UpdateModel : public QObject
 
     Q_PROPERTY(double downloadProgress READ downloadProgress NOTIFY downloadProgressChanged FINAL)
     Q_PROPERTY(double distUpgradeProgress READ distUpgradeProgress NOTIFY distUpgradeProgressChanged FINAL)
+    Q_PROPERTY(double backupProgress READ backupProgress NOTIFY backupProgressChanged FINAL)
 
     Q_PROPERTY(UpdateListModel *preUpdatelistModel READ preUpdatelistModel  NOTIFY preUpdatelistModelChanged FINAL)
     Q_PROPERTY(QString preUpdateTips READ preUpdateTips WRITE setPreUpdateTips NOTIFY preUpdateTipsChanged FINAL)
@@ -48,8 +49,11 @@ class UpdateModel : public QObject
     Q_PROPERTY(UpdateListModel *installFailedListModel READ installFailedListModel  NOTIFY installFailedListModelChanged FINAL)
     Q_PROPERTY(UpdateListModel *downloadFailedListModel READ downloadFailedListModel  NOTIFY downloadFailedListModelChanged FINAL)
     Q_PROPERTY(UpdateListModel *downloadinglistModel READ downloadinglistModel NOTIFY downloadinglistModelChanged FINAL)
+    Q_PROPERTY(UpdateListModel *backingUpListModel READ backingUpListModel NOTIFY backingUpListModelChanged FINAL)
+    Q_PROPERTY(UpdateListModel *backupFailedListModel READ backupFailedListModel NOTIFY backupFailedListModelChanged FINAL)
     Q_PROPERTY(QString downloadFailedTips READ downloadFailedTips NOTIFY downloadFailedTipsChanged FINAL)
     Q_PROPERTY(QString installFailedTips READ installFailedTips NOTIFY installFailedTipsChanged FINAL)
+    Q_PROPERTY(QString backUpFailedTips READ backupFailedTips NOTIFY backupFailedTipsChanged FINAL)
 
     // 更新设置页面数据
     Q_PROPERTY(bool securityUpdateEnabled READ securityUpdateEnabled WRITE setSecurityUpdateEnabled NOTIFY securityUpdateEnabledChanged FINAL)
@@ -215,6 +219,10 @@ public:
 
     double distUpgradeProgress() const { return m_distUpgradeProgress; }
 
+    void setBackupProgress(double progress);
+
+    double backupProgress() const { return m_backupProgress; }
+
     UpdatesStatus updateStatus(ControlPanelType type) const;
     UpdatesStatus updateStatus(UpdateType type) const;
     QList<UpdateType> updateTypesList(ControlPanelType type) const;
@@ -312,11 +320,20 @@ public:
     UpdateListModel *downloadinglistModel() const;
     void setDownloadinglistModel(UpdateListModel *newDownloadinglistModel);
 
+    UpdateListModel *backingUpListModel() const;
+    void setBackingUpListModel(UpdateListModel *newBackingUpListModel);
+
+    UpdateListModel *backupFailedListModel() const;
+    void setBackupFailedListModel(UpdateListModel *newBackupFailedListModel);
+
     QString downloadFailedTips() const;
     void setDownloadFailedTips(const QString &newDownloadFailedTips);
 
     QString installFailedTips() const;
     void setInstallFailedTips(const QString &newInstallFailedTips);
+
+    QString backupFailedTips() const;
+    void setBackupFailedTips(const QString &newBackupFailedTips);
 
     Q_INVOKABLE bool isCommunitySystem() const;
 
@@ -365,6 +382,7 @@ Q_SIGNALS:
     void notifyBackupSuccess();
     void p2pUpdateEnableStateChanged(bool enabled);
     void baselineChanged(const QString &baseline);
+    void backupProgressChanged(double progress);
 
     // 检查更新页面数据
     void showUpdateCtlChanged();
@@ -391,9 +409,15 @@ Q_SIGNALS:
 
     void downloadinglistModelChanged();
 
+    void backingUpListModelChanged();
+
+    void backupFailedListModelChanged();
+
     void downloadFailedTipsChanged();
 
     void installFailedTipsChanged();
+
+    void backupFailedTipsChanged();
 
 private:
     void setUpdateItemEnabled();
@@ -409,6 +433,7 @@ private:
     
     double m_downloadProgress;
     double m_distUpgradeProgress;
+    double m_backupProgress;
 #ifndef DISABLE_SYS_UPDATE_SOURCE_CHECK
     bool m_sourceCheck;
 #endif
@@ -481,6 +506,13 @@ private:
     // downloadFailedList qml data
     UpdateListModel *m_downloadFailedListModel;
     QString m_downloadFailedTips;
+
+    // backing up qml data
+    UpdateListModel *m_backingUpListModel;
+
+    // backup failed qml data
+    UpdateListModel *m_backupFailedListModel;
+    QString m_backupFailedTips;
 
 };
 

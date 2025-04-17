@@ -3,6 +3,7 @@
 // SPDX-License-Identifier: LGPL-3.0-or-later
 
 #include "updatemodel.h"
+#include "operation/common.h"
 #include "utils.h"
 
 #include <DSysInfo>
@@ -74,6 +75,8 @@ UpdateModel::UpdateModel(QObject* parent)
     , m_installCompleteListModel(new UpdateListModel(this))
     , m_installFailedListModel(new UpdateListModel(this))
     , m_downloadFailedListModel(new UpdateListModel(this))
+    , m_backingUpListModel(new UpdateListModel(this))
+    , m_backupFailedListModel(new UpdateListModel(this))
 {
     qRegisterMetaType<TestingChannelStatus>("TestingChannelStatus");
     qRegisterMetaType<UpdateType>("UpdateType");
@@ -702,6 +705,19 @@ void UpdateModel::setDownloadFailedTips(const QString &newDownloadFailedTips)
     emit downloadFailedTipsChanged();
 }
 
+QString UpdateModel::backupFailedTips() const
+{
+    return m_backupFailedTips;
+}
+
+void UpdateModel::setBackupFailedTips(const QString &newBackupFailedTips)
+{
+    if (m_backupFailedTips == newBackupFailedTips)
+        return;
+    m_backupFailedTips = newBackupFailedTips;
+    emit backupFailedTipsChanged();
+}
+
 UpdateListModel *UpdateModel::downloadinglistModel() const
 {
     return m_downloadinglistModel;
@@ -713,6 +729,32 @@ void UpdateModel::setDownloadinglistModel(UpdateListModel *newDownloadinglistMod
         return;
     m_downloadinglistModel = newDownloadinglistModel;
     emit downloadinglistModelChanged();
+}
+
+UpdateListModel *UpdateModel::backingUpListModel() const
+{
+    return m_backingUpListModel;
+}
+
+void UpdateModel::setBackingUpListModel(UpdateListModel *newBackingUpListModel)
+{
+    if (m_backingUpListModel == newBackingUpListModel)
+        return;
+    m_backingUpListModel = newBackingUpListModel;
+    emit backingUpListModelChanged();
+}
+
+UpdateListModel *UpdateModel::backupFailedListModel() const
+{
+    return m_backupFailedListModel;
+}
+
+void UpdateModel::setBackupFailedListModel(UpdateListModel *newBackupFailedListModel)
+{
+    if (m_backupFailedListModel == newBackupFailedListModel)
+        return;
+    m_backupFailedListModel = newBackupFailedListModel;
+    emit backupFailedListModelChanged();
 }
 
 UpdateListModel *UpdateModel::downloadFailedListModel() const
@@ -846,6 +888,14 @@ void UpdateModel::refreshUpdateUiModel()
         m_preInstallListModel->clearAllData();
     }
 
+    if (m_backingUpListModel) {
+        m_backingUpListModel->clearAllData();
+    }
+
+    if (m_backupFailedListModel) {
+        m_backupFailedListModel->clearAllData();
+    }
+
     for (auto item : m_allUpdateInfos.values()) {
         switch (item->updateStatus()) {
         case Updated:
@@ -877,6 +927,11 @@ void UpdateModel::refreshUpdateUiModel()
         case UpgradeComplete:
             m_installCompleteListModel->addUpdateData(item);
             break;
+        case BackingUp:
+            m_backingUpListModel->addUpdateData(item);
+            break;
+        case BackupFailed:
+            m_backupFailedListModel->addUpdateData(item);
         default:
             break;
         }
@@ -1056,6 +1111,15 @@ void UpdateModel::setDistUpgradeProgress(double progress)
 
     m_distUpgradeProgress = progress;
     Q_EMIT distUpgradeProgressChanged(m_distUpgradeProgress);
+}
+
+void UpdateModel::setBackupProgress(double progress)
+{
+    if (qFuzzyCompare(progress, m_backupProgress))
+        return;
+
+    m_backupProgress = progress;
+    Q_EMIT backupProgressChanged(m_backupProgress);
 }
 
 QList<UpdatesStatus> UpdateModel::allUpdateStatus() const

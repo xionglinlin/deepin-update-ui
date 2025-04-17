@@ -927,6 +927,8 @@ void UpdateWorker::onJobListChanged(const QList<QDBusObjectPath>& jobs)
             setDistUpgradeJob(m_jobPath);
         } else if (id == "prepare_dist_upgrade" && m_downloadJob == nullptr) {
             setDownloadJob(m_jobPath);
+        } else if (id == "backup" && m_backupJob == nullptr) {
+            setBackupJob(m_jobPath);
         }
     }
 }
@@ -949,6 +951,25 @@ void UpdateWorker::setDistUpgradeJob(const QString& jobPath)
     });
     m_model->setDistUpgradeProgress(m_distUpgradeJob->progress());
     onDistUpgradeStatusChanged(m_distUpgradeJob->status());
+}
+
+void UpdateWorker::setBackupJob(const QString& jobPath)
+{
+    qCInfo(DCC_UPDATE_WORKER) << "Create backup upgrade job, path:" << jobPath;
+    if (m_backupJob || jobPath.isEmpty()) {
+        qCInfo(DCC_UPDATE_WORKER) << "Job is not null or job path is empty";
+        return;
+    }
+
+    m_backupJob = new UpdateJobDBusProxy(jobPath, this);
+    connect(m_backupJob, &UpdateJobDBusProxy::ProgressChanged, m_model, &UpdateModel::setBackupProgress);
+    // TODO 错误提示处理
+    connect(m_backupJob, &UpdateJobDBusProxy::DescriptionChanged, this, [this](const QString &description) {
+        if (m_distUpgradeJob->status() == "failed") {
+            m_model->setLastErrorLog(BackupFailed, description);
+        }
+    });
+    m_model->setBackupProgress(m_distUpgradeJob->progress());
 }
 
 void UpdateWorker::updateSystemVersion()
@@ -1389,13 +1410,17 @@ void UpdateWorker::doUpgrade(int updateTypes, bool doBackup)
     qCInfo(DCC_UPDATE_WORKER) << "Update types:" << updateTypes << ", do backup:" << doBackup;
     QDBusPendingCall call = m_updateInter->DistUpgradePartly(updateTypes, doBackup);
     QDBusPendingCallWatcher* watcher = new QDBusPendingCallWatcher(call, this);
-    connect(watcher, &QDBusPendingCallWatcher::finished, [this, updateTypes, call, watcher] {
+    connect(watcher, &QDBusPendingCallWatcher::finished, [this, updateTypes, call, watcher, doBackup] {
         watcher->deleteLater();
         if (!call.isError()) {
             m_model->setLastStatus(UpgradeWaiting, __LINE__, updateTypes);
             QList<QVariant> outArgs = call.reply().arguments();
             if (outArgs.count() > 0) {
-                setDistUpgradeJob(outArgs.at(0).toString());
+                if (doBackup) {
+                    setDistUpgradeJob(outArgs.at(0).toString());
+                } else {
+                    setBackupJob(outArgs.at(0).toString());
+                }
             }
         } else {
             qCInfo(DCC_UPDATE_WORKER) << "Call `DistUpgradePartly` failed, error:" << call.error().message();

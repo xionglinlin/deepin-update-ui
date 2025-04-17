@@ -140,7 +140,7 @@ ColumnLayout {
                 Layout.alignment: Qt.AlignRight
                 Layout.rightMargin: stratIcon.width + stopIcon.width + progressCtl.spacing * 2
                 width: parent.width
-                text: updateTitle + process.value*100 + "%"
+                text: updateTitle + Math.floor(process.value * 100) + "%"
                 font.pixelSize: 12
             }
         }

@@ -378,5 +378,17 @@
         <source>To ensure proper functioning of your system and applications, please restart your computer after the update</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Backing up in progress...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Backing up in progress</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Backup failed</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 </TS>

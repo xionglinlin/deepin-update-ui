@@ -136,6 +136,7 @@ private:
     QUrl getTestingChannelJoinURL() const;
     QString timeToString(int value);
     QString adjustTimeFunc(const QString& start, const QString& end, bool returnEndTime);
+    void setBackupJob(const QString& jobPath);
 
 private:
     UpdateModel* m_model;
@@ -157,6 +158,7 @@ private:
 
     QPointer<UpdateJobDBusProxy> m_downloadJob;
     QPointer<UpdateJobDBusProxy> m_distUpgradeJob;
+    QPointer<UpdateJobDBusProxy> m_backupJob;
     // QPointer<UpdateJobDBusProxy> m_sysUpdateDownloadJob;
     // QPointer<UpdateJobDBusProxy> m_safeUpdateDownloadJob;
     // QPointer<UpdateJobDBusProxy> m_unknownUpdateDownloadJob;

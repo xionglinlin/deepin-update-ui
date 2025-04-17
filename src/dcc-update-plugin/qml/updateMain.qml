@@ -109,7 +109,7 @@ DccObject {
             onBtnClicked: function(updateType) {
 
                 console.log("安装更新 =================== ", updateType)
-                dccData.work().doUpgrade(updateType, false)
+                dccData.work().doUpgrade(updateType, true)
             }
         }
     }
@@ -180,6 +180,39 @@ DccObject {
                 console.log("下载 =================== ", updateType)
                 dccData.work().startDownload(updateType)
             }
+        }
+    }
+
+    DccObject {
+        name: "backupList"
+        parentName: "update"
+        backgroundType: DccObject.Normal
+        weight: 80
+        visible: dccData.model().backingUpListModel.anyVisible
+        pageType: DccObject.Item
+        page: UpdateControl{
+
+            checkVisible: false
+            updateListModels: dccData.model().backingUpListModel
+            updateStateTips: qsTr("Backing up in progress...")
+            updateTitle: qsTr("Backing up in progress")
+
+            processValue: dccData.model().backupProgress
+        }
+    }
+
+    DccObject {
+        name: "backupFailedList"
+        parentName: "update"
+        backgroundType: DccObject.Normal
+        weight: 90
+        visible: dccData.model().backupFailedListModel.anyVisible
+        pageType: DccObject.Item
+        page: UpdateControl{
+
+            checkVisible: false
+            updateListModels: dccData.model().backupFailedListModel
+            updateTitle: qsTr("Backup failed")
         }
     }
 
