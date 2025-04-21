@@ -208,6 +208,12 @@ DccObject {
         page: UpdateControl {
             updateListModels: dccData.model().backupFailedListModel
             processTitle: qsTr("Backup failed")
+            updateTitle: qsTr("Backup failed")
+            updateTips: dccData.model().backUpFailedTips
+            onBtnClicked: function(updateType) {
+            actionBtnText: qsTr("Back Up Again")
+                dccData.work().onRequestRetry(3, updateType)
+            }
         }
     }
 

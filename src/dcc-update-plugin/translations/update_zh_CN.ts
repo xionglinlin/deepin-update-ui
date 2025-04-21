@@ -393,5 +393,9 @@
         <source>Update installation successful</source>
         <translation>更新安装成功</translation>
     </message>
+    <message>
+        <source>Back Up Again</source>
+        <translation>重新备份</translation>
+    </message>
 </context>
 </TS>
