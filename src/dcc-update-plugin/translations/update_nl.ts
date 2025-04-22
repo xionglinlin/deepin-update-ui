@@ -1,115 +1,113 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="sq">
+<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="nl">
 <context>
     <name>CheckUpdate</name>
     <message>
         <source>Last check: </source>
-        <translation>Kontrolli i fundit më: </translation>
+        <translation>Recentste controle:</translation>
     </message>
 </context>
 <context>
     <name>NoActive</name>
     <message>
         <source>Your system is not activated, and it failed to connect to update services</source>
-        <translation>Sistemi juaj s’është aktivizuar dhe s’u arrit të lidhej me shërbime përditësimesh</translation>
+        <translation>Er kan geen verbinding worden gemaakt, omdat je systeem niet is geactiveerd.</translation>
     </message>
 </context>
 <context>
     <name>UpdateHistory</name>
     <message>
         <source>Settings will be reverted in %1s.</source>
-        <translation>Rregullimet do të kthehen te %1s.</translation>
+        <translation>De instellingen worden over %1 sec. teruggezet.</translation>
     </message>
     <message>
         <source>Save the display settings?</source>
-        <translation>Të ruhen rregullimet për ekranin?</translation>
+        <translation>Wil je de beeldscherminstellingen opslaan?</translation>
     </message>
     <message>
         <source>Revert</source>
-        <translation>Riktheji</translation>
+        <translation>Herstellen</translation>
     </message>
     <message>
         <source>Save</source>
-        <translation>Ruaji</translation>
+        <translation>Opslaan</translation>
     </message>
 </context>
 <context>
     <name>UpdateList</name>
     <message>
         <source>View Details</source>
-        <translation>Shihni Hollësitë</translation>
+        <translation>Details bekijken</translation>
     </message>
     <message>
         <source>Updates:</source>
-        <translation>Përditësime:</translation>
+        <translation>Updates:</translation>
     </message>
     <message>
         <source>Release time:</source>
-        <translation>Kohë hedhjeje në qarkullim:</translation>
+        <translation>Uitgebracht op:</translation>
     </message>
     <message>
         <source>Collapse</source>
-        <translation>Palose</translation>
+        <translation>Inklappen</translation>
     </message>
 </context>
 <context>
     <name>UpdateLogHelper</name>
     <message>
         <source>NONE</source>
-        <translation>ASNJË</translation>
+        <translation>GEEN</translation>
     </message>
     <message>
         <source>LOW</source>
-        <translation>I ULËT</translation>
+        <translation>LAAG</translation>
     </message>
     <message>
         <source>MEDIUM</source>
-        <translation>MESATAR</translation>
+        <translation>GEMIDDELD</translation>
     </message>
     <message>
         <source>HIGH</source>
-        <translation>I LARTË</translation>
+        <translation>HOOG</translation>
     </message>
     <message>
         <source>CRITICAL</source>
-        <translation>KRITIK</translation>
+        <translation>KRITIEK</translation>
     </message>
     <message>
         <source>critical-risk</source>
-        <translation>rrezik kritik</translation>
+        <translation>critical-risk</translation>
     </message>
     <message>
         <source>high-risk</source>
-        <translation>rrezik i lartë</translation>
+        <translation>high-risk</translation>
     </message>
     <message>
         <source>medium-risk</source>
-        <translation>rrezik mesatar</translation>
+        <translation>medium-risk</translation>
     </message>
     <message>
         <source>low-risk</source>
-        <translation>rrezik i ulët</translation>
+        <translation>low-risk</translation>
     </message>
     <message>
         <source>unknown</source>
-        <translation>i panjohur</translation>
+        <translation>onbekend</translation>
     </message>
     <message>
         <source>This update fixes</source>
-        <translation>Ky përditësim ndreq</translation>
+        <translation>Deze update lost het volgende op:</translation>
     </message>
     <message>
         <source>vulnerabilities</source>
-        <translation>cenueshmëri</translation>
+        <translation>kwetsbaarheden</translation>
     </message>
     <message>
         <source>vulnerability</source>
-        <translation>cenueshmëri</translation>
+        <translation>een kwetsbaarheid</translation>
     </message>
     <message>
         <source>%1 of %2 %3</source>
-        <translation>%1 nga %2 %3</translation>
+        <translation>%1 van %2 %3</translation>
         <extra-content_explain>`数字+%`会在代码中替换为字符串，例如：3 of high-risk vulnerabilities；各语言需要根据实际情况增加空格(例如：中文没有空格，英文有空格)</extra-content_explain>
     </message>
     <message>
@@ -119,7 +117,7 @@
     </message>
     <message>
         <source>for more details, please visit </source>
-        <translation>për më tepër hollësi, ju lutemi, vizitoni </translation>
+        <translation>Meer informatie:</translation>
         <extra-content_explain>这句话后面会带上一个超链接，各语言自行决定末尾需不需要加空格</extra-content_explain>
     </message>
 </context>
@@ -127,275 +125,275 @@
     <name>UpdateModel</name>
     <message>
         <source>Checking for updates, please wait…</source>
-        <translation>Po kontrollohet për përditësime, ju lutemi, pritni…</translation>
+        <translation>Bezig met controleren op updates…</translation>
     </message>
     <message>
         <source>Your system is up to date</source>
-        <translation>Sistemi juaj është i përditësuar</translation>
+        <translation>Je beschikt over de nieuwste software</translation>
     </message>
     <message>
         <source>Unknown error</source>
-        <translation>Gabim i panjohur</translation>
+        <translation>Onbekende fout</translation>
     </message>
     <message>
         <source>Downloading updates failed. Please free up %1 disk space first.</source>
-        <translation>Shkarkimi i përditësimeve dështoi. Ju lutemi, së pari, lironi %1 hapësirë në disk.</translation>
+        <translation>De updates kunnen niet worden gedownload. Maak ruimte vrij op %1.</translation>
     </message>
     <message>
         <source>Dependency error, failed to detect the updates</source>
-        <translation>Gabim varësish, s’u arrit të pikasen përditësimet</translation>
+        <translation>Bijwerken mislukt: afhankelijkheidsfout</translation>
     </message>
     <message>
         <source>Please check your network and try again.</source>
-        <translation>Ju lutemi, kontrolloni lidhjen tuaj me rrjetin dhe riprovoni.</translation>
+        <translation>Controleer je internetverbinding en probeer het opnieuw.</translation>
     </message>
     <message>
         <source>Downloading updates failed. Please check your network and try again.</source>
-        <translation>Shkarkimi i përditësimeve dështoi. Ju lutemi, kontrolloni rrjetin dhe riprovoni.</translation>
+        <translation>De updates kunnen niet worden gedownload - controleer je internetverbinding.</translation>
     </message>
     <message>
         <source>Unable to perform system backup. If you continue the updates, you cannot roll back to the old system later.</source>
-        <translation>S’arrihet të kryhet kopjeruajtje sistemi. Nëse vazhdoni përditësimet, s’mund të ktheheni prapa te sistemi i vjetër më vonë.</translation>
+        <translation>Er kan geen reservekopie worden gemaakt. Als je doorgaat met de installatie, dan kun je je systeem niet meer herstellen naar een oudere versie.</translation>
     </message>
     <message>
         <source>If you continue the updates, you cannot roll back to the old system later.</source>
-        <translation>Nëse vazhdoni përditësimet, s’mund të ktheheni prapa te sistemi i vjetër më vonë.</translation>
+        <translation>Als je doorgaat met de installatie, dan kun je je systeem niet meer herstellen naar een oudere versie.</translation>
     </message>
     <message>
         <source>Insufficient disk space</source>
-        <translation>Hapësirë disku e pamjaftueshme</translation>
+        <translation>Onvoldoende vrije ruimte</translation>
     </message>
     <message>
         <source>DPKG error</source>
-        <translation>Gabim DPKG</translation>
+        <translation>DPKG-fout</translation>
     </message>
     <message>
         <source>File missing</source>
-        <translation>Mungon kartelë</translation>
+        <translation>Bestand ontbreekt</translation>
     </message>
     <message>
         <source>Service connection is abnormal, please check the network and try again</source>
-        <translation>Lidhja me shërbimin s’është normale, ju lutemi, kontrolloni rrjetin dhe riprovoni</translation>
+        <translation>Er is een probleem met de updateserver. Controleer je internetverbinding en probeer het opnieuw.</translation>
     </message>
     <message>
         <source>The repository source configuration is not valid, please check and try again.</source>
-        <translation>Formësimi i depos së burimeve s’është i vlefshëm, ju lutemi, kontrolloni dhe riprovoni.</translation>
+        <translation>De pakketbroninstellingen zijn onjuist. Controleer de instellingen en probeer het opnieuw.</translation>
     </message>
     <message>
         <source>Check Again</source>
-        <translation>Rikontrollo</translation>
+        <translation>Opnieuw controleren</translation>
     </message>
 </context>
 <context>
     <name>UpdateSetting</name>
     <message>
         <source>Smart Mirror Switch</source>
-        <translation>Ndërrim i Mençur Pasqyrash</translation>
+        <translation>Slimme spiegelserverwisselaar</translation>
     </message>
     <message>
         <source>Update Type</source>
-        <translation>Lloj Përditësimi</translation>
+        <translation>Soort updates</translation>
     </message>
     <message>
         <source>Function Updates</source>
-        <translation>Përditësime Funksionesh</translation>
+        <translation>Functionele updates</translation>
     </message>
     <message>
         <source>Delivers a cumulative update including new features, quality updates, and  security updates</source>
-        <translation>Sjell një përditësim përmbledhës që përfshin veçori të reja, përditësime cilësie dhe përditësime sigurie</translation>
+        <translation>Bevat nieuwe functies, verbeteringen en oplossingen voor beveiligingsproblemen.</translation>
     </message>
     <message>
         <source>Security Updates</source>
-        <translation>Përditësime Sigurie</translation>
+        <translation>Beveiligingsupdates</translation>
     </message>
     <message>
         <source>Delivers security updates</source>
-        <translation>Sjell përditësime sigurie</translation>
+        <translation>Bevat oplossingen voor beveiligingsproblemen.</translation>
     </message>
     <message>
         <source>Third-party Updates</source>
-        <translation>Përditësime Palësh të Treta</translation>
+        <translation>Externe updates</translation>
     </message>
     <message>
         <source>Delivers  updates for additional repository sources</source>
-        <translation>Sjell përditësime për burime shtesë deposh</translation>
+        <translation>Bevat updates uit aanvullende pakketbronnen.</translation>
     </message>
     <message>
         <source>Limit Speed</source>
-        <translation>Kufizo Shpejtësinë</translation>
+        <translation>Snelheid beperken</translation>
     </message>
     <message>
         <source>Limit Setting</source>
-        <translation>Rregullim Kufiri</translation>
+        <translation>Beperken tot</translation>
     </message>
     <message>
         <source>Auto Download</source>
-        <translation>Vetëshkarkoje</translation>
+        <translation>Automatisch downloaden</translation>
     </message>
     <message>
         <source>Enabling &quot;Auto Download Updates&quot; will automatically download updates when connected to the internet</source>
-        <translation>Aktivizimi i “Vetëshkarko Përditësime” di të shkarkojë automatikisht përditësime, kur bëhet lidhja në internet</translation>
+        <translation>Schakel deze optie in om updates automatisch te downloaden zodra er een internetverbinding is.</translation>
     </message>
     <message>
         <source>Download when Inactive</source>
-        <translation>Shkarko kur është i Plogësht</translation>
+        <translation>Downloaden tijdens inactiviteit</translation>
     </message>
     <message>
         <source>Start at</source>
-        <translation>Fillo më</translation>
+        <translation>Beginnen om</translation>
     </message>
     <message>
         <source>End at</source>
-        <translation>Përfundoje më</translation>
+        <translation>Eindigen om</translation>
     </message>
     <message>
         <source>Advanced Settings</source>
-        <translation>Rregullime të Mëtejshme</translation>
+        <translation>Geavanceerde instellingen</translation>
     </message>
     <message>
         <source>Updates Notification</source>
-        <translation>Njoftim Përditësimesh</translation>
+        <translation>Updatemeldingen tonen</translation>
     </message>
     <message>
         <source>Clear Package Cache</source>
-        <translation>Spastro Fshehtinë Paketash</translation>
+        <translation>Pakketcache legen</translation>
     </message>
     <message>
         <source>Update History</source>
-        <translation>Historik Përditësimesh</translation>
+        <translation>Updategeschiedenis</translation>
     </message>
     <message>
         <source>View</source>
-        <translation>Shiheni</translation>
+        <translation>Bekijken</translation>
     </message>
     <message>
         <source>Join Internal Testing Channel</source>
-        <translation>Bëhuni Pjesë e Kanalit të Testimeve të Brendshme</translation>
+        <translation>Intern testkanaal inschakelen</translation>
     </message>
     <message>
         <source>Join the internal testing channel to get deepin latest updates</source>
-        <translation>Që të merrni përditësimet më të reja të deepin-it, bëhuni pjesë e kanalit të brendshëm të testimeve</translation>
+        <translation>Schakel het interne testkanaal in om de nieuwste Deepin-updates te ontvangen.</translation>
     </message>
 </context>
 <context>
     <name>UpdateWorker</name>
     <message>
         <source>System Updates</source>
-        <translation>Përditësime Sistemi</translation>
+        <translation>Systeemupdates</translation>
     </message>
     <message>
         <source>Fixed some known bugs and security vulnerabilities</source>
-        <translation>U ndreqën disa të meta të ditura dhe cenueshmëri sigurie</translation>
+        <translation>Er zijn enkele gemelde bugs en beveiligingsproblemen opgelost</translation>
     </message>
     <message>
         <source>Security Updates</source>
-        <translation>Përditësime Sigurie</translation>
+        <translation>Beveiligingsupdates</translation>
     </message>
     <message>
         <source>Third-party Repositories</source>
-        <translation>Depo Palësh të Treta</translation>
+        <translation>Externe pakketbronnen</translation>
     </message>
 </context>
 <context>
     <name>update</name>
     <message>
         <source>System Update</source>
-        <translation>Përditësim Sistemi</translation>
+        <translation>Systeemupdates</translation>
     </message>
     <message>
         <source>System update and upgrade</source>
-        <translation>Përditësim dhe përmirësim sistemi</translation>
+        <translation>Systeemupdates en -upgrades</translation>
     </message>
 </context>
 <context>
     <name>updateMain</name>
     <message>
         <source>Update Settings</source>
-        <translation>Rregullime Përditësimesh</translation>
+        <translation>Update-instellingen</translation>
     </message>
     <message>
         <source>Installing</source>
-        <translation>Instalim</translation>
+        <translation>Bezig met installeren</translation>
     </message>
     <message>
         <source>Update download completed</source>
-        <translation>Shkarkimi i përditësimit u plotësua</translation>
+        <translation>Het downloaden is voltooid</translation>
     </message>
     <message>
         <source>Install updates</source>
-        <translation>Instalo përditësimet</translation>
+        <translation>Updates installeren</translation>
     </message>
     <message>
         <source>Update size: </source>
-        <translation>Madhësi përditësimi: </translation>
+        <translation>Updategrootte:</translation>
     </message>
     <message>
         <source>Update download failed</source>
-        <translation>Shkarkimi i përditësimit dështoi</translation>
+        <translation>Het downloaden is mislukt</translation>
     </message>
     <message>
         <source>Downloading updates...</source>
-        <translation>Po shkarkohen përditësime…</translation>
+        <translation>Bezig met downloaden…</translation>
     </message>
     <message>
         <source>Downloading</source>
-        <translation>Shkarkim</translation>
+        <translation>Bezig met downloaden</translation>
     </message>
     <message>
         <source>Configure Update settings、Security Updates、Auto Download Updates and Updates Notification</source>
-        <translation>Formësoni rregullime Përditësimi、Përditësime Sigurie、Vetëshkarkim Përditësimedhe dhe Njoftim Përditësimesh</translation>
+        <translation>Stel de update-instellingen in, evenals beveiligingsupdates, automatisch downloaden en meldingen</translation>
     </message>
     <message>
         <source>Reboot now</source>
-        <translation>Riniseni tani</translation>
+        <translation>Nu herstarten</translation>
     </message>
     <message>
         <source>Download</source>
-        <translation>Shkarkoje</translation>
+        <translation>Downloaden</translation>
     </message>
     <message>
         <source>Installing updates...</source>
-        <translation>Po instalohen përditësimet…</translation>
+        <translation>Bezig met installeren…</translation>
     </message>
     <message>
         <source>Retry</source>
-        <translation>Riprovoni</translation>
+        <translation>Opnieuw proberen</translation>
     </message>
     <message>
         <source>Continue Update</source>
-        <translation>Vazhdo Përditësimin</translation>
+        <translation>Doorgaan met updates</translation>
     </message>
     <message>
         <source>Updates Available</source>
-        <translation>Ka Përditësime</translation>
+        <translation>Updates beschikbaar</translation>
     </message>
     <message>
         <source>Installation update failed</source>
-        <translation>Instalimi i përditësimeve dështoi</translation>
+        <translation>De installatie is mislukt</translation>
     </message>
     <message>
         <source>To ensure proper functioning of your system and applications, please restart your computer after the update</source>
-        <translation>Që të garantohet funksionimi i saktë i sistemit dhe aplikacioneve tuaja, ju lutemi, pas përditësimit, rinisni kopmjuterin tuaj</translation>
+        <translation>Herstart nadien je computer om alle wijzigingen toe te passen.</translation>
     </message>
     <message>
         <source>Backing up in progress...</source>
-        <translation>Kopjeruajtje në kryerje e sipër…</translation>
+        <translation>Bezig met maken van reserviekopie…</translation>
     </message>
     <message>
         <source>Backing up in progress</source>
-        <translation>Kopjeruajtje në kryerje e sipër</translation>
+        <translation>Bezig met maken van reserviekopie</translation>
     </message>
     <message>
         <source>Backup failed</source>
-        <translation>Kopjeruajtja dështoi</translation>
+        <translation>Reservekopie mislukt</translation>
     </message>
     <message>
         <source>Update installation successful</source>
-        <translation>Instalim i suksesshëm i përditësimeve</translation>
+        <translation>De updates zijn geïnstalleerd</translation>
     </message>
     <message>
         <source>Back Up Again</source>
-        <translation>Ribëj Kopjeruajtje</translation>
+        <translation>Reservekopie opnieuw maken</translation>
     </message>
 </context>
 </TS>
