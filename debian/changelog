@@ -1,3 +1,19 @@
+deepin-update-ui (1.0.5) unstable; urgency=medium
+
+  * [dde-update-ui] Updates for project Deepin Desktop Environment (#20)
+  * feat: Provide a notification of backup failure
+  * fix: The checkbox doesn't respond when clicked
+  * chore(license): Organizing licenses and copyrights
+  * feat: block the update settings
+  * feat: Clear QML cache after installation
+  * feat: use dbus-send instead of qdbus
+  * feat: optimize the code structure
+  * feat: add lock service dbus interface
+  * feat: update translations
+  * feat: adapt to translation platforms
+
+ -- zhangkun <zhangkun2@uniontech.com>  Tue, 22 Apr 2025 15:42:52 +0800
+
 deepin-update-ui (1.0.4) unstable; urgency=medium
 
   * chore: remove unnecessary dependencies
