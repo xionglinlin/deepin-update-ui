@@ -19,15 +19,15 @@
     <name>QuitTestingChannelDialog</name>
     <message>
         <source>If you exit the beta program, you will no longer receive beta updates.</source>
-        <translation type="unfinished"></translation>
+        <translation>Якщо ви вийдете з програми тестування, ви більше не отримуватимете тестових оновлень.</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>Скасувати</translation>
     </message>
     <message>
         <source>Exit</source>
-        <translation type="unfinished"></translation>
+        <translation>Вийти</translation>
     </message>
 </context>
 <context>
@@ -39,6 +39,10 @@
     <message>
         <source>Settings will be reverted in %1s.</source>
         <translation type="unfinished">Система повернеться до початкових налаштувань за %1 с.</translation>
+    </message>
+    <message>
+        <source>Settings will be reverted in %1s.</source>
+        <translation>Система повернеться до початкових налаштувань за %1 с.</translation>
     </message>
     <message>
         <source>Revert</source>
@@ -293,7 +297,7 @@
     </message>
     <message>
         <source>Click here to complete the application</source>
-        <translation type="unfinished"></translation>
+        <translation>Натисніть тут, щоб завершити подання</translation>
     </message>
 </context>
 <context>
@@ -414,7 +418,7 @@
     </message>
     <message>
         <source>Back Up Again</source>
-        <translation type="unfinished"></translation>
+        <translation>Повторити спробу копіювання</translation>
     </message>
 </context>
 </TS>

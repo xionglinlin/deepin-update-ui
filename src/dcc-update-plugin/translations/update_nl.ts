@@ -19,15 +19,15 @@
     <name>QuitTestingChannelDialog</name>
     <message>
         <source>If you exit the beta program, you will no longer receive beta updates.</source>
-        <translation type="unfinished"></translation>
+        <translation>Als je het bètaprogramma verlaat, ontvang je geen bèta-updates meer.</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>Annuleren</translation>
     </message>
     <message>
         <source>Exit</source>
-        <translation type="unfinished"></translation>
+        <translation>Afsluiten</translation>
     </message>
 </context>
 <context>
@@ -39,6 +39,10 @@
     <message>
         <source>Settings will be reverted in %1s.</source>
         <translation type="unfinished">De instellingen worden over %1 sec. teruggezet.</translation>
+    </message>
+    <message>
+        <source>Settings will be reverted in %1s.</source>
+        <translation>De instellingen worden over %1 sec. teruggezet.</translation>
     </message>
     <message>
         <source>Revert</source>
@@ -293,7 +297,7 @@
     </message>
     <message>
         <source>Click here to complete the application</source>
-        <translation type="unfinished"></translation>
+        <translation>Klik hier om te voltooien</translation>
     </message>
 </context>
 <context>

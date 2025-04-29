@@ -19,15 +19,15 @@
     <name>QuitTestingChannelDialog</name>
     <message>
         <source>If you exit the beta program, you will no longer receive beta updates.</source>
-        <translation type="unfinished"></translation>
+        <translation>Se você sair do programa beta, não receberá mais atualizações beta.</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>Cancelar</translation>
     </message>
     <message>
         <source>Exit</source>
-        <translation type="unfinished"></translation>
+        <translation>Sair</translation>
     </message>
 </context>
 <context>
@@ -39,6 +39,10 @@
     <message>
         <source>Settings will be reverted in %1s.</source>
         <translation type="unfinished">As configurações serão revertidas em %1s.</translation>
+    </message>
+    <message>
+        <source>Settings will be reverted in %1s.</source>
+        <translation>As configurações serão revertidas em %1s.</translation>
     </message>
     <message>
         <source>Revert</source>
@@ -293,7 +297,7 @@
     </message>
     <message>
         <source>Click here to complete the application</source>
-        <translation type="unfinished"></translation>
+        <translation>Clique aqui para completar a aplicação</translation>
     </message>
 </context>
 <context>

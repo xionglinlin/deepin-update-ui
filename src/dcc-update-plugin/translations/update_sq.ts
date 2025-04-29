@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="sq">
+<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="sq">
 <context>
     <name>CheckUpdate</name>
     <message>
@@ -19,34 +17,34 @@
     <name>QuitTestingChannelDialog</name>
     <message>
         <source>If you exit the beta program, you will no longer receive beta updates.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nëse e braktisni programin beta, s’do të merrni më përditësime beta.</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>Anuloje</translation>
     </message>
     <message>
         <source>Exit</source>
-        <translation type="unfinished"></translation>
+        <translation>Dilni</translation>
     </message>
 </context>
 <context>
     <name>UpdateHistoryDialog</name>
     <message>
         <source>Save the display settings?</source>
-        <translation type="unfinished">Të ruhen rregullimet për ekranin?</translation>
+        <translation>Të ruhen rregullimet e ekranit?</translation>
     </message>
     <message>
         <source>Settings will be reverted in %1s.</source>
-        <translation type="unfinished">Rregullimet do të kthehen te %1s.</translation>
+        <translation>Rregullimet do të prapakthehen te %1s.</translation>
     </message>
     <message>
         <source>Revert</source>
-        <translation type="unfinished">Riktheji</translation>
+        <translation>Prapaktheji</translation>
     </message>
     <message>
         <source>Save</source>
-        <translation type="unfinished">Ruaji</translation>
+        <translation>Ruaje</translation>
     </message>
 </context>
 <context>
@@ -293,7 +291,7 @@
     </message>
     <message>
         <source>Click here to complete the application</source>
-        <translation type="unfinished"></translation>
+        <translation>Klikoni këtu që të plotësoni aplikimin</translation>
     </message>
 </context>
 <context>

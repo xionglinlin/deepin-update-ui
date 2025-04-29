@@ -1,135 +1,128 @@
-<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="pl">
+<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="de_DE">
 <context>
     <name>CheckUpdate</name>
     <message>
         <source>Last check: </source>
-        <translation>Ostatnie sprawdzenie: </translation>
+        <translation>Letzte Prüfung:</translation>
     </message>
 </context>
 <context>
     <name>NoActive</name>
     <message>
         <source>Your system is not activated, and it failed to connect to update services</source>
-        <translation>Twój system nie jest aktywowany i nie udało mu się połączyć z usługą aktualizacji.</translation>
+        <translation>Ihr System ist nicht aktiviert, und es konnte nicht mit einem Aktualisierungs-Server verbunden werden.</translation>
     </message>
 </context>
 <context>
     <name>QuitTestingChannelDialog</name>
     <message>
         <source>If you exit the beta program, you will no longer receive beta updates.</source>
-        <translation>Jeśli opuścisz program Beta, przestaniesz otrzymywać aktualizacje z tego kanału.</translation>
+        <translation>Wenn Sie das Beta-Programm verlassen, erhalten Sie keine weiteren Beta-Aktualsierungen mehr</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation>Anuluj</translation>
+        <translation>Abbrechen</translation>
     </message>
-</context>
-<context>
-    <name>UpdateHistoryDialog</name>
     <message>
         <source>Exit</source>
-        <translation>Wyjdź</translation>
+        <translation>Verlassen</translation>
     </message>
 </context>
 <context>
     <name>UpdateHistoryDialog</name>
     <message>
         <source>Save the display settings?</source>
-        <translation type="unfinished">Zapisać ustawienia wyświetlania?</translation>
+        <translation>Anzeige-Einstellungen speichern?</translation>
     </message>
     <message>
         <source>Settings will be reverted in %1s.</source>
-        <translation type="unfinished">Ustawienia zostaną przywrócone za %1s.</translation>
-    </message>
-    <message>
-        <source>Settings will be reverted in %1s.</source>
-        <translation>Ustawienia zostaną przywrócone za %1s.</translation>
+        <translation>Einstellungen werden zurückgestellt in %1s.</translation>
     </message>
     <message>
         <source>Revert</source>
-        <translation type="unfinished">Przywróć</translation>
+        <translation>Zurückstellen</translation>
     </message>
     <message>
         <source>Save</source>
-        <translation type="unfinished">Zapisz</translation>
+        <translation>Speichern</translation>
     </message>
 </context>
 <context>
     <name>UpdateList</name>
     <message>
         <source>View Details</source>
-        <translation>Wyświetl szczegóły</translation>
+        <translation>Details anzeigen</translation>
     </message>
     <message>
         <source>Updates:</source>
-        <translation>Aktualizacje:</translation>
+        <translation>Aktualisierungen:</translation>
     </message>
     <message>
         <source>Release time:</source>
-        <translation>Data wydania:</translation>
+        <translation>Veröffentlichungsdatum:</translation>
     </message>
     <message>
         <source>Collapse</source>
-        <translation>Zwiń</translation>
+        <translation>Einfahren</translation>
     </message>
 </context>
 <context>
     <name>UpdateLogHelper</name>
     <message>
         <source>NONE</source>
-        <translation>BRAK</translation>
+        <translation>NICHTS</translation>
     </message>
     <message>
         <source>LOW</source>
-        <translation>NISKIE</translation>
+        <translation>GERING</translation>
     </message>
     <message>
         <source>MEDIUM</source>
-        <translation>ŚREDNIE</translation>
+        <translation>MITTEL</translation>
     </message>
     <message>
         <source>HIGH</source>
-        <translation>WYSOKIE</translation>
+        <translation>HOCH</translation>
     </message>
     <message>
         <source>CRITICAL</source>
-        <translation>KRYTYCZNE</translation>
+        <translation>KRITISCH</translation>
     </message>
     <message>
         <source>critical-risk</source>
-        <translation>ryzyko-krytyczne</translation>
+        <translation>kritisches-risiko</translation>
     </message>
     <message>
         <source>high-risk</source>
-        <translation>ryzyko-wysokie</translation>
+        <translation>hohes-risiko</translation>
     </message>
     <message>
         <source>medium-risk</source>
-        <translation>ryzyko-średnie</translation>
+        <translation>mittleres-risiko</translation>
     </message>
     <message>
         <source>low-risk</source>
-        <translation>ryzyko-niskie</translation>
+        <translation>niedriges-risiko</translation>
     </message>
     <message>
         <source>unknown</source>
-        <translation>nieznany</translation>
+        <translation>unbekannt</translation>
     </message>
     <message>
         <source>This update fixes</source>
-        <translation>Ta aktualizacja naprawia</translation>
+        <translation>Diese Aktualisierung behebt</translation>
     </message>
     <message>
         <source>vulnerabilities</source>
-        <translation>luki zabezpieczeń</translation>
+        <translation>Sicherheitsrisiken</translation>
     </message>
     <message>
         <source>vulnerability</source>
-        <translation>lukę zabezpieczeń</translation>
+        <translation>Sicherheitsrisiko</translation>
     </message>
     <message>
         <source>%1 of %2 %3</source>
-        <translation>%1 z %2 %3</translation>
+        <translation>%1 von %2 %3</translation>
         <extra-content_explain>`数字+%`会在代码中替换为字符串，例如：3 of high-risk vulnerabilities；各语言需要根据实际情况增加空格(例如：中文没有空格，英文有空格)</extra-content_explain>
     </message>
     <message>
@@ -139,7 +132,7 @@
     </message>
     <message>
         <source>for more details, please visit </source>
-        <translation>Aby uzyskać więcej informacji, odwiedź: </translation>
+        <translation>für weitere Einzelheiten besuchen Sie bitte</translation>
         <extra-content_explain>这句话后面会带上一个超链接，各语言自行决定末尾需不需要加空格</extra-content_explain>
     </message>
 </context>
@@ -147,283 +140,279 @@
     <name>UpdateModel</name>
     <message>
         <source>Checking for updates, please wait…</source>
-        <translation>Sprawdzanie aktualizacji, proszę czekać...</translation>
+        <translation>Aktualisierungen werden gesucht, einen Moment bitte…</translation>
     </message>
     <message>
         <source>Your system is up to date</source>
-        <translation>Twój system jest aktualny</translation>
+        <translation>Ihr System ist auf dem neuesten Stand</translation>
     </message>
     <message>
         <source>Unknown error</source>
-        <translation>Nieznany błąd</translation>
+        <translation>Unbekannter Fehler</translation>
     </message>
     <message>
         <source>Downloading updates failed. Please free up %1 disk space first.</source>
-        <translation>Błąd pobierania aktualizacji. Najpierw zwolnij %1 miejsca na dysku.</translation>
+        <translation>Aktualisierungen konnten nicht heruntergeladen werden. Bitte machen Sie zuerst %1 Speicherplatz frei.</translation>
     </message>
     <message>
         <source>Dependency error, failed to detect the updates</source>
-        <translation>Błąd zależności, nie udało się wykryć aktualizacji</translation>
+        <translation>Abhängigkeiten-Fehler, Aktualisierungen konnten nicht erkannt werden.</translation>
     </message>
     <message>
         <source>Please check your network and try again.</source>
-        <translation>Sprawdź swoją sieć i spróbuj ponownie.</translation>
+        <translation>Bitte prüfen Sie Ihr Netzwerk und versuchen es erneut.</translation>
     </message>
     <message>
         <source>Downloading updates failed. Please check your network and try again.</source>
-        <translation>Błąd pobierania aktualizacji. Sprawdź swoją sieć i spróbuj ponownie.</translation>
+        <translation>Aktualisierungen konnten nicht heruntergeladen werden. Bitte  überprüfen Sie Ihr Netzwerk und versuchen es erneut.</translation>
     </message>
     <message>
         <source>Unable to perform system backup. If you continue the updates, you cannot roll back to the old system later.</source>
-        <translation>Nie udało się utworzyć kopii zapasowej. Jeśli kontynuujesz aktualizacje, nie będziesz mógł przywrócić starego systemu.</translation>
+        <translation>System-Sicherung konnte nicht durchgeführt werden. Falls Sie mit den System-Aktualisierungen fortfahren, können Sie nicht wieder zurück zum alten System.</translation>
     </message>
     <message>
         <source>If you continue the updates, you cannot roll back to the old system later.</source>
-        <translation>Jeśli kontynuujesz aktualizacje, nie będziesz mógł przywrócić starego systemu.</translation>
+        <translation>Falls Sie mit den Aktualisierungen fortfahren, können Sie nicht wieder zurück zum alten System.</translation>
     </message>
     <message>
         <source>Insufficient disk space</source>
-        <translation>Za mało miejsca na dysku</translation>
+        <translation>Zu wenig Speicherplatz</translation>
     </message>
     <message>
         <source>DPKG error</source>
-        <translation>Błąd DPKG</translation>
+        <translation>DPKG-Fehler</translation>
     </message>
     <message>
         <source>File missing</source>
-        <translation>Brakuje pliku</translation>
+        <translation>Datei fehlt</translation>
     </message>
     <message>
         <source>Service connection is abnormal, please check the network and try again</source>
-        <translation>Występują problemy połączenia z usługą, sprawdź sieć i spróbuj ponownie.</translation>
+        <translation>Service-Verbindung ist unnormal, bitte prüfen Sie das Netzwerk und versuchen es erneut</translation>
     </message>
     <message>
         <source>The repository source configuration is not valid, please check and try again.</source>
-        <translation>Konfiguracja repozytorium źródłowego jest nieprawidłowa, sprawdź i spróbuj ponownie.</translation>
+        <translation>Diese Repositorien-Quellen-Konfiguration ist ungültig, bitte überprüfen Sie dies und versuchen es erneut.</translation>
     </message>
     <message>
         <source>Check Again</source>
-        <translation>Sprawdź ponownie</translation>
+        <translation>Nochmals prüfen</translation>
     </message>
 </context>
 <context>
     <name>UpdateSetting</name>
     <message>
         <source>Smart Mirror Switch</source>
-        <translation>Inteligentne przełączanie mirrorów</translation>
+        <translation>Smarter Spiegelserverwechsel</translation>
     </message>
     <message>
         <source>Update Type</source>
-        <translation>Typ aktualizacji</translation>
+        <translation>Aktualisierungs-Typ</translation>
     </message>
     <message>
         <source>Function Updates</source>
-        <translation>Aktualizacje funkcjonalności</translation>
+        <translation>Funktions-Aktualisierungen</translation>
     </message>
     <message>
         <source>Delivers a cumulative update including new features, quality updates, and  security updates</source>
-        <translation>Zapewnia cały pakiet aktualizacji, w tym nowe funkcje, usprawnienia i aktualizacje bezpieczeństwa</translation>
+        <translation>Liefert eine Aktualisierungs-Kombination aus neuen Funktionen, Verbesserungen und Sicherheitsverbesserungen</translation>
     </message>
     <message>
         <source>Security Updates</source>
-        <translation>Aktualizacje bezpieczeństwa</translation>
+        <translation>Sicherheits-Aktualisierungen</translation>
     </message>
     <message>
         <source>Delivers security updates</source>
-        <translation>Zapewnia aktualizacje bezpieczeństwa</translation>
+        <translation>Liefert Sicherheits-Aktualisierungen</translation>
     </message>
     <message>
         <source>Third-party Updates</source>
-        <translation>Aktualizacje stron trzecich</translation>
+        <translation>Drittparteien-Aktualisierungen</translation>
     </message>
     <message>
         <source>Delivers  updates for additional repository sources</source>
-        <translation>Zapewnia aktualizacje dla dodatkowych repozytoriów</translation>
+        <translation>Liefert Aktualisierungen für zusätzliche Repositorien-Quellen</translation>
     </message>
     <message>
         <source>Limit Speed</source>
-        <translation>Limit prędkości</translation>
+        <translation>Geschwindigkeit begrenzen</translation>
     </message>
     <message>
         <source>Limit Setting</source>
-        <translation>Ustawienia limitu</translation>
+        <translation>Geschwindigkeitseinstellung</translation>
     </message>
     <message>
         <source>Auto Download</source>
-        <translation>Automatyczne pobieranie</translation>
+        <translation>Automatischer Download</translation>
     </message>
     <message>
         <source>Enabling &quot;Auto Download Updates&quot; will automatically download updates when connected to the internet</source>
-        <translation>Włączenie &quot;Automatyczne pobieranie aktualizacji&quot; zainstaluje automatycznie aktualizacje po wykryciu połączenia z Internetem</translation>
+        <translation>Das Einschalten von &quot;Aktualisierungen automatisch herunterladen&quot; wird eben dieses tun, wenn eine Internetverbindung besteht</translation>
     </message>
     <message>
         <source>Download when Inactive</source>
-        <translation>Pobieraj w stanie bezczynności</translation>
+        <translation>Herunterladen, wenn inaktiv</translation>
     </message>
     <message>
         <source>Start at</source>
-        <translation>Rozpocznij o</translation>
+        <translation>Beginn um</translation>
     </message>
     <message>
         <source>End at</source>
-        <translation>Zakończ o</translation>
+        <translation>Ende um</translation>
     </message>
     <message>
         <source>Advanced Settings</source>
-        <translation>Ustawienia zaawansowane</translation>
+        <translation>Fortgeschrittene Einstellungen</translation>
     </message>
     <message>
         <source>Updates Notification</source>
-        <translation>Powiadomienia aktualizacji</translation>
+        <translation>Aktualisierungs-Benachrichtigung</translation>
     </message>
     <message>
         <source>Clear Package Cache</source>
-        <translation>Wyczyść pamięć podręczną pakietów</translation>
+        <translation>Paket-Cache-Speicher leeren</translation>
     </message>
     <message>
         <source>Update History</source>
-        <translation>Historia aktualizacji</translation>
+        <translation>Aktualisierungs-Chronik</translation>
     </message>
     <message>
         <source>View</source>
-        <translation>Wyświetl</translation>
+        <translation>Ansicht</translation>
     </message>
     <message>
         <source>Join Internal Testing Channel</source>
-        <translation>Dołącz do wewnętrznego kanału testowego</translation>
+        <translation>Dem Intern-Test-Kanal beitreten</translation>
     </message>
     <message>
         <source>Join the internal testing channel to get deepin latest updates</source>
-        <translation>Dołącz do wewnętrznego kanału testowego, aby uzyskać dostęp do najnowszych funkcji</translation>
+        <translation>Dem Intern-Test-Kanal beitreten um Deepin-latest-Aktualisierungen zu erhalten</translation>
     </message>
     <message>
         <source>Click here to complete the application</source>
-        <translation>Kliknij tutaj, aby zakończyć aplikacje</translation>
-    </message>
-    <message>
-        <source>Click here to complete the application</source>
-        <translation type="unfinished"></translation>
+        <translation>Klicken Sie um die das Programm abzuschließen</translation>
     </message>
 </context>
 <context>
     <name>UpdateWorker</name>
     <message>
         <source>System Updates</source>
-        <translation>Aktualizacje systemu</translation>
+        <translation>System-Aktualisierungen</translation>
     </message>
     <message>
         <source>Fixed some known bugs and security vulnerabilities</source>
-        <translation>Naprawiono kilka znanych błędów i luk bezpieczeństwa</translation>
+        <translation>Einige Fehler und Sicherheitsrisiken beseitigt</translation>
     </message>
     <message>
         <source>Security Updates</source>
-        <translation>Aktualizacje bezpieczeństwa</translation>
+        <translation>Sicherheits-Aktualisierungen</translation>
     </message>
     <message>
         <source>Third-party Repositories</source>
-        <translation>Zewnętrzne repozytoria</translation>
+        <translation>Drittparteien-Repositorien</translation>
     </message>
 </context>
 <context>
     <name>update</name>
     <message>
         <source>System Update</source>
-        <translation>Aktualizacje systemu</translation>
+        <translation>System-Aktualisierungen</translation>
     </message>
     <message>
         <source>System update and upgrade</source>
-        <translation>Aktualizacje systemu</translation>
+        <translation>System-Aktuakisierung und -Hochstufung</translation>
     </message>
 </context>
 <context>
     <name>updateMain</name>
     <message>
         <source>Update Settings</source>
-        <translation>Ustawienia aktualizacji</translation>
+        <translation>Aktualisierungs-Einstellungen</translation>
     </message>
     <message>
         <source>Installing</source>
-        <translation>Instalowanie</translation>
+        <translation>Installieren</translation>
     </message>
     <message>
         <source>Update download completed</source>
-        <translation>Nie udało się pobrać aktualizacji</translation>
+        <translation>Herunterladen abgeschlossen</translation>
     </message>
     <message>
         <source>Install updates</source>
-        <translation>Zainstaluj aktualizacje</translation>
+        <translation>Aktualisierungen einbauen</translation>
     </message>
     <message>
         <source>Update size: </source>
-        <translation>Rozmiar aktualizacji: </translation>
+        <translation>Größe der Aktualisierung:</translation>
     </message>
     <message>
         <source>Update download failed</source>
-        <translation>Nie udało się pobrać aktualizacji</translation>
+        <translation>Herunterladen der Aktualisierung fehlgeschlagen</translation>
     </message>
     <message>
         <source>Downloading updates...</source>
-        <translation>Pobieranie aktualizacji...</translation>
+        <translation>Aktualisierungen werden heruntergeladen…</translation>
     </message>
     <message>
         <source>Downloading</source>
-        <translation>Pobieranie</translation>
+        <translation>Am Herunterladen</translation>
     </message>
     <message>
         <source>Configure Update settings、Security Updates、Auto Download Updates and Updates Notification</source>
-        <translation>Konfiguracja ustawień aktualizacji, aktualizacje bezpieczeństwa, pobieranie i powiadomienia aktualizacji</translation>
+        <translation>Aktualisierungseinstellungen, Sicherheitsaktualisierungen, Aktualisierungen automatisch Herunterladen und Aktualisierungs-Benachrichtigung</translation>
     </message>
     <message>
         <source>Reboot now</source>
-        <translation>Uruchom ponownie teraz</translation>
+        <translation>Jetzt neustarten</translation>
     </message>
     <message>
         <source>Download</source>
-        <translation>Pobierz</translation>
+        <translation>Herunterladen</translation>
     </message>
     <message>
         <source>Installing updates...</source>
-        <translation>Instalowanie aktualizacji...</translation>
+        <translation>Aktualisierungen werden installiert…</translation>
     </message>
     <message>
         <source>Retry</source>
-        <translation>Ponów</translation>
+        <translation>Erneut versuchen</translation>
     </message>
     <message>
         <source>Continue Update</source>
-        <translation>Wznów aktualizacje</translation>
+        <translation>Aktualisierung fortsetzen</translation>
     </message>
     <message>
         <source>Updates Available</source>
-        <translation>Aktualizacje są dostępne</translation>
+        <translation>Aktualisierungen vorhanden</translation>
     </message>
     <message>
         <source>Installation update failed</source>
-        <translation>Błąd instalowania aktualizacji</translation>
+        <translation>Einbau der Aktualisierung fehlgeschlagen</translation>
     </message>
     <message>
         <source>To ensure proper functioning of your system and applications, please restart your computer after the update</source>
-        <translation>Aby zapewnić prawidłowe działanie systemu i aplikacji, uruchom ponownie komputer po zaktualizowaniu</translation>
+        <translation>Um das korrekte Funktionieren ihres Systems und der Programme sicherzustellen, machen Sie bitte einen Neustart nach der Aktualisierung</translation>
     </message>
     <message>
         <source>Backing up in progress...</source>
-        <translation>Tworzenie kopii zapasowej...</translation>
+        <translation>Datensicherung in Arbeit …</translation>
     </message>
     <message>
         <source>Backing up in progress</source>
-        <translation>Tworzenie kopii zapasowej</translation>
+        <translation>Datensicherung in Arbeit</translation>
     </message>
     <message>
         <source>Backup failed</source>
-        <translation>Błąd tworzenia kopii zapasowej</translation>
+        <translation>Datensicherung fehlgeschlagen</translation>
     </message>
     <message>
         <source>Update installation successful</source>
-        <translation>Aktualizacja zainstalowana pomyślnie</translation>
+        <translation>Einbau der Aktualisierung erfolgreich</translation>
     </message>
     <message>
         <source>Back Up Again</source>
-        <translation>Utwórz ponownie kopię zapasową</translation>
+        <translation>Erneut BackUp erstellen</translation>
     </message>
 </context>
 </TS>
