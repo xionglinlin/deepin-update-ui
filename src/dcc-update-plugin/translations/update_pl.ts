@@ -303,6 +303,10 @@
         <source>Click here to complete the application</source>
         <translation>Kliknij tutaj, aby zakończyć aplikacje</translation>
     </message>
+    <message>
+        <source>Expand</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>UpdateWorker</name>
@@ -421,8 +425,16 @@
         <translation>Aktualizacja zainstalowana pomyślnie</translation>
     </message>
     <message>
-        <source>Back Up Again</source>
-        <translation>Utwórz ponownie kopię zapasową</translation>
+        <source>If you continue the updates, you cannot roll back to the old system later.</source>
+        <translation type="unfinished">Jeśli kontynuujesz aktualizacje, nie będziesz mógł przywrócić starego systemu.</translation>
+    </message>
+    <message>
+        <source>Try Again</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Proceed to Update</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

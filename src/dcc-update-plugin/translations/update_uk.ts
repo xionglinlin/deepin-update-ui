@@ -303,6 +303,10 @@
         <source>Click here to complete the application</source>
         <translation>Натисніть тут, щоб завершити подання</translation>
     </message>
+    <message>
+        <source>Expand</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>UpdateWorker</name>
@@ -421,8 +425,16 @@
         <translation>Успішне встановлення оновлень</translation>
     </message>
     <message>
-        <source>Back Up Again</source>
-        <translation>Повторити спробу копіювання</translation>
+        <source>If you continue the updates, you cannot roll back to the old system later.</source>
+        <translation type="unfinished">Якщо ви продовжите процедуру оновлення, ви не зможете повернутися до попередньої системи.</translation>
+    </message>
+    <message>
+        <source>Try Again</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Proceed to Update</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

@@ -303,6 +303,10 @@
         <source>Click here to complete the application</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Expand</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>UpdateWorker</name>
@@ -421,8 +425,16 @@
         <translation>Päivitys asennettu</translation>
     </message>
     <message>
-        <source>Back Up Again</source>
-        <translation>Varmista uudelleen</translation>
+        <source>If you continue the updates, you cannot roll back to the old system later.</source>
+        <translation type="unfinished">Jos jatkat päivityksiä, et voi palata takaisin vanhaan järjestelmään.</translation>
+    </message>
+    <message>
+        <source>Try Again</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Proceed to Update</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

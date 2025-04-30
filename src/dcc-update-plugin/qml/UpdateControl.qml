@@ -1,13 +1,12 @@
 // SPDX-FileCopyrightText: 2024 UnionTech Software Technology Co., Ltd.
 // SPDX-License-Identifier: GPL-3.0-or-later
-import QtQuick 2.0
-import QtQuick.Controls 2.0
-import Qt.labs.qmlmodels 1.2
-import QtQuick.Layouts 1.15
+import QtQuick
+import QtQuick.Controls
+import QtQuick.Layouts
 
-import org.deepin.dtk 1.0 as D
-import org.deepin.dtk.style 1.0 as DS
-import org.deepin.dcc 1.0
+import org.deepin.dtk as D
+import org.deepin.dtk.style as DS
+import org.deepin.dcc
 
 ColumnLayout {
     id: rootLayout
@@ -16,22 +15,22 @@ ColumnLayout {
     property string updateStateIcon: ""
     property string updateTitle : ""
     property string updateTips: ""
-    property string actionBtnText : ""
+    property var btnActions: []
     property string processTitle: ""
     property double processValue: 0
     property bool processState: false
     property bool updateListEnable: true
 
-    signal btnClicked(int updateType)
+    signal btnClicked(int index, int updateType)
     signal downloadJobCtrl(int updateCtrlType)
     signal closeDownload()
 
     RowLayout {
-        Layout.preferredWidth: parent.width
+        Layout.rightMargin: 12
+        Layout.leftMargin: 12
+        Layout.topMargin: 10
+        Layout.bottomMargin: 10
         ColumnLayout {
-            Layout.leftMargin: 22
-            Layout.topMargin: 10
-            Layout.bottomMargin: 10
             spacing: 5
             RowLayout {
                 spacing: 5
@@ -45,7 +44,7 @@ ColumnLayout {
                 }
 
                 D.Label {
-                    font.pixelSize: 16
+                    font.pixelSize: D.DTK.fontManager.t5
                     font.bold: true
                     text: updateTitle
                 }
@@ -54,20 +53,34 @@ ColumnLayout {
             D.Label {
                 visible: updateTips.length !== 0
                 text: updateTips
-                font.pixelSize: 12
-                wrapMode: Text.WordWrap
+                font.pixelSize: D.DTK.fontManager.t8
+                Layout.fillWidth: true
+                elide: Text.ElideRight
+                ToolTip.delay: 1000
+                ToolTip.timeout: 5000
+                ToolTip.text: text
+                ToolTip.visible: desLabelHover.hovered && implicitWidth > width
+                HoverHandler {
+                    id: desLabelHover
+                }
             }
         }
 
-        D.Button {
-            Layout.rightMargin: 12
-            Layout.alignment: Qt.AlignRight | Qt.AlignVCenter
-            text: actionBtnText
-            font.pixelSize: 14
-            visible: actionBtnText.length !== 0
-            enabled: updatelistModel.model.isUpdateEnable
-            onClicked: {
-                rootLayout.btnClicked(updateListModels.getAllUpdateType())
+        Item {
+            Layout.fillWidth: true
+        }
+
+        Repeater {
+            model: btnActions
+            delegate: D.Button {
+                Layout.alignment: Qt.AlignRight | Qt.AlignVCenter
+                text: modelData
+                font: D.DTK.fontManager.t6
+                visible: modelData.length !== 0
+                enabled: updatelistModel.model.isUpdateEnable
+                onClicked: {
+                    rootLayout.btnClicked(index, updateListModels.getAllUpdateType())
+                }
             }
         }
 
@@ -129,7 +142,7 @@ ColumnLayout {
                 // Layout.rightMargin: startIcon.width + stopIcon.width + progressCtl.spacing * 2
                 width: parent.width
                 text: processTitle + Math.floor(process.value * 100) + "%"
-                font.pixelSize: 12
+                font.pixelSize: D.DTK.fontManager.t8
             }
         }
     }

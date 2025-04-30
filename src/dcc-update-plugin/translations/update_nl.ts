@@ -303,6 +303,10 @@
         <source>Click here to complete the application</source>
         <translation>Klik hier om te voltooien</translation>
     </message>
+    <message>
+        <source>Expand</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>UpdateWorker</name>
@@ -421,8 +425,16 @@
         <translation>De updates zijn geïnstalleerd</translation>
     </message>
     <message>
-        <source>Back Up Again</source>
-        <translation>Reservekopie opnieuw maken</translation>
+        <source>If you continue the updates, you cannot roll back to the old system later.</source>
+        <translation type="unfinished">Als je doorgaat met de installatie, dan kun je je systeem niet meer herstellen naar een oudere versie.</translation>
+    </message>
+    <message>
+        <source>Try Again</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Proceed to Update</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

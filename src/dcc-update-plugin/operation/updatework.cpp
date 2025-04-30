@@ -632,6 +632,7 @@ void UpdateWorker::doUpgrade(int updateTypes, bool doBackup)
 {
     qCInfo(DCC_UPDATE_WORKER) << "Do upgrade, update types:" << updateTypes << ", whether do backup:" << doBackup;
     cleanLaStoreJob(m_distUpgradeJob);
+    cleanLaStoreJob(m_backupJob);
 
     qCInfo(DCC_UPDATE_WORKER) << "Update types:" << updateTypes << ", do backup:" << doBackup;
     QDBusPendingCall call = m_updateInter->DistUpgradePartly(updateTypes, doBackup);

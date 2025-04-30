@@ -8,6 +8,8 @@ import QtQuick.Layouts 1.15
 import org.deepin.dtk 1.0 as D
 import org.deepin.dcc 1.0
 
+import org.deepin.dcc.update 1.0
+
 DccObject {
 
     Connections {
@@ -119,9 +121,9 @@ DccObject {
             updateStateIcon: "qrc:/icons/deepin/builtin/icons/success.svg"
             updateTitle: qsTr("Update installation successful")
             updateTips: qsTr("To ensure proper functioning of your system and applications, please restart your computer after the update")
-            actionBtnText: qsTr("Reboot now")
+            btnActions: [ qsTr("Reboot now") ]
 
-            onBtnClicked: function(updateType) {
+            onBtnClicked: function(index, updateType) {
                 dccData.work().reStart()
             }
         }
@@ -141,10 +143,10 @@ DccObject {
             updateStateIcon: "qrc:/icons/deepin/builtin/icons/warning.svg"
             updateTitle: qsTr("Installation update failed")
             updateTips: dccData.model().downloadFailedTips
-            actionBtnText: qsTr("Continue Update")
+            btnActions: [ qsTr("Continue Update") ]
 
-            onBtnClicked: function(updateType) {
-                dccData.work().onRequestRetry(2, updateType)
+            onBtnClicked: function(index, updateType) {
+                dccData.work().onRequestRetry(Common.CPT_UpgradeFailed, updateType)
             }
         }
     }
@@ -162,13 +164,18 @@ DccObject {
             updateListModels: dccData.model().backupFailedListModel
             processTitle: qsTr("Backup failed")
             updateTitle: qsTr("Backup failed")
-            updateTips: dccData.model().backUpFailedTips
-            onBtnClicked: function(updateType) {
-            actionBtnText: qsTr("Back Up Again")
-                dccData.work().onRequestRetry(3, updateType)
+            updateTips: qsTr("If you continue the updates, you cannot roll back to the old system later.")
+            btnActions: [ qsTr("Try Again"), qsTr("Proceed to Update") ]
+            onBtnClicked: function(index, updateType) {
+                console.log("index: " + index, " updateType: " + updateType)
+                if (index === 0) {
+                    dccData.work().onRequestRetry(Common.CPT_BackupFailed, updateType)
+                } else {
+                    dccData.work().doUpgrade(updateType, false)
+                }
             }
         }
-    }    
+    }   
 
     // 下载完成列表
     DccObject {
@@ -182,10 +189,10 @@ DccObject {
         page: UpdateControl {
             updateListModels: dccData.model().preInstallListModel
             updateTitle: qsTr("Update download completed")
-            actionBtnText: qsTr("Install updates")
+            btnActions: [ qsTr("Install updates") ]
             updateTips: qsTr("Update size: ") + dccData.model().preInstallListModel.downloadSize
 
-            onBtnClicked: function(updateType) {
+            onBtnClicked: function(index, updateType) {
                 dccData.work().doUpgrade(updateType, true)
             }
         }
@@ -203,11 +210,11 @@ DccObject {
         page: UpdateControl {
             updateListModels: dccData.model().downloadFailedListModel
             updateTitle: qsTr("Update download failed")
-            actionBtnText: qsTr("Retry")
+            btnActions: [ qsTr("Retry") ]
             updateTips: dccData.model().installFailedTips
 
-            onBtnClicked: function(updateType) {
-                dccData.work().onRequestRetry(6, updateType)
+            onBtnClicked: function(index, updateType) {
+                dccData.work().onRequestRetry(Common.CPT_DownloadFailed, updateType)
             }
         }
     }
@@ -224,10 +231,10 @@ DccObject {
         page: UpdateControl {
             updateListModels: dccData.model().preUpdatelistModel
             updateTitle: qsTr("Updates Available")
-            actionBtnText: qsTr("Download")
+            btnActions: [ qsTr("Download") ]
             updateTips: qsTr("Update size: ") + dccData.model().preUpdatelistModel.downloadSize
 
-            onBtnClicked: function(updateType) {
+            onBtnClicked: function(index, updateType) {
                 dccData.work().startDownload(updateType)
             }
         }

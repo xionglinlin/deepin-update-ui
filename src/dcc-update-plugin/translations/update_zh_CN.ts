@@ -303,6 +303,10 @@
         <source>Click here to complete the application</source>
         <translation>点击此处完成内测申请</translation>
     </message>
+    <message>
+        <source>Expand</source>
+        <translation>展开</translation>
+    </message>
 </context>
 <context>
     <name>UpdateWorker</name>
@@ -421,8 +425,16 @@
         <translation>更新安装成功</translation>
     </message>
     <message>
-        <source>Back Up Again</source>
-        <translation>重新备份</translation>
+        <source>If you continue the updates, you cannot roll back to the old system later.</source>
+        <translation>继续更新，系统将无法回退</translation>
+    </message>
+    <message>
+        <source>Try Again</source>
+        <translation>重试</translation>
+    </message>
+    <message>
+        <source>Proceed to Update</source>
+        <translation>继续更新</translation>
     </message>
 </context>
 </TS>
