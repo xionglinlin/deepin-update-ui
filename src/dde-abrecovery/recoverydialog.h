@@ -39,11 +39,11 @@ private:
      */
     void exitApp(bool isExec = true);
     void requestReboot();
-    QString getBackupTime();
 
 private:
     UpdateDBusProxy *m_updateDBusProxy;
     RecoveryWidget *m_recoveryWidget;
+    QString m_backupTime;
 };
 
 class RecoveryWidget : public QWidget

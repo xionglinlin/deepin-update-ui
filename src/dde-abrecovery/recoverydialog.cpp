@@ -54,8 +54,7 @@ void Manage::showDialog()
         return;
 
     m_recoveryWidget = new RecoveryWidget();
-    // TODO 缺少版本号
-    m_recoveryWidget->backupInfomation("", getBackupTime());
+    m_recoveryWidget->backupInfomation(DSysInfo::productVersion() , m_backupTime);
 
     connect(m_recoveryWidget, &RecoveryWidget::notifyButtonClicked, this, [ = ](bool state) {
         // 能够进入到弹框页面,说明是满足一切版本回退的条件
@@ -99,33 +98,37 @@ void Manage::recoveryCanRestore()
 {
     QDBusPendingCall call = m_updateDBusProxy->CanRollback();
     QDBusPendingCallWatcher *watcher = new QDBusPendingCallWatcher(call, this);
-    connect(watcher, &QDBusPendingCallWatcher::finished, [this, call] {
-        if (!call.isError()) {
-            QDBusReply<bool> reply = call.reply();
-            bool value = reply.value();
-            // 满足条件,返回 true : showDialog
-            if (value) {
-                qInfo() << "If ab recovery interface can restore: true, showDialog...";
-                showDialog();
+    connect(watcher, &QDBusPendingCallWatcher::finished, [this, watcher] {
+        QDBusPendingReply<bool, QString> reply = *watcher;
+        watcher->deleteLater();
+        if (!reply.isError()) {
+            
+            if (reply.count() >= 2) {
+                bool canRollback = reply.argumentAt<0>();
+                QString backupData = reply.argumentAt<1>();
+                
+                qInfo() << "Rollback status:" << canRollback << "Message:" << backupData;
+                
+                if (canRollback) {
+                    QJsonDocument doc = QJsonDocument::fromJson(backupData.toUtf8());
+                    QJsonObject obj = doc.object();
+                    qlonglong backupTime = obj["time"].toVariant().toLongLong();
+                    
+                    m_backupTime = QDateTime::fromSecsSinceEpoch(backupTime).toString("yyyy/MM/dd hh:mm:ss");
+                    showDialog();
+                } else {
+                    exitApp();
+                }
             } else {
                 // 不满足恢复条件,退出app
                 qInfo() << "If ab recovery interface can restore: false, exitApp...";
                 exitApp();
             }
         } else {
-            qWarning() << "Call Recovery can restore error: " << call.error().message();
+            qWarning() << "Call Recovery can restore error: " << reply.error().message();
+            exitApp();
         }
     });
-}
-
-QString Manage::getBackupTime()
-{
-    // TODO 缺少备份时间
-    // time_t t = static_cast<time_t>(m_systemRecovery->backupTime());
-    time_t t = static_cast<time_t>(0);
-    QDateTime time = QDateTime::fromSecsSinceEpoch(t);
-
-    return time.toString("yyyy/MM/dd hh:mm:ss");
 }
 
 void Manage::exitApp(bool isExec)
@@ -298,7 +301,7 @@ void RecoveryWidget::initUI()
 
     // 社区版需要显示'deepin 20',专业版显示'uos 20'
     QString systemVersion = DSysInfo::isCommunityEdition() ? "deepin " : "uos ";
-    DTipLabel *tip = new DTipLabel(tr("Are you sure you want to roll back to %1 backed up on %2?").arg(systemVersion + m_backupVersion).arg(m_backupTime));
+    DTipLabel *tip = new DTipLabel(tr("Are you sure you want to roll back to %1 backed up on %2?").arg(m_backupTime).arg(systemVersion + m_backupVersion));
     DFontSizeManager::instance()->bind(tip, DFontSizeManager::T4, QFont::Light);
     tip->setWordWrap(true);
     tip->setContentsMargins(QMargins(5, 0, 5, 0));
