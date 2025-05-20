@@ -10,6 +10,7 @@
 #include <DPaletteHelper>
 #include <DGuiApplicationHelper>
 #include <DSysInfo>
+#include <DIcon>
 
 #include <QEvent>
 #include <QApplication>
@@ -51,7 +52,11 @@ CheckProgressWidget::CheckProgressWidget(QWidget *parent)
     if (UpdateModel::CSS_BeforeLogin == UpdateModel::instance()->checkSystemStage()) {
         m_logo = new QLabel(this);
         m_logo->setFixedSize(286, 57);
-        m_logo->setPixmap(DHiDPIHelper::loadNxPixmap(":img/logo.svg"));
+
+        if (DSysInfo::uosEditionType() == DSysInfo::UosCommunity)
+            m_logo->setPixmap(DIcon::loadNxPixmap(":img/deepin_logo.svg"));
+        else
+            m_logo->setPixmap(DIcon::loadNxPixmap(":img/uos_logo.svg"));
 
         m_tip->setText(tr("The check is almost complete, thank you for your patience"));
 

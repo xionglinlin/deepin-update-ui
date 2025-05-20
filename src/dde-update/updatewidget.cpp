@@ -17,6 +17,7 @@
 #include <DPaletteHelper>
 #include <DGuiApplicationHelper>
 #include <DIcon>
+#include <DSysInfo>
 
 DCORE_USE_NAMESPACE
 DWIDGET_USE_NAMESPACE
@@ -117,7 +118,10 @@ UpdateProgressWidget::UpdateProgressWidget(QWidget *parent)
     , m_installBeginValue(0)
 {
     m_logo->setFixedSize(286, 57);
-    m_logo->setPixmap(DIcon::loadNxPixmap(":img/logo.svg"));
+    if (DSysInfo::uosEditionType() == DSysInfo::UosCommunity)
+        m_logo->setPixmap(DIcon::loadNxPixmap(":img/deepin_logo.svg"));
+    else
+        m_logo->setPixmap(DIcon::loadNxPixmap(":img/uos_logo.svg"));
 
     auto palette = m_tip->palette();
     palette.setColor(QPalette::WindowText, Qt::white);

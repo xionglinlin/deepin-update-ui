@@ -2,7 +2,8 @@
     <qresource prefix="/">
         <file>img/failed.svg</file>
         <file>img/success.svg</file>
-        <file>img/logo.svg</file>
+        <file>img/uos_logo.svg</file>
+        <file>img/deepin_logo.svg</file>
         <file>img/waiting_update/waiting_update_0.png</file>
         <file>img/waiting_update/waiting_update_1.png</file>
         <file>img/waiting_update/waiting_update_2.png</file>
