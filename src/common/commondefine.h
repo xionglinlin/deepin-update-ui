@@ -36,5 +36,10 @@ const static QString LockService = QStringLiteral("org.deepin.dde.LockService1")
 const static QString LockPath = QStringLiteral("/org/deepin/dde/LockService1");
 const static QString LockInterface = QStringLiteral("org.deepin.dde.LockService1");
 
+// shutdownFront1
+const static QString ShutdownFront1Service = QStringLiteral("org.deepin.dde.ShutdownFront1");
+const static QString ShutdownFront1Path = QStringLiteral("/org/deepin/dde/ShutdownFront1");
+const static QString ShutdownFront1Interface = QStringLiteral("org.deepin.dde.ShutdownFront1");
+
 const static QString PropertiesInterface = QStringLiteral("org.freedesktop.DBus.Properties");
 const static QString PropertiesChanged = QStringLiteral("PropertiesChanged");

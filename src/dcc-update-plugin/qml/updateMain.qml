@@ -238,7 +238,25 @@ DccObject {
             updateListEnable: !dccData.model().upgradeWaiting
 
             onBtnClicked: function(index, updateType) {
-                dccData.work().doUpgrade(updateType, true)
+                updateSelectDialog.updateType = updateType
+                updateSelectDialog.show()
+            }
+
+            UpdateSelectDialog {
+                id: updateSelectDialog
+                property var updateType: 0
+                palette: parent.palette
+                visible: false
+                onSilentBtnClicked: {
+                    dccData.work().doUpgrade(updateType, true)
+                    close()
+                }
+                onUpgradeRebootBtnClicked: {
+                    dccData.work().modalUpgrade(true)
+                }
+                onUpgradeShutdownBtnClicked: {
+                    dccData.work().modalUpgrade(false)
+                }
             }
         }
     }

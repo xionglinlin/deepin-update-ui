@@ -61,8 +61,7 @@ class UpdateProgressWidget : public QFrame
     Q_OBJECT
 public:
     explicit UpdateProgressWidget(QWidget *parent = nullptr);
-    void setValue(double value);
-    void setInstallBeginValue(int value);
+    void setValue(int value);
 
 protected:
     bool event(QEvent *e) override;
@@ -73,7 +72,6 @@ private:
     Dtk::Widget::DPictureSequenceView  *m_waitingView;
     Dtk::Widget::DProgressBar *m_progressBar;
     QLabel *m_progressText;
-    int m_installBeginValue;
 };
 
 class UpdateCompleteWidget : public QFrame
@@ -125,6 +123,7 @@ private slots:
     void onUpdateStatusChanged(UpdateModel::UpdateStatus status);
     void showLogWidget();
     void hideLogWidget();
+    void onJobProgressChanged(double value);
 
 private:
     explicit UpdateWidget(QWidget *parent = nullptr);

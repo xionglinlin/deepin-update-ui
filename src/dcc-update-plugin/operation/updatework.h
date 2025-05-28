@@ -52,6 +52,7 @@ public:
     // 备份并安装更新
     Q_INVOKABLE void doUpgrade(int updateTypes, bool doBackup);
     Q_INVOKABLE void reStart();
+    Q_INVOKABLE void modalUpgrade(bool rebootAfterUpgrade = true);
     void setBackupJob(const QString& jobPath);
     void setDistUpgradeJob(const QString& jobPath);
     void updateSystemVersion();

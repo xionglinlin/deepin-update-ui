@@ -58,6 +58,7 @@ private:
     bool syncStartService(const QString &serviceName);
     void createDistUpgradeJob(const QString& jobPath);
     void createCheckSystemJob(const QString& jobPath);
+    void createBackupJob(const QString& jobPath);
     void cleanLaStoreJob(QPointer<JobInter> dbusJob);
     void getUpdateOption();
 
@@ -65,9 +66,11 @@ private slots:
     void onJobListChanged(const QList<QDBusObjectPath> &jobs);
     void onDistUpgradeStatusChanged(const QString &status);
     void onCheckSystemStatusChanged(const QString &status);
+    void onBackupStatusChanged(const QString& value);
 
 private:
     QPointer<JobInter> m_distUpgradeJob; // 更新job
+    QPointer<JobInter> m_backupJob; // 备份job
     QPointer<JobInter> m_fixErrorJob; // 修复错误job
     QPointer<JobInter> m_checkSystemJob; // 修复错误job
     UpdateDBusProxy *m_dbusProxy;

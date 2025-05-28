@@ -121,6 +121,11 @@ public:
 
     // lockService
     QString CurrentUser();
+
+    // shutdownFront
+    void Restart();
+    void UpdateAndReboot();
+    void UpdateAndShutdown();
 signals:
     // updater
     void UpdateNotifyChanged(bool value) const;
@@ -156,6 +161,7 @@ private:
     DDBusInterface *m_smartMirrorInter;
     DDBusInterface *m_login1Inter;
     DDBusInterface *m_lockServiceInter;
+    DDBusInterface *m_shutdownFrontInter;
 
     QDBusServiceWatcher *m_interWatcher;
 };

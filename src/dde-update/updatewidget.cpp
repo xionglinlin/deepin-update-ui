@@ -22,7 +22,7 @@
 DCORE_USE_NAMESPACE
 DWIDGET_USE_NAMESPACE
 
-const int BACKUP_BEGIN_PROGRESS = 20;
+const int BACKUP_BEGIN_PROGRESS = 0;
 const int BACKUP_END_PROGRESS = 50;
 
 UpdateLogWidget::UpdateLogWidget(QWidget *parent)
@@ -115,7 +115,6 @@ UpdateProgressWidget::UpdateProgressWidget(QWidget *parent)
     , m_waitingView(new DPictureSequenceView(this))
     , m_progressBar(new DProgressBar(this))
     , m_progressText(new QLabel(this))
-    , m_installBeginValue(0)
 {
     m_logo->setFixedSize(286, 57);
     if (DSysInfo::uosEditionType() == DSysInfo::UosCommunity)
@@ -183,27 +182,13 @@ bool UpdateProgressWidget::event(QEvent *e)
     return false;
 }
 
-void UpdateProgressWidget::setValue(double value)
+void UpdateProgressWidget::setValue(int value)
 {
-    double tmpValue = value * (100 - m_installBeginValue);
-    // 在备份完成后,如果m_installBeginValue=50,那么value需要大于等于2进度条才会增加,等待时间过长,体验不好.
-    if (m_installBeginValue > 0 && tmpValue < 1 && tmpValue > 0)
-        tmpValue = 1.0;
-
-    int iProgress = m_installBeginValue + static_cast<int>(tmpValue);
     // 进度条不能大于100，不能小于0，不能回退
-    if (iProgress > 100 || iProgress < 0 || iProgress <= m_progressBar->value())
+    if (value > 100 || value < 0 || value <= m_progressBar->value())
         return;
 
     qInfo() << "Update progress value: " << value;
-    m_progressBar->setValue(iProgress);
-    m_progressText->setText(QString::number(iProgress) + "%");
-}
-
-void UpdateProgressWidget::setInstallBeginValue(int value)
-{
-    m_installBeginValue = value;
-
     m_progressBar->setValue(value);
     m_progressText->setText(QString::number(value) + "%");
 }
@@ -454,11 +439,9 @@ void UpdateWidget::onUpdateStatusChanged(UpdateModel::UpdateStatus status)
             break;
         case UpdateModel::UpdateStatus::BackingUp:
             m_stackedWidget->setCurrentWidget(m_progressWidget);
-            m_progressWidget->setInstallBeginValue(BACKUP_BEGIN_PROGRESS);
             break;
         case UpdateModel::UpdateStatus::BackupSuccess:
             m_stackedWidget->setCurrentWidget(m_progressWidget);
-            m_progressWidget->setInstallBeginValue(BACKUP_END_PROGRESS);
             break;
         case UpdateModel::UpdateStatus::Installing:
             setMouseCursorVisible(false);
@@ -505,7 +488,7 @@ void UpdateWidget::initUi()
 
 void UpdateWidget::initConnections()
 {
-    connect(UpdateModel::instance(), &UpdateModel::JobProgressChanged, m_progressWidget, &UpdateProgressWidget::setValue);
+    connect(UpdateModel::instance(), &UpdateModel::JobProgressChanged, this, &UpdateWidget::onJobProgressChanged);
     connect(UpdateModel::instance(), &UpdateModel::updateStatusChanged, this, &UpdateWidget::onUpdateStatusChanged);
     connect(m_updateCompleteWidget, &UpdateCompleteWidget::requestShowLogWidget, this, &UpdateWidget::showLogWidget);
     connect(m_logWidget, &UpdateLogWidget::requestHideLogWidget, this, &UpdateWidget::hideLogWidget);
@@ -558,4 +541,30 @@ void UpdateWidget::keyPressEvent(QKeyEvent *e)
 {
     Q_UNUSED(e)
     // 屏蔽esc键，设置event的accept无效，暂时不处理
+}
+
+void UpdateWidget::onJobProgressChanged(double value)
+{
+    qInfo() << "Job progress changed: " << value << "hasBackup: " << UpdateModel::instance()->hasBackup() << "updateStatus: " << UpdateModel::instance()->updateStatus();
+    int progress = 0;
+    bool hasBackup = UpdateModel::instance()->hasBackup();
+    if (hasBackup) {
+        if (UpdateModel::instance()->updateStatus() == UpdateModel::UpdateStatus::BackingUp) {
+            progress = BACKUP_BEGIN_PROGRESS + static_cast<int>(value * (BACKUP_END_PROGRESS - BACKUP_BEGIN_PROGRESS));
+        } else if (UpdateModel::instance()->updateStatus() == UpdateModel::UpdateStatus::BackupSuccess) {
+            progress = BACKUP_END_PROGRESS;
+        } else if (UpdateModel::instance()->updateStatus() == UpdateModel::UpdateStatus::Installing) {
+            progress = BACKUP_END_PROGRESS + static_cast<int>(value * (100 - BACKUP_END_PROGRESS));
+        } else if (UpdateModel::instance()->updateStatus() == UpdateModel::UpdateStatus::InstallSuccess) {
+            progress = 100;
+        }
+    } else {
+        if (UpdateModel::instance()->updateStatus() == UpdateModel::UpdateStatus::Installing) {
+            progress = value * 100;
+        } else if (UpdateModel::instance()->updateStatus() == UpdateModel::UpdateStatus::InstallSuccess) {
+            progress = 100;
+        }
+    }
+
+    m_progressWidget->setValue(progress);
 }

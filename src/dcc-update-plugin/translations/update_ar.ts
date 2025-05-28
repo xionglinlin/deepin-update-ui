@@ -227,6 +227,25 @@
     </message>
 </context>
 <context>
+    <name>UpdateSelectDialog</name>
+    <message>
+        <source>The updates have been already downloaded. What do you want to do?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Silent Installation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Update and Reboot</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Update and Shut Down</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>UpdateSetting</name>
     <message>
         <source>Smart Mirror Switch</source>
@@ -322,6 +341,14 @@
     </message>
     <message>
         <source>Forum users at level 2 and above can join the beta test to receive the latest updates.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Collapse</source>
+        <translation type="unfinished">قم بطي ذلك</translation>
+    </message>
+    <message>
+        <source>Only numbers between 1-99999 are allowed</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

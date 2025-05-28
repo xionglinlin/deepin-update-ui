@@ -682,12 +682,18 @@ void UpdateWorker::doUpgrade(int updateTypes, bool doBackup)
 
 void UpdateWorker::reStart()
 {
-    DDBusSender()
-    .service("com.deepin.dde.shutdownFront")
-    .interface("com.deepin.dde.shutdownFront")
-    .path("/com/deepin/dde/shutdownFront")
-    .method("Restart")
-    .call();
+    qCInfo(DCC_UPDATE_WORKER) << "request restart";
+    m_updateInter->Restart();
+}
+
+void UpdateWorker::modalUpgrade(bool rebootAfterUpgrade)
+{
+    qCInfo(DCC_UPDATE_WORKER) << "request modal upgrade, reboot after upgrade:" << rebootAfterUpgrade;
+    if (rebootAfterUpgrade) {
+        m_updateInter->UpdateAndReboot();
+    } else {
+        m_updateInter->UpdateAndShutdown();
+    }
 }
 
 void UpdateWorker::setBackupJob(const QString& jobPath)
@@ -1404,7 +1410,7 @@ void UpdateWorker::onBackupStatusChanged(const QString &value)
         m_model->setLastError(BackupFailed, analyzeJobErrorMessage(description, BackupFailed));
         m_model->setBackupFailedTips(m_model->errorToText(m_model->lastError(BackupFailed)));
     } else if (value == "end") {
-        deleteJob(m_downloadJob);
+        deleteJob(m_backupJob);
     }
 }
 

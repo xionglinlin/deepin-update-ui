@@ -112,6 +112,9 @@ public:
     void setCheckSystemStage(CheckSystemStage stage) { m_checkSystemStage = stage; }
     CheckSystemStage checkSystemStage() const { return m_checkSystemStage; }
 
+    bool hasBackup() const { return m_hasBackup; }
+    void setHasBackup(bool hasBackup) { m_hasBackup = hasBackup; }
+
 private:
     explicit UpdateModel(QObject *parent = nullptr);
 
@@ -132,6 +135,7 @@ private:
     bool m_isReboot;                // true 更新并重启 false 更新并关机
     int m_updateMode; // 更新类型
     bool m_doUpgrade; // 是否进行更新操作
+    bool m_hasBackup = false; // 是否有备份
 
     CheckStatus m_checkStatus;
     CheckSystemStage m_checkSystemStage;

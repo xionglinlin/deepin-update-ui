@@ -33,6 +33,8 @@ UpdateDBusProxy::UpdateDBusProxy(QObject *parent)
                                           this))
     , m_lockServiceInter(new DDBusInterface(
         LockService, LockPath, LockInterface, QDBusConnection::systemBus(), this))
+    , m_shutdownFrontInter(new DDBusInterface(
+        ShutdownFront1Service, ShutdownFront1Path, ShutdownFront1Interface, QDBusConnection::sessionBus(), this))
     , m_interWatcher(new QDBusServiceWatcher(UpdaterService, QDBusConnection::systemBus()))
 
 {
@@ -416,4 +418,17 @@ void UpdateDBusProxy::SetEnable(bool enable)
 QString UpdateDBusProxy::CurrentUser()
 {
     return QDBusPendingReply<QString>(m_lockServiceInter->asyncCall(QStringLiteral("CurrentUser")));
+}
+
+void UpdateDBusProxy::Restart()
+{
+    m_shutdownFrontInter->asyncCall(QStringLiteral("Restart"));
+}
+void UpdateDBusProxy::UpdateAndReboot()
+{
+    m_shutdownFrontInter->asyncCall(QStringLiteral("UpdateAndReboot"));
+}
+void UpdateDBusProxy::UpdateAndShutdown()
+{
+    m_shutdownFrontInter->asyncCall(QStringLiteral("UpdateAndShutdown"));
 }
