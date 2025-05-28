@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="es">
+<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="es">
 <context>
     <name>CheckUpdate</name>
     <message>
@@ -31,7 +29,7 @@
     </message>
     <message>
         <source>No update history</source>
-        <translation type="unfinished"></translation>
+        <translation>Sin historial de actualizaciones</translation>
     </message>
     <message>
         <source>System Updates</source>
@@ -43,7 +41,7 @@
     </message>
     <message>
         <source>Delivers a cumulative update including new features, quality updates, and security updates</source>
-        <translation type="unfinished"></translation>
+        <translation>Ofrece una actualización acumulativa que incluye nuevas funciones, actualizaciones de calidad y seguridad</translation>
     </message>
     <message>
         <source>Delivers security updates</source>
@@ -51,7 +49,7 @@
     </message>
     <message>
         <source>Installation date:</source>
-        <translation type="unfinished"></translation>
+        <translation>Fecha de instalación:</translation>
     </message>
 </context>
 <context>
@@ -215,7 +213,7 @@
     </message>
     <message>
         <source>Turn on the switches under Update Content to get better experiences</source>
-        <translation type="unfinished"></translation>
+        <translation>Activa los interruptores en Actualizar contenido para obtener mejores experiencias</translation>
     </message>
     <message>
         <source>Your system is not activated, and it failed to connect to update services</source>
@@ -322,7 +320,7 @@
     </message>
     <message>
         <source>Forum users at level 2 and above can join the beta test to receive the latest updates.</source>
-        <translation type="unfinished"></translation>
+        <translation>Los usuarios del foro de nivel 2 o superior pueden unirse a la prueba beta para recibir las últimas actualizaciones.</translation>
     </message>
 </context>
 <context>
@@ -455,7 +453,7 @@
     </message>
     <message>
         <source>The battery capacity is lower than 60%. To get successful updates, please plug in.</source>
-        <translation type="unfinished"></translation>
+        <translation>La capacidad de la batería es inferior al 60%. Para obtener actualizaciones exitosas, conéctese.</translation>
     </message>
 </context>
 </TS>
