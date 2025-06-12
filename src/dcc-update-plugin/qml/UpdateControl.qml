@@ -93,7 +93,7 @@ ColumnLayout {
 
         BusyIndicator {
             id: initAnimation
-            running: true
+            running: initAnimation.visible
             visible: busyState
             implicitWidth: 32
             implicitHeight: 32
