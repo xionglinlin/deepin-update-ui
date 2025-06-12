@@ -133,4 +133,16 @@ void UpdateModel::setCheckStatus(CheckStatus status)
     }
 }
 
+void UpdateModel::setUpdateLog(const QString &log)
+{
+    m_updateLog = log;
+    Q_EMIT updateLogChanged(m_updateLog);
+}
+
+void UpdateModel::appendUpdateLog(const QString &log)
+{
+    m_updateLog += log;
+    Q_EMIT updateLogAppended(log);
+}
+
 #endif // __UPDATEMODEL_H__

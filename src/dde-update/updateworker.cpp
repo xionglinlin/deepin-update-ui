@@ -4,8 +4,9 @@
 
 #include "updateworker.h"
 #include "dconfig_helper.h"
-#include "common/dbus/updatejobdbusproxy.h"
 #include "common/commondefine.h"
+#include "common/dbus/updatejobdbusproxy.h"
+#include "common/global_util/public_func.h"
 
 #include <QTimer>
 #include <QDir>
@@ -20,6 +21,9 @@
 #include <QWidget>
 #include <QApplication>
 #include <QFile>
+#include <QFileSystemWatcher>
+#include <QTextStream>
+#include <QStandardPaths>
 
 #include <DDBusSender>
 
@@ -34,6 +38,7 @@ UpdateWorker::UpdateWorker(QObject *parent)
     , m_checkSystemJob(nullptr)
     , m_dbusProxy(new UpdateDBusProxy(this))
     , m_waitingToCheckSystem(false)
+    , m_logWatcherHelper(new LogWatcherHelper(this))
 {
 }
 
@@ -66,6 +71,18 @@ void UpdateWorker::init()
 
     getUpdateOption();
     onJobListChanged(m_dbusProxy->jobList());
+
+    connect(m_logWatcherHelper, &LogWatcherHelper::incrementalDataChanged, this, [](const QString &data) {
+        UpdateModel::instance()->appendUpdateLog(data);
+    });
+
+    connect(m_logWatcherHelper, &LogWatcherHelper::fileReset, this, []() {
+        UpdateModel::instance()->setUpdateLog(QString());
+    });
+
+    QTimer::singleShot(0, this, [this]() {
+        m_logWatcherHelper->startWatchFile();
+    });
 }
 
 /**
@@ -634,4 +651,47 @@ void UpdateWorker::forceReboot(bool reboot)
             qWarning() << "Power off failed:" << reply.error().message();
         }
     });
+}
+
+bool UpdateWorker::exportUpdateLog()
+{
+    const auto& [uid, name] = getCurrentUser();
+    if (uid == 0) {
+        qWarning() << "Current user's uid is invalid";
+        emit exportUpdateLogFinished(false);
+        return false;
+    }
+
+    QString homeDir = QString("/home/%1").arg(name);
+    QString desktopPath = QDir(homeDir).absoluteFilePath("Desktop");
+
+    if (desktopPath.isEmpty()) {
+        qWarning() << "Cannot get desktop path";
+        emit exportUpdateLogFinished(false);
+        return false;
+    }
+    
+    QDateTime currentTime = QDateTime::currentDateTime();
+    QString fileName = QString("%1_%2.txt").arg(tr("updatelog")).arg(currentTime.toString("yyyy_MM_dd_HH.mm.ss"));
+    QString exportTargetPath = QDir(desktopPath).filePath(fileName);
+
+    qInfo() << "Export update log to:" << exportTargetPath;
+
+    QDBusPendingCall call = m_dbusProxy->ExportUpdateDetails(exportTargetPath);
+    QDBusPendingCallWatcher* watcher = new QDBusPendingCallWatcher(call, this);
+    
+    connect(watcher, &QDBusPendingCallWatcher::finished, this, [this, watcher, exportTargetPath] {
+        QDBusPendingReply<void> reply = *watcher;
+        if (reply.isError()) {
+            qWarning() << "Export update details failed, error:" << reply.error().message();
+            emit exportUpdateLogFinished(false);
+        } else {
+            qInfo() << "Export update log successfully to:" << exportTargetPath;
+            emit exportUpdateLogFinished(true);
+        }
+
+        watcher->deleteLater();
+    });
+    
+    return true;
 }

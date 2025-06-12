@@ -115,6 +115,10 @@ public:
     bool hasBackup() const { return m_hasBackup; }
     void setHasBackup(bool hasBackup) { m_hasBackup = hasBackup; }
 
+    void setUpdateLog(const QString &log);
+    void appendUpdateLog(const QString &log);
+    QString updateLog() const { return m_updateLog; }
+
 private:
     explicit UpdateModel(QObject *parent = nullptr);
 
@@ -123,6 +127,8 @@ signals:
     void updateStatusChanged(UpdateStatus status);
     void JobProgressChanged(double progress);
     void checkStatusChanged(CheckStatus);
+    void updateLogChanged(const QString &log);
+    void updateLogAppended(const QString &log);
 
 private:
     bool m_updateAvailable;
@@ -139,6 +145,8 @@ private:
 
     CheckStatus m_checkStatus;
     CheckSystemStage m_checkSystemStage;
+
+    QString m_updateLog;
 };
 
 #endif // UPDATEMODEL_H

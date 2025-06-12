@@ -17,6 +17,7 @@
 #include <QVBoxLayout>
 #include <QSpacerItem>
 #include <QPointer>
+#include <QScrollArea>
 
 #include <DSpinner>
 #include <DLabel>
@@ -32,15 +33,27 @@ class UpdateLogWidget: public QFrame
     Q_OBJECT
 public:
     explicit UpdateLogWidget(QWidget *parent = nullptr);
-    void setErrorLog(const QString &error);
 
 Q_SIGNALS:
     void requestHideLogWidget();
 
+public slots:
+    void setLog(const QString &log);
+    void appendLog(const QString &log);
+
 private:
-    Dtk::Widget::DCommandLinkButton *m_hideLogWidgetButton;
-    Dtk::Widget::DLabel *m_logLabel;
-    QWidget* m_logWidget;
+    void scrollToBottom();
+    void showNotify(const QIcon &icon, const QString &text);
+    void hideNotify();
+
+private:
+    QPlainTextEdit *m_logTextEdit;
+    Dtk::Widget::DPushButton *m_exportButton;
+
+    QWidget *m_notifyWidget;
+    QLabel *m_notifyIconLabel;
+    QLabel *m_notifyTextLabel;
+    QTimer *m_notifyTimer;
 };
 
 class UpdatePrepareWidget : public QFrame
@@ -72,6 +85,9 @@ private:
     Dtk::Widget::DPictureSequenceView  *m_waitingView;
     Dtk::Widget::DProgressBar *m_progressBar;
     QLabel *m_progressText;
+    Dtk::Widget::DCommandLinkButton *m_showLogButton;
+    UpdateLogWidget *m_logWidget;
+    QSpacerItem *m_headSpacer;
 };
 
 class UpdateCompleteWidget : public QFrame
@@ -91,6 +107,8 @@ private:
     void showSuccessFrame();
     void showErrorFrame(UpdateModel::UpdateError error);
     void createButtons(const QList<UpdateModel::UpdateAction> &actions);
+    void expendLogWidget();
+    void collapseLogWidget();
 
 private:
     QLabel *m_iconLabel;
@@ -100,9 +118,11 @@ private:
     QTimer *m_countDownTimer;
     int m_countDown;
     QList<QPushButton *> m_actionButtons;
-    QSpacerItem *m_buttonSpacer;
     Dtk::Widget::DCommandLinkButton *m_showLogButton;
     QPointer<QPushButton> m_checkedButton;
+    QWidget *m_expendWidget;
+    QVBoxLayout *m_expendLayout;
+    UpdateLogWidget *m_logWidget;
 };
 
 class UpdateWidget : public QFrame

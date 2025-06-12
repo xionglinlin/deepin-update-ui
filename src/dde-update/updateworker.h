@@ -20,6 +20,7 @@
 
 #include "common/dbus/updatedbusproxy.h"
 #include "common/dbus/updatejobdbusproxy.h"
+#include "common/logwatcherhelper.h"
 
 using JobInter = UpdateJobDBusProxy;
 
@@ -49,6 +50,10 @@ public:
 
 Q_SIGNALS:
     void requestExitUpdating();
+    void exportUpdateLogFinished(bool success);
+
+public slots:
+    bool exportUpdateLog();
 
 private:
     explicit UpdateWorker(QObject *parent = nullptr);
@@ -75,6 +80,7 @@ private:
     QPointer<JobInter> m_checkSystemJob; // 修复错误job
     UpdateDBusProxy *m_dbusProxy;
     bool m_waitingToCheckSystem;
+    LogWatcherHelper *m_logWatcherHelper;
 };
 
 #endif // UPDATECTRL_H

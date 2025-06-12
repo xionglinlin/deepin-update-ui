@@ -25,6 +25,7 @@ private slots:
 
 signals:
     void incrementalDataChanged(const QString &incrementaldata);
+    void fileReset();
 
 private:
     QFileSystemWatcher *m_fileWatcher;

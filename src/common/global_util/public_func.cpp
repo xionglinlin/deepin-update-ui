@@ -31,23 +31,35 @@ QPixmap loadPixmap(const QString &file)
     return pixmap;
 }
 
-QString getCurrentLocale()
+// uid, name
+std::pair<int, QString> getCurrentUser()
 {
-    static const QString DEFAULT_LOCALE = QStringLiteral("en_US");
-
     UpdateDBusProxy dbusProxy;
     const QString &currentUserJson = dbusProxy.CurrentUser();
     qInfo() << "Get current locale, current user:" << currentUserJson;
 
     QJsonParseError jsonParseError;
     const auto& userDoc = QJsonDocument::fromJson(currentUserJson.toUtf8(), &jsonParseError);
+
     if (jsonParseError.error != QJsonParseError::NoError || userDoc.isEmpty()) {
         qWarning("Failed to obtain current user information from lock service");
-        return DEFAULT_LOCALE;
+        return {};
     }
 
     const auto& userObj = userDoc.object();
     const auto& uid = userObj.value("Uid").toInt();
+    const auto& name = userObj.value("Name").toString();
+
+    return {uid, name};
+}
+
+QString getCurrentLocale()
+{
+    static const QString DEFAULT_LOCALE = QStringLiteral("en_US");
+
+    UpdateDBusProxy dbusProxy;
+    const auto& [uid, _] = getCurrentUser();
+
     if (uid == 0) {
         qWarning() << "Current user's uid is invalid";
         return DEFAULT_LOCALE;

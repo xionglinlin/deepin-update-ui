@@ -11,6 +11,14 @@
 #include <QScrollArea>
 #include <QScrollBar>
 #include <QWindow>
+#include <QTimer>
+#include <QPlainTextEdit>
+#include <QTextOption>
+#include <QStandardPaths>
+#include <QDateTime>
+#include <QDir>
+#include <QTextStream>
+#include <QStringConverter>
 
 #include <DFontSizeManager>
 #include <QKeyEvent>
@@ -18,6 +26,8 @@
 #include <DGuiApplicationHelper>
 #include <DIcon>
 #include <DSysInfo>
+#include <DToolButton>
+#include <DAnchors>
 
 DCORE_USE_NAMESPACE
 DWIDGET_USE_NAMESPACE
@@ -25,62 +35,126 @@ DWIDGET_USE_NAMESPACE
 const int BACKUP_BEGIN_PROGRESS = 0;
 const int BACKUP_END_PROGRESS = 50;
 
+#define NOTIFY_TIME_OUT 3000
+#define NOTIFY_ICON_SIZE 22
+
 UpdateLogWidget::UpdateLogWidget(QWidget *parent)
     : QFrame(parent)
-    , m_hideLogWidgetButton(new DCommandLinkButton(tr("Hide Logs"), this))
-    , m_logLabel(new DLabel(this))
-    , m_logWidget(new QWidget(this))
+    , m_logTextEdit(new QPlainTextEdit(this))
+    , m_exportButton(new Dtk::Widget::DPushButton(tr("Export"), this))
+    , m_notifyWidget(new QWidget(this))
+    , m_notifyIconLabel(new QLabel(this))
+    , m_notifyTextLabel(new QLabel(this))
+    , m_notifyTimer(new QTimer(this))
 {
-    m_logLabel->setWordWrap(true);
-    DFontSizeManager::instance()->bind(m_logLabel, DFontSizeManager::T6);
-    auto font = m_logLabel->font();
+    m_logTextEdit->setReadOnly(true);
+    m_logTextEdit->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Expanding);
+    m_logTextEdit->setWordWrapMode(QTextOption::WordWrap);
+    m_logTextEdit->setFrameStyle(QFrame::NoFrame);
+    m_logTextEdit->setContentsMargins(0, 0, 0, 0);
+    m_logTextEdit->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    m_logTextEdit->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
+    
+    // 禁止文本选择和右键菜单
+    m_logTextEdit->setTextInteractionFlags(Qt::NoTextInteraction);
+    m_logTextEdit->setContextMenuPolicy(Qt::NoContextMenu);
+    
+    DFontSizeManager::instance()->bind(m_logTextEdit, DFontSizeManager::T6);
+    auto font = m_logTextEdit->font();
     font.setWeight(QFont::ExtraLight);
-    m_logLabel->setFont(font);
-    m_logLabel->setAlignment(Qt::AlignLeft);
-    m_logLabel->setAttribute(Qt::WA_TranslucentBackground);
-    m_logLabel->setTextFormat(Qt::TextFormat::PlainText);
-    m_logLabel->adjustSize();
-    QPalette palette = m_logLabel->palette();
-    palette.setColor(QPalette::WindowText, Qt::white);
-    m_logLabel->setPalette(palette);
+    m_logTextEdit->setFont(font);
 
-    QScrollArea *scrollArea = new QScrollArea;
-    scrollArea->setFixedWidth(900);
-    scrollArea->setFixedHeight(527);
-    scrollArea->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Preferred);
-    scrollArea->setWidgetResizable(true);
-    scrollArea->setFrameStyle(QFrame::NoFrame);
-    scrollArea->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    scrollArea->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
-    scrollArea->setContentsMargins(0, 0, 0, 0);
-    scrollArea->setWidget(m_logLabel);
-    scrollArea->setSizeAdjustPolicy(QAbstractScrollArea::AdjustToContents);
-    QPalette pa = scrollArea->palette();
-    pa.setColor(QPalette::Window, Qt::transparent);
-    scrollArea->setPalette(pa);
+    QPalette palette = m_logTextEdit->palette();
+    palette.setColor(QPalette::Text, Qt::white);
+    palette.setColor(QPalette::Base, Qt::transparent);
+    m_logTextEdit->setPalette(palette);
+    m_logTextEdit->setAttribute(Qt::WA_TranslucentBackground);
 
-#ifdef QT_SCROLL_WHEEL_ANI
-    QScrollBar *bar = scrollArea->verticalScrollBar();
-    bar->setSingleStep(1);
-    scrollArea->setVerticalScrollBarPolicy(Qt::ScrollBarSlideAnimationOn);
-#endif
-
-    auto logLayout = new QVBoxLayout(m_logWidget);
-    logLayout->addWidget(scrollArea, 0, Qt::AlignCenter);
+    m_notifyIconLabel->setFixedSize(NOTIFY_ICON_SIZE, NOTIFY_ICON_SIZE);
+    m_notifyIconLabel->setScaledContents(true);
+    QHBoxLayout *notifyLayout = new QHBoxLayout(m_notifyWidget);
+    notifyLayout->setContentsMargins(0, 5, 0, 5);
+    notifyLayout->addWidget(m_notifyIconLabel, 0, Qt::AlignVCenter);
+    notifyLayout->addSpacing(5);
+    notifyLayout->addWidget(m_notifyTextLabel, 0, Qt::AlignVCenter);
+    m_notifyWidget->setVisible(false);
 
     auto mainLayout = new QVBoxLayout(this);
+    mainLayout->setContentsMargins(0, 0, 0, 0);
+    mainLayout->setSpacing(0);
     mainLayout->addStretch();
-    mainLayout->addWidget(m_hideLogWidgetButton, 0, Qt::AlignHCenter);
-    mainLayout->addSpacing(20);
-    mainLayout->addWidget(m_logWidget, 0, Qt::AlignHCenter);
+    mainLayout->addWidget(m_logTextEdit, 1);
     mainLayout->addStretch();
+    mainLayout->addSpacing(10);
+    mainLayout->addWidget(m_exportButton, 0, Qt::AlignHCenter);
+    mainLayout->addWidget(m_notifyWidget, 0, Qt::AlignHCenter);
 
-    connect(m_hideLogWidgetButton, &DCommandLinkButton::clicked, this, &UpdateLogWidget::requestHideLogWidget);
+    connect(m_exportButton, &DPushButton::clicked, UpdateWorker::instance(), &UpdateWorker::exportUpdateLog);
+    connect(UpdateWorker::instance(), &UpdateWorker::exportUpdateLogFinished, this, [this](bool success) {
+        if (success) {
+            showNotify(QIcon::fromTheme("sp_ok"), tr("The log has been exported to the desktop"));
+        } else {
+            showNotify(QIcon::fromTheme("sp_warning"), tr("Export failed"));
+        }
+    });
+
+    connect(UpdateModel::instance(), &UpdateModel::updateLogChanged, this, &UpdateLogWidget::setLog);
+    connect(UpdateModel::instance(), &UpdateModel::updateLogAppended, this, &UpdateLogWidget::appendLog);
+    connect(m_notifyTimer, &QTimer::timeout, this, &UpdateLogWidget::hideNotify);
 }
 
-void UpdateLogWidget::setErrorLog(const QString &error)
+void UpdateLogWidget::setLog(const QString &log)
 {
-    m_logLabel->setText(error);
+    m_logTextEdit->setPlainText(log);
+    scrollToBottom();
+}
+
+void UpdateLogWidget::appendLog(const QString &log)
+{
+    QString cleanLog = log;
+    if (cleanLog.endsWith('\n')) {
+        cleanLog.chop(1);  // 移除最后一个换行符，appendPlainText会自动换行
+    }
+    m_logTextEdit->appendPlainText(cleanLog);
+    scrollToBottom();
+}
+
+void UpdateLogWidget::scrollToBottom()
+{
+    if (m_logTextEdit && m_logTextEdit->verticalScrollBar()) {
+        QScrollBar *verticalScrollBar = m_logTextEdit->verticalScrollBar();
+        
+        // 检查当前是否已经在底部（允许小的误差范围）
+        const int tolerance = 5; // 像素容差，处理可能的四舍五入误差
+        bool isAtBottom = verticalScrollBar->value() >= (verticalScrollBar->maximum() - tolerance);
+        
+        // 只有当前在底部时才自动滚动到新的底部
+        if (isAtBottom) {
+            // 使用 QTimer::singleShot 确保在文本更新后再滚动
+            QTimer::singleShot(0, this, [this]() {
+                QScrollBar *verticalScrollBar = m_logTextEdit->verticalScrollBar();
+                verticalScrollBar->setValue(verticalScrollBar->maximum());
+            });
+        }
+    }
+}
+
+void UpdateLogWidget::showNotify(const QIcon &icon, const QString &text)
+{
+    m_notifyIconLabel->setPixmap(icon.pixmap(QSize(NOTIFY_ICON_SIZE, NOTIFY_ICON_SIZE)));
+    m_notifyTextLabel->setText(text);
+    m_exportButton->setVisible(false);
+    m_notifyWidget->setVisible(true);
+    m_notifyTimer->start(NOTIFY_TIME_OUT);
+}
+
+void UpdateLogWidget::hideNotify()
+{
+    if (m_notifyTimer->isActive()) {
+        m_notifyTimer->stop();
+    }
+    m_notifyWidget->setVisible(false);
+    m_exportButton->setVisible(true);
 }
 
 UpdatePrepareWidget::UpdatePrepareWidget(QWidget *parent) : QFrame(parent)
@@ -115,6 +189,9 @@ UpdateProgressWidget::UpdateProgressWidget(QWidget *parent)
     , m_waitingView(new DPictureSequenceView(this))
     , m_progressBar(new DProgressBar(this))
     , m_progressText(new QLabel(this))
+    , m_showLogButton(new Dtk::Widget::DCommandLinkButton(tr("View update logs"), this))
+    , m_logWidget(new UpdateLogWidget(this))
+    , m_headSpacer(new QSpacerItem(0, 0))
 {
     m_logo->setFixedSize(286, 57);
     if (DSysInfo::uosEditionType() == DSysInfo::UosCommunity)
@@ -162,14 +239,35 @@ UpdateProgressWidget::UpdateProgressWidget(QWidget *parent)
     pProgressLayout->addWidget(m_progressText, 0, Qt::AlignCenter);
     pProgressLayout->addStretch();
 
-    QVBoxLayout *pLayout = new QVBoxLayout(this);
-    pLayout->addStretch();
+    QWidget *contentWidget = new QWidget(this);
+    QVBoxLayout *pLayout = new QVBoxLayout(contentWidget);
+    pLayout->setSpacing(0);
+    pLayout->addItem(m_headSpacer);
     pLayout->addWidget(m_logo, 0, Qt::AlignCenter);
-    pLayout->addSpacing(100);
+    pLayout->addSpacing(48);
     pLayout->addLayout(pProgressLayout, 0);
     pLayout->addSpacing(10);
     pLayout->addLayout(tipsLayout, 0);
-    pLayout->addStretch();
+    pLayout->addSpacing(10);
+    pLayout->addWidget(m_showLogButton, 0, Qt::AlignCenter);
+
+    auto mainAnchors = new DAnchors<QWidget>(this);
+    auto contentAnchors = new DAnchors<QWidget>(contentWidget);
+    contentAnchors->setCenterIn(mainAnchors);
+
+    auto logWidgetAnchors = new DAnchors<QWidget>(m_logWidget);
+    m_logWidget->setFixedWidth(718);
+    m_logWidget->setVisible(false);
+    logWidgetAnchors->setTop(contentAnchors->bottom());
+    logWidgetAnchors->setHorizontalCenter(mainAnchors->horizontalCenter());
+    logWidgetAnchors->setBottom(mainAnchors->bottom());
+    logWidgetAnchors->setBottomMargin(30);
+
+    connect(m_showLogButton, &DCommandLinkButton::clicked, this, [this] {
+        bool toShow = !m_logWidget->isVisible();
+        m_logWidget->setVisible(toShow);
+        m_showLogButton->setText(toShow ? tr("Collapse update logs") : tr("View update logs"));
+    });
 }
 
 bool UpdateProgressWidget::event(QEvent *e)
@@ -201,9 +299,10 @@ UpdateCompleteWidget::UpdateCompleteWidget(QWidget *parent)
     , m_mainLayout(nullptr)
     , m_countDownTimer(nullptr)
     , m_countDown(3)
-    , m_buttonSpacer(new QSpacerItem(0, 80))
-    , m_showLogButton(new Dtk::Widget::DCommandLinkButton(tr("View Logs"), this))
+    , m_showLogButton(new Dtk::Widget::DCommandLinkButton(tr("View update logs"), this))
     , m_checkedButton(nullptr)
+    , m_expendWidget(new QWidget(this))
+    , m_logWidget(new UpdateLogWidget(this))
 {
     QPalette palette = this->palette();
     palette.setColor(QPalette::WindowText, Qt::white);
@@ -217,7 +316,9 @@ UpdateCompleteWidget::UpdateCompleteWidget(QWidget *parent)
     m_tips->setAlignment(Qt::AlignVCenter);
     DFontSizeManager::instance()->bind(m_tips, DFontSizeManager::T6);
 
-    m_mainLayout = new QVBoxLayout(this);
+    QWidget *contentWidget = new QWidget(this);
+
+    m_mainLayout = new QVBoxLayout(contentWidget);
     m_mainLayout->setContentsMargins(0, 0, 0, 0);
     m_mainLayout->setSpacing(10);
     m_mainLayout->setAlignment(Qt::AlignCenter);
@@ -225,9 +326,40 @@ UpdateCompleteWidget::UpdateCompleteWidget(QWidget *parent)
     m_mainLayout->addWidget(m_title, 0, Qt::AlignCenter);
     m_mainLayout->addWidget(m_tips,0 , Qt::AlignCenter);
     m_mainLayout->addWidget(m_showLogButton,0 , Qt::AlignCenter);
-    m_mainLayout->addItem(m_buttonSpacer);
 
-    connect(m_showLogButton, &DCommandLinkButton::clicked, this, &UpdateCompleteWidget::requestShowLogWidget);
+    m_expendLayout = new QVBoxLayout(m_expendWidget);
+    m_expendLayout->setContentsMargins(0, 0, 0, 0);
+    m_expendLayout->setSpacing(10);
+    m_expendLayout->addWidget(m_logWidget, 1, Qt::AlignHCenter);
+    // 始终在底部保持一个弹簧，让按钮在顶部对齐
+    m_expendLayout->addStretch();
+
+    m_logWidget->setFixedWidth(718);
+
+    auto mainAnchors = new DAnchors<QWidget>(this);
+    auto contentAnchors = new DAnchors<QWidget>(contentWidget);
+    contentAnchors->setCenterIn(mainAnchors);
+
+    auto expendAnchors = new DAnchors<QWidget>(m_expendWidget);
+    expendAnchors->setTop(contentAnchors->bottom());
+    expendAnchors->setHorizontalCenter(mainAnchors->horizontalCenter());
+    expendAnchors->setBottom(mainAnchors->bottom());
+    expendAnchors->setLeft(mainAnchors->left());
+    expendAnchors->setRight(mainAnchors->right());
+    expendAnchors->setTopMargin(10);
+    expendAnchors->setBottomMargin(30);
+
+    collapseLogWidget();
+    connect(m_showLogButton, &DCommandLinkButton::clicked, this, [this](){
+        bool toShow = !m_logWidget->isVisible();
+        if (toShow) {
+            expendLogWidget();
+            m_showLogButton->setText(tr("Collapse update logs"));
+        } else {
+            collapseLogWidget();
+            m_showLogButton->setText(tr("View update logs"));
+        }
+    });
 }
 
 void UpdateCompleteWidget::showResult(bool success, UpdateModel::UpdateError error)
@@ -245,7 +377,6 @@ void UpdateCompleteWidget::showSuccessFrame()
 {
     qDeleteAll(m_actionButtons);
     m_actionButtons.clear();
-    m_buttonSpacer->changeSize(0, 0);
     m_mainLayout->invalidate();
     m_showLogButton->setVisible(false);
 
@@ -287,11 +418,12 @@ void UpdateCompleteWidget::showSuccessFrame()
             UpdateModel::instance()->updateActionText(UpdateModel::Reboot) :
             UpdateModel::instance()->updateActionText(UpdateModel::ShutDown), this);
         button->setFixedSize(240, 48);
-        m_mainLayout->addWidget(button, 0, Qt::AlignHCenter);
+        // 在 stretch 之前插入按钮（stretch 总是在最后一个位置）
+        int insertIndex = m_expendLayout->count() - 1; // stretch 的位置
+        m_expendLayout->insertWidget(insertIndex, button, 0, Qt::AlignHCenter);
         m_actionButtons.append(button);
         button->setFocusPolicy(Qt::NoFocus);
         button->setCheckable(true);
-        m_buttonSpacer->changeSize(0, 80);
         m_mainLayout->invalidate();
         QApplication::setOverrideCursor(Qt::ArrowCursor);
 
@@ -299,13 +431,14 @@ void UpdateCompleteWidget::showSuccessFrame()
             UpdateWorker::instance()->forceReboot(UpdateModel::instance()->isReboot());
         });
     });
+
+    collapseLogWidget();
 }
 
 void UpdateCompleteWidget::showErrorFrame(UpdateModel::UpdateError error)
 {
     qInfo() << "Update complete widget show error frame, error: " << error;
 
-    m_buttonSpacer->changeSize(0, 0);
     static const QMap<UpdateModel::UpdateError, QList<UpdateModel::UpdateAction>> ErrorActions = {
         {UpdateModel::CanNotBackup, {UpdateModel::ContinueUpdating, UpdateModel::ExitUpdating}},
         {UpdateModel::BackupInterfaceError, {UpdateModel::ExitUpdating, UpdateModel::ContinueUpdating}},
@@ -326,8 +459,6 @@ void UpdateCompleteWidget::showErrorFrame(UpdateModel::UpdateError error)
     m_tips->setText(pair.second);
     m_showLogButton->setVisible(error >= UpdateModel::UpdateInterfaceError);
     createButtons(actions);
-    if (!m_actionButtons.isEmpty())
-        m_buttonSpacer->changeSize(0, 80);
 
     m_mainLayout->invalidate();
 
@@ -338,6 +469,8 @@ void UpdateCompleteWidget::showErrorFrame(UpdateModel::UpdateError error)
             UpdateWorker::instance()->doPowerAction(false);
         });
     }
+
+    collapseLogWidget();
 }
 
 void UpdateCompleteWidget::createButtons(const QList<UpdateModel::UpdateAction> &actions)
@@ -349,7 +482,9 @@ void UpdateCompleteWidget::createButtons(const QList<UpdateModel::UpdateAction> 
     for (auto action : actions) {
         auto button = new QPushButton(UpdateModel::updateActionText(action), this);
         button->setFixedSize(240, 48);
-        m_mainLayout->addWidget(button, 0, Qt::AlignHCenter);
+        // 在 stretch 之前插入按钮（stretch 总是在最后一个位置）
+        int insertIndex = m_expendLayout->count() - 1; // stretch 的位置
+        m_expendLayout->insertWidget(insertIndex, button, 0, Qt::AlignHCenter);
         m_actionButtons.append(button);
         button->setFocusPolicy(Qt::NoFocus);
         button->setCheckable(true);
@@ -369,6 +504,22 @@ void UpdateCompleteWidget::createButtons(const QList<UpdateModel::UpdateAction> 
     if (!m_checkedButton && !m_actionButtons.isEmpty()) {
         m_checkedButton = m_actionButtons.first();
         m_checkedButton->setChecked(true);
+    }
+}
+
+void UpdateCompleteWidget::expendLogWidget()
+{
+    m_logWidget->setVisible(true);
+    for(auto button : m_actionButtons) {
+        button->setVisible(false);
+    }
+}
+
+void UpdateCompleteWidget::collapseLogWidget()
+{
+    m_logWidget->setVisible(false);
+    for(auto button : m_actionButtons) {
+        button->setVisible(true);
     }
 }
 
@@ -444,19 +595,16 @@ void UpdateWidget::onUpdateStatusChanged(UpdateModel::UpdateStatus status)
             m_stackedWidget->setCurrentWidget(m_progressWidget);
             break;
         case UpdateModel::UpdateStatus::Installing:
-            setMouseCursorVisible(false);
             m_stackedWidget->setCurrentWidget(m_progressWidget);
             break;
         case UpdateModel::UpdateStatus::InstallSuccess:
             // 升级成功
-            setMouseCursorVisible(false);
             m_stackedWidget->setCurrentWidget(m_updateCompleteWidget);
             m_updateCompleteWidget->showResult(true);
             break;
         case UpdateModel::UpdateStatus::InstallFailed:
         case UpdateModel::UpdateStatus::BackupFailed:
         case UpdateModel::UpdateStatus::PrepareFailed:
-            setMouseCursorVisible(true);
             m_stackedWidget->setCurrentWidget(m_updateCompleteWidget);
             m_updateCompleteWidget->showResult(false, UpdateModel::instance()->updateError());
 
@@ -478,10 +626,10 @@ void UpdateWidget::initUi()
     m_stackedWidget->addWidget(m_updateCompleteWidget);
     m_stackedWidget->addWidget(m_logWidget);
 
-    QVBoxLayout * pLayout = new QVBoxLayout(this);
-    pLayout->setContentsMargins(0, 0, 0, 0);
-    pLayout->setSpacing(0);
-    pLayout->addWidget(m_stackedWidget, 0, Qt::AlignCenter);
+    auto mainAnchors = new DAnchors<UpdateWidget>(this);
+    auto stackedWidgetAnchors = new DAnchors<QStackedWidget>(m_stackedWidget);
+
+    stackedWidgetAnchors->setFill(mainAnchors);
 
     setFocusProxy(m_stackedWidget);
 }
@@ -503,8 +651,7 @@ void UpdateWidget::initConnections()
 
 void UpdateWidget::showLogWidget()
 {
-    setMouseCursorVisible(true);
-    m_logWidget->setErrorLog(UpdateModel::instance()->lastErrorLog());
+    m_logWidget->setLog(UpdateModel::instance()->lastErrorLog());
     m_stackedWidget->setCurrentWidget(m_logWidget);
 }
 
@@ -515,14 +662,12 @@ void UpdateWidget::hideLogWidget()
 
 void UpdateWidget::showChecking()
 {
-    setMouseCursorVisible(false);
     m_stackedWidget->setCurrentWidget(m_prepareWidget);
     m_prepareWidget->showPrepare();
 }
 
 void UpdateWidget::showProgress()
 {
-    setMouseCursorVisible(false);
     m_stackedWidget->setCurrentWidget(m_progressWidget);
 }
 

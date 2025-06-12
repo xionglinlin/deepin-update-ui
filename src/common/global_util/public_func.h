@@ -14,6 +14,7 @@
 
 QPixmap loadPixmap(const QString &file);
 
+std::pair<int, QString> getCurrentUser();
 QString getCurrentLocale();
 
 template <typename T>

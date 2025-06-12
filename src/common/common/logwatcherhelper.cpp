@@ -98,6 +98,7 @@ void LogWatcherHelper::onDirectoryChanged(const QString &path)
     } else if (!fileExists && fileWatched) {
         qInfo() << "Update log file was deleted:" << UPDATE_LOG_FILE;
         m_lastFileSize = 0;
+        emit fileReset();
         m_data = QString();
     }
 }
@@ -117,6 +118,7 @@ void LogWatcherHelper:: readFileIncrement()
     if (currentFileSize < m_lastFileSize) {
         m_lastFileSize = 0;
         m_data = QString();
+        emit fileReset();
     }
 
     // 如果文件大小没变，没有新内容
