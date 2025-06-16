@@ -221,11 +221,11 @@ QDBusPendingCall UpdateDBusProxy::CanRollback()
     return m_managerInter->asyncCall(QStringLiteral("CanRollback"));
 }
 
-void UpdateDBusProxy::ConfirmRollback(bool confirm)
+QDBusPendingCall UpdateDBusProxy::ConfirmRollback(bool confirm)
 {
     QList<QVariant> argumentList;
     argumentList << QVariant::fromValue(confirm);
-    m_managerInter->asyncCallWithArgumentList(QStringLiteral("ConfirmRollback"), argumentList);
+    return m_managerInter->asyncCallWithArgumentList(QStringLiteral("ConfirmRollback"), argumentList);
 }
 
 QDBusPendingCall UpdateDBusProxy::Poweroff(bool reboot)

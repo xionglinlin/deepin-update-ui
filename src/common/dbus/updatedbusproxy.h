@@ -77,7 +77,7 @@ public:
     bool p2pUpdateEnable();
 
     QDBusPendingCall CanRollback();
-    void ConfirmRollback(bool confirm);
+    QDBusPendingCall ConfirmRollback(bool confirm);
 
     bool managerInterIsValid() const { return m_managerInter && m_managerInter->isValid(); }
 

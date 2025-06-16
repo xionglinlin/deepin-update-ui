@@ -60,13 +60,7 @@ void Manage::showDialog()
         // 能够进入到弹框页面,说明是满足一切版本回退的条件
         // true: 确认 , 要恢复旧版本
         qInfo() << "Notify button clicked, state: " << state;
-        if (state) {
-            m_updateDBusProxy->ConfirmRollback(true);
-            m_recoveryWidget->updateRestoringWaitUI();
-        } else {
-            // false: 取消并重启
-            m_updateDBusProxy->ConfirmRollback(false);
-        }
+        doConfirmRollback(state);
     });
 
 
@@ -113,9 +107,16 @@ void Manage::recoveryCanRestore()
                     QJsonDocument doc = QJsonDocument::fromJson(backupData.toUtf8());
                     QJsonObject obj = doc.object();
                     qlonglong backupTime = obj["time"].toVariant().toLongLong();
+                    bool noConfirm = obj["auto"].toBool();
                     
                     m_backupTime = QDateTime::fromSecsSinceEpoch(backupTime).toString("yyyy/MM/dd hh:mm:ss");
                     showDialog();
+
+                    // 存在auto=true,就不需要用户确认是否回退，直接执行回退流程
+                    if (noConfirm) {
+                        doConfirmRollback(true);
+                    }
+
                 } else {
                     exitApp();
                 }
@@ -157,6 +158,28 @@ void Manage::requestReboot()
         }
         exitApp();
     });
+}
+
+void Manage::doConfirmRollback(bool confirm)
+{
+    if (confirm) {
+        m_recoveryWidget->updateRestoringWaitUI();
+        QDBusPendingCall call = m_updateDBusProxy->ConfirmRollback(true);
+        QDBusPendingCallWatcher *watcher = new QDBusPendingCallWatcher(call, this);
+        connect(watcher, &QDBusPendingCallWatcher::finished, [this, watcher] {
+            QDBusPendingReply<void> reply = *watcher;
+            if (reply.isError()) {
+                qWarning() << "Confirm rollback error: " << reply.error().message();
+            } else {
+                qInfo() << "Confirm rollback success";
+            }
+            watcher->deleteLater();
+            exitApp();
+        });
+    } else {
+        // false: 取消并重启
+        m_updateDBusProxy->ConfirmRollback(false);
+    }
 }
 
 RecoveryWidget::RecoveryWidget(QWidget *parent)

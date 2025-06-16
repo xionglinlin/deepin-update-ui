@@ -30,6 +30,8 @@ public:
     explicit Manage(QObject *parent = nullptr);
     void showDialog();
 
+    void doConfirmRollback(bool confirm);
+
 private:
     void recoveryCanRestore();
 
