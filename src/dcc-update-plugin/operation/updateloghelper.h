@@ -169,7 +169,7 @@ public:
     static HistoryItemDetail fromSystemJsonObj(const QJsonObject &obj)
     {
         HistoryItemDetail item;
-        item.name = obj.value("showVersion").toString();
+        item.name = QObject::tr("Version:") + obj.value("showVersion").toString();
         item.description = obj.value(getLanguageType() == "CN" ? "cnLog" : "enLog").toString();
         return item;
     }
@@ -192,7 +192,7 @@ struct HistoryItemInfo {
             return item;
 
         item.upgradeTime = obj.value("UpgradeTime").toString();
-
+        item.summary = QObject::tr("Fixed some known bugs and security vulnerabilities");
         if (SystemUpdate == item.type) {
             const auto &originChangLog = obj.value("OriginChangelog").toArray();
             for (const auto &value : originChangLog) {

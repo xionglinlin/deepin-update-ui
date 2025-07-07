@@ -76,6 +76,8 @@ void UpdateLogHelper::handleUpdateLog(const QString &log)
 
 void UpdateLogHelper::handleSystem(const QJsonArray &log)
 {
+    qWarning() << "----------handleSystem:" << log;
+
     m_systemLog.clear();
     for (const QJsonValue& value : log) {
         QJsonObject obj = value.toObject();
@@ -145,14 +147,14 @@ void UpdateLogHelper::handleSystemItemInfo(UpdateItemInfo *itemInfo) const
             itemInfo->setUpdateTime(log.publishTime);
         } else {
             DetailInfo detailInfo;
-            const QString& systemVersion = log.showVersion;
+            // const QString& systemVersion = log.showVersion;
             // 专业版不不在详细信息中显示维护线版本
-            if (!systemVersion.isEmpty() && systemVersion.back() == '0') {
+            // if (!systemVersion.isEmpty() && systemVersion.back() == '0') {
                 detailInfo.name = log.showVersion;
                 detailInfo.updateTime = log.publishTime;
                 detailInfo.info = explain;
                 itemInfo->addDetailInfo(detailInfo);
-            }
+            // }
         }
     }
 }

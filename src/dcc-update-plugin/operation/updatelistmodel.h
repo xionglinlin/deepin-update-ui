@@ -20,12 +20,12 @@ public:
     enum updateRoles {
         Title = Qt::UserRole + 1,
         Version,
-        TitleDescription,
-        UpdateLog,
+        Explain,
         ReleaseTime,
         Checked,
         UpdateStatus,
-        IconName
+        IconName,
+        Details
     };
 
     explicit UpdateListModel(QObject *parent = nullptr);
@@ -50,12 +50,12 @@ public:
         QHash<int, QByteArray> roles;
         roles[Title] = "title";
         roles[Version] = "version";
-        roles[TitleDescription] = "titleDescription";
-        roles[UpdateLog] = "updateLog";
+        roles[Explain] = "explain";
         roles[ReleaseTime] = "releaseTime";
         roles[Checked] = "checked";
         roles[UpdateStatus] = "updateStatus";
         roles[IconName] = "iconName";
+        roles[Details] = "details";
         return roles;
     }
 

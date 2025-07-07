@@ -97,7 +97,6 @@ D.DialogWindow {
                     Layout.fillWidth: true
                     D.DciIcon {
                         palette: D.DTK.makeIconPalette(logItem.palette)
-                        mode: logItem.D.ColorSelector.controlState
                         theme: logItem.D.ColorSelector.controlTheme
                         fallbackToQIcon: false
                         width: 22
@@ -136,19 +135,14 @@ D.DialogWindow {
 
                         // 摘要
                         Label {
-                            text: {
-                                if (Summary === "") {
-                                    switch(Type) {
-                                    case 1:
-                                        return qsTr("Delivers a cumulative update including new features, quality updates, and security updates")
-                                    case 4:
-                                        return qsTr("Delivers security updates")
-                                    default:
-                                        return ""
-                                    }
-                                } else {
-                                    return Summary
+                            text: Summary
+                            visible: {
+                                if (Type === 1) {
+                                    return Details.length === 0
+                                } else if (Type === 4) {
+                                    return true
                                 }
+                                return false
                             }
                             font: D.DTK.fontManager.t8
                             wrapMode: Text.WordWrap
@@ -181,6 +175,7 @@ D.DialogWindow {
                                 }
                                 Label {
                                     text: modelData.displayVulLevel
+                                    visible: modelData.displayVulLevel !== ""
                                     font: D.DTK.fontManager.t8
                                     color: D.DTK.themeType == D.ApplicationHelper.LightType ? Qt.rgba(0, 0, 0, 1) : Qt.rgba(1, 1, 1, 1)
                                     wrapMode: Text.WordWrap
@@ -191,6 +186,16 @@ D.DialogWindow {
                                     font: D.DTK.fontManager.t8
                                     wrapMode: Text.WordWrap
                                     Layout.fillWidth: true
+                                    onLinkActivated: (link)=> {
+                                        if (link.startsWith("http")) {
+                                            Qt.openUrlExternally(link)
+                                        }
+                                    }
+                                    MouseArea {
+                                        anchors.fill: parent
+                                        cursorShape: parent.hoveredLink ? Qt.PointingHandCursor : Qt.ArrowCursor
+                                        acceptedButtons: Qt.NoButton
+                                    }                                    
                                 }
                             }
                         }

@@ -93,58 +93,68 @@ Rectangle {
                             horizontalAlignment: Text.AlignLeft
                             Layout.fillWidth: true
                             font: D.DTK.fontManager.t8
-                            text: model.titleDescription
+                            text: model.explain
                             wrapMode: Text.WordWrap
                             onLinkActivated: (link)=> {
-                                dccData.work().openUrl(link)
-                            }  
-                        }
-
-                        D.Label {
-                            id: shortLog
-                            Layout.alignment: Qt.AlignLeft
-                            horizontalAlignment: Text.AlignLeft
-                            text: model.updateLog
-                            font: D.DTK.fontManager.t8
-                            Layout.fillWidth: true
-                            wrapMode: Text.WordWrap
-                            visible: false
-                        }
-
-                        D.Label {
-                            id: detailLog
-                            visible: false
-                            Layout.alignment: Qt.AlignLeft
-                            horizontalAlignment: Text.AlignLeft
-                            text: ""
-                            font: D.DTK.fontManager.t8
-                            Layout.fillWidth: true
-                            wrapMode: Text.WordWrap
-                        }
-
-                        RowLayout {
-                            D.Label {
-                                id: releaseTitle
-                                Layout.alignment: Qt.AlignLeft
-                                horizontalAlignment: Text.AlignLeft
-                                visible: model.releaseTime.length !== 0
-                                font: D.DTK.fontManager.t8
-                                text: qsTr("Release time:") + model.releaseTime
+                                if (link.startsWith("http")) {
+                                    Qt.openUrlExternally(link)
+                                }
                             }
+                            MouseArea {
+                                anchors.fill: parent
+                                cursorShape: parent.hoveredLink ? Qt.PointingHandCursor : Qt.ArrowCursor
+                                acceptedButtons: Qt.NoButton
+                            }
+                        }
 
-                            Item {
+                        D.Label {
+                            id: releaseTitle
+                            Layout.alignment: Qt.AlignLeft
+                            horizontalAlignment: Text.AlignLeft
+                            visible: model.releaseTime.length !== 0
+                            font: D.DTK.fontManager.t8
+                            text: qsTr("Release time:") + model.releaseTime
+                        }
+
+                        // 详情列表
+                        Repeater {
+                            model: details
+
+                            ColumnLayout {
+                                Layout.margins: 0
                                 Layout.fillWidth: true
-                            }
 
-                            D.ToolButton {
-                                Layout.alignment: Qt.AlignRight
-                                visible: detailLog.visible
-                                text: shortLog.visible ? qsTr("View Details") : qsTr("Collapse")
-                                textColor: DS.Style.highlightedButton.text
+                                visible: true
 
-                                onClicked: {
-                                    shortLog.visible = !shortLog.visible
-                                    detailLog.visible = !detailLog.visible
+                                Label {
+                                    text: qsTr("Version:") + modelData.name
+                                    font: D.DTK.fontManager.t8
+                                    color: D.DTK.themeType == D.ApplicationHelper.LightType ? Qt.rgba(0, 0, 0, 1) : Qt.rgba(1, 1, 1, 1)
+                                    wrapMode: Text.WordWrap
+                                    Layout.fillWidth: true
+                                }
+                                Label {
+                                    text: modelData.info
+                                    font: D.DTK.fontManager.t8
+                                    wrapMode: Text.WordWrap
+                                    Layout.fillWidth: true
+                                    onLinkActivated: (link)=> {
+                                        if (link.startsWith("http")) {
+                                            Qt.openUrlExternally(link)
+                                        }
+                                    }
+                                    MouseArea {
+                                        anchors.fill: parent
+                                        cursorShape: parent.hoveredLink ? Qt.PointingHandCursor : Qt.ArrowCursor
+                                        acceptedButtons: Qt.NoButton
+                                    }                                    
+                                }
+
+                                Label {
+                                    text: qsTr("Release time:") + modelData.updateTime
+                                    font: D.DTK.fontManager.t8
+                                    wrapMode: Text.WordWrap
+                                    Layout.fillWidth: true
                                 }
                             }
                         }

@@ -27,10 +27,8 @@ QVariant UpdateListModel::data(const QModelIndex &index, int role) const
         return data->name();
     case Version:
         return data->currentVersion();
-    case TitleDescription:
+    case Explain:
         return data->explain();
-    case UpdateLog:
-        return "";
     case ReleaseTime:
         return data->updateTime();
     case Checked:
@@ -39,6 +37,12 @@ QVariant UpdateListModel::data(const QModelIndex &index, int role) const
         return data->updateStatus();
     case IconName:
         return getIconName(data->updateType());
+    case Details: {
+        QVariantList list;
+        for (const auto &detail : data->detailInfos())
+            list << QVariant::fromValue(detail);
+        return list;
+    }        
     default:
         break;
     }

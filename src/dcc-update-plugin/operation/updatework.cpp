@@ -535,6 +535,7 @@ QMap<UpdateType, UpdateItemInfo*> UpdateWorker::getAllUpdateInfo(const QMap<QStr
     systemItemInfo->setTypeString(SYSTEM_UPGRADE_TYPE_STRING);
     systemItemInfo->setName(tr("System Updates"));
     systemItemInfo->setExplain(tr("Fixed some known bugs and security vulnerabilities"));
+    systemItemInfo->setUpdateTime(QDateTime::currentDateTime().toString("yyyy-MM-dd"));
     systemItemInfo->setPackages(systemPackages);
     setUpdateItemDownloadSize(systemItemInfo);
     systemItemInfo->setUpdateModeEnabled(updateMode & UpdateType::SystemUpdate);
@@ -544,6 +545,7 @@ QMap<UpdateType, UpdateItemInfo*> UpdateWorker::getAllUpdateInfo(const QMap<QStr
     securityItemInfo->setTypeString(SECURITY_UPGRADE_TYPE_STRING);
     securityItemInfo->setName(tr("Security Updates"));
     securityItemInfo->setExplain(tr("Fixed some known bugs and security vulnerabilities"));
+    systemItemInfo->setUpdateTime(QDateTime::currentDateTime().toString("yyyy-MM-dd"));
     securityItemInfo->setPackages(securityPackages);
     setUpdateItemDownloadSize(securityItemInfo);
     securityItemInfo->setUpdateModeEnabled(updateMode & UpdateType::SecurityUpdate);

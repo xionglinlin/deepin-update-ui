@@ -10,15 +10,23 @@
 
 using namespace dcc::update::common;
 
-struct DetailInfo {
+struct DetailInfo 
+{
+    Q_GADGET
+    Q_PROPERTY(QString name MEMBER name)
+    Q_PROPERTY(QString updateTime MEMBER updateTime)
+    Q_PROPERTY(QString info MEMBER info)
+    Q_PROPERTY(QString link MEMBER link)
+    Q_PROPERTY(QString vulLevel MEMBER vulLevel)
+
+public:    
     QString name;
     QString updateTime;
     QString info;
     QString link;
     QString vulLevel;
-
-    DetailInfo() { }
 };
+Q_DECLARE_METATYPE(DetailInfo)
 
 class UpdateItemInfo : public QObject {
     Q_OBJECT

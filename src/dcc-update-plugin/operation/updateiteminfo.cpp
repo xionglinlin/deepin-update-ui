@@ -16,6 +16,8 @@ UpdateItemInfo::UpdateItemInfo(UpdateType type, QObject* parent)
     , m_isChecked(true)
     , m_updateStatus(UpdatesStatus::Default)
 {
+    qRegisterMetaType<DetailInfo>("DetailInfo");
+    qRegisterMetaType<QList<DetailInfo>>("QList<DetailInfo>");    
 }
 
 void UpdateItemInfo::setDownloadSize(qlonglong downloadSize)
