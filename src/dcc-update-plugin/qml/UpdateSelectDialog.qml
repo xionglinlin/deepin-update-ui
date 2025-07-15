@@ -63,6 +63,7 @@ D.DialogWindow {
                     normalDark: normal
                 }
                 Layout.fillWidth: true
+                focus: root.visible
                 onClicked: {
                     root.upgradeShutdownBtnClicked()
                 }
