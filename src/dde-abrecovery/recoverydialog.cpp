@@ -187,6 +187,8 @@ RecoveryWidget::RecoveryWidget(QWidget *parent)
     , m_backupVersion("")
     , m_backupTime("")
     , m_restoreWidget(nullptr)
+    , m_confirmBtn(nullptr)
+    , m_rebootBtn(nullptr)
 {
     this->setWindowFlags(Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint);
     this->setAttribute(Qt::WA_TranslucentBackground);
@@ -333,12 +335,12 @@ void RecoveryWidget::initUI()
     QHBoxLayout *btnLayout = new QHBoxLayout();
     btnLayout->setContentsMargins(0, 0, 0, 0);
 
-    QPushButton *rebootBtn = new QPushButton();
-    rebootBtn->setText(tr("Cancel and Reboot"));
-    rebootBtn->setFixedHeight(45);
-    DFontSizeManager::instance()->bind(rebootBtn, DFontSizeManager::T4, QFont::Normal);
-    btnLayout->addWidget(rebootBtn, Qt::AlignCenter);
-    connect(rebootBtn, &QPushButton::clicked, this, [ this ] {
+    m_rebootBtn = new QPushButton();
+    m_rebootBtn->setText(tr("Cancel and Reboot"));
+    m_rebootBtn->setFixedHeight(45);
+    DFontSizeManager::instance()->bind(m_rebootBtn, DFontSizeManager::T4, QFont::Normal);
+    btnLayout->addWidget(m_rebootBtn, Qt::AlignCenter);
+    connect(m_rebootBtn, &QPushButton::clicked, this, [ this ] {
         Q_EMIT notifyButtonClicked(0);
     });
 
@@ -349,14 +351,19 @@ void RecoveryWidget::initUI()
     btnLayout->addWidget(line, Qt::AlignCenter);
     btnLayout->addSpacing(6);
 
-    DSuggestButton *confirmBtn = new DSuggestButton();
-    confirmBtn->setText(tr("Confirm"));
-    confirmBtn->setFixedHeight(45);
-    DFontSizeManager::instance()->bind(confirmBtn, DFontSizeManager::T4, QFont::Normal);
-    btnLayout->addWidget(confirmBtn, Qt::AlignCenter);
-    connect(confirmBtn, &DSuggestButton::clicked, this, [ this ] {
+    m_confirmBtn = new DSuggestButton();
+    m_confirmBtn->setText(tr("Confirm"));
+    m_confirmBtn->setFixedHeight(45);
+    DFontSizeManager::instance()->bind(m_confirmBtn, DFontSizeManager::T4, QFont::Normal);
+    btnLayout->addWidget(m_confirmBtn, Qt::AlignCenter);
+    connect(m_confirmBtn, &DSuggestButton::clicked, this, [ this ] {
         Q_EMIT notifyButtonClicked(1);
     });
+    
+    // 设置按钮的 autoDefault 属性，这样有焦点的按钮会响应 Enter 键
+    m_confirmBtn->setAutoDefault(true);
+    m_rebootBtn->setAutoDefault(true);
+    
     mainLayout->addSpacing(10);
     mainLayout->addLayout(btnLayout);
 
@@ -414,6 +421,15 @@ void RecoveryWidget::removeContent()
 
     delete layout;
     layout = nullptr;
+}
+
+void RecoveryWidget::focusInEvent(QFocusEvent *event)
+{
+    QWidget::focusInEvent(event);
+    
+    if (m_confirmBtn && event->reason() != Qt::TabFocusReason && event->reason() != Qt::BacktabFocusReason) {
+        m_confirmBtn->setFocus();
+    }
 }
 
 void RecoveryWidget::closeEvent(QCloseEvent *event)

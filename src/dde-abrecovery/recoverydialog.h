@@ -10,6 +10,7 @@
 
 #include <QWidget>
 #include <QKeyEvent>
+#include <QPushButton>
 
 
 DWIDGET_USE_NAMESPACE
@@ -73,12 +74,15 @@ private:
     void keyPressEvent(QKeyEvent *e) override;
     void paintEvent(QPaintEvent *event) override;
     void closeEvent(QCloseEvent *event) override;
+    void focusInEvent(QFocusEvent *event) override;
     void removeContent();
 
 private:
     QString m_backupVersion;
     QString m_backupTime;
     BackgroundWidget *m_restoreWidget;
+    QPushButton *m_confirmBtn;
+    QPushButton *m_rebootBtn;
 };
 
 #endif // RECOVERYDIALOG_H
