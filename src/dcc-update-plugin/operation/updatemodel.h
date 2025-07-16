@@ -27,7 +27,6 @@ class UpdateModel : public QObject
     Q_PROPERTY(QString updateDisabledIcon READ updateDisabledIcon NOTIFY updateDisabledIconChanged FINAL)
     Q_PROPERTY(QString updateDisabledTips READ updateDisabledTips NOTIFY updateDisabledTipsChanged FINAL)
     Q_PROPERTY(bool batterIsOK READ batterIsOK NOTIFY batterIsOKChanged FINAL)
-    Q_PROPERTY(int lastStatus READ lastStatus  NOTIFY lastStatusChanged FINAL)
 
     // ---------------检查更新页面数据---------------
     Q_PROPERTY(bool showCheckUpdate READ showCheckUpdate NOTIFY showCheckUpdateChanged FINAL)
@@ -111,9 +110,6 @@ public:
 
     bool batterIsOK() const { return m_batterIsOK; }
     void setBatterIsOK(bool ok);
-
-    int lastStatus() const { return m_lastStatus; }
-    void setLastStatus(const UpdatesStatus &status, int line, int types = 0);
 
     bool immutableAutoRecovery() const { return m_immutableAutoRecovery; }
     void setImmutableAutoRecovery(bool value);
@@ -220,7 +216,6 @@ public:
     QString lastErrorLog(UpdatesStatus status) const { return m_descriptionMap.value(status, ""); }
     void setLastErrorLog(UpdatesStatus status, const QString &description);
 
-    static ControlPanelType getControlPanelType(UpdatesStatus status);
     static QString updateErrorToString(UpdateErrorType error);
 
     void setUpdateStatus(const QByteArray &status);
@@ -228,17 +223,11 @@ public:
     void refreshUpdateUiModel();
     void updateAvailableState();
     void modifyUpdateStatusByBackupStatus(LastoreDaemonUpdateStatus &);
-    void updateWaitingStatus(UpdateType updateType, UpdatesStatus status);
 
     bool isUpdatable() const { return m_isUpdatable; }
     void setIsUpdatable(bool isUpdatable);
 
-    UpdatesStatus updateStatus(ControlPanelType type) const;
-    UpdatesStatus updateStatus(UpdateType type) const;
-    QList<UpdateType> updateTypesList(ControlPanelType type) const;
-    int updateTypes(ControlPanelType type) const;
     QList<UpdatesStatus> allUpdateStatus() const;
-    QMap<UpdatesStatus, int> allWaitingStatus() const { return m_waitingStatusMap; };
 
 
     // ---------------更新设置页面数据---------------
@@ -328,7 +317,6 @@ Q_SIGNALS:
     void updateDisabledTipsChanged();
 
     void batterIsOKChanged(bool isOK);
-    void lastStatusChanged(int status);
     void immutableAutoRecoveryChanged(bool value);
 
     // 检查更新页面数据
@@ -368,7 +356,6 @@ Q_SIGNALS:
 
     void updateInfoChanged(UpdateType);
     void isUpdatableChanged(const bool isUpdatablePackages);
-    void updateStatusChanged(ControlPanelType, UpdatesStatus);
     void controlTypeChanged();
     void lastErrorChanged(UpdatesStatus, UpdateErrorType);
     void notifyBackupSuccess();
@@ -401,7 +388,6 @@ private:
     QString m_updateDisabledIcon;
     QString m_updateDisabledTips;
     bool m_batterIsOK;
-    int m_lastStatus;
     bool m_immutableAutoRecovery;
 
     // 检查更新页面数据
@@ -440,10 +426,8 @@ private:
     QMap<UpdatesStatus, UpdateErrorType> m_errorMap;
     QMap<UpdatesStatus, QString> m_descriptionMap;
     QByteArray m_updateStatus; // lastore daemon发上来的原始json数据
-
+    QMap<UpdateType, UpdatesStatus> m_statusMap;
     bool m_isUpdatable; // 是否有包可更新
-    QMap<ControlPanelType, QPair<UpdatesStatus, QList<UpdateType>>> m_controlStatusMap;
-    QMap<UpdatesStatus, int> m_waitingStatusMap;
 
     // 更新设置页面数据
     bool m_securityUpdateEnabled;

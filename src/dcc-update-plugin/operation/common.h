@@ -110,20 +110,6 @@ enum TestingChannelStatus {
 };
 Q_ENUM_NS(TestingChannelStatus)
 
-enum ControlPanelType {
-    CPT_Invalid,
-    CPT_NeedRestart,
-    CPT_UpgradeFailed,
-    CPT_BackupFailed,
-    CPT_Upgrade,
-    CPT_Downloaded,
-    CPT_DownloadFailed,
-    CPT_Downloading,
-    CPT_Available,
-    CPT_Checking
-};
-Q_ENUM_NS(ControlPanelType)
-
 enum CtrlWidgetType {
     CtrlState_None,
     CtrlState_Check,

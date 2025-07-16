@@ -99,8 +99,11 @@ public:
     void setInstallPackageJob(const QString& jobPath);
     void setRemovePackageJob(const QString& jobPath);
 
+    // 获取并处理更新日志
+    void getAndHandleUpdateLogs();
+
     Q_INVOKABLE bool openUrl(const QString& url);
-    Q_INVOKABLE void onRequestRetry(int type, int updateTypes);
+    Q_INVOKABLE void onRequestRetry(int state, int updateTypes);
 
     Q_INVOKABLE void setCheckUpdateMode(int type, bool isChecked);
 

@@ -215,7 +215,7 @@ DccObject {
             btnActions: [ qsTr("Continue Update") ]
 
             onBtnClicked: function(index, updateType) {
-                dccData.work().onRequestRetry(Common.CPT_UpgradeFailed, updateType)
+                dccData.work().onRequestRetry(Common.UpgradeFailed, updateType)
             }
         }
     }
@@ -250,7 +250,7 @@ DccObject {
             onBtnClicked: function(index, updateType) {
                 console.log("index: " + index, " updateType: " + updateType)
                 if (index === 0) {
-                    dccData.work().onRequestRetry(Common.CPT_BackupFailed, updateType)
+                    dccData.work().onRequestRetry(Common.BackupFailed, updateType)
                 } else {
                     dccData.work().doUpgrade(updateType, false)
                 }
@@ -330,7 +330,7 @@ DccObject {
             updateListEnable: !dccData.model().upgradeWaiting
 
             onBtnClicked: function(index, updateType) {
-                dccData.work().onRequestRetry(Common.CPT_DownloadFailed, updateType)
+                dccData.work().onRequestRetry(Common.DownloadFailed, updateType)
             }
         }
     }

@@ -121,7 +121,6 @@ UpdateWorker::UpdateWorker(UpdateModel* model, QObject* parent)
 {
     qRegisterMetaType<UpdatesStatus>("UpdatesStatus");
     qRegisterMetaType<UiActiveState>("UiActiveState");
-    qRegisterMetaType<ControlPanelType>("ControlPanelType");
 
     initConnect();
 }
@@ -239,23 +238,8 @@ void UpdateWorker::activate()
         const bool isDownloading = m_downloadJob && m_downloadJob->status() != "failed";
         const bool isUpgrading = m_distUpgradeJob && m_distUpgradeJob->status() != "failed";
         if (isUpgrading || isDownloading) {
-            auto watcher = new QDBusPendingCallWatcher(m_updateInter->GetUpdateLogs(SystemUpdate | SecurityUpdate), this);
-            connect(watcher, &QDBusPendingCallWatcher::finished, [this, watcher] {
-                if (!watcher->isError()) {
-                    QDBusPendingReply<QString> reply = watcher->reply();
-                    UpdateLogHelper::ref().handleUpdateLog(reply.value());
-                    auto resultMap = m_model->getAllUpdateInfos();
-                    for (UpdateType type : resultMap.keys()) {
-                        UpdateLogHelper::ref().updateItemInfo(resultMap.value(type));
-                    }
-                } else {
-                    qCWarning(DCC_UPDATE_WORKER) << "Get update log failed";
-                }
-                // 日志处理完了再显示更新内容界面
-                m_model->setLastStatus(CheckingSucceed, __LINE__);
-                setUpdateInfo();
-                watcher->deleteLater();
-            });
+            getAndHandleUpdateLogs();
+            setUpdateInfo();
         }
     }
     
@@ -452,7 +436,6 @@ void UpdateWorker::doCheckUpdates()
         QDBusPendingReply<QDBusObjectPath> reply = *watcher;
         if (reply.isError()) {
             qCWarning(DCC_UPDATE_WORKER) << "Check update failed, error: " << reply.error().message();
-            m_model->setLastStatus(UpdatesStatus::CheckingFailed, __LINE__);
             cleanLaStoreJob(m_checkUpdateJob);
             m_doCheckUpdates = false;
         } else {
@@ -467,10 +450,6 @@ void UpdateWorker::doCheckUpdates()
 void UpdateWorker::setCheckUpdatesJob(const QString& jobPath)
 {
     qCInfo(DCC_UPDATE_WORKER) << "Set check updates job";
-    UpdatesStatus state = m_model->updateStatus(CPT_Downloading);
-    if (UpdatesStatus::Downloading != state && UpdatesStatus::DownloadPaused != state) {
-        m_model->setLastStatus(UpdatesStatus::Checking, __LINE__);
-    }
 
     m_model->setCheckUpdateStatus(UpdatesStatus::Checking);
     createCheckUpdateJob(jobPath);
@@ -506,17 +485,12 @@ void UpdateWorker::setUpdateInfo()
     const QMap<QString, QStringList>& updatePackages = m_updateInter->classifiedUpdatablePackages();
 
     QMap<UpdateType, UpdateItemInfo*> updateInfoMap = getAllUpdateInfo(updatePackages);
-    bool isUpdated = true;
     for (auto info : updateInfoMap.values()) {
         m_model->addUpdateInfo(info);
-        if (info->isUpdateAvailable()) {
-            isUpdated = false;
-        }
     }
     m_model->refreshUpdateItemsChecked();
     m_model->refreshUpdateStatus();
     m_model->updateAvailableState();
-    m_model->setLastStatus(isUpdated ? Updated : UpdatesAvailable, __LINE__);
 }
 
 /**
@@ -594,7 +568,6 @@ void UpdateWorker::startDownload(int updateTypes)
     cleanLaStoreJob(m_downloadJob);
 
     // 直接设置为正在下载状态, 否则切换下载界面等待时间稍长,体验不好
-    m_model->setLastStatus(UpdatesStatus::DownloadWaiting, __LINE__, updateTypes);
     m_model->setDownloadWaiting(true);
 
     // 开始下载
@@ -686,7 +659,6 @@ void UpdateWorker::doUpgrade(int updateTypes, bool doBackup)
         if (reply.isError()) {
             qCWarning(DCC_UPDATE_WORKER) << "Call `DistUpgradePartly` failed, error:" << reply.error().message();
         } else {
-            m_model->setLastStatus(UpgradeWaiting, __LINE__, updateTypes);
             m_model->setUpgradeWaiting(true);
 
             const QString jobPath = reply.value().path();
@@ -1219,15 +1191,12 @@ bool UpdateWorker::openUrl(const QString& url)
     return QDesktopServices::openUrl(QUrl(url));
 }
 
-void UpdateWorker::onRequestRetry(int type, int updateTypes)
+void UpdateWorker::onRequestRetry(int state, int updateTypes)
 {
-    const auto controlType = static_cast<ControlPanelType>(type);
-    const auto updateStatus = m_model->updateStatus(controlType);
-    const auto lastError = m_model->lastError(m_model->updateStatus(controlType));
+    UpdatesStatus updateStatus = UpdatesStatus(state);
+    const auto lastError = m_model->lastError(UpdatesStatus(state));
 
-    qCWarning(DCC_UPDATE_WORKER) << "Control type:" << controlType
-               << ", update status:" << updateStatus
-               << ", update types:" << updateTypes;
+    qCWarning(DCC_UPDATE_WORKER) << "update status:" << updateStatus << ", update types:" << updateTypes;
 
     if (updateStatus == UpgradeFailed && lastError == DpkgInterrupted) {
         if (m_fixErrorJob != nullptr) {
@@ -1422,35 +1391,17 @@ void UpdateWorker::onCheckUpdateStatusChanged(const QString& value)
             const auto& description = m_checkUpdateJob->description();
             m_model->setLastErrorLog(CheckingFailed, description);
             m_model->setLastError(CheckingFailed, analyzeJobErrorMessage(description, CheckingFailed));
-            m_model->setLastStatus(CheckingFailed, __LINE__);
             m_model->setCheckUpdateStatus(CheckingFailed);
             deleteJob(m_checkUpdateJob);
             m_doCheckUpdates = false;
         }
     } else if (value == "success" || value == "succeed") {
-        auto watcher = new QDBusPendingCallWatcher(m_updateInter->GetUpdateLogs(SystemUpdate | SecurityUpdate), this);
-        connect(watcher, &QDBusPendingCallWatcher::finished, [this, watcher] {
-            watcher->deleteLater();
-            if (!watcher->isError()) {
-                QDBusPendingReply<QString> reply = watcher->reply();
-                UpdateLogHelper::ref().handleUpdateLog(reply.value());
-                auto resultMap = m_model->getAllUpdateInfos();
-                for (UpdateType type : resultMap.keys()) {
-                    UpdateLogHelper::ref().updateItemInfo(resultMap.value(type));
-                }
-            } else {
-                qCWarning(DCC_UPDATE_WORKER) << "Get update log failed";
-            }
-            // 日志处理完了再显示更新内容界面
-        });
-        m_model->setLastStatus(CheckingSucceed, __LINE__);
-        m_model->setCheckUpdateStatus(CheckingSucceed);
+        getAndHandleUpdateLogs();
         setUpdateInfo();
+        m_model->setCheckUpdateStatus(Updated);
         m_model->setShowCheckUpdate(!m_model->isUpdatable());
     } else if (value == "end") {
         refreshLastTimeAndCheckCircle();
-        m_model->setCheckUpdateStatus(UpdatesStatus(m_model->lastStatus()));
-        m_model->updateCheckUpdateUi();
         deleteJob(m_checkUpdateJob);
         m_doCheckUpdates = false;
     }
@@ -1554,3 +1505,21 @@ void UpdateWorker::onRemovePackageStatusChanged(const QString& value)
     }
 }
 
+void UpdateWorker::getAndHandleUpdateLogs()
+{
+    qCInfo(DCC_UPDATE_WORKER) << "Get and handle update logs";
+    auto watcher = new QDBusPendingCallWatcher(m_updateInter->GetUpdateLogs(SystemUpdate | SecurityUpdate), this);
+    connect(watcher, &QDBusPendingCallWatcher::finished, [this, watcher] {
+        if (!watcher->isError()) {
+            QDBusPendingReply<QString> reply = watcher->reply();
+            UpdateLogHelper::ref().handleUpdateLog(reply.value());
+            auto resultMap = m_model->getAllUpdateInfos();
+            for (UpdateType type : resultMap.keys()) {
+                UpdateLogHelper::ref().updateItemInfo(resultMap.value(type));
+            }
+        } else {
+            qCWarning(DCC_UPDATE_WORKER) << "Get update log failed";
+        }
+        watcher->deleteLater();
+    });
+}

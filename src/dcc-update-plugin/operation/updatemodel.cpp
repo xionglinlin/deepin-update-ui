@@ -14,23 +14,6 @@ using namespace dcc::update::common;
 Q_LOGGING_CATEGORY(DCC_UPDATE_MODEL, "dcc-update-model")
 
 DCORE_USE_NAMESPACE
-static const QMap<UpdatesStatus, ControlPanelType> ControlPanelTypeMapping = {
-    { Default, CPT_Invalid },
-    { UpdatesAvailable, CPT_Available },
-    { DownloadWaiting, CPT_Available },
-    { Downloading, CPT_Downloading },
-    { DownloadPaused, CPT_Downloading },
-    { DownloadFailed, CPT_DownloadFailed },
-    { Downloaded, CPT_Downloaded },
-    { UpgradeWaiting, CPT_Downloaded },
-    { BackingUp, CPT_Upgrade },
-    { BackupSuccess, CPT_Upgrade },
-    { BackupFailed, CPT_BackupFailed },
-    { UpgradeReady, CPT_Upgrade },
-    { Upgrading, CPT_Upgrade },
-    { UpgradeFailed, CPT_UpgradeFailed },
-    { UpgradeSuccess, CPT_NeedRestart },
-};
 
 UpdateModel::UpdateModel(QObject* parent)
     : QObject(parent)
@@ -41,7 +24,6 @@ UpdateModel::UpdateModel(QObject* parent)
     , m_updateDisabledIcon("")
     , m_updateDisabledTips("")
     , m_batterIsOK(false)
-    , m_lastStatus(Default)
     , m_showCheckUpdate(false)
     , m_checkUpdateIcon("")
     , m_checkUpdateProgress(0.0)
@@ -193,19 +175,6 @@ void UpdateModel::setBatterIsOK(bool ok)
 
     m_batterIsOK = ok;
     Q_EMIT batterIsOKChanged(ok);
-}
-
-void UpdateModel::setLastStatus(const UpdatesStatus& status, int line, int types)
-{
-    qCInfo(DCC_UPDATE_MODEL) << "Status: ======== " << status << ", types:" << types << ", line:" << line;
-    if (status == UpgradeWaiting || status == DownloadWaiting) {
-        m_waitingStatusMap.insert(status, types);
-    }
-
-    if (m_lastStatus != status) {
-        m_lastStatus = status;
-        Q_EMIT lastStatusChanged(m_lastStatus);
-    }
 }
 
 void UpdateModel::setImmutableAutoRecovery(bool value)
@@ -514,7 +483,7 @@ void UpdateModel::addUpdateInfo(UpdateItemInfo* info)
         return;
 
     const auto updateType = info->updateType();
-    info->setUpdateStatus(updateStatus(updateType));
+    info->setUpdateStatus(m_statusMap.value(updateType, Default));
     if (m_allUpdateInfos.contains(updateType)) {
         if (m_allUpdateInfos.value(updateType))
             deleteUpdateInfo(m_allUpdateInfos.value(updateType));
@@ -523,12 +492,6 @@ void UpdateModel::addUpdateInfo(UpdateItemInfo* info)
 
     qCInfo(DCC_UPDATE_MODEL) << "Add update info:" << info->updateType() << info->updateStatus();
     m_allUpdateInfos.insert(updateType, info);
-
-    if (!info->isUpdateAvailable()) {
-        for (auto& pair : m_controlStatusMap) {
-            pair.second.removeAll(updateType);
-        }
-    }
 
     Q_EMIT updateInfoChanged(updateType);
 }
@@ -592,11 +555,6 @@ void UpdateModel::setLastErrorLog(UpdatesStatus status, const QString &descripti
     m_descriptionMap.insert(status, description);
 }
 
-ControlPanelType UpdateModel::getControlPanelType(UpdatesStatus status)
-{
-    return ControlPanelTypeMapping.value(status, CPT_Invalid);
-}
-
 QString UpdateModel::updateErrorToString(UpdateErrorType error)
 {
     if (error == UpdateErrorType::DependenciesBrokenError)
@@ -610,7 +568,6 @@ QString UpdateModel::updateErrorToString(UpdateErrorType error)
 
 void UpdateModel::setUpdateStatus(const QByteArray& status)
 {
-    qCInfo(DCC_UPDATE_MODEL) << "Lastore update status:" << status;
     if (m_updateStatus == status)
         return;
 
@@ -625,62 +582,19 @@ void UpdateModel::refreshUpdateStatus()
         return;
     }
 
+    qCInfo(DCC_UPDATE_MODEL) << "refresh update status:" << m_updateStatus;
+
     auto lastoreUpdateStatus = LastoreDaemonUpdateStatus::fromJson(m_updateStatus);
     modifyUpdateStatusByBackupStatus(lastoreUpdateStatus);
-    if (lastoreUpdateStatus.backupStatus == BackupSuccess) {
-        Q_EMIT notifyBackupSuccess();
-    }
+
+    m_statusMap = lastoreUpdateStatus.m_statusMap;
     for (auto info : m_allUpdateInfos.values()) {
-        info->setUpdateStatus(lastoreUpdateStatus.m_statusMap.value(info->updateType(), Default));
+        info->setUpdateStatus(m_statusMap.value(info->updateType(), Default));
     }
 
-    auto it = lastoreUpdateStatus.m_statusMap.begin();
-    for (; it != lastoreUpdateStatus.m_statusMap.end(); it++) {
-        const auto updateType = it.key();
+    auto it = m_statusMap.begin();
+    for (; it != m_statusMap.end(); it++) {
         const auto updateStatus = it.value();
-        const auto controlType = getControlPanelType(updateStatus);
-
-        if (it.value() == Default || (updateItemInfo(updateType) && !updateItemInfo(updateType)->isUpdateAvailable())) {
-            qCInfo(DCC_UPDATE_MODEL) << updateType << " is not available";
-            continue;
-        }
-        if (!m_controlStatusMap.contains(controlType)) {
-            qCInfo(DCC_UPDATE_MODEL) << "Insert control type:" << controlType;
-            m_controlStatusMap.insert( controlType, qMakePair<UpdatesStatus, QList<UpdateType>>(std::move(const_cast<UpdatesStatus&>(updateStatus)), { updateType }));
-            Q_EMIT updateStatusChanged(controlType, updateStatus);
-        }
-
-        // 判断updateType在对应的control中，修改status即可
-        // 如果updateType不在对应的control中，从其他control中移除updateType
-        auto controlIt = m_controlStatusMap.begin();
-        for (; controlIt != m_controlStatusMap.end(); controlIt++) {
-            if (controlIt.key() == controlType) {
-                if (controlIt.value().second.contains(updateType)) {
-                    if (controlIt.value().first != updateStatus) {
-                        qCInfo(DCC_UPDATE_MODEL) << controlType << " change status from " << controlIt.value().first << " to " << updateStatus;
-                        controlIt.value().first = updateStatus;
-                        Q_EMIT updateStatusChanged(controlIt.key(), updateStatus);
-                    }
-                } else {
-                    qCInfo(DCC_UPDATE_MODEL) << "Append " << updateType << " to " << controlType;
-                    controlIt.value().second.append(updateType);
-                }
-            } else {
-                if (controlIt.value().second.contains(updateType)) {
-                    qCInfo(DCC_UPDATE_MODEL) << "Remove " << updateType << " from " <<controlIt.key();
-                    controlIt.value().second.removeOne(updateType);
-                }
-
-                // 将Ready状态还原为本来的状态
-                if (Downloading == updateStatus && CPT_Available == controlIt.key()) {
-                    controlIt.value().first = UpdatesAvailable;
-                } else if ((Upgrading == updateStatus || BackingUp == updateStatus) && CPT_Downloaded == controlIt.key()) {
-                    controlIt.value().first = Downloaded;
-                }
-            }
-        }
-
-        updateWaitingStatus(updateType, updateStatus);
 
         if (updateStatus >= Downloading && updateStatus <= DownloadFailed) {
             setDownloadWaiting(false);
@@ -688,22 +602,6 @@ void UpdateModel::refreshUpdateStatus()
 
         if (updateStatus >= BackingUp && updateStatus <= UpgradeComplete) {
             setUpgradeWaiting(false);
-        }
-    }
-
-    // 清理m_controlStatusMap中无用的control
-    for (auto key : m_controlStatusMap.keys()) {
-        bool exist = false;
-        for (auto status : lastoreUpdateStatus.m_statusMap.values()) {
-            if (getControlPanelType(status) == key) {
-                exist = true;
-                break;
-            }
-        }
-
-        if (!exist) {
-            qCInfo(DCC_UPDATE_MODEL) << "Remove control type:" << key;
-            m_controlStatusMap.remove(key);
         }
     }
 
@@ -798,10 +696,9 @@ void UpdateModel::refreshUpdateUiModel()
 
 void UpdateModel::updateAvailableState()
 {
-    auto it = m_controlStatusMap.begin();
-    for (; it != m_controlStatusMap.end(); it++) {
-        auto pair = it.value();
-        if ((pair.first >= UpdatesAvailable && pair.first <= UpgradeComplete && (m_updateMode & updateTypes(it.key())))) {
+    auto it = m_statusMap.begin();
+    for (; it != m_statusMap.end(); it++) {
+        if (it.value() >= UpdatesAvailable && it.value() <= UpgradeComplete && (m_updateMode & it.key())) {
             setIsUpdatable(true);
             return;
         }
@@ -809,7 +706,6 @@ void UpdateModel::updateAvailableState()
 
     setIsUpdatable(false);
 }
-
 
 // lastore返回的update status没有将备份的状态匹配给具体的更新类型,需要根据备份状态修正一下更新状态
 void UpdateModel::modifyUpdateStatusByBackupStatus(LastoreDaemonUpdateStatus& lastoreUpdateStatus)
@@ -841,20 +737,6 @@ void UpdateModel::modifyUpdateStatusByBackupStatus(LastoreDaemonUpdateStatus& la
     }
 }
 
-void UpdateModel::updateWaitingStatus(UpdateType updateType, UpdatesStatus updateStatus)
-{
-    int downloadWaitingTypes = m_waitingStatusMap.value(DownloadWaiting, 0);
-    if (updateStatus > DownloadWaiting && updateStatus <= DownloadFailed && downloadWaitingTypes & updateType) {
-        m_waitingStatusMap.remove(DownloadWaiting);
-        return;
-    }
-
-    int upgradeWaitingTypes = m_waitingStatusMap.value(UpgradeWaiting, 0);
-    if (updateStatus > UpgradeWaiting && updateStatus <= UpgradeComplete && upgradeWaitingTypes & updateType) {
-        m_waitingStatusMap.remove(UpgradeWaiting);
-    }
-}
-
 void UpdateModel::setIsUpdatable(bool isUpdatable)
 {
     if (m_isUpdatable == isUpdatable)
@@ -864,50 +746,11 @@ void UpdateModel::setIsUpdatable(bool isUpdatable)
     Q_EMIT isUpdatableChanged(isUpdatable);
 }
 
-UpdatesStatus UpdateModel::updateStatus(ControlPanelType type) const
-{
-    if (!m_controlStatusMap.contains(type)) {
-        return UpdatesStatus::Default;
-    }
-
-    return m_controlStatusMap.value(type).first;
-}
-
-UpdatesStatus UpdateModel::updateStatus(UpdateType type) const
-{
-    for (const auto& pair : m_controlStatusMap.values()) {
-        if (pair.second.contains(type)) {
-            return pair.first;
-        }
-    }
-
-    return UpdatesStatus::Default;
-}
-
-QList<UpdateType> UpdateModel::updateTypesList(ControlPanelType type) const
-{
-    if (!m_controlStatusMap.contains(type)) {
-        return {};
-    }
-
-    return m_controlStatusMap.value(type).second;
-}
-
-int UpdateModel::updateTypes(ControlPanelType type) const
-{
-    QList<UpdateType> list = updateTypesList(type);
-    int types = 0;
-    for (const auto& item : list) {
-        types |= item;
-    }
-    return types;
-}
-
 QList<UpdatesStatus> UpdateModel::allUpdateStatus() const
 {
     QList<UpdatesStatus> list;
-    for (const auto& pair : m_controlStatusMap.values()) {
-        list.append(pair.first);
+    for (const auto& status : m_statusMap.values()) {
+        list.append(status);
     }
 
     return list;
@@ -963,9 +806,7 @@ void UpdateModel::setUpdateMode(quint64 updateMode)
     setUpdateItemEnabled();
     refreshUpdateStatus();
     updateAvailableState();
-    if (m_lastStatus == Updated && m_isUpdatable) {
-        setLastStatus(UpdatesAvailable, __LINE__);
-    }
+
     Q_EMIT updateModeChanged(m_updateMode);
 }
 
