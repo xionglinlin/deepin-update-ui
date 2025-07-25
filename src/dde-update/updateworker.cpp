@@ -26,6 +26,7 @@
 #include <QStandardPaths>
 
 #include <DDBusSender>
+#include <DStandardPaths>
 
 Q_LOGGING_CATEGORY(DDE_UPDATE_WORKER, "dde-update-worker")
 
@@ -662,8 +663,7 @@ bool UpdateWorker::exportUpdateLog()
         return false;
     }
 
-    QString homeDir = QString("/home/%1").arg(name);
-    QString desktopPath = QDir(homeDir).absoluteFilePath("Desktop");
+    QString desktopPath = Dtk::Core::DStandardPaths::homePath(uid) + "/Desktop";
 
     if (desktopPath.isEmpty()) {
         qWarning() << "Cannot get desktop path";
