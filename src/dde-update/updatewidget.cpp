@@ -192,6 +192,7 @@ UpdateProgressWidget::UpdateProgressWidget(QWidget *parent)
     , m_showLogButton(new Dtk::Widget::DCommandLinkButton(tr("View update logs"), this))
     , m_logWidget(new UpdateLogWidget(this))
     , m_headSpacer(new QSpacerItem(0, 0))
+    , m_contentWidget(new QWidget(this))
 {
     m_logo->setFixedSize(286, 57);
     if (DSysInfo::uosEditionType() == DSysInfo::UosCommunity)
@@ -239,8 +240,7 @@ UpdateProgressWidget::UpdateProgressWidget(QWidget *parent)
     pProgressLayout->addWidget(m_progressText, 0, Qt::AlignCenter);
     pProgressLayout->addStretch();
 
-    QWidget *contentWidget = new QWidget(this);
-    QVBoxLayout *pLayout = new QVBoxLayout(contentWidget);
+    QVBoxLayout *pLayout = new QVBoxLayout(m_contentWidget);
     pLayout->setSpacing(0);
     pLayout->addItem(m_headSpacer);
     pLayout->addWidget(m_logo, 0, Qt::AlignCenter);
@@ -252,7 +252,7 @@ UpdateProgressWidget::UpdateProgressWidget(QWidget *parent)
     pLayout->addWidget(m_showLogButton, 0, Qt::AlignCenter);
 
     auto mainAnchors = new DAnchors<QWidget>(this);
-    auto contentAnchors = new DAnchors<QWidget>(contentWidget);
+    auto contentAnchors = new DAnchors<QWidget>(m_contentWidget);
     contentAnchors->setCenterIn(mainAnchors);
 
     auto logWidgetAnchors = new DAnchors<QWidget>(m_logWidget);
@@ -263,10 +263,12 @@ UpdateProgressWidget::UpdateProgressWidget(QWidget *parent)
     logWidgetAnchors->setBottom(mainAnchors->bottom());
     logWidgetAnchors->setBottomMargin(30);
 
+
     connect(m_showLogButton, &DCommandLinkButton::clicked, this, [this] {
         bool toShow = !m_logWidget->isVisible();
         m_logWidget->setVisible(toShow);
         m_showLogButton->setText(toShow ? tr("Collapse update logs") : tr("View update logs"));
+        m_contentWidget->adjustSize();
     });
 }
 
@@ -303,6 +305,7 @@ UpdateCompleteWidget::UpdateCompleteWidget(QWidget *parent)
     , m_checkedButton(nullptr)
     , m_expendWidget(new QWidget(this))
     , m_logWidget(new UpdateLogWidget(this))
+    , m_contentWidget(new QWidget(this))
 {
     QPalette palette = this->palette();
     palette.setColor(QPalette::WindowText, Qt::white);
@@ -316,9 +319,7 @@ UpdateCompleteWidget::UpdateCompleteWidget(QWidget *parent)
     m_tips->setAlignment(Qt::AlignVCenter);
     DFontSizeManager::instance()->bind(m_tips, DFontSizeManager::T6);
 
-    QWidget *contentWidget = new QWidget(this);
-
-    m_mainLayout = new QVBoxLayout(contentWidget);
+    m_mainLayout = new QVBoxLayout(m_contentWidget);
     m_mainLayout->setContentsMargins(0, 0, 0, 0);
     m_mainLayout->setSpacing(10);
     m_mainLayout->setAlignment(Qt::AlignCenter);
@@ -337,7 +338,7 @@ UpdateCompleteWidget::UpdateCompleteWidget(QWidget *parent)
     m_logWidget->setFixedWidth(718);
 
     auto mainAnchors = new DAnchors<QWidget>(this);
-    auto contentAnchors = new DAnchors<QWidget>(contentWidget);
+    auto contentAnchors = new DAnchors<QWidget>(m_contentWidget);
     contentAnchors->setCenterIn(mainAnchors);
 
     auto expendAnchors = new DAnchors<QWidget>(m_expendWidget);
@@ -359,6 +360,7 @@ UpdateCompleteWidget::UpdateCompleteWidget(QWidget *parent)
             collapseLogWidget();
             m_showLogButton->setText(tr("View update logs"));
         }
+        m_contentWidget->adjustSize();
     });
 }
 
@@ -417,6 +419,8 @@ void UpdateCompleteWidget::showSuccessFrame()
         auto button = new QPushButton(UpdateModel::instance()->isReboot() ?
             UpdateModel::instance()->updateActionText(UpdateModel::Reboot) :
             UpdateModel::instance()->updateActionText(UpdateModel::ShutDown), this);
+        m_contentWidget->adjustSize();
+
         button->setFixedSize(240, 48);
         // 在 stretch 之前插入按钮（stretch 总是在最后一个位置）
         int insertIndex = m_expendLayout->count() - 1; // stretch 的位置

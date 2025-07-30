@@ -88,6 +88,7 @@ private:
     Dtk::Widget::DCommandLinkButton *m_showLogButton;
     UpdateLogWidget *m_logWidget;
     QSpacerItem *m_headSpacer;
+    QWidget *m_contentWidget;
 };
 
 class UpdateCompleteWidget : public QFrame
@@ -123,6 +124,7 @@ private:
     QWidget *m_expendWidget;
     QVBoxLayout *m_expendLayout;
     UpdateLogWidget *m_logWidget;
+    QWidget *m_contentWidget;
 };
 
 class UpdateWidget : public QFrame
