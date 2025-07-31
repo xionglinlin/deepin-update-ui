@@ -5,32 +5,38 @@
 #define LOGWATCHERHELPER_H
 
 #include <QObject>
-#include <QFileSystemWatcher>
+#include <QSocketNotifier>
+
+class UpdateDBusProxy;
 
 class LogWatcherHelper : public QObject
 {
     Q_OBJECT
 
 public:
-    explicit LogWatcherHelper(QObject *parent = nullptr);
+    explicit LogWatcherHelper(UpdateDBusProxy *dbusProxy, QObject *parent = nullptr);
     ~LogWatcherHelper();
 
     void startWatchFile();
     void stopWatchFile();
-    void readFileIncrement();
 
 private slots:
-    void onFileChanged(const QString &path);
-    void onDirectoryChanged(const QString &path);
+    void onDataAvailable();
 
 signals:
     void incrementalDataChanged(const QString &incrementaldata);
     void fileReset();
 
 private:
-    QFileSystemWatcher *m_fileWatcher;
-    qint64 m_lastFileSize;
+    void setupLogPipe();
+    void readAvailableData();
+    void startRealtimeLogAfterHistory();
+    
     QString m_data;
+    UpdateDBusProxy *m_dbusProxy;
+    int m_readFd;
+    int m_writeFd;
+    QSocketNotifier *m_socketNotifier;
 };
 
 #endif // LOGWATCHERHELPER_H

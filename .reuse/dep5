@@ -29,12 +29,12 @@ Copyright: None
 License: CC0-1.0
 
 # bash scripts
-Files: *.sh src/dde-update/misc/98deepin-upgrade-check
+Files: *.sh src/dde-update/misc/98deepin-upgrade-check src/dde-upadte/misc/copy-update-log.sh
 Copyright: None
 License: CC0-1.0
 
 # configuration files for CI scripts/tools
-Files: .github/* .obs/* .tx/transifex.yaml .tx/deepin.conf
+Files: .github/* .obs/* .tx/transifex.yaml .tx/deepin.conf src/dde-update/misc/deepin-update-log-copy@.service src/dde-update/misc/52-deepin-update-ui.rules
 Copyright: None
 License: CC0-1.0
 

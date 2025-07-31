@@ -18,6 +18,6 @@ Homepage: http://www.deepin.org/
 
 Package: deepin-update-ui
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}
+Depends: ${shlibs:Depends}, ${misc:Depends}, lastore-daemon (>>6.2.25),
 Description: The UI collection for updating functions, including control
  center update plugins, full screen update interfaces, rollback pages, etc.

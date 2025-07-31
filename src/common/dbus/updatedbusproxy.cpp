@@ -8,6 +8,7 @@
 #include <QDBusMetaType>
 #include <QDBusPendingReply>
 #include <QDBusReply>
+#include <QDBusUnixFileDescriptor>
 
 #include "common/commondefine.h"
 
@@ -375,11 +376,12 @@ QDBusPendingCall UpdateDBusProxy::CheckUpgrade(int checkMode, int checkOrder)
     return m_managerInter->asyncCallWithArgumentList(QStringLiteral("CheckUpgrade"), argumentList);
 }
 
-QDBusPendingReply<void> UpdateDBusProxy::ExportUpdateDetails(const QString &filename)
+QDBusPendingReply<void> UpdateDBusProxy::GetUpdateDetails(int fd, bool realtime)
 {
     QList<QVariant> argumentList;
-    argumentList << QVariant::fromValue(filename);
-    return m_managerInter->asyncCallWithArgumentList(QStringLiteral("ExportUpdateDetails"), argumentList);
+    argumentList << QVariant::fromValue(QDBusUnixFileDescriptor(fd));
+    argumentList << QVariant::fromValue(realtime);
+    return m_managerInter->asyncCallWithArgumentList(QStringLiteral("GetUpdateDetails"), argumentList);
 }
 
 bool UpdateDBusProxy::onBattery()

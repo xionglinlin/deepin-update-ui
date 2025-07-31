@@ -19,6 +19,8 @@
 #include <QVariant>
 #include <QtConcurrent>
 
+#include <memory>
+
 #include <DDBusSender>
 #include <DNotifySender>
 
@@ -105,7 +107,7 @@ UpdateWorker::UpdateWorker(UpdateModel* model, QObject* parent)
     , m_model(model)
     , m_updateInter(new UpdateDBusProxy(this))
     , m_lastoreHeartBeatTimer(new QTimer(this))
-    , m_logWatcherHelper(new LogWatcherHelper(this))
+    , m_logWatcherHelper(new LogWatcherHelper(m_updateInter, this))
     , m_machineid(std::nullopt)
     , m_testingChannelUrl(std::nullopt)
     , m_doCheckUpdates(false)
@@ -1308,9 +1310,24 @@ void UpdateWorker::exportLogToDesktop()
     QString fileName = tr("updatelog") + QString("_%1.txt").arg(timestamp);
     QString filePath = QDir(desktopPath).absoluteFilePath(fileName);
 
-    QDBusPendingCall call = m_updateInter->ExportUpdateDetails(filePath);
+    // 直接创建桌面文件并获取文件描述符
+    auto logFile = std::make_shared<QFile>(filePath);
+    if (!logFile->open(QIODevice::WriteOnly | QIODevice::Text)) {
+        qCWarning(DCC_UPDATE_WORKER) << "Failed to create log file:" << filePath;
+        notifyInfo(tr("Update"), tr("Log export failed, please try again"));
+        return;
+    }
+
+    int fd = logFile->handle();
+    if (fd == -1) {
+        qCWarning(DCC_UPDATE_WORKER) << "Failed to get file descriptor for:" << filePath;
+        notifyInfo(tr("Update"), tr("Log export failed, please try again"));
+        return;
+    }
+
+    QDBusPendingCall call = m_updateInter->GetUpdateDetails(fd, false);
     QDBusPendingCallWatcher* watcher = new QDBusPendingCallWatcher(call, this);
-    connect(watcher, &QDBusPendingCallWatcher::finished, this, [watcher] {
+    connect(watcher, &QDBusPendingCallWatcher::finished, this, [watcher, logFile] {
         QDBusPendingReply<void> reply = *watcher;
         if (reply.isError()) {
             qCWarning(DCC_UPDATE_WORKER) << "Export update details failed, error: " << reply.error().message();

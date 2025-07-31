@@ -24,6 +24,10 @@
 #include <QFileSystemWatcher>
 #include <QTextStream>
 #include <QStandardPaths>
+#include <fcntl.h>
+#include <unistd.h>
+#include <sys/stat.h>
+#include <sys/types.h>
 
 #include <DDBusSender>
 #include <DStandardPaths>
@@ -39,7 +43,7 @@ UpdateWorker::UpdateWorker(QObject *parent)
     , m_checkSystemJob(nullptr)
     , m_dbusProxy(new UpdateDBusProxy(this))
     , m_waitingToCheckSystem(false)
-    , m_logWatcherHelper(new LogWatcherHelper(this))
+    , m_logWatcherHelper(new LogWatcherHelper(m_dbusProxy, this))
 {
 }
 
@@ -664,34 +668,72 @@ bool UpdateWorker::exportUpdateLog()
     }
 
     QString desktopPath = Dtk::Core::DStandardPaths::homePath(uid) + "/Desktop";
-
     if (desktopPath.isEmpty()) {
-        qWarning() << "Cannot get desktop path";
+        qWarning() << "Cannot get desktop path for user:" << name << "uid:" << uid;
         emit exportUpdateLogFinished(false);
         return false;
     }
-    
-    QDateTime currentTime = QDateTime::currentDateTime();
-    QString fileName = QString("%1_%2.txt").arg(tr("updatelog")).arg(currentTime.toString("yyyy_MM_dd_HH.mm.ss"));
-    QString exportTargetPath = QDir(desktopPath).filePath(fileName);
 
-    qInfo() << "Export update log to:" << exportTargetPath;
+    // 创建固定的安全临时目录
+    const QString tempDirPath = "/tmp/deepin-update-ui";
+    QDir tempDir;
+    if (!tempDir.exists(tempDirPath)) {
+        if (!tempDir.mkpath(tempDirPath)) {
+            qWarning() << "Failed to create temp directory:" << tempDirPath;
+            emit exportUpdateLogFinished(false);
+            return false;
+        }
+    }
 
-    QDBusPendingCall call = m_dbusProxy->ExportUpdateDetails(exportTargetPath);
+    // 只有lightdm用户和lightdm组可以访问
+    if (chmod(tempDirPath.toUtf8().constData(), 0750) == -1) {
+        qWarning() << "Failed to set directory permissions:" << strerror(errno);
+        emit exportUpdateLogFinished(false);
+        return false;
+    }
+
+    const QString fileName = QString("%1_%2.txt")
+        .arg(tr("updatelog"))
+        .arg(QDateTime::currentDateTime().toString("yyyy_MM_dd_HH.mm.ss"));
+    const QString tempLogPath = tempDirPath + "/" + fileName;
+
+    qInfo() << "Export update log to temp file:" << tempLogPath;
+    qInfo() << "Target desktop path:" << desktopPath;
+
+    int fd = open(tempLogPath.toUtf8().constData(), O_WRONLY | O_CREAT | O_TRUNC, 0640);
+    if (fd == -1) {
+        qWarning() << "Failed to create temp log file:" << tempLogPath << "error:" << strerror(errno);
+        emit exportUpdateLogFinished(false);
+        return false;
+    }
+
+    QDBusPendingCall call = m_dbusProxy->GetUpdateDetails(fd, false);
     QDBusPendingCallWatcher* watcher = new QDBusPendingCallWatcher(call, this);
     
-    connect(watcher, &QDBusPendingCallWatcher::finished, this, [this, watcher, exportTargetPath] {
+    connect(watcher, &QDBusPendingCallWatcher::finished, this, [this, watcher, tempLogPath, desktopPath, fd] {
+        close(fd);
+
         QDBusPendingReply<void> reply = *watcher;
         if (reply.isError()) {
-            qWarning() << "Export update details failed, error:" << reply.error().message();
+            qWarning() << "Export update details failed:" << reply.error().message();
+            // 清理失败的临时文件
+            QFile::remove(tempLogPath);
             emit exportUpdateLogFinished(false);
         } else {
-            qInfo() << "Export update log successfully to:" << exportTargetPath;
+            qInfo() << "Export update log successfully to temp file:" << tempLogPath;
+
+            // 使用systemd模板服务传递十六进制编码的参数（避免特殊字符问题）
+            QString pathsParam = tempLogPath + ":" + desktopPath;
+            QByteArray encodedParam = pathsParam.toUtf8().toHex();
+            QString serviceName = QString("deepin-update-log-copy@%1.service").arg(QString::fromLatin1(encodedParam));
+            
+            QProcess::startDetached("systemctl", QStringList() << "start" << serviceName);
+            qInfo() << "Started copy service with hex encoded parameters:" << pathsParam;
+            
             emit exportUpdateLogFinished(true);
         }
-
         watcher->deleteLater();
     });
-    
+
     return true;
 }

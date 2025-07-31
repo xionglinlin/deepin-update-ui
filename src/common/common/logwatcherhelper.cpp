@@ -4,15 +4,21 @@
 #include "logwatcherhelper.h"
 
 #include <QDebug>
-#include <QDir>
+#include <QDBusPendingCallWatcher>
+#include <QDBusPendingCall>
 
-#define UPDATE_LOG_FILE "/tmp/lastore_update_detail.log"
+#include <unistd.h>
+#include <fcntl.h>
 
-LogWatcherHelper::LogWatcherHelper(QObject *parent)
+#include "../dbus/updatedbusproxy.h"
+
+LogWatcherHelper::LogWatcherHelper(UpdateDBusProxy *dbusProxy, QObject *parent)
     : QObject(parent)
-    , m_fileWatcher(nullptr)
-    , m_lastFileSize(0)
     , m_data(QString())
+    , m_dbusProxy(dbusProxy)
+    , m_readFd(-1)
+    , m_writeFd(-1)
+    , m_socketNotifier(nullptr)
 {
 
 }
@@ -24,126 +30,136 @@ LogWatcherHelper::~LogWatcherHelper()
 
 void LogWatcherHelper::startWatchFile()
 {
-    qInfo() << "Start watch update log file";
-    if (m_fileWatcher) {
-        qWarning() << "Log file watcher already exists";
+    qDebug() << "Start watch update log via DBus interface";
+    
+    if (!m_dbusProxy) {
+        qWarning() << "DBus proxy is null, cannot start watching";
+        return;
+    }
+    
+    if (m_readFd != -1) {
+        qWarning() << "Log watcher already started";
         return;
     }
 
-    m_fileWatcher = new QFileSystemWatcher(this);
-    connect(m_fileWatcher, &QFileSystemWatcher::fileChanged, this, &LogWatcherHelper::onFileChanged);
-    connect(m_fileWatcher, &QFileSystemWatcher::directoryChanged, this, &LogWatcherHelper::onDirectoryChanged);
-
-    // 总是监控 /tmp 目录以检测文件创建/删除
-    const QString logDir = "/tmp";
-    if (QDir(logDir).exists()) {
-        m_fileWatcher->addPath(logDir);
-    } else {
-        qWarning() << "tmp directory does not exist:" << logDir;
-    }
-
-    // 如果日志文件已存在，也监控它
-    if (QFile::exists(UPDATE_LOG_FILE)) {
-        m_fileWatcher->addPath(UPDATE_LOG_FILE);
-
-        // 立即读取现有文件内容
-        m_lastFileSize = 0;
-        m_data = QString();
-        readFileIncrement();
-    }
+    // 设置管道并调用 DBus 接口
+    setupLogPipe();
 }
 
 void LogWatcherHelper::stopWatchFile()
 {
-    qInfo() << "Stop watch update log file";
-    if (m_fileWatcher) {
-        m_fileWatcher->removePaths(m_fileWatcher->files());
-        delete m_fileWatcher;
-        m_fileWatcher = nullptr;
+    qDebug() << "Stop watch update log";
+    
+    // 停止文件描述符监听
+    if (m_socketNotifier) {
+        m_socketNotifier->setEnabled(false);
+        delete m_socketNotifier;
+        m_socketNotifier = nullptr;
+    }
+    
+    // 关闭文件描述符
+    if (m_readFd != -1) {
+        close(m_readFd);
+        m_readFd = -1;
+    }
+    
+    if (m_writeFd != -1) {
+        close(m_writeFd);
+        m_writeFd = -1;
     }
 
-    // 重置文件大小记录
-    m_lastFileSize = 0;
+    // 重置数据
     m_data = QString();
 }
 
-void LogWatcherHelper::onFileChanged(const QString &path)
+void LogWatcherHelper::setupLogPipe()
 {
-    if (path != UPDATE_LOG_FILE) {
+    // 创建管道
+    int pipefd[2];
+    if (pipe(pipefd) == -1) {
+        qWarning() << "Failed to create pipe for log reading";
         return;
     }
 
-    readFileIncrement();
+    m_readFd = pipefd[0];
+    m_writeFd = pipefd[1];
 
-    // 重新添加文件到监控列表（QFileSystemWatcher 在文件变化后可能会自动移除监控）
-    if (m_fileWatcher && !m_fileWatcher->files().contains(path)) {
-        m_fileWatcher->addPath(path);
-    }
+    // 设置读端为非阻塞
+    int flags = fcntl(m_readFd, F_GETFL, 0);
+    fcntl(m_readFd, F_SETFL, flags | O_NONBLOCK);
+
+    // 设置 QSocketNotifier 来监听读端文件描述符
+    m_socketNotifier = new QSocketNotifier(m_readFd, QSocketNotifier::Read, this);
+    connect(m_socketNotifier, &QSocketNotifier::activated, this, &LogWatcherHelper::onDataAvailable);
+
+    // 第一步：先获取历史日志 (realtime=false)
+    qDebug() << "First getting historical logs...";
+    QDBusPendingCall historyCall = m_dbusProxy->GetUpdateDetails(m_writeFd, false);
+    QDBusPendingCallWatcher* historyWatcher = new QDBusPendingCallWatcher(historyCall, this);
+    
+    connect(historyWatcher, &QDBusPendingCallWatcher::finished, this, [this, historyWatcher](void) {
+        // 可能获取历史日志失败（比如没有历史日志），但是不影响实时日志的获取
+        if (historyWatcher->isError()) {
+            qWarning() << "GetUpdateDetails for history failed:" << historyWatcher->error().message();
+            historyWatcher->deleteLater();
+        }
+
+        qDebug() << "Historical logs completed, starting realtime monitoring...";
+        
+        // 历史日志获取完成，直接启动实时日志监听
+        startRealtimeLogAfterHistory();
+        
+        historyWatcher->deleteLater();
+    });
 }
 
-void LogWatcherHelper::onDirectoryChanged(const QString &path)
+void LogWatcherHelper::startRealtimeLogAfterHistory()
 {
-    if (path != "/tmp") {
-        return;
+    // 启用文件描述符监听
+    if (m_socketNotifier) {
+        m_socketNotifier->setEnabled(true);
     }
-
-    const bool fileExists = QFile::exists(UPDATE_LOG_FILE);
-    const bool fileWatched = m_fileWatcher && m_fileWatcher->files().contains(UPDATE_LOG_FILE);
-
-    if (fileExists && !fileWatched) {
-        m_fileWatcher->addPath(UPDATE_LOG_FILE);
-        m_lastFileSize = 0;
-        m_data = QString();
-        readFileIncrement();
-    } else if (!fileExists && fileWatched) {
-        qInfo() << "Update log file was deleted:" << UPDATE_LOG_FILE;
-        m_lastFileSize = 0;
-        emit fileReset();
-        m_data = QString();
-    }
+    
+    // 开始获取实时增量日志 (realtime=true)
+    QDBusPendingCall realtimeCall = m_dbusProxy->GetUpdateDetails(m_writeFd, true);
+    QDBusPendingCallWatcher* realtimeWatcher = new QDBusPendingCallWatcher(realtimeCall, this);
+    
+    connect(realtimeWatcher, &QDBusPendingCallWatcher::finished, this, [this, realtimeWatcher](void) {
+        
+        if (realtimeWatcher->isError()) {
+            qWarning() << "GetUpdateDetails for realtime failed:" << realtimeWatcher->error().message();
+            stopWatchFile();
+        } else {
+            qDebug() << "Realtime log monitoring started successfully";
+        }
+        
+        realtimeWatcher->deleteLater();
+    });
 }
 
-void LogWatcherHelper:: readFileIncrement()
+void LogWatcherHelper::onDataAvailable()
 {
-    QFile logFile(UPDATE_LOG_FILE);
+    readAvailableData();
+}
 
-    if (!logFile.exists()) {
-        qWarning() << "Log file does not exist:" << UPDATE_LOG_FILE;
+void LogWatcherHelper::readAvailableData()
+{
+    if (m_readFd == -1) {
         return;
     }
 
-    const qint64 currentFileSize = logFile.size();
-
-    // 如果文件变小了，说明文件被重新创建或截断，重新开始读取
-    if (currentFileSize < m_lastFileSize) {
-        m_lastFileSize = 0;
-        m_data = QString();
-        emit fileReset();
+    QByteArray buffer;
+    char readBuffer[4096];
+    ssize_t bytesRead;
+    
+    while ((bytesRead = read(m_readFd, readBuffer, sizeof(readBuffer))) > 0) {
+        buffer.append(readBuffer, bytesRead);
     }
+    
+    if (!buffer.isEmpty()) {
+        QString newContent = QString::fromUtf8(buffer);
 
-    // 如果文件大小没变，没有新内容
-    if (currentFileSize == m_lastFileSize) {
-        return;
+        m_data.append(newContent);
+        emit incrementalDataChanged(newContent);
     }
-
-    if (!logFile.open(QIODevice::ReadOnly | QIODevice::Text)) {
-        qWarning() << "Failed to open log file for reading:" << logFile.errorString();
-        return;
-    }
-
-    // 定位到上次读取的位置
-    if (!logFile.seek(m_lastFileSize)) {
-        qWarning() << "Failed to seek to position:" << m_lastFileSize;
-        logFile.close();
-        return;
-    }
-
-    const QByteArray newData = logFile.readAll();
-    logFile.close();
-
-    m_lastFileSize = currentFileSize;
-
-    const QString incrementalContent = QString::fromUtf8(newData);
-    m_data.append(incrementalContent);
-    emit incrementalDataChanged(incrementalContent);
 }

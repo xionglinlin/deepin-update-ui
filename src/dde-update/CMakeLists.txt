@@ -67,6 +67,18 @@ install(FILES "misc/99_system_upgrade_conf.json"
 install(FILES "misc/dde-update-autostart.desktop"
         DESTINATION ${CMAKE_INSTALL_SYSCONFDIR}/xdg/autostart)
 
+install(FILES "misc/copy-update-log.sh"
+        DESTINATION ${CMAKE_INSTALL_LIBEXECDIR}/deepin-update-ui
+        PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE GROUP_READ GROUP_EXECUTE WORLD_READ WORLD_EXECUTE)
+
+install(FILES "misc/deepin-update-log-copy@.service"
+        DESTINATION lib/systemd/system
+        PERMISSIONS OWNER_READ OWNER_WRITE GROUP_READ WORLD_READ)
+
+install(FILES "misc/52-deepin-update-ui.rules"
+        DESTINATION ${CMAKE_INSTALL_DATADIR}/polkit-1/rules.d/
+        PERMISSIONS OWNER_READ OWNER_WRITE GROUP_READ WORLD_READ)
+
 install(PROGRAMS "misc/98deepin-upgrade-check"
         DESTINATION ${CMAKE_INSTALL_SYSCONFDIR}/X11/Xsession.d)
 
