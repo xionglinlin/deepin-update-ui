@@ -215,7 +215,7 @@
     </message>
     <message>
         <source>Service connection is abnormal, please check the network and try again</source>
-        <translation>A conexão do serviço está anormal, verifique a conexão e tente novamente</translation>
+        <translation>A conexão com o serviço está anormal. Verifique a conexão de rede e tente novamente</translation>
     </message>
     <message>
         <source>The repository source configuration is not valid, please check and try again.</source>
@@ -373,7 +373,7 @@
     </message>
     <message>
         <source>Join the internal testing channel to get deepin latest updates.</source>
-        <translation type="unfinished"/>
+        <translation>Participe do canal de testes internos para receber as últimas atualizações do deepin.</translation>
     </message>
 </context>
 <context>
