@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2011 - 2023 UnionTech Software Technology Co., Ltd.
+// SPDX-FileCopyrightText: 2011 - 2026 UnionTech Software Technology Co., Ltd.
 //
 // SPDX-License-Identifier: LGPL-3.0-or-later
 
@@ -29,12 +29,14 @@ class UpdateModel : public QObject
     Q_PROPERTY(bool batterIsOK READ batterIsOK NOTIFY batterIsOKChanged FINAL)
     Q_PROPERTY(int lastStatus READ lastStatus  NOTIFY lastStatusChanged FINAL)
     Q_PROPERTY(bool isUpdatable READ isUpdatable  NOTIFY isUpdatableChanged FINAL)
+    Q_PROPERTY(bool isPrivateUpdate READ isPrivateUpdate NOTIFY isPrivateUpdateChanged FINAL)
 
     // ---------------检查更新页面数据---------------
     Q_PROPERTY(bool showCheckUpdate READ showCheckUpdate NOTIFY showCheckUpdateChanged FINAL)
     Q_PROPERTY(QString checkUpdateIcon READ checkUpdateIcon NOTIFY checkUpdateIconChanged FINAL)
     Q_PROPERTY(double checkUpdateProgress READ checkUpdateProgress NOTIFY checkUpdateProgressChanged FINAL)
     Q_PROPERTY(UpdatesStatus checkUpdateStatus READ checkUpdateStatus NOTIFY checkUpdateStatusChanged FINAL)
+    Q_PROPERTY(QString versionInfo READ versionInfo NOTIFY versionInfoChanged FINAL)
     Q_PROPERTY(QString checkUpdateErrTips READ checkUpdateErrTips NOTIFY checkUpdateErrTipsChanged FINAL)
     Q_PROPERTY(QString checkBtnText READ checkBtnText NOTIFY checkBtnTextChanged FINAL)
     Q_PROPERTY(QString lastCheckUpdateTime READ lastCheckUpdateTime NOTIFY lastCheckUpdateTimeChanged FINAL)
@@ -53,6 +55,7 @@ class UpdateModel : public QObject
     Q_PROPERTY(bool downloadWaiting READ downloadWaiting NOTIFY downloadWaitingChanged FINAL)
     Q_PROPERTY(bool downloadPaused READ downloadPaused NOTIFY downloadPausedChanged FINAL)
     Q_PROPERTY(bool upgradeWaiting READ upgradeWaiting NOTIFY upgradeWaitingChanged FINAL)
+    Q_PROPERTY(QString forceUpdateText READ forceUpdateText NOTIFY forceUpdateTextChanged FINAL)
 
     Q_PROPERTY(double downloadProgress READ downloadProgress NOTIFY downloadProgressChanged FINAL)
     Q_PROPERTY(double backupProgress READ backupProgress NOTIFY backupProgressChanged FINAL)
@@ -72,6 +75,7 @@ class UpdateModel : public QObject
     Q_PROPERTY(bool thirdPartyUpdate READ thirdPartyUpdate NOTIFY updateModeChanged FINAL)
     Q_PROPERTY(bool updateModeDisabled READ updateModeDisabled NOTIFY updateModeChanged FINAL)
     Q_PROPERTY(bool downloadSpeedLimitEnabled READ downloadSpeedLimitEnabled NOTIFY downloadSpeedLimitConfigChanged FINAL)
+    Q_PROPERTY(bool downloadIsOnlineSpeedLimit READ downloadIsOnlineSpeedLimit NOTIFY downloadIsOnlineSpeedLimitChanged FINAL)
     Q_PROPERTY(QString downloadSpeedLimitSize READ downloadSpeedLimitSize NOTIFY downloadSpeedLimitConfigChanged FINAL)
     Q_PROPERTY(bool autoDownloadUpdates READ autoDownloadUpdates WRITE setAutoDownloadUpdates NOTIFY autoDownloadUpdatesChanged FINAL)
     Q_PROPERTY(bool idleDownloadEnabled READ idleDownloadEnabled NOTIFY idleDownloadConfigChanged FINAL)
@@ -81,7 +85,17 @@ class UpdateModel : public QObject
     Q_PROPERTY(bool autoCleanCache READ autoCleanCache WRITE setAutoCleanCache NOTIFY autoCleanCacheChanged FINAL)
     Q_PROPERTY(bool smartMirrorSwitch READ smartMirrorSwitch WRITE setSmartMirrorSwitch NOTIFY smartMirrorSwitchChanged FINAL)
     Q_PROPERTY(TestingChannelStatus testingChannelStatus READ testingChannelStatus WRITE setTestingChannelStatus NOTIFY testingChannelStatusChanged FINAL)
-
+    Q_PROPERTY(QString upgradeDownloadSpeedCurrentRate READ upgradeDownloadSpeedCurrentRate NOTIFY upgradeDownloadSpeedLimitConfigChanged FINAL)
+    Q_PROPERTY(QString upgradeDownloadSpeedLimitRate READ upgradeDownloadSpeedLimitRate NOTIFY upgradeDownloadSpeedLimitConfigChanged FINAL)
+    Q_PROPERTY(bool upgradeDownloadSpeedEnable READ upgradeDownloadSpeedEnable NOTIFY upgradeDownloadSpeedLimitConfigChanged FINAL)
+    Q_PROPERTY(bool upgradeDownloadSpeedIsOnline READ upgradeDownloadSpeedIsOnline NOTIFY upgradeDownloadSpeedLimitConfigChanged FINAL)
+    Q_PROPERTY(QString upgradeUploadSpeedCurrentRate READ upgradeUploadSpeedCurrentRate NOTIFY upgradeUploadSpeedLimitConfigChanged FINAL)
+    Q_PROPERTY(QString upgradeUploadSpeedLimitRate READ upgradeUploadSpeedLimitRate NOTIFY upgradeUploadSpeedLimitConfigChanged FINAL)
+    Q_PROPERTY(bool upgradeUploadSpeedIsOnline READ upgradeUploadSpeedIsOnline NOTIFY upgradeUploadSpeedLimitConfigChanged FINAL)
+    Q_PROPERTY(bool upgradeUploadSpeedEnable READ upgradeUploadSpeedEnable NOTIFY upgradeUploadSpeedLimitConfigChanged FINAL)
+    Q_PROPERTY(bool upgradeDeliveryEnable READ upgradeDeliveryEnable NOTIFY upgradeDeliveryEnableChanged FINAL)
+    Q_PROPERTY(bool p2pUpdateEnabled READ isP2PUpdateEnabled NOTIFY p2pUpdateEnableStateChanged FINAL)
+    Q_PROPERTY(bool forceUpdate READ forceUpdate NOTIFY forceUpdateChanged FINAL)
     Q_PROPERTY(UpdateHistoryModel *historyModel READ historyModel NOTIFY historyModelChanged FINAL)
 
 
@@ -133,6 +147,9 @@ public:
     void setCheckUpdateStatus(UpdatesStatus newCheckUpdateStatus);
     void updateCheckUpdateUi();
 
+    QString versionInfo() const { return m_versionInfo; }
+    void setVersionInfo(const QString &newCheckUpdateErrTips);
+
     QString checkUpdateErrTips() const { return m_checkUpdateErrTips; }
     void setCheckUpdateErrTips(const QString &newCheckUpdateErrTips);
 
@@ -182,6 +199,9 @@ public:
 
     bool upgradeWaiting() const { return m_upgradeWaiting; }
     void setUpgradeWaiting(bool waiting);
+
+    QString forceUpdateText() const { return m_forceUpdateText; }
+    void setForceUpdateText(const QString& updateTime, int lastoreStatus);
 
     double downloadProgress() const { return m_downloadProgress; }
     void setDownloadProgress(double downloadProgress);
@@ -234,6 +254,9 @@ public:
     bool isUpdatable() const { return m_isUpdatable; }
     void setIsUpdatable(bool isUpdatable);
 
+    bool isPrivateUpdate() const { return m_isPrivateUpdate; }
+    void setIsPrivateUpdate(bool isPrivateUpdate);
+
     UpdatesStatus updateStatus(ControlPanelType type) const;
     UpdatesStatus updateStatus(UpdateType type) const;
     QList<UpdateType> updateTypesList(ControlPanelType type) const;
@@ -258,9 +281,27 @@ public:
     void setUpdateItemEnabled();
 
     bool downloadSpeedLimitEnabled() const;
+    bool downloadIsOnlineSpeedLimit() const;
     QString downloadSpeedLimitSize() const;
     DownloadSpeedLimitConfig speedLimitConfig() const;
-    void setSpeedLimitConfig(const QByteArray &config);
+    void setSpeedLimitConfig(const QByteArray &config, bool isFromQml = false);
+
+    void setUpgradeDownloadSpeedLimitConfig(const QByteArray& config, bool needEmitSignal = true);
+    QString upgradeDownloadSpeedCurrentRate() const;
+    QString upgradeDownloadSpeedLimitRate() const;
+    bool upgradeDownloadSpeedEnable() const;
+    bool upgradeDownloadSpeedIsOnline() const;
+    LastoreUpgradeSpeedLimitConfig upgradeDownloadSpeedLimitConfig() const;
+    void setUpgradeUploadSpeedLimitConfig(const QByteArray& config, bool needEmitSignal = true);
+    QString upgradeUploadSpeedCurrentRate() const;
+    QString upgradeUploadSpeedLimitRate() const;
+    bool upgradeUploadSpeedEnable() const;
+    bool upgradeUploadSpeedIsOnline() const;
+    LastoreUpgradeSpeedLimitConfig upgradeUploadSpeedLimitConfig() const;
+    bool upgradeDeliveryEnable() const;
+
+    void setUpgradeDeliveryEnable(bool enable);
+    void refreshUpgradeDeliveryEnable(bool enable);
 
     bool autoDownloadUpdates() const { return m_autoDownloadUpdates; }
     void setAutoDownloadUpdates(bool autoDownloadUpdates);
@@ -310,6 +351,9 @@ public:
     bool isP2PUpdateEnabled() const { return m_p2pUpdateEnabled; }
     void setP2PUpdateEnabled(bool enabled);
 
+    bool forceUpdate() const { return m_forceUpdate; }
+    void setForceUpdate();
+
 
     Q_INVOKABLE bool isCommunitySystem() const;
     Q_INVOKABLE QString privacyAgreementText() const;
@@ -337,6 +381,7 @@ Q_SIGNALS:
     void checkUpdateIconChanged();
     void checkUpdateProgressChanged();
     void checkUpdateStatusChanged();
+    void versionInfoChanged();
     void checkUpdateErrTipsChanged();
     void checkBtnTextChanged();
     void lastCheckUpdateTimeChanged();
@@ -356,6 +401,7 @@ Q_SIGNALS:
     void downloadWaitingChanged(bool waiting);
     void downloadPausedChanged(bool paused);
     void upgradeWaitingChanged(bool waiting);
+    void forceUpdateTextChanged();
 
     void downloadProgressChanged(const double &progress);
     void backupProgressChanged(double progress);
@@ -369,6 +415,7 @@ Q_SIGNALS:
 
     void updateInfoChanged(UpdateType);
     void isUpdatableChanged(const bool isUpdatablePackages);
+    void isPrivateUpdateChanged(const bool isPrivateUpdate);
     void updateStatusChanged(ControlPanelType, UpdatesStatus);
     void controlTypeChanged();
     void lastErrorChanged(UpdatesStatus, UpdateErrorType);
@@ -378,7 +425,11 @@ Q_SIGNALS:
     void securityUpdateEnabledChanged(bool enable);
     void thirdPartyUpdateEnabledChanged(bool enable);
     void updateModeChanged(quint64 updateMode);
+    void upgradeDeliveryEnableChanged();
     void downloadSpeedLimitConfigChanged();
+    void downloadIsOnlineSpeedLimitChanged();
+    void upgradeDownloadSpeedLimitConfigChanged();
+    void upgradeUploadSpeedLimitConfigChanged();
     void autoDownloadUpdatesChanged(bool autoDownloadUpdates);
     void idleDownloadConfigChanged();
     void updateNotifyChanged(const bool notify);
@@ -392,6 +443,7 @@ Q_SIGNALS:
     void showVersionChanged(QString version);
     void baselineChanged(const QString &baseline);
     void p2pUpdateEnableStateChanged(bool enabled);
+    void forceUpdateChanged(bool forceUpdate);
     void historyModelChanged();
 
 private:
@@ -410,6 +462,7 @@ private:
     QString m_checkUpdateIcon;
     double m_checkUpdateProgress;
     UpdatesStatus m_checkUpdateStatus;
+    QString m_versionInfo;
     QString m_checkUpdateErrTips;
     QString m_checkBtnText;
     QString m_lastCheckUpdateTime;
@@ -428,6 +481,7 @@ private:
     bool m_downloadWaiting;
     bool m_downloadPaused;
     bool m_upgradeWaiting;
+    QString m_forceUpdateText;
     double m_downloadProgress;
     double m_distUpgradeProgress;
     double m_backupProgress;
@@ -443,6 +497,7 @@ private:
     QByteArray m_updateStatus; // lastore daemon发上来的原始json数据
 
     bool m_isUpdatable; // 是否有包可更新
+    bool m_isPrivateUpdate; //当前是否接入私有化更新
     QMap<ControlPanelType, QPair<UpdatesStatus, QList<UpdateType>>> m_controlStatusMap;
     QMap<UpdatesStatus, int> m_waitingStatusMap;
 
@@ -451,6 +506,9 @@ private:
     bool m_thirdPartyUpdateEnabled;
     quint64 m_updateMode;
     QByteArray m_speedLimitConfig;
+    bool m_isUpgradeDeliveryEnable;
+    QByteArray m_upgradeDownloadSpeedLimitConfig;
+    QByteArray m_upgradeUploadSpeedLimitConfig;
     bool m_autoDownloadUpdates;
     IdleDownloadConfig m_idleDownloadConfig;
     bool m_updateNotify;
@@ -466,6 +524,7 @@ private:
     QString m_showVersion;
     QString m_baseline;
     bool m_p2pUpdateEnabled;
+    bool m_forceUpdate;
 
     // update history qml data
     UpdateHistoryModel *m_historyModel;

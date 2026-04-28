@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2024 UnionTech Software Technology Co., Ltd.
+// SPDX-FileCopyrightText: 2024-2026 UnionTech Software Technology Co., Ltd.
 // SPDX-License-Identifier: GPL-3.0-or-later
 import QtQuick
 import QtQuick.Controls
@@ -15,12 +15,16 @@ ColumnLayout {
     property string updateStateIcon: ""
     property string updateTitle : ""
     property string updateTips: ""
+    property string secondaryUpdateTips: ""
     property var btnActions: []
+    property bool showActionButtons: true
     property string processTitle: ""
     property double processValue: 0
     property bool processState: false
     property bool busyState: false
     property bool updateListEnable: true
+    property bool buttonsEnabled: true
+    property var buttonEnabledStates: []
     property bool updateListcheck: true
     property bool isDownloading: false
     property bool isPauseOrNot: false
@@ -89,6 +93,14 @@ ColumnLayout {
                 }
             }
 
+            D.Label {
+                Layout.alignment: Qt.AlignLeft | Qt.AlignTop
+                visible: secondaryUpdateTips.length !== 0
+                text: secondaryUpdateTips
+                font: D.DTK.fontManager.t8
+                Layout.fillWidth: true
+            }
+
             D.Button {
                 Layout.alignment: Qt.AlignLeft | Qt.AlignTop
                 visible: showLogButton
@@ -122,8 +134,10 @@ ColumnLayout {
                 Layout.alignment: Qt.AlignRight | Qt.AlignVCenter
                 text: modelData
                 font: D.DTK.fontManager.t6
-                visible: modelData.length !== 0 && !initAnimation.visible
-                enabled: updatelistModel.model.isUpdateEnable
+                visible: rootLayout.showActionButtons && modelData.length !== 0 && !initAnimation.visible
+                enabled: rootLayout.buttonsEnabled
+                    && updatelistModel.model.isUpdateEnable
+                    && (rootLayout.buttonEnabledStates.length <= index || rootLayout.buttonEnabledStates[index])
                 onClicked: {
                     rootLayout.btnClicked(index, updateListModels.getAllUpdateType())
                 }
@@ -180,7 +194,7 @@ ColumnLayout {
                     icon.height: 24
                     implicitWidth: 24
                     implicitHeight: 24
-                    visible: isDownloading
+                    visible: isDownloading && !dccData.model().isPrivateUpdate
 
                     onClicked: {
                         rootLayout.closeDownload()

@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2018 - 2023 UnionTech Software Technology Co., Ltd.
+// SPDX-FileCopyrightText: 2018 - 2026 UnionTech Software Technology Co., Ltd.
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 #include "updatedbusproxy.h"
@@ -207,6 +207,21 @@ QString UpdateDBusProxy::updateStatus()
     return qvariant_cast<QString>(m_managerInter->property("UpdateStatus"));
 }
 
+bool UpdateDBusProxy::downloadLimitOnChanging()
+{
+    return qvariant_cast<bool>(m_managerInter->property("downloadLimitOnChanging"));
+}
+
+bool UpdateDBusProxy::p2PUpdateEnable()
+{
+    return qvariant_cast<bool>(m_updateInter->property("P2PUpdateEnable"));
+}
+
+bool UpdateDBusProxy::p2PUpdateSupport()
+{
+    return qvariant_cast<bool>(m_updateInter->property("P2PUpdateSupport"));
+}
+
 bool UpdateDBusProxy::immutableAutoRecovery()
 {
     return qvariant_cast<bool>(m_managerInter->property("ImmutableAutoRecovery"));
@@ -387,6 +402,36 @@ QDBusPendingReply<QString> UpdateDBusProxy::GetUpdateLogs(int updateType)
     return m_managerInter->asyncCallWithArgumentList(QStringLiteral("GetUpdateLogs"), argumentList);
 }
 
+QDBusPendingReply<void> UpdateDBusProxy::SetUpgradeDeliveryEnable(bool enable)
+{
+    qCDebug(logCommon) << "Setting upgrade delivery enable :" << enable;
+    QList<QVariant> argumentList;
+    argumentList << QVariant::fromValue(enable);
+    return m_updateInter->asyncCallWithArgumentList(QStringLiteral("SetP2PUpdateEnable"), argumentList);
+}
+
+QDBusPendingReply<void> UpdateDBusProxy::SetUpgradeDeliveryDownloadSpeedLimit(const QString& downloadLimit)
+{
+    qCDebug(logCommon) << "Setting upgrade delivery download speed limit : " << downloadLimit;
+    QList<QVariant> argumentList;
+    argumentList << QVariant::fromValue(downloadLimit);
+    return m_updateInter->asyncCallWithArgumentList(QStringLiteral("SetDeliveryDownloadSpeedLimit"), argumentList);
+}
+
+QDBusPendingReply<void> UpdateDBusProxy::SetUpgradeDeliveryUploadSpeedLimit(const QString& uploadLimit)
+{
+    qCDebug(logCommon) << "Setting upgrade delivery upload speed limit : " << uploadLimit;
+    QList<QVariant> argumentList;
+    argumentList << QVariant::fromValue(uploadLimit);
+    return m_updateInter->asyncCallWithArgumentList(QStringLiteral("SetDeliveryUploadSpeedLimit"), argumentList);
+}
+
+QDBusPendingReply<void> UpdateDBusProxy::ClearUpgradeDeliveryCache()
+{
+    qCDebug(logCommon) << "Clearing upgrade delivery cache";
+    return m_updateInter->asyncCall(QStringLiteral("CleanTransmissionFiles"));
+}
+
 QDBusPendingReply<void> UpdateDBusProxy::SetIdleDownloadConfig(const QString& config)
 {
     qCDebug(logCommon) << "Setting idle download config:" << config;
@@ -426,6 +471,14 @@ QDBusPendingReply<void> UpdateDBusProxy::GetUpdateDetails(int fd, bool realtime)
     argumentList << QVariant::fromValue(QDBusUnixFileDescriptor(fd));
     argumentList << QVariant::fromValue(realtime);
     return m_managerInter->asyncCallWithArgumentList(QStringLiteral("GetUpdateDetails"), argumentList);
+}
+
+QDBusPendingReply<void> UpdateDBusProxy::SetShutdownForceUpdate(bool isShutdownUpdate)
+{
+    qCDebug(logCommon) << "Setting shutdown force update , isShutdownUpdate:" << isShutdownUpdate;
+    QList<QVariant> argumentList;
+    argumentList << QVariant::fromValue(isShutdownUpdate);
+    return m_managerInter->asyncCallWithArgumentList(QStringLiteral("SetShutdownForceUpdate"), argumentList);
 }
 
 bool UpdateDBusProxy::onBattery()

@@ -85,11 +85,11 @@
     </message>
     <message>
         <source>View More</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Collapse</source>
-        <translation>Réduire</translation>
+        <translation type="unfinished">Réduire</translation>
     </message>
 </context>
 <context>

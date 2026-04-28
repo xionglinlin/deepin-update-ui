@@ -1,13 +1,16 @@
-// SPDX-FileCopyrightText: 2011 - 2023 UnionTech Software Technology Co., Ltd.
+// SPDX-FileCopyrightText: 2011 - 2026 UnionTech Software Technology Co., Ltd.
 //
 // SPDX-License-Identifier: LGPL-3.0-or-later
 
+#include "common/common/dconfig_helper.h"
 #include "updatemodel.h"
 #include "updatehistorymodel.h"
 #include "operation/common.h"
+#include "common/common/dconfig_helper.h"
 #include "utils.h"
 
 #include <DSysInfo>
+#include <QDateTime>
 #include <QLoggingCategory>
 
 using namespace dcc::update::common;
@@ -15,6 +18,7 @@ using namespace dcc::update::common;
 Q_DECLARE_LOGGING_CATEGORY(logDccUpdatePlugin)
 
 DCORE_USE_NAMESPACE
+static constexpr int ShutdownUpdateStatus = 5;
 static const QMap<UpdatesStatus, ControlPanelType> ControlPanelTypeMapping = {
     { Default, CPT_Invalid },
     { UpdatesAvailable, CPT_Available },
@@ -63,6 +67,7 @@ UpdateModel::UpdateModel(QObject* parent)
     , m_downloadWaiting(false)
     , m_downloadPaused(false)
     , m_upgradeWaiting(false)
+    , m_forceUpdateText("")
     , m_downloadProgress(0.0)
     , m_distUpgradeProgress(0.0)
     , m_backupProgress(0.0)
@@ -72,6 +77,7 @@ UpdateModel::UpdateModel(QObject* parent)
     , m_backupFailedTips("")
     , m_installLog("")
     , m_isUpdatable(false)
+    , m_isPrivateUpdate(false)
     , m_securityUpdateEnabled(false)
     , m_thirdPartyUpdateEnabled(false)
     , m_updateMode(UpdateType::Invalid)
@@ -87,6 +93,7 @@ UpdateModel::UpdateModel(QObject* parent)
     , m_showVersion("")
     , m_baseline("")
     , m_p2pUpdateEnabled(false)
+    , m_forceUpdate(false)
     , m_historyModel(new UpdateHistoryModel(this))
 {
     qCDebug(logDccUpdatePlugin) << "Initialize UpdateModel";
@@ -214,6 +221,27 @@ void UpdateModel::setBatterIsOK(bool ok)
     Q_EMIT batterIsOKChanged(ok);
 }
 
+void UpdateModel::setForceUpdateText(const QString& updateTime, int lastoreStatus)
+{
+    if (!updateTime.isEmpty()) {
+        QDateTime dateTime = QDateTime::fromString(updateTime, Qt::ISODate);
+        if (dateTime.isValid()) {
+            QString formattedDateTime = dateTime.toString("HH:mm:ss");
+            qCDebug(logDccUpdatePlugin) << "Set scheduled upgrade time:" << formattedDateTime;
+            if (m_forceUpdateText == formattedDateTime) {
+                return;
+            }
+
+            m_forceUpdateText = tr("will upgrade at %1").arg(formattedDateTime);
+        }
+    } else if (lastoreStatus == ShutdownUpdateStatus) {
+        m_forceUpdateText = tr("will upgrade when shutdown");
+    } else {
+        m_forceUpdateText = "";
+    }
+    Q_EMIT forceUpdateTextChanged();
+}
+
 void UpdateModel::setLastStatus(const UpdatesStatus& status, int line, int types)
 {
     qCInfo(logDccUpdatePlugin) << "Status: " << status << ", types:" << types << ", line:" << line;
@@ -300,17 +328,34 @@ void UpdateModel::updateCheckUpdateUi()
             setCheckBtnText(tr("Check Again"));
             break;
         case Updated:
-        case UpdatesAvailable:
+        case UpdatesAvailable: {
             qCDebug(logDccUpdatePlugin) << "Setting UI for Updated status";
             setCheckBtnText(tr("Check Again"));
             setCheckUpdateErrTips(tr("Your system is up to date"));
             setCheckUpdateIcon("update_abreast_of_time");
+            QString versionInfo = tr("Current Edition") + ": " + m_systemVersionInfo;
+            if (!m_baseline.isEmpty()) {
+                versionInfo = versionInfo + "\n" + tr("Baseline") + ": " + m_baseline;
+            }
+            setVersionInfo(versionInfo);
             break;
+        }
         default:
             qCDebug(logDccUpdatePlugin) << "Unknown status in switch, clearing text";
             setCheckBtnText(tr(""));
             return;
     }
+}
+
+void UpdateModel::setVersionInfo(const QString &versionInfo) 
+{
+    qCDebug(logDccUpdatePlugin) << "Setting version info:" << versionInfo;
+    if (m_versionInfo == versionInfo) {
+        return;
+    }
+
+    m_versionInfo = versionInfo;
+    emit versionInfoChanged();
 }
 
 void UpdateModel::setCheckUpdateErrTips(const QString &newCheckUpdateErrTips)
@@ -969,6 +1014,17 @@ void UpdateModel::setIsUpdatable(bool isUpdatable)
     Q_EMIT isUpdatableChanged(isUpdatable);
 }
 
+void UpdateModel::setIsPrivateUpdate(bool isPrivateUpdate)
+{
+    qCDebug(logDccUpdatePlugin) << "Setting is private update: " << isPrivateUpdate;
+    if (m_isPrivateUpdate == isPrivateUpdate) {
+        return;
+    }
+
+    m_isPrivateUpdate = isPrivateUpdate;
+    Q_EMIT isPrivateUpdateChanged(isPrivateUpdate);
+}
+
 UpdatesStatus UpdateModel::updateStatus(ControlPanelType type) const
 {
     qCDebug(logDccUpdatePlugin) << "Getting update status for control panel type:" << type;
@@ -1101,6 +1157,11 @@ bool UpdateModel::downloadSpeedLimitEnabled() const
     return DownloadSpeedLimitConfig::fromJson(m_speedLimitConfig).downloadSpeedLimitEnabled;
 }
 
+bool UpdateModel::downloadIsOnlineSpeedLimit() const
+{
+    return DownloadSpeedLimitConfig::fromJson(m_speedLimitConfig).isOnlineSpeedLimit;
+}
+
 QString UpdateModel::downloadSpeedLimitSize() const
 {
     return DownloadSpeedLimitConfig::fromJson(m_speedLimitConfig).limitSpeed;
@@ -1111,14 +1172,112 @@ DownloadSpeedLimitConfig UpdateModel::speedLimitConfig() const
     return DownloadSpeedLimitConfig::fromJson(m_speedLimitConfig);
 }
 
-void UpdateModel::setSpeedLimitConfig(const QByteArray& config)
+void UpdateModel::setSpeedLimitConfig(const QByteArray& config, bool isFromQml)
 {
     qCDebug(logDccUpdatePlugin) << "Set speed limit config:" << config;
+    if (DownloadSpeedLimitConfig::fromJson(m_speedLimitConfig).isOnlineSpeedLimit && isFromQml)
+        return;
     if (m_speedLimitConfig == config)
         return;
 
     m_speedLimitConfig = config;
     Q_EMIT downloadSpeedLimitConfigChanged();
+}
+
+void UpdateModel::setUpgradeDownloadSpeedLimitConfig(const QByteArray& config, bool needEmitSignal)
+{
+    qCInfo(logDccUpdatePlugin) << "Set upgrade download speed limit  config" << config;
+    m_upgradeDownloadSpeedLimitConfig = config;
+    if (needEmitSignal)
+        Q_EMIT upgradeDownloadSpeedLimitConfigChanged();
+}
+
+QString UpdateModel::upgradeDownloadSpeedCurrentRate() const
+{
+    qCInfo(logDccUpdatePlugin) << "Upgrade download speed current rate " << UpgradeSpeedLimitConfig::fromJson(m_upgradeDownloadSpeedLimitConfig).currentRate;
+    return QString::number(LastoreUpgradeSpeedLimitConfig::fromJson(m_upgradeDownloadSpeedLimitConfig).limitSpeed.toInt() / 1024);
+}
+
+QString UpdateModel::upgradeDownloadSpeedLimitRate() const
+{
+    qCInfo(logDccUpdatePlugin) << "Upgrade download speed limit rate " << UpgradeSpeedLimitConfig::fromJson(m_upgradeDownloadSpeedLimitConfig).limitRate;
+    return LastoreUpgradeSpeedLimitConfig::fromJson(m_upgradeDownloadSpeedLimitConfig).limitSpeed;
+}
+
+bool UpdateModel::upgradeDownloadSpeedEnable() const
+{
+    qCInfo(logDccUpdatePlugin) << "Upgrade download speed enable " << m_upgradeDownloadSpeedLimitConfig;
+    return LastoreUpgradeSpeedLimitConfig::fromJson(m_upgradeDownloadSpeedLimitConfig).speedLimitEnabled;
+}
+
+bool UpdateModel::upgradeDownloadSpeedIsOnline() const
+{
+    qCInfo(logDccUpdatePlugin) << "Upgrade download speed is online " << m_upgradeDownloadSpeedLimitConfig;
+    return LastoreUpgradeSpeedLimitConfig::fromJson(m_upgradeDownloadSpeedLimitConfig).isOnlineSpeedLimit;
+}
+
+LastoreUpgradeSpeedLimitConfig UpdateModel::upgradeDownloadSpeedLimitConfig() const
+{
+    qCInfo(logDccUpdatePlugin) << "Upgrade download speed limit config " << m_upgradeDownloadSpeedLimitConfig;
+    return LastoreUpgradeSpeedLimitConfig::fromJson(m_upgradeDownloadSpeedLimitConfig);
+}
+
+void UpdateModel::setUpgradeUploadSpeedLimitConfig(const QByteArray& config, bool needEmitSignal)
+{
+    qCInfo(logDccUpdatePlugin) << "Set upgrade upload speed limit config" << config;
+    m_upgradeUploadSpeedLimitConfig = config;
+    if (needEmitSignal)
+        Q_EMIT upgradeUploadSpeedLimitConfigChanged();
+}
+
+QString UpdateModel::upgradeUploadSpeedCurrentRate() const
+{
+    qCInfo(logDccUpdatePlugin) << "Upgrade upload speed current rate " << UpgradeSpeedLimitConfig::fromJson(m_upgradeUploadSpeedLimitConfig).currentRate;
+    return QString::number(LastoreUpgradeSpeedLimitConfig::fromJson(m_upgradeUploadSpeedLimitConfig).limitSpeed.toInt() / 1024);
+}
+
+QString UpdateModel::upgradeUploadSpeedLimitRate() const
+{
+     qCInfo(logDccUpdatePlugin) << "Upgrade upload speed limit rate " << UpgradeSpeedLimitConfig::fromJson(m_upgradeUploadSpeedLimitConfig).limitRate;
+    return LastoreUpgradeSpeedLimitConfig::fromJson(m_upgradeUploadSpeedLimitConfig).limitSpeed;
+}
+
+bool UpdateModel::upgradeUploadSpeedEnable() const
+{
+    qCInfo(logDccUpdatePlugin) << "Upgrade upload speed enable " << m_upgradeUploadSpeedLimitConfig;
+    return LastoreUpgradeSpeedLimitConfig::fromJson(m_upgradeUploadSpeedLimitConfig).speedLimitEnabled;
+}
+
+bool UpdateModel::upgradeUploadSpeedIsOnline() const
+{
+    qCInfo(logDccUpdatePlugin) << "Upgrade upload speed is online " << m_upgradeDownloadSpeedLimitConfig;
+    return LastoreUpgradeSpeedLimitConfig::fromJson(m_upgradeUploadSpeedLimitConfig).isOnlineSpeedLimit;
+}
+
+LastoreUpgradeSpeedLimitConfig UpdateModel::upgradeUploadSpeedLimitConfig() const
+{
+    qCInfo(logDccUpdatePlugin) << "Upgrade upload speed limit config " << m_upgradeUploadSpeedLimitConfig;
+    return LastoreUpgradeSpeedLimitConfig::fromJson(m_upgradeUploadSpeedLimitConfig);
+}
+
+bool UpdateModel::upgradeDeliveryEnable() const
+{
+    return m_isUpgradeDeliveryEnable;
+}
+
+void UpdateModel::setUpgradeDeliveryEnable(bool enable)
+{
+    m_isUpgradeDeliveryEnable = enable;
+    Q_EMIT upgradeDeliveryEnableChanged();
+}
+
+void UpdateModel::refreshUpgradeDeliveryEnable(bool enable)
+{
+    m_isUpgradeDeliveryEnable = enable;
+    if (enable) {
+        Q_EMIT upgradeDownloadSpeedLimitConfigChanged();
+        Q_EMIT upgradeUploadSpeedLimitConfigChanged();
+    }
 }
 
 void UpdateModel::setAutoDownloadUpdates(bool autoDownloadUpdates)
@@ -1308,6 +1467,29 @@ void UpdateModel::setP2PUpdateEnabled(bool enabled)
     }
 }
 
+void UpdateModel::setForceUpdate()
+{
+    bool forceUpdate = false;
+    const int lastoreStatus = DConfigHelper::instance()->getConfig("org.deepin.dde.lastore", "org.deepin.dde.lastore", "", "lastore-daemon-status", 0).toInt();
+
+    if (lastoreStatus == ShutdownUpdateStatus) {
+        forceUpdate = true;
+    } else {
+        const QString updateTime = DConfigHelper::instance()->getConfig("org.deepin.dde.lastore", "org.deepin.dde.lastore", "", "update-time", "").toString();
+        if (!updateTime.isEmpty()) {
+            forceUpdate = QDateTime::fromString(updateTime, Qt::ISODate).isValid();
+        }
+    }
+
+    qCDebug(logDccUpdatePlugin) << "Set force update:" << forceUpdate << "old value:" << m_forceUpdate;
+    if (m_forceUpdate == forceUpdate) {
+        return;
+    }
+
+    m_forceUpdate = forceUpdate;
+    Q_EMIT forceUpdateChanged(m_forceUpdate);
+}
+
 bool UpdateModel::isCommunitySystem() const
 {
     return Dtk::Core::DSysInfo::UosCommunity == Dtk::Core::DSysInfo::DSysInfo::uosEditionType();
@@ -1346,7 +1528,6 @@ void UpdateModel::onUpdatePropertiesChanged(const QString& interfaceName, const 
 {
     qCDebug(logDccUpdatePlugin) << "Update properties changed for interface:" << interfaceName << "properties count:" << changedProperties.size();
     Q_UNUSED(invalidatedProperties)
-
     if (interfaceName == "org.deepin.dde.Lastore1.Manager") {
         qCDebug(logDccUpdatePlugin) << "Handling Lastore Manager property changes";
         if (changedProperties.contains("CheckUpdateMode")) {
@@ -1384,7 +1565,21 @@ void UpdateModel::onUpdatePropertiesChanged(const QString& interfaceName, const 
 
         if (changedProperties.contains("P2PUpdateEnable")) {
             qCDebug(logDccUpdatePlugin) << "P2PUpdateEnable property changed";
-            setP2PUpdateEnabled(changedProperties.value("P2PUpdateEnable").toBool());
+            setUpgradeDeliveryEnable(changedProperties.value("P2PUpdateEnable").toBool());
+        }
+    }
+
+    if (interfaceName == "org.deepin.upgradedelivery") {
+        qCDebug(logDccUpdatePlugin) << "Handling upgrade delivery property changes";
+        if (changedProperties.contains("DownloadLimitSpeed")) {
+            qCDebug(logDccUpdatePlugin) << "P2PUpgradeDownloadSpeedLimitConfig property changed";
+            qCDebug(logDccUpdatePlugin) << "P2PUpgradeDownloadSpeedLimitConfig property changed " << changedProperties.value("DownloadLimitSpeed");
+            setUpgradeDownloadSpeedLimitConfig(transferDeliveryConfigToLastoreDeliveryConfig(changedProperties.value("DownloadLimitSpeed").toByteArray()).toUtf8());
+        }
+
+        if (changedProperties.contains("UploadLimitSpeed")) {
+            qCDebug(logDccUpdatePlugin) << "P2PUpgradeUploadSpeedLimitConfig property changed";
+            setUpgradeUploadSpeedLimitConfig(transferDeliveryConfigToLastoreDeliveryConfig(changedProperties.value("UploadLimitSpeed").toByteArray()).toUtf8());
         }
     }
 }

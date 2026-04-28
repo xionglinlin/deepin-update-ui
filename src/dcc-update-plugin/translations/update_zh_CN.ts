@@ -256,6 +256,14 @@
         <translation>安装更新</translation>
     </message>
     <message>
+        <source>Install Now</source>
+        <translation>立即更新</translation>
+    </message>
+    <message>
+        <source>Check Again</source>
+        <translation>重新检查更新</translation>
+    </message>
+    <message>
         <source>Update download failed</source>
         <translation>更新下载失败</translation>
     </message>
@@ -282,6 +290,14 @@
 </context>
 <context>
     <name>UpdateModel</name>
+    <message>
+        <source>Current Edition</source>
+        <translation>私有化更新版本号</translation>
+    </message>
+    <message>
+        <source>Baseline</source>
+        <translation>补丁版本号</translation>
+    </message>
     <message>
         <source>Checking for updates, please wait…</source>
         <translation>正在检查更新，请等待…</translation>
@@ -355,6 +371,14 @@
         <translation>开启更新内容开关，可以获得更优质的功能体验哦</translation>
     </message>
     <message>
+        <source>will upgrade when shutdown</source>
+        <translation>系统将在计算机关机或重启时进行更新</translation>
+    </message>
+    <message>
+        <source>will upgrade at %1</source>
+        <translation>将于%1开始系统更新</translation>
+    </message>
+    <message>
         <source>Your system is not activated, and it failed to connect to update services</source>
         <translation>当前系统未激活，无法启动更新服务</translation>
     </message>
@@ -419,6 +443,22 @@
     <message>
         <source>Delivers  updates for additional repository sources</source>
         <translation>提供额外添加的仓库源更新内容</translation>
+    </message>
+    <message>
+        <source>Delivery Optimization</source>
+        <translation>传递优化</translation>
+    </message>
+    <message>
+        <source>When enabled, your device may share previously downloaded system updates with other devices on your local network.When you turn it off, cached files from update delivery will be cleared during the next restart.</source>
+        <translation>开启此功能，你的设备可能会将以前下载的部分系统更新发送到本地网络的设备上。关闭此功能后，将在重启时清除传递优化时缓存的文件</translation>
+    </message>
+    <message>
+        <source>Delivery Optimization-Limit Speed</source>
+        <translation>传递优化-下载限速</translation>
+    </message>
+    <message>
+        <source>Delivery Optimization-Upload throttling</source>
+        <translation>传递优化-上传限速</translation>
     </message>
     <message>
         <source>Limit Speed</source>
@@ -487,6 +527,26 @@
     <message>
         <source>Only numbers between 1-99999 are allowed</source>
         <translation>只允许输入1-99999</translation>
+    </message>
+    <message>
+        <source>Only numbers between 10-999999 are allowed</source>
+        <translation>只允许输入10-999999</translation>
+    </message>
+    <message>
+        <source>Failed to change Delivery Optimization setting</source>
+        <translation>更新传递优化服务异常</translation>
+    </message>
+    <message>
+        <source>Update Delivery Optimization service exception</source>
+        <translation>更新传递优化服务异常</translation>
+    </message>
+    <message>
+        <source>Try again</source>
+        <translation>再试一次</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation>取消</translation>
     </message>
     <message>
         <source>Join the internal testing channel to get deepin latest updates.</source>

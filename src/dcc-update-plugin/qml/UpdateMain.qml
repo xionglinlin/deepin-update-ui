@@ -233,7 +233,7 @@ DccObject {
                 return dccData.model().installFailedTips
             }
             btnActions: [ qsTr("Continue Update") ]
-
+            showActionButtons: !dccData.model().isPrivateUpdate
             onBtnClicked: function(index, updateType) {
                 dccData.work().onRequestRetry(Common.CPT_UpgradeFailed, updateType)
             }
@@ -289,21 +289,41 @@ DccObject {
         pageType: DccObject.Item
 
         page: UpdateControl {
+            id: preInstallUpdateControl
             updateListModels: dccData.model().preInstallListModel
             updateTitle: qsTr("Update download completed")
-            btnActions: [ qsTr("Install updates") ]
+            btnActions: dccData.model().isPrivateUpdate ? [ 
+                qsTr("Install Now"),
+                qsTr("Check Again")
+            ] : [qsTr("Install updates")]
+            function updateSecondaryTips() {
+                secondaryUpdateTips = dccData.model().forceUpdateText
+            }
             updateTips: {
                 if (!dccData.model().batterIsOK) {
                     return qsTr("The battery capacity is lower than 60%. To get successful updates, please plug in.")
                 }
                 return qsTr("Update size: ") + dccData.model().preInstallListModel.downloadSize
             }
+            secondaryUpdateTips: ""
+            Component.onCompleted: updateSecondaryTips()
             busyState: dccData.model().upgradeWaiting
             updateListEnable: !dccData.model().upgradeWaiting
+            buttonEnabledStates: dccData.model().isPrivateUpdate
+                ? [!dccData.model().forceUpdate, true]
+                : [true]
 
             onBtnClicked: function(index, updateType) {
-                updateSelectLoader.updateType = updateType
-                updateSelectLoader.active = true
+                if (index === 0) {
+                    if (dccData.model().isPrivateUpdate) {
+                        dccData.work().doUpgrade(updateListModels.getAllUpdateType(), true)
+                    } else {
+                        updateSelectLoader.updateType = updateType
+                        updateSelectLoader.active = true
+                    }
+                } else if (index === 1) {
+                    dccData.work().reCheckWithUi();
+                }
             }
 
             Loader {
@@ -327,6 +347,13 @@ DccObject {
                 }
                 onLoaded: function () {
                     updateSelectLoader.item.show()
+                }
+            }
+
+            Connections {
+                target: dccData.model()
+                function onForceUpdateTextChanged() {
+                    preInstallUpdateControl.updateSecondaryTips()
                 }
             }
 
@@ -377,7 +404,7 @@ DccObject {
 
         page: UpdateControl {
             updateListModels: dccData.model().preUpdatelistModel
-            updateTitle: !dccData.model().downloadWaiting ? qsTr("Updates Available") : qsTr("Downloading updates...")
+            updateTitle: !dccData.model().downloadWaiting || dccData.model().isPrivateUpdate ? qsTr("Updates Available") : qsTr("Downloading updates...")
             btnActions: [ qsTr("Download") ]
             updateTips: qsTr("Update size: ") + dccData.model().preUpdatelistModel.downloadSize
             busyState: dccData.model().downloadWaiting
@@ -385,6 +412,12 @@ DccObject {
 
             onBtnClicked: function(index, updateType) {
                 dccData.work().startDownload(updateType)
+            }
+
+            Component.onCompleted: {
+                if (dccData.model().isPrivateUpdate) {
+                    dccData.work().startDownload(1)
+                }
             }
         }
     }

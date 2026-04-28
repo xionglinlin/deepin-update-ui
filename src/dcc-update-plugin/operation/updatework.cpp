@@ -6,6 +6,7 @@
 #include "common/common/logwatcherhelper.h"
 #include "utils.h"
 #include "dconfigwatcher.h"
+#include "common/common/dconfig_helper.h"
 #include "updateloghelper.h"
 
 #include <QDBusError>
@@ -28,7 +29,6 @@
 #include <DNotifySender>
 
 Q_DECLARE_LOGGING_CATEGORY(logDccUpdatePlugin)
-
 using namespace DCC_NAMESPACE;
 
 const QString TestingChannel = "testing Channel";
@@ -38,6 +38,7 @@ const QString ServiceLinkCN = QStringLiteral("https://insider.deepin.org.cn");
 const QString ChangeLogFile = "/usr/share/deepin/release-note/UpdateInfo.json";
 const QString ChangeLogDic = "/usr/share/deepin/";
 const QString UpdateLogTmpFile = "/tmp/deepin-update-log.json";
+const QString AuthFailed = "authentication failed";
 
 const int LOWEST_BATTERY_PERCENT = 60;
 
@@ -116,6 +117,7 @@ UpdateWorker::UpdateWorker(UpdateModel* model, QObject* parent)
     , m_lastoreDConfig(DConfig::create("org.deepin.dde.lastore", "org.deepin.dde.lastore", "", this))
     , m_model(model)
     , m_updateInter(new UpdateDBusProxy(this))
+    , m_updateAssistant(nullptr)
     , m_lastoreHeartBeatTimer(new QTimer(this))
     , m_logWatcherHelper(new LogWatcherHelper(m_updateInter, this))
     , m_machineid(std::nullopt)
@@ -181,6 +183,9 @@ void UpdateWorker::initConnect()
     connect(m_updateInter, &UpdateDBusProxy::AutoCleanChanged, m_model, &UpdateModel::setAutoCleanCache);
     connect(m_updateInter, &UpdateDBusProxy::AutoDownloadUpdatesChanged, m_model, &UpdateModel::setAutoDownloadUpdates);
     connect(m_updateInter, &UpdateDBusProxy::MirrorSourceChanged, m_model, &UpdateModel::setDefaultMirror);
+    connect(m_updateInter, &UpdateDBusProxy::P2PUpdateSupportChanged, this, [this](bool supported) {
+        Q_EMIT p2PUpdateSupportChanged(supported);
+    });
     if (IsCommunitySystem) {
         connect(m_updateInter, &UpdateDBusProxy::EnableChanged, m_model, &UpdateModel::setSmartMirrorSwitch);
     }
@@ -208,6 +213,13 @@ void UpdateWorker::initConnect()
             // m_model->setP2PUpdateEnabled(DConfigWatcher::instance()->getValue(DConfigWatcher::update, configName).toBool());
         }
     });
+
+    m_updateAssistant = new UpdateAssistant("org.deepin.upgradedelivery", "/org/deepin/upgradedelivery", QDBusConnection::systemBus(), this);
+    QDBusConnection::systemBus().connect("org.deepin.upgradedelivery",
+        "/org/deepin/upgradedelivery",
+        "org.freedesktop.DBus.Properties",
+        "PropertiesChanged",
+        m_model, SLOT(onUpdatePropertiesChanged(QString, QVariantMap, QStringList)));
 }
 
 void UpdateWorker::activate()
@@ -220,7 +232,9 @@ void UpdateWorker::activate()
     updateSystemVersion();
     refreshLastTimeAndCheckCircle();
     initTestingChannel();
+    refreshUpgradeDeliveryInfo();
 
+    m_model->setIsPrivateUpdate(DConfigHelper::instance()->getConfig("org.deepin.dde.lastore", "org.deepin.dde.lastore", "","intranet-update", false).toString() == "true");
     m_model->setUpdateMode(m_updateInter->updateMode());
     m_model->setCheckUpdateMode(m_updateInter->checkUpdateMode());
     m_model->setSecurityUpdateEnabled(DConfigWatcher::instance()->getValue(DConfigWatcher::update, "updateSafety").toString() != "Hidden");
@@ -232,6 +246,7 @@ void UpdateWorker::activate()
     m_model->setUpdateNotify(m_updateInter->updateNotify());
     m_model->setAutoCleanCache(m_updateInter->autoClean());
     m_model->setP2PUpdateEnabled(m_updateInter->p2pUpdateEnable());
+    m_model->setForceUpdate();
     m_model->setImmutableAutoRecovery(m_updateInter->immutableAutoRecovery());
     if (IsCommunitySystem) {
         qCDebug(logDccUpdatePlugin) << "community system, enable smarrt mirror switch";
@@ -282,6 +297,7 @@ void UpdateWorker::initConfig()
     qCDebug(logDccUpdatePlugin) << "Initialize lastore daemon configuration";
     if (m_lastoreDConfig && m_lastoreDConfig->isValid()) {
         m_model->setLastoreDaemonStatus(m_lastoreDConfig->value("lastore-daemon-status").toInt());
+        m_model->setForceUpdateText(m_lastoreDConfig->value("update-time").toString(), m_lastoreDConfig->value("lastore-daemon-status").toInt());
         connect(m_lastoreDConfig, &DConfig::valueChanged, this, [this](const QString& key) {
             if ("lastore-daemon-status" == key) {
                 bool ok;
@@ -290,6 +306,12 @@ void UpdateWorker::initConfig()
                     qCDebug(logDccUpdatePlugin) << "Lastore daemon status changed:" << value;
                     m_model->setLastoreDaemonStatus(value);
                 }
+                m_model->setForceUpdateText(m_lastoreDConfig->value("update-time").toString(), m_lastoreDConfig->value("lastore-daemon-status").toInt());
+                m_model->setForceUpdate();
+            }
+            if ("update-time" == key) {
+                m_model->setForceUpdateText(m_lastoreDConfig->value("update-time").toString(), m_lastoreDConfig->value("lastore-daemon-status").toInt());
+                m_model->setForceUpdate();
             }
         });
     } else {
@@ -492,6 +514,12 @@ void UpdateWorker::doCheckUpdates()
         }
         watcher->deleteLater();
     });
+}
+
+void UpdateWorker::reCheckWithUi()
+{
+    m_model->setShowCheckUpdate(true);
+    doCheckUpdates();
 }
 
 void UpdateWorker::setCheckUpdatesJob(const QString& jobPath)
@@ -787,6 +815,12 @@ void UpdateWorker::modalUpgrade(bool rebootAfterUpgrade)
     }
 }
 
+void UpdateWorker::setShutdownAndUpgrade(bool isShutdownUpdate)
+{
+    qCInfo(logDccUpdatePlugin) << "request shutdown upgrade, upgrade after shutdown:" << isShutdownUpdate;
+    m_updateInter->SetShutdownForceUpdate(isShutdownUpdate);
+}
+
 void UpdateWorker::setBackupJob(const QString& jobPath)
 {
     qCInfo(logDccUpdatePlugin) << "Create backup upgrade job, path:" << jobPath;
@@ -891,8 +925,9 @@ void UpdateWorker::setDownloadSpeedLimitEnabled(bool enable)
     qCDebug(logDccUpdatePlugin) << "Set download speed limit enabled:" << enable;
     auto config = m_model->speedLimitConfig();
     config.downloadSpeedLimitEnabled = enable;
+    config.isOnlineSpeedLimit = false;
     // dbus返回需要1s，导致界面更新慢，这里直接先更新model
-    m_model->setSpeedLimitConfig(config.toJson().toUtf8());
+    m_model->setSpeedLimitConfig(config.toJson().toUtf8(), true);
     setDownloadSpeedLimitConfig(config.toJson());
 }
 
@@ -901,6 +936,7 @@ void UpdateWorker::setDownloadSpeedLimitSize(const QString& size)
     qCDebug(logDccUpdatePlugin) << "set download speed limit size" << size;
     auto config = m_model->speedLimitConfig();
     config.limitSpeed = size;
+    config.isOnlineSpeedLimit = false;
     setDownloadSpeedLimitConfig(config.toJson());
 }
 
@@ -1255,6 +1291,22 @@ void UpdateWorker::initTestingChannel()
         }
         watcher->deleteLater();
     });
+}
+
+void UpdateWorker::refreshUpgradeDeliveryInfo()
+{
+    qCDebug(logDccUpdatePlugin) << "Refresh upgrade delivery info";
+    if (!m_updateAssistant || !m_model) {
+        return;
+    }
+    m_model->setUpgradeDownloadSpeedLimitConfig(transferDeliveryConfigToLastoreDeliveryConfig(m_updateAssistant->downloadLimitSpeed()).toUtf8());
+    m_model->setUpgradeUploadSpeedLimitConfig(transferDeliveryConfigToLastoreDeliveryConfig(m_updateAssistant->uploadLimitSpeed()).toUtf8());
+    m_model->setUpgradeDeliveryEnable(m_updateInter->p2pUpdateEnable());
+}
+
+bool UpdateWorker::p2pUpdateSupported() const
+{
+    return m_updateInter && m_updateInter->p2PUpdateSupport();
 }
 
 void UpdateWorker::checkTestingChannelStatus()
@@ -1692,3 +1744,99 @@ void UpdateWorker::onRemovePackageStatusChanged(const QString& value)
     }
 }
 
+//更新传递总开关
+void UpdateWorker::setUpgradeDeliveryEnabled(bool enabled, bool fromRetryDialog)
+{
+    if (enabled == m_model->upgradeDeliveryEnable() && !fromRetryDialog) {
+        return;
+    }
+
+    qCDebug(logDccUpdatePlugin) << "Set update assistant service, enabled: " << enabled;
+    auto func_set_success = [=](bool enabled) {
+        qCDebug(logDccUpdatePlugin) << "Set update assistant service succeed, enabled " << enabled;
+        if (m_updateAssistant && m_model) {
+            m_model->setUpgradeDownloadSpeedLimitConfig(transferDeliveryConfigToLastoreDeliveryConfig(m_updateAssistant->downloadLimitSpeed()).toUtf8());
+            m_model->setUpgradeUploadSpeedLimitConfig(transferDeliveryConfigToLastoreDeliveryConfig(m_updateAssistant->uploadLimitSpeed()).toUtf8());
+            m_model->setUpgradeDeliveryEnable(enabled);
+        }
+    };
+    auto watcher = new QDBusPendingCallWatcher(m_updateInter->SetUpgradeDeliveryEnable(enabled), this);
+    connect(watcher, &QDBusPendingCallWatcher::finished, [this, watcher, enabled, func_set_success] {
+        watcher->deleteLater();
+        if (watcher->isError()) {
+            qCWarning(logDccUpdatePlugin) << "Set update assistant service failed, enabled " << enabled << " error: " << watcher->error().message();
+            m_model->setUpgradeDeliveryEnable(!enabled);
+            if (watcher->error().message() != AuthFailed)
+                Q_EMIT upgradeDeliveryEnableSetFailed();
+            return;
+        }
+        func_set_success(enabled);
+    });
+}
+
+//设置更新传递下载限速
+void UpdateWorker::setUpgradeDeliveryDownloadLimitSpeed(const QString& speed, bool enable)
+{
+    LastoreUpgradeSpeedLimitConfig downloadSpeedLimitConfig;
+    downloadSpeedLimitConfig.isOnlineSpeedLimit = false;
+    downloadSpeedLimitConfig.speedLimitEnabled = enable;
+    downloadSpeedLimitConfig.limitSpeed = speed;
+    qCInfo(logDccUpdatePlugin) << "Set upgrade download speed limit: " << downloadSpeedLimitConfig.toJson();
+    auto watcher = new QDBusPendingCallWatcher(m_updateInter->SetUpgradeDeliveryDownloadSpeedLimit(downloadSpeedLimitConfig.toJson()), this);
+    connect(watcher, &QDBusPendingCallWatcher::finished, [watcher, this, downloadSpeedLimitConfig] {
+        watcher->deleteLater();
+        if (watcher->isError()) {
+            qCWarning(logDccUpdatePlugin) << "Set upgrade download speed limit config error: " << watcher->error().message();
+            m_model->setUpgradeDownloadSpeedLimitConfig(m_model->upgradeDownloadSpeedLimitConfig().toJson().toUtf8());
+            Q_EMIT upgradeDeliveryConfigSetFailed();
+            return;
+        }
+    });
+}
+
+//设置更新传递上传限速
+void UpdateWorker::setUpgradeDeliveryUploadLimitSpeed(const QString& speed, bool enable)
+{
+    LastoreUpgradeSpeedLimitConfig uploadSpeedLimitConfig;
+    uploadSpeedLimitConfig.isOnlineSpeedLimit = false;
+    uploadSpeedLimitConfig.speedLimitEnabled = enable;
+    uploadSpeedLimitConfig.limitSpeed = speed;
+    qCInfo(logDccUpdatePlugin) << "Set upgrade upload speed limit: " << uploadSpeedLimitConfig.toJson();
+    auto watcher = new QDBusPendingCallWatcher(m_updateInter->SetUpgradeDeliveryUploadSpeedLimit(uploadSpeedLimitConfig.toJson()), this);
+    connect(watcher, &QDBusPendingCallWatcher::finished, [watcher, this, uploadSpeedLimitConfig] {
+        watcher->deleteLater();
+        if (watcher->isError()) {
+            qCWarning(logDccUpdatePlugin) << "Set upgrade upload speed limit config error: " << watcher->error().message();
+            m_model->setUpgradeUploadSpeedLimitConfig(m_model->upgradeUploadSpeedLimitConfig().toJson().toUtf8());
+            Q_EMIT upgradeDeliveryConfigSetFailed();
+            return;
+        }
+    });
+}
+
+void UpdateWorker::getUpgradeDeliveryDownloadLimitSpeed()
+{
+    if (m_updateAssistant && m_model) {
+        m_model->setUpgradeDownloadSpeedLimitConfig(transferDeliveryConfigToLastoreDeliveryConfig(m_updateAssistant->downloadLimitSpeed()).toUtf8());
+    }
+}
+
+void UpdateWorker::getUpgradeDeliveryUploadLimitSpeed()
+{
+    if (m_updateAssistant && m_model) {
+        m_model->setUpgradeUploadSpeedLimitConfig(transferDeliveryConfigToLastoreDeliveryConfig(m_updateAssistant->uploadLimitSpeed()).toUtf8());
+    }
+}
+
+void UpdateWorker::cleanUpgradeDeliveryCache()
+{
+    qCDebug(logDccUpdatePlugin) << "Clean update assistant cache succeed";
+    auto watcher = new QDBusPendingCallWatcher(m_updateInter->ClearUpgradeDeliveryCache(), this);
+    connect(watcher, &QDBusPendingCallWatcher::finished, [this, watcher] {
+        watcher->deleteLater();
+        if (watcher->isError()) {
+            qCWarning(logDccUpdatePlugin) << "Clean update assistant cache failed";
+            return;
+        }
+    });
+}

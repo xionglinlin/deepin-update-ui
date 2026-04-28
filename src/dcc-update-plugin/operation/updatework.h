@@ -10,6 +10,7 @@
 #include "common/common/logwatcherhelper.h"
 #include "common/dbus/updatedbusproxy.h"
 #include "common/dbus/updatejobdbusproxy.h"
+#include "common/dbus/updateassistant.h"
 
 #include <QLoggingCategory>
 #include <QNetworkAccessManager>
@@ -37,6 +38,7 @@ public:
     // 检查更新
     Q_INVOKABLE void checkNeedDoUpdates();
     Q_INVOKABLE void doCheckUpdates();
+    Q_INVOKABLE void reCheckWithUi();
     void setCheckUpdatesJob(const QString& jobPath);
     void createCheckUpdateJob(const QString& jobPath);
     void refreshLastTimeAndCheckCircle();
@@ -54,6 +56,7 @@ public:
     Q_INVOKABLE void doUpgrade(int updateTypes, bool doBackup);
     Q_INVOKABLE void reStart();
     Q_INVOKABLE void modalUpgrade(bool rebootAfterUpgrade = true);
+    Q_INVOKABLE void setShutdownAndUpgrade(bool isShutdownUpdate = false);
     void setBackupJob(const QString& jobPath);
     void setDistUpgradeJob(const QString& jobPath);
     void updateSystemVersion();
@@ -71,7 +74,13 @@ public:
     Q_INVOKABLE void setIdleDownloadEnabled(bool enable);
     Q_INVOKABLE void setIdleDownloadBeginTime(QString time);
     Q_INVOKABLE void setIdleDownloadEndTime(QString time);
-    void setIdleDownloadConfig(const IdleDownloadConfig& config);
+    Q_INVOKABLE void setUpgradeDeliveryEnabled(bool enabled, bool fromRetryDialog = false);
+    Q_INVOKABLE void setUpgradeDeliveryDownloadLimitSpeed(const QString& speed, bool enable);
+    Q_INVOKABLE void setUpgradeDeliveryUploadLimitSpeed(const QString& speed, bool enable);
+    Q_INVOKABLE void getUpgradeDeliveryDownloadLimitSpeed();
+    Q_INVOKABLE void getUpgradeDeliveryUploadLimitSpeed();
+    Q_INVOKABLE void cleanUpgradeDeliveryCache();
+    Q_INVOKABLE void setIdleDownloadConfig(const IdleDownloadConfig& config);
     QString adjustTimeFunc(const QString& start, const QString& end, bool returnEndTime);
 
     // 更新设置-更新提醒
@@ -92,6 +101,7 @@ public:
     Q_INVOKABLE void setTestingChannelEnable(const bool& enable);
     Q_INVOKABLE bool openTestingChannelUrl();
     Q_INVOKABLE void exitTestingChannel(bool value);
+    Q_INVOKABLE bool p2pUpdateSupported() const;
     std::optional<QString> getMachineId();
     std::optional<QUrl> getTestingChannelUrl();
     void initTestingChannel();
@@ -99,6 +109,7 @@ public:
     void setInstallPackageJob(const QString& jobPath);
     void setRemovePackageJob(const QString& jobPath);
     QString getServiceUrlByRegion();
+    void refreshUpgradeDeliveryInfo();
 
     Q_INVOKABLE bool openUrl(const QString& url);
     Q_INVOKABLE void onRequestRetry(int type, int updateTypes);
@@ -126,11 +137,15 @@ public Q_SLOTS:
 Q_SIGNALS:
     void requestCloseTestingChannel();
     void startDoUpgrade();
+    void upgradeDeliveryEnableSetFailed();
+    void upgradeDeliveryConfigSetFailed();
+    void p2PUpdateSupportChanged(bool supported);
 
 private:
     Dtk::Core::DConfig *m_lastoreDConfig;
     UpdateModel* m_model;
     UpdateDBusProxy *m_updateInter;
+    UpdateAssistant* m_updateAssistant;
     QTimer *m_lastoreHeartBeatTimer; // lastore-daemon 心跳信号，防止lastore-daemon自动退出
     LogWatcherHelper *m_logWatcherHelper;
 
