@@ -49,6 +49,8 @@ UpdateDBusProxy::UpdateDBusProxy(QObject *parent)
     qRegisterMetaType<BatteryPercentageInfo>("BatteryPercentageInfo");
     qDBusRegisterMetaType<BatteryPercentageInfo>();
 
+    registerMirrorInfoListMetaType();
+
     m_interWatcher->setWatchedServices({UpdaterService, ManagerInterface, HostnameService});
 
     connect(m_interWatcher, &QDBusServiceWatcher::serviceRegistered, this, [this](const QString &serviceName) {
@@ -179,6 +181,19 @@ void UpdateDBusProxy::SetMirrorSource(const QString &in0)
     QList<QVariant> argumentList;
     argumentList << QVariant::fromValue(in0);
     m_updateInter->asyncCallWithArgumentList(QStringLiteral("SetMirrorSource"), argumentList);
+}
+
+QDBusPendingReply<MirrorInfoList> UpdateDBusProxy::ListMirrorSources(const QString &lang)
+{
+    qCDebug(logCommon) << "Listing mirror sources for language:" << lang;
+    QList<QVariant> argumentList;
+    argumentList << QVariant::fromValue(lang);
+    return m_updateInter->asyncCallWithArgumentList(QStringLiteral("ListMirrorSources"), argumentList);
+}
+
+QString UpdateDBusProxy::MirrorSource()
+{
+    return qvariant_cast<QString>(m_updateInter->property("MirrorSource"));
 }
 
 bool UpdateDBusProxy::autoClean()

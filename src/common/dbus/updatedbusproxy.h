@@ -11,6 +11,8 @@
 #include <QObject>
 #include <QDBusServiceWatcher>
 
+#include "mirrorinfolist.h"
+
 typedef QMap<QString, QStringList> LastoreUpdatePackagesInfo;
 typedef QMap<QString, double> BatteryPercentageInfo;
 
@@ -52,6 +54,8 @@ public:
     bool autoCheckUpdates();
     void SetAutoCheckUpdates(bool in0);
     void SetMirrorSource(const QString &in0);
+    QDBusPendingReply<MirrorInfoList> ListMirrorSources(const QString &lang);
+    QString MirrorSource();
 
     // ManagerInter
     Q_PROPERTY(bool AutoClean READ autoClean NOTIFY AutoCleanChanged)

@@ -8,7 +8,8 @@
 #include "common.h"
 #include "updatedatastructs.h"
 #include "updateiteminfo.h"
-#include "mirrorinfolist.h"
+#include "common/dbus/mirrorinfolist.h"
+#include "mirrorsourcemodel.h"
 #include "appupdateinfolist.h"
 #include "updatelistmodel.h"
 
@@ -84,6 +85,9 @@ class UpdateModel : public QObject
     Q_PROPERTY(bool updateNotify READ updateNotify WRITE setUpdateNotify NOTIFY updateNotifyChanged FINAL)
     Q_PROPERTY(bool autoCleanCache READ autoCleanCache WRITE setAutoCleanCache NOTIFY autoCleanCacheChanged FINAL)
     Q_PROPERTY(bool smartMirrorSwitch READ smartMirrorSwitch WRITE setSmartMirrorSwitch NOTIFY smartMirrorSwitchChanged FINAL)
+    Q_PROPERTY(QString defaultMirrorId READ defaultMirrorId NOTIFY defaultMirrorChanged FINAL)
+    Q_PROPERTY(MirrorSourceModel *mirrorSourceModel READ mirrorSourceModel NOTIFY mirrorSourceModelChanged FINAL)
+    Q_PROPERTY(bool netselectExist READ netselectExist NOTIFY netselectExistChanged FINAL)
     Q_PROPERTY(TestingChannelStatus testingChannelStatus READ testingChannelStatus WRITE setTestingChannelStatus NOTIFY testingChannelStatusChanged FINAL)
     Q_PROPERTY(QString upgradeDownloadSpeedCurrentRate READ upgradeDownloadSpeedCurrentRate NOTIFY upgradeDownloadSpeedLimitConfigChanged FINAL)
     Q_PROPERTY(QString upgradeDownloadSpeedLimitRate READ upgradeDownloadSpeedLimitRate NOTIFY upgradeDownloadSpeedLimitConfigChanged FINAL)
@@ -327,11 +331,10 @@ public:
     MirrorInfoList mirrorInfos() const { return m_mirrorList; }
     void setMirrorInfos(const MirrorInfoList& list);
 
-    MirrorInfo defaultMirror() const;
+    QString defaultMirrorId() const { return m_mirrorId; };
     void setDefaultMirror(const QString &mirrorId);
-    
-    QMap<QString, int> mirrorSpeedInfo() const { return m_mirrorSpeedInfo; }
-    void setMirrorSpeedInfo(const QMap<QString, int> &mirrorSpeedInfo);
+
+    MirrorSourceModel *mirrorSourceModel() const;
 
     bool netselectExist() const { return m_netselectExist; }
     void setNetselectExist(bool netselectExist);
@@ -350,13 +353,13 @@ public:
 
     bool isP2PUpdateEnabled() const { return m_p2pUpdateEnabled; }
     void setP2PUpdateEnabled(bool enabled);
-
     bool forceUpdate() const { return m_forceUpdate; }
     void setForceUpdate();
 
 
     Q_INVOKABLE bool isCommunitySystem() const;
     Q_INVOKABLE QString privacyAgreementText() const;
+    Q_INVOKABLE QString getMirrorNameById(const QString &mirrorId) const;
 
     UpdateHistoryModel *historyModel() const;
 
@@ -435,8 +438,8 @@ Q_SIGNALS:
     void updateNotifyChanged(const bool notify);
     void autoCleanCacheChanged(const bool autoCleanCache);
     void smartMirrorSwitchChanged(bool smartMirrorSwitch);
-    void defaultMirrorChanged(const MirrorInfo& mirror);
-    void mirrorSpeedInfoAvailable(const QMap<QString, int> &mirrorSpeedInfo);
+    void defaultMirrorChanged(const QString &mirrorId);
+    void mirrorSourceModelChanged();
     void netselectExistChanged(const bool netselectExist);
     void testingChannelStatusChanged(TestingChannelStatus status);
     void systemVersionChanged(QString version);
@@ -517,7 +520,7 @@ private:
     bool m_smartMirrorSwitch;
     MirrorInfoList m_mirrorList;
     QString m_mirrorId;
-    QMap<QString, int> m_mirrorSpeedInfo;
+    MirrorSourceModel *m_mirrorSourceModel;
     bool m_netselectExist;
     TestingChannelStatus m_testingChannelStatus;
     QString m_systemVersionInfo;

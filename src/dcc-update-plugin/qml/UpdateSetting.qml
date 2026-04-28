@@ -889,18 +889,142 @@ DccObject {
             }
 
             DccObject {
-                visible: false
+                visible: !dccData.model().smartMirrorSwitch
                 name: "defautMirror"
                 parentName: "mirrorSettingGrp"
-             //   displayName: qsTr("默认镜像源")
+                displayName: qsTr("Default Mirror Source")
                 weight: 20
                 enabled: !dccData.model().updateProhibited
                 pageType: DccObject.Editor
-                page: D.ComboBox {
-                    model:["[SG]Ox.sg", "[AU]JAARNET", "[SE]Academic Computer Club", "[CN]阿里云"]
-                    // checked: dccData.model().audioMono
 
-                    currentIndex: 0
+                page: Item {
+                    id: mirrorItem
+                    implicitWidth: rowlayout.implicitWidth
+                    implicitHeight: rowlayout.implicitHeight
+
+                    RowLayout {
+                        id: rowlayout
+                        spacing: 10
+                        Label {
+                            id: mirrorLabel
+                            text: dccData.model().getMirrorNameById(dccData.model().defaultMirrorId)
+                        }
+                        D.IconLabel {
+                            Layout.alignment: Qt.AlignRight | Qt.AlignHCenter
+                            icon.name: "arrow_ordinary_down"
+                            icon.palette: D.DTK.makeIconPalette(mirrorLabel.palette)
+                        }
+                    }
+
+                    MouseArea {
+                        anchors.fill: parent
+
+                        onClicked: function (mouse) {
+                            if (!mirrorPopupWindow.isVisible()) {
+                                mirrorPopupWindow.show()
+                                mirrorPopupWindow.setPositionByItem(parent)
+                            }
+                        }
+
+                        // 镜像源弹出窗口
+                        MirrorSourcePopup {
+                            id: mirrorPopupWindow
+
+                            delegateModel: DelegateModel {
+                                model: dccData.model().mirrorSourceModel
+                                delegate: D.MenuItem {
+                                    id: menuItem
+                                    width: mirrorPopupWindow.viewWidth
+                                    useIndicatorPadding: true
+                                    checkable: true
+                                    autoExclusive: true
+                                    checked: model.id === dccData.model().defaultMirrorId
+                                    highlighted: ListView.isCurrentItem
+                                    hoverEnabled: true
+                                    font: D.DTK.fontManager.t6
+
+                                    // 自定义内容布局：名称 + 测速值
+                                    contentItem: RowLayout {
+                                        spacing: 10
+
+                                        // 左侧指示器占位
+                                        Item {
+                                            Layout.preferredWidth: menuItem.useIndicatorPadding ? 20 : 0
+                                            Layout.preferredHeight: parent.height
+                                            visible: menuItem.useIndicatorPadding
+                                        }
+
+                                        // 镜像源名称
+                                        Label {
+                                            id: mirrorId
+                                            Layout.fillWidth: true
+                                            Layout.alignment: Qt.AlignVCenter
+                                            text: model.name
+                                            font: menuItem.font
+                                            elide: Text.ElideRight
+                                            horizontalAlignment: Text.AlignLeft
+
+                                            ToolTip {
+                                                text: mirrorId.text
+                                                visible: labelHandler.hovered && mirrorId.truncated
+                                                delay: 500
+                                                timeout: 4000
+                                            }
+
+                                            HoverHandler {
+                                                id: labelHandler
+                                            }
+                                        }
+
+                                        // 测速值
+                                        Label {
+                                            id: speedLabel
+                                            Layout.alignment: Qt.AlignVCenter
+                                            Layout.rightMargin: 6
+                                            text: menuItem.speedText(model.speed)
+                                            color: {
+                                                var s = model.speed
+                                                if (s >= 0 && s < Common.Timeout) return menuItem.speedColor(s)
+                                                return palette.windowText
+                                            }
+                                            font: menuItem.font
+                                            horizontalAlignment: Text.AlignRight
+                                        }
+                                    }
+
+                                    function speedText(speed) {
+                                        if (speed === Common.Untested) return qsTr("Untested")
+                                        if (speed === Common.Testing) return qsTr("Testing...")
+                                        if (speed >= Common.Timeout) return qsTr("Timeout")
+                                        return speed + "ms"
+                                    }
+
+                                    function speedColor(speed) {
+                                        if (speed > Common.Medium) return "#D20000"
+                                        if (speed > Common.Fast) return "#B58504"
+                                        return "#049B15"
+                                    }
+
+                                    onHoveredChanged: {
+                                        if (hovered && !ListView.view.keyboardScrolling) {
+                                            mirrorPopupWindow.setViewIndex(index)
+                                        }
+                                    }
+
+                                    onCheckedChanged: {
+                                        if (checked && model.id !== dccData.model().defaultMirrorId) {
+                                            dccData.work().setMirrorSource(model.id)
+                                            mirrorPopupWindow.close()
+                                        }
+                                    }
+                                }
+                            }
+
+                            onTestButtonClicked: {
+                                dccData.work().testMirrorSpeed()
+                            }
+                        }
+                    }
                 }
             }
         }

@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2016 - 2023 UnionTech Software Technology Co., Ltd.
+// SPDX-FileCopyrightText: 2016 - 2026 UnionTech Software Technology Co., Ltd.
 //
 // SPDX-License-Identifier: LGPL-3.0-or-later
 
@@ -131,6 +131,14 @@ enum CtrlWidgetType {
 };
 Q_ENUM_NS(CtrlWidgetType)
 
+enum SpeedStatus {
+    Untested = -2,    // 未检测
+    Testing = -1,     // 测试中
+    Fast = 200,       // 快速阈值，单位ms
+    Medium = 2000,    // 中速阈值，单位ms
+    Timeout = 10000   // 超时阈值，单位ms
+};
+Q_ENUM_NS(SpeedStatus)
 
 
 static inline QString formatCap(qulonglong cap, const int size = 1024)

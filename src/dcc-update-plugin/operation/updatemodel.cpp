@@ -87,6 +87,7 @@ UpdateModel::UpdateModel(QObject* parent)
     , m_autoCleanCache(false)
     , m_smartMirrorSwitch(false)
     , m_mirrorId("")
+    , m_mirrorSourceModel(new MirrorSourceModel(this))
     , m_netselectExist(false)
     , m_testingChannelStatus(TestingChannelStatus::DeActive)
     , m_systemVersionInfo("")
@@ -1361,21 +1362,29 @@ void UpdateModel::setMirrorInfos(const MirrorInfoList& list)
 {
     qCDebug(logDccUpdatePlugin) << "Set mirror infos, count:" << list.size();
     m_mirrorList = list;
+    m_mirrorSourceModel->setMirrorList(list);
 }
 
-MirrorInfo UpdateModel::defaultMirror() const
+MirrorSourceModel *UpdateModel::mirrorSourceModel() const
 {
-    qCDebug(logDccUpdatePlugin) << "Get default mirror, mirror list size: " << m_mirrorList.size() << "mirror id: " << m_mirrorId;
+    return m_mirrorSourceModel;
+}
+
+QString UpdateModel::getMirrorNameById(const QString &mirrorId) const
+{
+    if (m_mirrorList.isEmpty()) {
+        return QString();
+    }
+
     QList<MirrorInfo>::const_iterator it = m_mirrorList.begin();
     for (; it != m_mirrorList.end(); ++it) {
-        if ((*it).m_id == m_mirrorId) {
-            qCDebug(logDccUpdatePlugin) << "Found default mirror:" << (*it).m_id;
-            return *it;
+        if ((*it).m_id == mirrorId) {
+            qCDebug(logDccUpdatePlugin) << "Found mirror:" << (*it).m_id;
+            return (*it).m_name;
         }
     }
 
-    qCDebug(logDccUpdatePlugin) << "Using first mirror as default";
-    return m_mirrorList.at(0);
+    return m_mirrorList.at(0).m_name;
 }
 
 void UpdateModel::setDefaultMirror(const QString& mirrorId)
@@ -1385,26 +1394,7 @@ void UpdateModel::setDefaultMirror(const QString& mirrorId)
         return;
 
     m_mirrorId = mirrorId;
-
-    QList<MirrorInfo>::iterator it = m_mirrorList.begin();
-    for (; it != m_mirrorList.end(); ++it) {
-        if ((*it).m_id == mirrorId) {
-            Q_EMIT defaultMirrorChanged(*it);
-        }
-    }
-}
-
-void UpdateModel::setMirrorSpeedInfo(const QMap<QString, int>& mirrorSpeedInfo)
-{
-    qCDebug(logDccUpdatePlugin) << "Setting mirror speed info, count:" << mirrorSpeedInfo.size() << "old value: " << m_mirrorSpeedInfo;
-    m_mirrorSpeedInfo = mirrorSpeedInfo;
-
-    if (mirrorSpeedInfo.keys().length()) {
-        qCDebug(logDccUpdatePlugin) << "Emitting mirror speed info available signal" << mirrorSpeedInfo;
-        Q_EMIT mirrorSpeedInfoAvailable(mirrorSpeedInfo);
-    } else {
-        qCDebug(logDccUpdatePlugin) << "No mirror speed info to emit";
-    }
+    Q_EMIT defaultMirrorChanged(mirrorId);
 }
 
 void UpdateModel::setNetselectExist(bool netselectExist)
