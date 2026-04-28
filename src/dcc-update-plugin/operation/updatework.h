@@ -90,8 +90,8 @@ public:
 
     // 更新设置-镜像源
     Q_INVOKABLE void setSmartMirror(bool enable);
-    Q_INVOKABLE void setMirrorSource(const MirrorInfo& mirror);
-    void testMirrorSpeed();
+    Q_INVOKABLE void setMirrorSource(const QString& mirrorId);
+    Q_INVOKABLE void testMirrorSpeed();
     void checkNetselect();
 #ifndef DISABLE_SYS_UPDATE_MIRRORS
     void refreshMirrors();

@@ -4,12 +4,14 @@
 
 #include "updatework.h"
 #include "common/common/logwatcherhelper.h"
+#include "common/dbus/mirrorinfolist.h"
 #include "utils.h"
 #include "dconfigwatcher.h"
 #include "common/common/dconfig_helper.h"
 #include "updateloghelper.h"
 
 #include <QDBusError>
+#include <QDBusPendingCallWatcher>
 #include <QDesktopServices>
 #include <QFuture>
 #include <QFutureWatcher>
@@ -80,7 +82,6 @@ static int TestMirrorSpeedInternal(const QString& url, QPointer<QObject> baseObj
     args << url << "-s"
          << "1";
 
-    qCDebug(logDccUpdatePlugin) << "start process netselect";
     QProcess process;
     process.start("netselect", args);
 
@@ -253,6 +254,7 @@ void UpdateWorker::activate()
         m_model->setSmartMirrorSwitch(m_updateInter->enable());
     }
 #ifndef DISABLE_SYS_UPDATE_MIRRORS
+    checkNetselect();
     refreshMirrors();
 #endif
 
@@ -1041,10 +1043,16 @@ void UpdateWorker::setSmartMirror(bool enable)
     m_updateInter->SetEnable(enable);
 }
 
-void UpdateWorker::setMirrorSource(const MirrorInfo& mirror)
+void UpdateWorker::setMirrorSource(const QString& mirrorId)
 {
-    qCDebug(logDccUpdatePlugin) << "Set mirror source:" << mirror.m_id;
-    m_updateInter->SetMirrorSource(mirror.m_id);
+    qCDebug(logDccUpdatePlugin) << "Set mirror source:" << mirrorId;
+    QList<MirrorInfo> mirrors = m_model->mirrorInfos();
+    for (const MirrorInfo& mirror : mirrors) {
+        if (mirror.m_id == mirrorId) {
+            m_updateInter->SetMirrorSource(mirrorId);
+            break;
+        }
+    }
 }
 
 void UpdateWorker::testMirrorSpeed()
@@ -1058,18 +1066,21 @@ void UpdateWorker::testMirrorSpeed()
     }
 
     qCDebug(logDccUpdatePlugin) << "Testing" << urlList.size() << "mirror URLs";
-    // reset the data;
-    m_model->setMirrorSpeedInfo(QMap<QString, int>());
+    m_model->mirrorSourceModel()->resetSpeedInfo();
 
     QFutureWatcher<int>* watcher = new QFutureWatcher<int>();
-    connect(watcher, &QFutureWatcher<int>::resultReadyAt, [this, urlList, watcher, mirrors](int index) {
-        QMap<QString, int> speedInfo = m_model->mirrorSpeedInfo();
 
+    connect(watcher, &QFutureWatcher<int>::finished, [watcher]() {
+        qCDebug(logDccUpdatePlugin) << "Mirror speed test completed, cleaning up watcher";
+        watcher->deleteLater();
+    });
+
+    connect(watcher, &QFutureWatcher<int>::resultReadyAt, [this, watcher, mirrors](int index) {
         int result = watcher->resultAt(index);
         QString mirrorId = mirrors.at(index).m_id;
-        speedInfo[mirrorId] = result;
 
-        m_model->setMirrorSpeedInfo(speedInfo);
+        qCDebug(logDccUpdatePlugin) << "speed test result ID:" << mirrorId << "Speed:" << result << "ms";
+        m_model->mirrorSourceModel()->updateMirrorSpeed(mirrorId, result);
     });
 
     QPointer<QObject> guest(this);
@@ -1080,7 +1091,7 @@ void UpdateWorker::testMirrorSpeed()
 void UpdateWorker::checkNetselect()
 {
     qCDebug(logDccUpdatePlugin) << "Checking netselect tool availability";
-    QProcess* process = new QProcess;
+    QProcess* process = new QProcess(this);
     process->start("netselect", QStringList() << "127.0.0.1");
     connect(process, &QProcess::errorOccurred, this, [this, process](QProcess::ProcessError error) {
         if ((error == QProcess::FailedToStart) || (error == QProcess::Crashed)) {
@@ -1103,28 +1114,30 @@ void UpdateWorker::checkNetselect()
 #ifndef DISABLE_SYS_UPDATE_MIRRORS
 void UpdateWorker::refreshMirrors()
 {
-    qCDebug(logDccUpdatePlugin) << QDir::currentPath();
-    QFile file(":/update/themes/common/config/mirrors.json");
-    if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
-        qCDebug(logDccUpdatePlugin) << file.errorString();
-        return;
+    m_model->setDefaultMirror(m_updateInter->MirrorSource());
+
+    QString locale = QLocale::system().name();
+    if (!(QLocale::system().name() == "zh_CN" || QLocale::system().name() == "zh_TW")) {
+        locale = "zh_CN";
     }
-    QJsonArray array = QJsonDocument::fromJson(file.readAll()).array();
-    QList<MirrorInfo> list;
-    for (auto item : array) {
-        QJsonObject obj = item.toObject();
-        MirrorInfo info;
-        info.m_id = obj.value("id").toString();
-        QString locale = QLocale::system().name();
-        if (!(QLocale::system().name() == "zh_CN" || QLocale::system().name() == "zh_TW")) {
-            locale = "zh_CN";
+    qCDebug(logDccUpdatePlugin) << "Refreshing mirrors from DBus for locale:" << locale;
+
+    QDBusPendingReply<MirrorInfoList> reply = m_updateInter->ListMirrorSources(locale);
+    QDBusPendingCallWatcher *watcher = new QDBusPendingCallWatcher(reply, this);
+    connect(watcher, &QDBusPendingCallWatcher::finished, this, [this, watcher](QDBusPendingCallWatcher *call) {
+        watcher->deleteLater();
+        QDBusPendingReply<MirrorInfoList> reply = *call;
+        if (reply.isError()) {
+            qCWarning(logDccUpdatePlugin) << "Failed to get mirror sources from DBus:" << reply.error().message();
+            return;
         }
-        info.m_name = obj.value(QString("name_locale.%1").arg(locale)).toString();
-        info.m_url = obj.value("url").toString();
-        list << info;
-    }
-    m_model->setMirrorInfos(list);
-    m_model->setDefaultMirror(list[0].m_id);
+        MirrorInfoList list = reply.value();
+        qCDebug(logDccUpdatePlugin) << "Loaded" << list.size() << "mirrors from DBus";
+        m_model->setMirrorInfos(list);
+        if (!list.isEmpty() && m_model->defaultMirrorId().isEmpty()) {
+            m_model->setDefaultMirror(list[0].m_id);
+        }
+    });
 }
 #endif
 

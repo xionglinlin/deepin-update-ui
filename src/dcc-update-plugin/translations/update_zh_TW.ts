@@ -1,9 +1,18 @@
-<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="zh_TW">
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS>
+<TS version="2.1" language="zh_TW">
 <context>
     <name>CheckUpdate</name>
     <message>
         <source>Last check: </source>
         <translation>上次檢查更新時間：</translation>
+    </message>
+</context>
+<context>
+    <name>MirrorSourcePopup</name>
+    <message>
+        <source>Connectivity Test</source>
+        <translation>連通性測試</translation>
     </message>
 </context>
 <context>
@@ -525,10 +534,6 @@
         <translation>收起</translation>
     </message>
     <message>
-        <source>Only numbers between 1-99999 are allowed</source>
-        <translation>只允許輸入1-99999</translation>
-    </message>
-    <message>
         <source>Only numbers between 10-999999 are allowed</source>
         <translation>只允許輸入10-999999</translation>
     </message>
@@ -551,6 +556,22 @@
     <message>
         <source>Join the internal testing channel to get deepin latest updates.</source>
         <translation>加入deepin內測通道，以獲取deepin最新更新內容</translation>
+    </message>
+    <message>
+        <source>Default Mirror Source</source>
+        <translation>預設映象源</translation>
+    </message>
+    <message>
+        <source>Untested</source>
+        <translation>未檢測</translation>
+    </message>
+    <message>
+        <source>Testing...</source>
+        <translation>測試中...</translation>
+    </message>
+    <message>
+        <source>Timeout</source>
+        <translation>超時</translation>
     </message>
 </context>
 <context>

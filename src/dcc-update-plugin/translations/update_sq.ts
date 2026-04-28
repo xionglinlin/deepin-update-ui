@@ -1,9 +1,18 @@
-<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="sq">
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS>
+<TS version="2.1" language="sq">
 <context>
     <name>CheckUpdate</name>
     <message>
         <source>Last check: </source>
         <translation>Kontrolli i fundit më: </translation>
+    </message>
+</context>
+<context>
+    <name>MirrorSourcePopup</name>
+    <message>
+        <source>Connectivity Test</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -279,6 +288,14 @@
         <source>Configure Update settings、Security Updates、Auto Download Updates and Updates Notification</source>
         <translation>Formësoni rregullime Përditësimi、Përditësime Sigurie、Vetëshkarkim Përditësimedhe dhe Njoftim Përditësimesh</translation>
     </message>
+    <message>
+        <source>Install Now</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Check Again</source>
+        <translation type="unfinished">Rikontrollo</translation>
+    </message>
 </context>
 <context>
     <name>UpdateModel</name>
@@ -365,6 +382,22 @@
     <message>
         <source>The system has enabled auto recovery function and does not support updates. If you have any questions, please contact the enterprise administrator</source>
         <translation>Sistemi ka të aktivizuar funksion rikthimi dhe s’mbulon përditësime. Nëse keni ndonjë pyetje, ju lutemi, lidhuni me përgjegjësin.</translation>
+    </message>
+    <message>
+        <source>will upgrade at %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>will upgrade when shutdown</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Current Edition</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Baseline</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -485,12 +518,60 @@
         <translation>Palose</translation>
     </message>
     <message>
-        <source>Only numbers between 1-99999 are allowed</source>
-        <translation>Lejohen vetëm numra mes 1-99999</translation>
-    </message>
-    <message>
         <source>Join the internal testing channel to get deepin latest updates.</source>
         <translation>Që të merrni përditësimet më të reja të deepin-it, bëhuni pjesë e kanalit të brendshëm të testimeve.</translation>
+    </message>
+    <message>
+        <source>Failed to change Delivery Optimization setting</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation type="unfinished">Anuloje</translation>
+    </message>
+    <message>
+        <source>Update Delivery Optimization service exception</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Try again</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delivery Optimization</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>When enabled, your device may share previously downloaded system updates with other devices on your local network.When you turn it off, cached files from update delivery will be cleared during the next restart.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delivery Optimization-Upload throttling</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Only numbers between 10-999999 are allowed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delivery Optimization-Limit Speed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Default Mirror Source</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Untested</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Testing...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Timeout</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
