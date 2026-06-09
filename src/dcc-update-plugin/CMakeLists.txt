@@ -1,4 +1,4 @@
-# SPDX-FileCopyrightText: 2025 UnionTech Software Technology Co., Ltd.
+# SPDX-FileCopyrightText: 2025 - 2026 UnionTech Software Technology Co., Ltd.
 #
 # SPDX-License-Identifier: CC0-1.0
 
@@ -55,5 +55,10 @@ target_link_libraries(${Update_Name} PRIVATE
 )
 
 install(FILES "misc/org.deepin.dde.control-center.update.json" DESTINATION share/dsg/configs/org.deepin.dde.control-center)
+
+# security loader permission interfaces config
+install(FILES "misc/permission-interfaces/org.deepin.dcc-update-ui.json"
+    DESTINATION share/dde-control-center/permission-interfaces)
+
 dcc_install_plugin(NAME ${Update_Name} TARGET ${Update_Name})
 dcc_handle_plugin_translation(NAME ${Update_Name} )
